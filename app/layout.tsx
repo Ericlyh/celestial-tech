@@ -34,8 +34,12 @@ export const metadata: Metadata = {
     description:
       'Where cybersecurity meets artificial intelligence — next-generation protection.',
   },
+}
+
+export const viewport = {
   themeColor: '#0A0A0A',
-  viewport: 'width=device-width, initial-scale=1',
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({
