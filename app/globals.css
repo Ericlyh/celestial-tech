@@ -1,0 +1,410 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================
+   CSS VARIABLES — CELESTIAL TECH PALETTE
+   ============================================= */
+:root {
+  --color-deep-space: #0A0A0A;
+  --color-cyber-cyan: #00F0FF;
+  --color-cyber-purple: #8B5CF6;
+  --color-pure-white: #FFFFFF;
+
+  /* Derived / semantic */
+  --color-glow-cyan: rgba(0, 240, 255, 0.4);
+  --color-glow-purple: rgba(139, 92, 246, 0.4);
+  --color-surface: rgba(255, 255, 255, 0.03);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-cyan: rgba(0, 240, 255, 0.2);
+  --color-border-purple: rgba(139, 92, 246, 0.2);
+
+  /* Typography */
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* =============================================
+   BASE RESETS & DEFAULTS
+   ============================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-deep-space);
+  color: var(--color-pure-white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =============================================
+   CUSTOM SCROLLBAR
+   ============================================= */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-deep-space);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.25);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 240, 255, 0.5);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 240, 255, 0.25) var(--color-deep-space);
+}
+
+/* =============================================
+   TEXT SELECTION
+   ============================================= */
+::selection {
+  background: rgba(0, 240, 255, 0.25);
+  color: var(--color-pure-white);
+}
+
+/* =============================================
+   FOCUS STYLES (ACCESSIBILITY)
+   ============================================= */
+:focus-visible {
+  outline: 2px solid var(--color-cyber-cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* =============================================
+   GLASSMORPHISM UTILITY CLASSES
+   ============================================= */
+@layer components {
+  .glass {
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--color-border);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .glass-card:hover {
+    border-color: var(--color-border-cyan);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 240, 255, 0.08);
+    transform: translateY(-4px);
+  }
+
+  .glass-nav {
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  /* Gradient text utilities */
+  .text-gradient-cyan {
+    background: linear-gradient(135deg, var(--color-cyber-cyan), #00c8d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-purple {
+    background: linear-gradient(135deg, var(--color-cyber-purple), #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-mixed {
+    background: linear-gradient(135deg, var(--color-cyber-cyan) 0%, var(--color-cyber-purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Button styles */
+  .btn-cyber-cyan {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    background: var(--color-cyber-cyan);
+    color: var(--color-deep-space);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+  }
+
+  .btn-cyber-cyan:hover {
+    background: #00d4e8;
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.45), 0 0 60px rgba(0, 240, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .btn-cyber-purple {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    background: transparent;
+    color: var(--color-cyber-purple);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    border-radius: 8px;
+    border: 2px solid var(--color-cyber-purple);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .btn-cyber-purple:hover {
+    background: rgba(139, 92, 246, 0.1);
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.3);
+    transform: translateY(-2px);
+  }
+
+  /* Section padding */
+  .section-pad {
+    padding: 100px 24px;
+  }
+
+  @media (max-width: 768px) {
+    .section-pad {
+      padding: 64px 16px;
+    }
+  }
+}
+
+/* =============================================
+   KEYFRAME ANIMATIONS
+   ============================================= */
+
+/* Neon glow pulse — for glowing elements */
+@keyframes neonGlowCyan {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(0, 240, 255, 0.4),
+                0 0 10px rgba(0, 240, 255, 0.3),
+                0 0 20px rgba(0, 240, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.6),
+                0 0 25px rgba(0, 240, 255, 0.4),
+                0 0 50px rgba(0, 240, 255, 0.2);
+  }
+}
+
+@keyframes neonGlowPurple {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(139, 92, 246, 0.4),
+                0 0 10px rgba(139, 92, 246, 0.3),
+                0 0 20px rgba(139, 92, 246, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.6),
+                0 0 25px rgba(139, 92, 246, 0.4),
+                0 0 50px rgba(139, 92, 246, 0.2);
+  }
+}
+
+/* Star twinkle for particle canvas */
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.9; }
+}
+
+/* Shimmer loading effect */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Fade in from bottom (used with framer-motion) */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Grid pattern pulse */
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* Orb float animation */
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 15px) scale(0.95); }
+}
+
+/* =============================================
+   HERO CANVAS & GRID BACKGROUND STYLES
+   ============================================= */
+.hero-canvas-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridPulse 4s ease-in-out infinite;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+
+/* Radial gradient overlay for depth */
+.hero-radial-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 60% 60% at 50% 50%,
+    rgba(139, 92, 246, 0.06) 0%,
+    transparent 70%
+  );
+}
+
+/* =============================================
+   NEON GLOW TEXT
+   ============================================= */
+.neon-text-cyan {
+  text-shadow:
+    0 0 10px rgba(0, 240, 255, 0.6),
+    0 0 20px rgba(0, 240, 255, 0.4),
+    0 0 40px rgba(0, 240, 255, 0.2);
+}
+
+.neon-text-purple {
+  text-shadow:
+    0 0 10px rgba(139, 92, 246, 0.6),
+    0 0 20px rgba(139, 92, 246, 0.4),
+    0 0 40px rgba(139, 92, 246, 0.2);
+}
+
+/* =============================================
+   SYNERGY BOX
+   ============================================= */
+.synergy-box {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 240, 255, 0.08) 0%,
+    rgba(139, 92, 246, 0.08) 100%
+  );
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.synergy-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 240, 255, 0.05) 0%,
+    rgba(139, 92, 246, 0.05) 100%
+  );
+  pointer-events: none;
+}
+
+/* =============================================
+   DIVIDER LINE WITH GLOW
+   ============================================= */
+.divider-cyber {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 240, 255, 0.4) 30%,
+    rgba(139, 92, 246, 0.4) 70%,
+    transparent 100%
+  );
+}
+
+/* =============================================
+   RESPONSIVE HELPERS
+   ============================================= */
+@layer utilities {
+  .container-main {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .heading-xl {
+    @apply text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight;
+  }
+
+  .heading-lg {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight;
+  }
+
+  .heading-md {
+    @apply text-2xl sm:text-3xl font-semibold leading-snug;
+  }
+
+  .heading-sm {
+    @apply text-xl sm:text-2xl font-semibold;
+  }
+
+  .body-lg {
+    @apply text-lg sm:text-xl leading-relaxed opacity-80;
+  }
+
+  .body-md {
+    @apply text-base leading-relaxed opacity-70;
+  }
+
+  /* Pillar badge */
+  .pillar-badge-cyan {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium;
+    background: rgba(0, 240, 255, 0.1);
+    color: var(--color-cyber-cyan);
+    border: 1px solid rgba(0, 240, 255, 0.2);
+  }
+
+  .pillar-badge-purple {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium;
+    background: rgba(139, 92, 246, 0.1);
+    color: var(--color-cyber-purple);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+  }
+}
