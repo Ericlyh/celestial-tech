@@ -3,16 +3,18 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Shield, Menu, X } from 'lucide-react'
+import { useTranslation } from '@/i18n'
 
 const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'Services', href: '#services' },
-  { label: 'Why Us', href: '#about' },
-  { label: 'Case Studies', href: '#case-studies' },
-  { label: 'Contact', href: '#contact' },
+  { key: 'nav_home', href: '#home' },
+  { key: 'nav_services', href: '#services' },
+  { key: 'nav_whyUs', href: '#about' },
+  { key: 'nav_caseStudies', href: '#case-studies' },
+  { key: 'nav_contact', href: '#contact' },
 ]
 
 export default function Navbar() {
+  const { t, locale, toggleLocale } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -74,12 +76,12 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
-                key={link.label}
+                key={link.key}
                 href={link.href}
                 onClick={(e) => { e.preventDefault(); handleNavClick(link.href) }}
                 className="body-md text-pure-white/70 hover:text-cyber-cyan transition-colors duration-200 relative group"
               >
-                {link.label}
+                {t(link.key as any)}
                 {/* Underline hover effect */}
                 <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-cyber-cyan rounded-full transition-all duration-300 group-hover:w-full" />
               </a>
@@ -87,12 +89,19 @@ export default function Navbar() {
           </div>
 
           {/* Desktop CTA */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-3">
+            <button
+              onClick={toggleLocale}
+              className="px-3 py-1.5 text-xs font-medium rounded border border-white/20 text-pure-white/70 hover:text-cyber-cyan hover:border-cyber-cyan/50 transition-colors duration-200"
+              aria-label="Toggle language"
+            >
+              {locale === 'en' ? 'EN' : '繁'}
+            </button>
             <button
               onClick={() => handleNavClick('#contact')}
               className="btn-cyber-cyan text-sm"
             >
-              Get Protected
+              {t('nav_getProtected')}
             </button>
           </div>
 
@@ -100,7 +109,7 @@ export default function Navbar() {
           <button
             className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors"
             onClick={() => setIsOpen(!isOpen)}
-            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            aria-label={isOpen ? t('nav_closeMenu') : t('nav_openMenu')}
           >
             {isOpen ? (
               <X size={22} className="text-pure-white" />
@@ -124,12 +133,12 @@ export default function Navbar() {
             <div className="container-main py-6 flex flex-col gap-1">
               {navLinks.map((link) => (
                 <a
-                  key={link.label}
+                  key={link.key}
                   href={link.href}
                   onClick={(e) => { e.preventDefault(); handleNavClick(link.href) }}
                   className="py-3 px-4 rounded-lg text-pure-white/80 hover:text-cyber-cyan hover:bg-white/5 transition-all duration-200 font-medium"
                 >
-                  {link.label}
+                  {t(link.key as any)}
                 </a>
               ))}
               <div className="pt-4 border-t border-white/5 mt-2">
@@ -137,7 +146,7 @@ export default function Navbar() {
                   onClick={() => handleNavClick('#contact')}
                   className="btn-cyber-cyan w-full justify-center"
                 >
-                  Get Protected
+                  {t('nav_getProtected')}
                 </button>
               </div>
             </div>

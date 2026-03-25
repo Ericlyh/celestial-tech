@@ -1,26 +1,14 @@
-'use client';
+'use client'
 
-import { motion } from 'framer-motion';
-import { Linkedin, Twitter, Github, Shield } from 'lucide-react';
-
-const quickLinks = [
-  { label: 'Home', href: '#' },
-  { label: 'Services', href: '#services' },
-  { label: 'Case Studies', href: '#case-studies' },
-  { label: 'About', href: '#founder' },
-  { label: 'Contact', href: '#contact' },
-];
-
-const legalLinks = [
-  { label: 'Privacy Policy', href: '#' },
-  { label: 'Terms of Service', href: '#' },
-];
+import { motion } from 'framer-motion'
+import { Linkedin, Twitter, Github, Shield } from 'lucide-react'
+import { useTranslation } from '@/i18n'
 
 const socialLinks = [
   { icon: Linkedin, href: '#', label: 'LinkedIn' },
   { icon: Twitter, href: '#', label: 'Twitter / X' },
   { icon: Github, href: '#', label: 'GitHub' },
-];
+]
 
 const footerVariants = {
   hidden: { opacity: 0 },
@@ -28,7 +16,7 @@ const footerVariants = {
     opacity: 1,
     transition: { staggerChildren: 0.1 },
   },
-};
+}
 
 const itemVariants = {
   hidden: { opacity: 0, y: 10 },
@@ -37,9 +25,24 @@ const itemVariants = {
     y: 0,
     transition: { duration: 0.4 },
   },
-};
+}
 
 export default function Footer() {
+  const { t } = useTranslation()
+
+  const quickLinks = [
+    { labelKey: 'footer_home' as const, href: '#' },
+    { labelKey: 'footer_services' as const, href: '#services' },
+    { labelKey: 'nav_caseStudies' as const, href: '#case-studies' },
+    { labelKey: 'footer_about' as const, href: '#founder' },
+    { labelKey: 'footer_contact' as const, href: '#contact' },
+  ]
+
+  const legalLinks = [
+    { labelKey: 'footer_privacy' as const, href: '#' },
+    { labelKey: 'footer_terms' as const, href: '#' },
+  ]
+
   return (
     <footer className="relative bg-[#060608] border-t border-white/[0.05] overflow-hidden">
       {/* Top accent */}
@@ -67,14 +70,13 @@ export default function Footer() {
               <div>
                 <span className="text-white font-bold text-lg tracking-tight">Celestial Tech</span>
                 <span className="block text-[10px] text-[#00F0FF] tracking-[0.2em] uppercase -mt-1">
-                  Next-Gen Security
+                  {t('footer_tagline')}
                 </span>
               </div>
             </div>
 
             <p className="text-gray-500 text-sm leading-relaxed max-w-sm mb-6">
-              Fusing military-grade cybersecurity with AI-driven threat intelligence. We protect the
-              organizations that move the world forward — 24/7, without compromise.
+              {t('footer_description')}
             </p>
 
             {/* Social icons */}
@@ -97,17 +99,17 @@ export default function Footer() {
 
           {/* Quick links */}
           <motion.div variants={itemVariants}>
-            <h4 className="text-white font-semibold text-sm tracking-wide uppercase mb-5">Navigation</h4>
+            <h4 className="text-white font-semibold text-sm tracking-wide uppercase mb-5">{t('footer_nav')}</h4>
             <ul className="space-y-3">
-              {quickLinks.map(({ label, href }) => (
-                <li key={label}>
+              {quickLinks.map(({ labelKey, href }) => (
+                <li key={labelKey}>
                   <a
                     href={href}
                     className="text-gray-500 hover:text-[#00F0FF] text-sm transition-colors duration-300
                                inline-block hover:translate-x-1"
                     style={{ transition: 'color 0.3s, transform 0.2s' }}
                   >
-                    {label}
+                    {t(labelKey)}
                   </a>
                 </li>
               ))}
@@ -116,15 +118,15 @@ export default function Footer() {
 
           {/* Legal */}
           <motion.div variants={itemVariants}>
-            <h4 className="text-white font-semibold text-sm tracking-wide uppercase mb-5">Legal</h4>
+            <h4 className="text-white font-semibold text-sm tracking-wide uppercase mb-5">{t('footer_legal')}</h4>
             <ul className="space-y-3">
-              {legalLinks.map(({ label, href }) => (
-                <li key={label}>
+              {legalLinks.map(({ labelKey, href }) => (
+                <li key={labelKey}>
                   <a
                     href={href}
                     className="text-gray-500 hover:text-[#00F0FF] text-sm transition-colors duration-300"
                   >
-                    {label}
+                    {t(labelKey)}
                   </a>
                 </li>
               ))}
@@ -133,7 +135,7 @@ export default function Footer() {
             {/* Status indicator */}
             <div className="mt-6 flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse" />
-              <span className="text-gray-600 text-xs">SOC 2 Active Monitoring</span>
+              <span className="text-gray-600 text-xs">{t('footer_soc')}</span>
             </div>
           </motion.div>
         </div>
@@ -145,7 +147,7 @@ export default function Footer() {
                      justify-between items-center gap-4"
         >
           <p className="text-gray-600 text-sm">
-            © 2026 Celestial Tech. All rights reserved.
+            © 2026 Celestial Tech. {t('footer_rights')}
           </p>
           <p className="text-gray-700 text-xs">
             Crafted with precision. Secured with intelligence.
@@ -153,5 +155,5 @@ export default function Footer() {
         </motion.div>
       </motion.div>
     </footer>
-  );
+  )
 }

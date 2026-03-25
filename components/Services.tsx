@@ -14,72 +14,7 @@ import {
   Sparkles,
 } from 'lucide-react'
 import { useState } from 'react'
-
-const cyberServices = [
-  {
-    icon: Shield,
-    title: 'Cybersecurity Consulting',
-    description:
-      'Comprehensive risk assessments and security strategy development tailored to your organization\'s unique threat landscape.',
-  },
-  {
-    icon: Eye,
-    title: 'SOC Monitoring & Rule Set Tuning',
-    description:
-      '24/7 Security Operations Center monitoring with finely tuned detection rules to catch threats before they escalate.',
-  },
-  {
-    icon: Target,
-    title: 'Penetration Testing (Red Teaming)',
-    description:
-      'Adversary simulation through realistic attack scenarios, exposing vulnerabilities before malicious actors exploit them.',
-  },
-  {
-    icon: UserCheck,
-    title: 'Personal Cybersecurity Protection',
-    description:
-      'Executive and high-profile individual protection — securing personal digital footprints with enterprise-grade controls.',
-  },
-  {
-    icon: GraduationCap,
-    title: 'Security Awareness Training',
-    description:
-      'Human-layer defense through engaging, up-to-date training programs that transform employees into the first line of security.',
-  },
-  {
-    icon: BrainCircuit,
-    title: 'Purple Teaming',
-    description:
-      'Offensive and defensive teams working in unison — bridging the gap with coordinated exercises and knowledge transfer.',
-  },
-]
-
-const aiServices = [
-  {
-    icon: Lightbulb,
-    title: 'AI Strategy Consulting',
-    description:
-      'Roadmap development for AI adoption — from use-case identification to ROI modeling and implementation planning.',
-  },
-  {
-    icon: Cpu,
-    title: 'Custom AI Tailor-Made Setup & Integration',
-    description:
-      'Bespoke AI solutions architected and integrated into your existing systems — no off-the-shelf shortcuts.',
-  },
-  {
-    icon: Layers,
-    title: 'AI Model Deployment & Scaling',
-    description:
-      'From prototype to production — reliable, scalable model deployment with monitoring, versioning, and optimization.',
-  },
-  {
-    icon: Sparkles,
-    title: 'AI Training & Fine-Tuning',
-    description:
-      'Specialized model training on proprietary data to maximize relevance, accuracy, and domain-specific performance.',
-  },
-]
+import { useTranslation } from '@/i18n'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -91,7 +26,66 @@ const fadeUp = {
 }
 
 export default function Services() {
+  const { t } = useTranslation()
   const [activeTab, setActiveTab] = useState<'cyber' | 'ai'>('cyber')
+
+  const cyberServices = [
+    {
+      icon: Shield,
+      titleKey: 'services_cyber_consulting' as const,
+      descKey: 'services_cyber_consulting_desc' as const,
+    },
+    {
+      icon: Eye,
+      titleKey: 'services_soc' as const,
+      descKey: 'services_soc_desc' as const,
+    },
+    {
+      icon: Target,
+      titleKey: 'services_pentest' as const,
+      descKey: 'services_pentest_desc' as const,
+    },
+    {
+      icon: UserCheck,
+      titleKey: 'services_personal' as const,
+      descKey: 'services_personal_desc' as const,
+    },
+    {
+      icon: GraduationCap,
+      titleKey: 'services_training' as const,
+      descKey: 'services_training_desc' as const,
+    },
+    {
+      icon: BrainCircuit,
+      titleKey: 'services_purple' as const,
+      descKey: 'services_purple_desc' as const,
+    },
+  ]
+
+  const aiServices = [
+    {
+      icon: Lightbulb,
+      titleKey: 'services_ai_strategy' as const,
+      descKey: 'services_ai_strategy_desc' as const,
+    },
+    {
+      icon: Cpu,
+      titleKey: 'services_ai_custom' as const,
+      descKey: 'services_ai_custom_desc' as const,
+    },
+    {
+      icon: Layers,
+      titleKey: 'services_ai_deploy' as const,
+      descKey: 'services_ai_deploy_desc' as const,
+    },
+    {
+      icon: Sparkles,
+      titleKey: 'services_ai_train' as const,
+      descKey: 'services_ai_train_desc' as const,
+    },
+  ]
+
+  const activeServices = activeTab === 'cyber' ? cyberServices : aiServices
 
   return (
     <section id="services" className="relative py-32 px-6 overflow-hidden">
@@ -112,22 +106,21 @@ export default function Services() {
             variants={fadeUp}
             className="text-cyber-cyan font-mono text-sm tracking-widest uppercase mb-4"
           >
-            What We Do
+            {t('services_label')}
           </motion.p>
           <motion.h2
             custom={1}
             variants={fadeUp}
             className="text-4xl md:text-5xl font-bold text-white mb-6"
           >
-            Two Pillars, One Mission
+            {t('services_title')}
           </motion.h2>
           <motion.p
             custom={2}
             variants={fadeUp}
             className="text-white/60 max-w-2xl mx-auto text-lg"
           >
-            We operate at the intersection of cybersecurity and artificial intelligence — 
-            delivering services that are smarter, faster, and more adaptive than conventional approaches.
+            {t('services_subtitle')}
           </motion.p>
         </motion.div>
 
@@ -149,7 +142,7 @@ export default function Services() {
                   : 'text-white/50 hover:text-white'
               }`}
             >
-              🛡️ Cybersecurity
+              🛡️ {t('services_cyber')}
             </button>
             <button
               onClick={() => setActiveTab('ai')}
@@ -159,7 +152,7 @@ export default function Services() {
                   : 'text-white/50 hover:text-white'
               }`}
             >
-              🤖 AI Solutions
+              🤖 {t('services_ai')}
             </button>
           </div>
         </motion.div>
@@ -172,9 +165,9 @@ export default function Services() {
           transition={{ duration: 0.3 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {(activeTab === 'cyber' ? cyberServices : aiServices).map((service, i) => (
+          {activeServices.map((service, i) => (
             <motion.div
-              key={service.title}
+              key={service.titleKey}
               custom={i}
               variants={fadeUp}
               initial="hidden"
@@ -196,10 +189,10 @@ export default function Services() {
                   </div>
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-3 group-hover:text-cyber-cyan/90 transition-colors">
-                  {service.title}
+                  {t(service.titleKey)}
                 </h3>
                 <p className="text-white/50 text-sm leading-relaxed">
-                  {service.description}
+                  {t(service.descKey)}
                 </p>
               </div>
             </motion.div>
@@ -219,25 +212,23 @@ export default function Services() {
           <div className="relative bg-white/[0.03] backdrop-blur-md rounded-3xl p-8 md:p-10 border border-white/[0.08] text-center">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyber-cyan/10 text-cyber-cyan text-xs font-mono tracking-wider mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-cyber-cyan animate-pulse" />
-              CYBER + AI SYNERGY
+              {t('services_synergy_label')}
             </div>
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Two Disciplines, Amplified Together
+              {t('services_synergy_title')}
             </h3>
             <p className="text-white/55 max-w-2xl mx-auto text-base leading-relaxed">
-              Our cybersecurity and AI practices aren&apos;t siloed — they reinforce each other. 
-              AI-powered threat detection feeds into our SOC. Security data trains smarter AI models. 
-              The result: protection that learns, adapts, and stays ahead of threats.
+              {t('services_synergy_desc')}
             </p>
             <div className="flex flex-wrap justify-center gap-4 mt-8">
               <span className="px-4 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-white/60 text-sm">
-                🤖 AI-Powered SOC
+                🤖 {t('services_synergy_1')}
               </span>
               <span className="px-4 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-white/60 text-sm">
-                🛡️ Security-Informed AI
+                🛡️ {t('services_synergy_2')}
               </span>
               <span className="px-4 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-white/60 text-sm">
-                📊 Threat Intelligence + ML
+                📊 {t('services_synergy_3')}
               </span>
             </div>
           </div>

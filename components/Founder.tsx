@@ -1,9 +1,12 @@
-'use client';
+'use client'
 
-import { motion } from 'framer-motion';
-import { Linkedin, Twitter, Github, Target, Rocket, Heart } from 'lucide-react';
+import { motion } from 'framer-motion'
+import { Linkedin, Twitter, Github, Target, Rocket, Heart } from 'lucide-react'
+import { useTranslation } from '@/i18n'
 
 export default function Founder() {
+  const { t } = useTranslation()
+
   return (
     <section id="founder" className="relative py-24 px-6 md:px-12 overflow-hidden">
       {/* Background */}
@@ -20,10 +23,10 @@ export default function Founder() {
           className="text-center mb-16"
         >
           <p className="text-[#00F0FF] text-sm font-medium tracking-widest uppercase mb-4">
-            The Vision
+            {t('founder_label')}
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-white">
-            From the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F0FF] to-[#8B5CF6]">Founder</span>
+            {t('founder_greeting')}
           </h2>
         </motion.div>
 
@@ -82,49 +85,24 @@ export default function Founder() {
             {/* Content */}
             <div className="flex-1">
               <div className="mb-6">
-                <h3 className="text-2xl font-bold text-white mb-1">Alex Chen</h3>
+                <h3 className="text-2xl font-bold text-white mb-1">{t('founder_name')}</h3>
                 <p className="text-[#00F0FF] font-medium">Founder & CEO, Celestial Tech</p>
               </div>
 
               <div className="space-y-4 text-gray-300 leading-relaxed mb-8">
-                <p>
-                  After a decade protecting critical infrastructure at two of the world&apos;s largest cybersecurity firms,
-                  I grew frustrated watching great organizations get breached not because they lacked security tools —
-                  but because they lacked strategic direction.
-                </p>
-                <p>
-                  Celestial Tech was born from a simple belief: <strong className="text-white">security should be a
-                  partner, not a vendor.</strong> We fuse military-grade defense with genuine intelligence — the kind
-                  that learns, adapts, and anticipates. Not just another MSSP. A true security partner.
-                </p>
+                <p>{t('founder_p1')}</p>
+                <p>{t('founder_p2')}</p>
+                <p>{t('founder_p3')}</p>
+                <p>{t('founder_p4')}</p>
               </div>
 
-              {/* Personal message */}
-              <div className="relative bg-white/[0.03] border border-[#00F0FF]/10 rounded-xl p-5 mb-8">
-                <div className="absolute -top-3 left-5 px-2 bg-[#0A0A0A]">
-                  <Heart className="w-4 h-4 text-[#8B5CF6]" />
-                </div>
-                <p className="text-gray-400 italic text-sm leading-relaxed">
-                  &quot;My commitment to every client is simple: I will treat your security like it&apos;s my own.
-                  Because at the end of the day, when you win, we all win.&quot;
-                </p>
-              </div>
-
-              {/* Social proof badges */}
-              <div className="flex flex-wrap gap-6 mb-8">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse" />
-                  <span className="text-sm text-gray-400">10+ Years Enterprise Security</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Target className="w-4 h-4 text-[#8B5CF6]" />
-                  <span className="text-sm text-gray-400">500+ Threat Investigations</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Rocket className="w-4 h-4 text-[#00F0FF]" />
-                  <span className="text-sm text-gray-400">Founded 2024</span>
-                </div>
-              </div>
+              {/* CTA */}
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 text-sm font-medium text-[#00F0FF] hover:text-white transition-colors duration-300 mb-8"
+              >
+                {t('founder_cta')}
+              </a>
 
               {/* Social links */}
               <div className="flex gap-4">
@@ -151,5 +129,5 @@ export default function Founder() {
         </motion.div>
       </div>
     </section>
-  );
+  )
 }

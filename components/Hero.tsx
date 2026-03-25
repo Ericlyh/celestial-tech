@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronDown, ArrowRight, Sparkles } from 'lucide-react'
+import { useTranslation } from '@/i18n'
 
 /* =============================================
    STAR PARTICLE CANVAS
@@ -89,6 +90,7 @@ function Orb({ className, color }: { className: string; color: string }) {
    HERO COMPONENT
    ============================================= */
 export default function Hero() {
+  const { t } = useTranslation()
   const canvasRef = useRef<HTMLCanvasElement>(null)
   useStarCanvas(canvasRef)
 
@@ -178,7 +180,7 @@ export default function Hero() {
         >
           <span className="pillar-badge-cyan">
             <Sparkles size={14} />
-            Next-Generation Cybersecurity + AI
+            {t('hero_badge')}
           </span>
         </motion.div>
 
@@ -189,14 +191,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
           className="heading-xl mb-6 max-w-5xl mx-auto"
         >
-          Where{' '}
-          <span className="text-gradient-cyan neon-text-cyan">
-            Cybersecurity
-          </span>{' '}
-          Meets{' '}
-          <span className="text-gradient-purple neon-text-purple">
-            Artificial Intelligence
-          </span>
+          {t('hero_headline')}
         </motion.h1>
 
         {/* Subheadline */}
@@ -206,9 +201,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
           className="body-lg text-pure-white/60 max-w-3xl mx-auto mb-10"
         >
-          Celestial Tech pioneers the intersection of AI and security — delivering
-          intelligent threat detection, autonomous protection, and adaptive defense
-          systems that evolve faster than the threats they counter.
+          {t('hero_subheadline')}
         </motion.p>
 
         {/* CTA Buttons */}
@@ -219,11 +212,11 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
           <button onClick={scrollToContact} className="btn-cyber-cyan text-base px-8 py-3.5">
-            Get Protected
+            {t('hero_cta_protected')}
             <ArrowRight size={18} />
           </button>
           <button onClick={scrollToServices} className="btn-cyber-purple text-base px-8 py-3.5">
-            Explore AI Solutions
+            {t('hero_cta_ai')}
             <ArrowRight size={18} />
           </button>
         </motion.div>
@@ -236,11 +229,11 @@ export default function Hero() {
           className="mt-16"
         >
           <p className="body-md text-pure-white/40 mb-5 tracking-widest uppercase text-xs">
-            Trusted by forward-thinking enterprises
+            {t('hero_trust')}
           </p>
           <div className="flex flex-wrap gap-6 justify-center items-center opacity-30">
             {/* Placeholder trust logos — replace with real SVGs */}
-            {['Fortune 500', 'Global Banks', 'Tech Leaders', 'Defense Contractors'].map((name) => (
+            {[t('hero_logo_fortune'), t('hero_logo_banks'), t('hero_logo_tech'), t('hero_logo_defense')].map((name) => (
               <span key={name} className="text-sm font-semibold tracking-wider text-pure-white/50 uppercase">
                 {name}
               </span>
@@ -257,7 +250,7 @@ export default function Hero() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 cursor-pointer"
         onClick={scrollToServices}
       >
-        <span className="text-xs text-pure-white/30 tracking-widest uppercase">Scroll</span>
+        <span className="text-xs text-pure-white/30 tracking-widest uppercase">{t('hero_scroll')}</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}

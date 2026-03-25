@@ -2,29 +2,27 @@
 
 import { motion } from 'framer-motion';
 import { Star, Quote } from 'lucide-react';
+import { useTranslation } from '@/i18n';
 
 const testimonials = [
   {
-    quote:
-      'Celestial Tech didn\'t just secure our infrastructure — they transformed our entire security culture. Our board now has confidence in our data protection posture we never had before.',
-    name: 'Sarah Mitchell',
-    role: 'Chief Information Security Officer',
+    quoteKey: 'testimonials_cFO' as const,
+    nameKey: 'testimonials_cFO_name' as const,
+    roleKey: 'testimonials_cFO_role' as const,
     company: 'Meridian Capital Group',
     rating: 5,
   },
   {
-    quote:
-      'The depth of their threat intelligence is unmatched. When we faced a sophisticated social engineering campaign, Celestial identified and neutralized it in under 2 hours. That level of speed saves real businesses.',
-    name: 'David Park',
-    role: 'VP of Engineering',
+    quoteKey: 'testimonials_cto' as const,
+    nameKey: 'testimonials_cto_name' as const,
+    roleKey: 'testimonials_cto_role' as const,
     company: 'Nexus Cloud Solutions',
     rating: 5,
   },
   {
-    quote:
-      'I\'ve worked with five security vendors over my career. Celestial is the first one I\'d genuinely recommend without hesitation. They feel like an extension of our team, not a third-party vendor.',
-    name: 'Priya Ramanathan',
-    role: 'Head of Technology',
+    quoteKey: 'testimonials_ceo' as const,
+    nameKey: 'testimonials_ceo_name' as const,
+    roleKey: 'testimonials_ceo_role' as const,
     company: 'Aurora Health Systems',
     rating: 5,
   },
@@ -62,6 +60,8 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 export default function Testimonials() {
+  const { t } = useTranslation()
+
   return (
     <section id="testimonials" className="relative py-24 px-6 md:px-12 overflow-hidden">
       {/* Background */}
@@ -78,13 +78,13 @@ export default function Testimonials() {
           className="text-center mb-16"
         >
           <p className="text-[#00F0FF] text-sm font-medium tracking-widest uppercase mb-4">
-            Client Voices
+            {t('testimonials_label')}
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            What Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F0FF] to-[#8B5CF6]">Clients Say</span>
+            {t('testimonials_title')}
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Don&apos;t take our word for it — hear from the leaders who trust us with their most critical security challenges.
+            {t('testimonials_subtitle')}
           </p>
         </motion.div>
 
@@ -117,7 +117,7 @@ export default function Testimonials() {
               <blockquote className="text-gray-300 leading-relaxed mb-8 relative">
                 <span className="text-[#00F0FF]/30 text-5xl font-serif absolute -top-2 -left-1">&ldquo;</span>
                 <p className="relative z-10 pl-4">
-                  {testimonial.quote}
+                  {t(testimonial.quoteKey)}
                 </p>
               </blockquote>
 
@@ -130,13 +130,13 @@ export default function Testimonials() {
                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#00F0FF]/20 to-[#8B5CF6]/20
                                 border border-[#00F0FF]/20 flex items-center justify-center flex-shrink-0">
                   <span className="text-sm font-semibold text-[#00F0FF]">
-                    {testimonial.name.split(' ').map((n) => n[0]).join('')}
+                    {t(testimonial.nameKey).split(' ').map((n) => n[0]).join('')}
                   </span>
                 </div>
 
                 <div>
-                  <p className="text-white font-medium text-sm">{testimonial.name}</p>
-                  <p className="text-[#8B5CF6] text-xs">{testimonial.role}</p>
+                  <p className="text-white font-medium text-sm">{t(testimonial.nameKey)}</p>
+                  <p className="text-[#8B5CF6] text-xs">{t(testimonial.roleKey)}</p>
                   <p className="text-gray-500 text-xs">{testimonial.company}</p>
                 </div>
               </div>
@@ -144,25 +144,7 @@ export default function Testimonials() {
           ))}
         </motion.div>
 
-        {/* Trust bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 text-center"
-        >
-          <p className="text-gray-500 text-sm mb-4">Trusted by security teams at</p>
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-40">
-            {['Meridian Capital', 'Nexus Cloud', 'Aurora Health', 'Quantum Systems', 'Atlas Retail'].map(
-              (company) => (
-                <span key={company} className="text-white font-medium tracking-wide">
-                  {company}
-                </span>
-              )
-            )}
-          </div>
-        </motion.div>
+
       </div>
     </section>
   );

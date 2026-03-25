@@ -1,46 +1,8 @@
-'use client';
+'use client'
 
-import { motion } from 'framer-motion';
-import { ShieldCheck, Brain, Zap, Users, Headphones, Award } from 'lucide-react';
-
-const benefits = [
-  {
-    icon: ShieldCheck,
-    title: 'Security + Intelligence Fusion',
-    description:
-      'We merge cutting-edge cybersecurity with AI-driven threat intelligence, giving you defenses that think ahead — not just react.',
-  },
-  {
-    icon: Zap,
-    title: 'Proactive Defense',
-    description:
-      'Stop threats before they strike. Our predictive monitoring identifies vulnerabilities and anomalies in real-time, neutralizing risks preemptively.',
-  },
-  {
-    icon: Users,
-    title: 'Enterprise-Grade',
-    description:
-      'Scalable infrastructure built for the demands of modern enterprise. Bank-grade encryption, zero-trust architecture, and compliance-ready from day one.',
-  },
-  {
-    icon: Brain,
-    title: 'Personalized Solutions',
-    description:
-      'No two organizations face identical threats. We architect security strategies tailored to your industry, stack, and risk profile.',
-  },
-  {
-    icon: Headphones,
-    title: '24/7 Support',
-    description:
-      'Cyber threats don\'t sleep — and neither do we. Our global SOC operates round-the-clock, ensuring a human expert is always a heartbeat away.',
-  },
-  {
-    icon: Award,
-    title: 'Proven Track Record',
-    description:
-      'Trusted by startups and Fortune 500s alike. Our clients report a 99.9% threat resolution rate and average 60% reduction in security incidents.',
-  },
-];
+import { motion } from 'framer-motion'
+import { ShieldCheck, Brain, Zap, Users, Headphones, Award } from 'lucide-react'
+import { useTranslation } from '@/i18n'
 
 const containerVariants = {
   hidden: {},
@@ -49,7 +11,7 @@ const containerVariants = {
       staggerChildren: 0.1,
     },
   },
-};
+}
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -58,9 +20,44 @@ const itemVariants = {
     y: 0,
     transition: { duration: 0.6, ease: 'easeOut' },
   },
-};
+}
 
 export default function WhyUs() {
+  const { t } = useTranslation()
+
+  const benefits = [
+    {
+      icon: ShieldCheck,
+      titleKey: 'why_fusion_title' as const,
+      descKey: 'why_fusion_desc' as const,
+    },
+    {
+      icon: Zap,
+      titleKey: 'why_proactive_title' as const,
+      descKey: 'why_proactive_desc' as const,
+    },
+    {
+      icon: Users,
+      titleKey: 'why_enterprise_title' as const,
+      descKey: 'why_enterprise_desc' as const,
+    },
+    {
+      icon: Brain,
+      titleKey: 'why_personalized_title' as const,
+      descKey: 'why_personalized_desc' as const,
+    },
+    {
+      icon: Headphones,
+      titleKey: 'why_support_title' as const,
+      descKey: 'why_support_desc' as const,
+    },
+    {
+      icon: Award,
+      titleKey: 'why_track_title' as const,
+      descKey: 'why_track_desc' as const,
+    },
+  ]
+
   return (
     <section id="why-us" className="relative py-24 px-6 md:px-12 overflow-hidden">
       {/* Background gradient */}
@@ -77,13 +74,13 @@ export default function WhyUs() {
           className="text-center mb-16"
         >
           <p className="text-[#00F0FF] text-sm font-medium tracking-widest uppercase mb-4">
-            Why Choose Us
+            {t('why_label')}
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F0FF] to-[#8B5CF6]">Celestial Tech</span>?
+            {t('why_title')}
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            We don&apos;t just secure your systems — we transform your security posture into a strategic advantage.
+            {t('why_subtitle')}
           </p>
         </motion.div>
 
@@ -96,10 +93,10 @@ export default function WhyUs() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {benefits.map((benefit, index) => {
-            const Icon = benefit.icon;
+            const Icon = benefit.icon
             return (
               <motion.div
-                key={index}
+                key={benefit.titleKey}
                 variants={itemVariants}
                 className="group relative bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8
                            hover:border-[#00F0FF]/40 transition-all duration-500
@@ -122,17 +119,17 @@ export default function WhyUs() {
                   </div>
 
                   <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-[#00F0FF] transition-colors duration-300">
-                    {benefit.title}
+                    {t(benefit.titleKey)}
                   </h3>
                   <p className="text-gray-400 leading-relaxed">
-                    {benefit.description}
+                    {t(benefit.descKey)}
                   </p>
                 </div>
               </motion.div>
-            );
+            )
           })}
         </motion.div>
       </div>
     </section>
-  );
+  )
 }

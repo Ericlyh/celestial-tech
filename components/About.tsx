@@ -3,27 +3,25 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Lightbulb, Handshake, Trophy } from 'lucide-react'
+import { useTranslation } from '@/i18n'
 
 const pillars = [
   {
     icon: Lightbulb,
-    title: 'Innovation',
-    description:
-      'We don\'t follow the playbook — we rewrite it. Our team fuses bleeding-edge AI research with real-world security operations to build solutions that didn\'t exist yesterday.',
+    titleKey: 'about_innovation',
+    descKey: 'about_innovation_desc',
     color: 'cyan',
   },
   {
     icon: Handshake,
-    title: 'Trust',
-    description:
-      'Security is a relationship built on confidence. From transparent threat briefings to zero-surprise contracts, we earn trust through consistency and radical accountability.',
+    titleKey: 'about_trust',
+    descKey: 'about_trust_desc',
     color: 'purple',
   },
   {
     icon: Trophy,
-    title: 'Excellence',
-    description:
-      'We hold ourselves to the highest standards — not just industry benchmarks. Every engagement is executed with precision engineering, thorough testing, and meticulous documentation.',
+    titleKey: 'about_excellence',
+    descKey: 'about_excellence_desc',
     color: 'cyan',
   },
 ]
@@ -72,6 +70,7 @@ function CelestialDecoration() {
 }
 
 export default function About() {
+  const { t } = useTranslation()
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
@@ -95,7 +94,7 @@ export default function About() {
           className="mb-4"
         >
           <span className="text-sm font-semibold tracking-widest uppercase text-cyber-purple/70">
-            Why Celestial Tech
+            {t('about_label')}
           </span>
         </motion.div>
 
@@ -106,8 +105,7 @@ export default function About() {
           transition={{ duration: 0.6, delay: 0.05 }}
           className="heading-lg mb-6 max-w-3xl"
         >
-          We protect the organizations that shape the{' '}
-          <span className="text-gradient-mixed">future of humanity.</span>
+          {t('about_title')}
         </motion.h2>
 
         {/* Story Paragraph */}
@@ -117,11 +115,7 @@ export default function About() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="body-lg text-pure-white/60 max-w-3xl mb-16"
         >
-          Founded by a team of veteran security engineers and AI researchers, Celestial
-          Tech was built on a single conviction: the best defense isn&apos;t just
-          human — it&apos;s intelligent. We combine deep offensive security expertise
-          with cutting-edge machine learning to create adaptive, autonomous defense
-          systems that stay ahead of even the most sophisticated adversaries.
+          {t('about_p1')}
         </motion.p>
 
         {/* Divider */}
@@ -139,7 +133,7 @@ export default function About() {
             const isCyan = pillar.color === 'cyan'
             return (
               <motion.div
-                key={pillar.title}
+                key={pillar.titleKey}
                 custom={i}
                 variants={cardVariants}
                 initial="hidden"
@@ -163,12 +157,12 @@ export default function About() {
                     isCyan ? 'text-gradient-cyan' : 'text-gradient-purple'
                   }`}
                 >
-                  {pillar.title}
+                  {t(pillar.titleKey as any)}
                 </h3>
 
                 {/* Description */}
                 <p className="body-md text-pure-white/60 leading-relaxed">
-                  {pillar.description}
+                  {t(pillar.descKey as any)}
                 </p>
 
                 {/* Hover glow line at bottom */}
