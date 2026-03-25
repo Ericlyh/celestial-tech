@@ -1,6 +1,5 @@
-import type { Config } from 'tailwindcss'
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -19,15 +18,16 @@ const config: Config = {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'hero-grid': "linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px)",
+        'hero-grid':
+          'linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px)',
       },
       backgroundSize: {
-        'grid': '60px 60px',
+        grid: '60px 60px',
       },
       animation: {
         'neon-pulse': 'neonPulse 2s ease-in-out infinite alternate',
-        'float': 'float 6s ease-in-out infinite',
-        'twinkle': 'twinkle 3s ease-in-out infinite',
+        float: 'float 6s ease-in-out infinite',
+        twinkle: 'twinkle 3s ease-in-out infinite',
       },
       keyframes: {
         neonPulse: {
@@ -46,11 +46,9 @@ const config: Config = {
       boxShadow: {
         'neon-cyan': '0 0 20px rgba(0, 240, 255, 0.3), 0 0 40px rgba(0, 240, 255, 0.1)',
         'neon-purple': '0 0 20px rgba(139, 92, 246, 0.3), 0 0 40px rgba(139, 92, 246, 0.1)',
-        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+        glass: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
       },
     },
   },
   plugins: [],
 }
-
-export default config
