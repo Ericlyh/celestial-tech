@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Post {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String
+  content     String   // markdown body
+  category    String   // "AI" | "Cybersecurity"
+  coverImage  String?
+  author      String   @default("Celestial Tech Team")
+  readTime    Int      @default(5)
+  published   Boolean  @default(true)
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  sourceUrl   String?  // original news article source
+  sourceName  String?  // e.g. "NewsAPI", "X", "YouTube"
+}
+
+model Meta {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String
+}

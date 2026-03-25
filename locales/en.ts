@@ -7,6 +7,7 @@ export const en = {
   nav_contact: 'Contact',
   nav_getProtected: 'Get Protected',
   nav_exploreAI: 'Explore AI',
+  nav_blog: 'Blog',
   nav_openMenu: 'Open menu',
   nav_closeMenu: 'Close menu',
 

@@ -10,6 +10,7 @@ const navLinks = [
   { key: 'nav_services', href: '#services' },
   { key: 'nav_whyUs', href: '#about' },
   { key: 'nav_caseStudies', href: '#case-studies' },
+  { key: 'nav_blog', href: '/blog' },
   { key: 'nav_contact', href: '#contact' },
 ]
 
@@ -29,6 +30,11 @@ export default function Navbar() {
 
   const handleNavClick = (href: string) => {
     setIsOpen(false)
+    // External/absolute paths navigate normally
+    if (href.startsWith('/')) {
+      window.location.href = href
+      return
+    }
     // Smooth scroll to section
     const el = document.querySelector(href)
     if (el) {

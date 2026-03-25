@@ -9,6 +9,7 @@ export const zhHant: Record<LocaleKey, string> = {
   nav_contact: '聯絡我們',
   nav_getProtected: '立即保護',
   nav_exploreAI: '探索 AI 方案',
+  nav_blog: '部落格',
   nav_openMenu: '打開選單',
   nav_closeMenu: '關閉選單',
 
