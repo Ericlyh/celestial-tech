@@ -94,7 +94,7 @@ function BlogCard({ post, index }: { post: Post; index: number }) {
 
             {/* Arrow indicator */}
             <div className="mt-4 flex items-center gap-1.5 text-cyber-cyan text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <span>Read more</span>
+              <span>{t('blog_readMore')}</span>
               <ArrowRight size={14} />
             </div>
           </div>
@@ -172,10 +172,10 @@ export default function BlogPage() {
               Celestial Tech Insights
             </span>
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
-              Insights
+              {t('blog_title')}
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Where Cybersecurity Meets Artificial Intelligence
+              {t('blog_subtitle')}
             </p>
           </motion.div>
         </div>
@@ -213,7 +213,7 @@ export default function BlogPage() {
 
           {filteredPosts.length === 0 && (
             <div className="text-center py-20 text-gray-500">
-              <p>No posts found in this category yet.</p>
+              <p>{t('blog_noPosts')}</p>
             </div>
           )}
         </div>

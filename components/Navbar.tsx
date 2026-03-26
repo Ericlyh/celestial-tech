@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Shield, Menu, X } from 'lucide-react'
 import { useTranslation } from '@/i18n'
+import { usePathname } from 'next/navigation'
 
 const navLinks = [
   { key: 'nav_home', href: '#home' },
@@ -17,6 +18,7 @@ const navLinks = [
 
 export default function Navbar() {
   const { t, locale, toggleLocale } = useTranslation()
+  const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -31,15 +33,21 @@ export default function Navbar() {
 
   const handleNavClick = (href: string) => {
     setIsOpen(false)
-    // External/absolute paths navigate normally
+    // Absolute paths navigate normally
     if (href.startsWith('/')) {
       window.location.href = href
       return
     }
-    // Smooth scroll to section
-    const el = document.querySelector(href)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
+    // Hash links: on homepage, smooth scroll; on subpages, go to homepage first
+    if (href.startsWith('#')) {
+      const isHomepage = pathname === '/'
+      if (isHomepage) {
+        const el = document.querySelector(href)
+        if (el) el.scrollIntoView({ behavior: 'smooth' })
+      } else {
+        window.location.href = `/${href}`
+      }
+      return
     }
   }
 

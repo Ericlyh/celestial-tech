@@ -176,7 +176,7 @@ const itemVariants = {
 }
 
 export default function OpenClawHostingPage() {
-  const { t } = useTranslation()
+  const { t, locale } = useTranslation()
 
   return (
     <main className="relative min-h-screen bg-deep-space overflow-x-hidden">
@@ -522,6 +522,146 @@ export default function OpenClawHostingPage() {
                 <p className="text-xs text-pure-white/30">{faq.aEn}</p>
               </motion.div>
             ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Comparison: OpenClaw vs Claude Code Desktop */}
+      <section id="comparison" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-purple/10 text-cyber-purple text-sm font-medium mb-6 border border-cyber-purple/20">
+              {t('comparison_label')}
+            </span>
+            <h2 className="heading-lg text-pure-white mb-4">
+              {t('comparison_title')}
+            </h2>
+            <p className="body-lg text-pure-white/50 max-w-2xl mx-auto">
+              {locale === 'zh-Hant' ? t('comparison_subtitle' as any) : 'Claude Code Desktop is a great AI coding assistant. But if you want real business automation, OpenClaw is in a different league.'}
+            </p>
+          </motion.div>
+
+          {/* Comparison table */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="glass-card overflow-hidden"
+          >
+            {/* Table header */}
+            <div className="grid grid-cols-2 gap-0">
+              <div className="p-6 border-b border-white/5 bg-white/[0.02]">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-cyber-cyan/20 flex items-center justify-center border border-cyber-cyan/30">
+                    <span className="text-lg">🤖</span>
+                  </div>
+                  <div>
+                    <p className="font-bold text-pure-white">OpenClaw</p>
+                    <p className="text-xs text-cyber-cyan">AI 員工平台</p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-6 border-b border-white/5 bg-white/[0.02]">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10">
+                    <span className="text-lg">💻</span>
+                  </div>
+                  <div>
+                    <p className="font-bold text-pure-white/60">Claude Code Desktop</p>
+                    <p className="text-xs text-pure-white/30">AI Coding Assistant</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Rows */}
+            {[
+              {
+                icon: '🏢',
+                openclaw: t('comparison_1_title' as any),
+                openclawSub: locale === 'zh-Hant' ? t('comparison_1_desc' as any) : t('comparison_1_desc_en' as any),
+                claude: '幫你寫 Code',
+                claudeSub: locale === 'zh-Hant' ? '專為開發者而設嘅 AI coding 助手' : 'AI coding assistant for developers',
+                winner: 'openclaw',
+              },
+              {
+                icon: '🇭🇰',
+                openclaw: t('comparison_2_title' as any),
+                openclawSub: locale === 'zh-Hant' ? t('comparison_2_desc' as any) : t('comparison_2_desc_en' as any),
+                claude: '英文為主',
+                claudeSub: locale === 'zh-Hant' ? '主要支援英文，廣東話有限' : 'Primarily English, limited Cantonese support',
+                winner: 'openclaw',
+              },
+              {
+                icon: '⚙️',
+                openclaw: t('comparison_3_title' as any),
+                openclawSub: locale === 'zh-Hant' ? t('comparison_3_desc' as any) : t('comparison_3_desc_en' as any),
+                claude: '需要 Prompt Engineering',
+                claudeSub: locale === 'zh-Hant' ? '需要懂得點樣寫 prompt 同理解 AI 輸出' : 'Requires prompt writing and AI output understanding',
+                winner: 'openclaw',
+              },
+              {
+                icon: '⏰',
+                openclaw: t('comparison_4_title' as any),
+                openclawSub: locale === 'zh-Hant' ? t('comparison_4_desc' as any) : t('comparison_4_desc_en' as any),
+                claude: '需要你啟動',
+                claudeSub: locale === 'zh-Hant' ? '需要人手啟動，唔係持續運行' : 'Requires manual invocation, not always running',
+                winner: 'openclaw',
+              },
+              {
+                icon: '🛡️',
+                openclaw: t('comparison_5_title' as any),
+                openclawSub: locale === 'zh-Hant' ? t('comparison_5_desc' as any) : t('comparison_5_desc_en' as any),
+                claude: '自己管理',
+                claudeSub: locale === 'zh-Hant' ? '你需要自己管伺服器、更新、保安' : 'You manage servers, updates, and security yourself',
+                winner: 'openclaw',
+              },
+            ].map((row, i) => (
+              <div key={i} className="grid grid-cols-2 gap-0 border-b border-white/5 last:border-0">
+                <div className="p-6 border-r border-white/5">
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl mt-0.5">{row.icon}</span>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <p className="font-semibold text-pure-white">{row.openclaw}</p>
+                        {locale === 'en' && (
+                          <span className="text-xs text-cyber-cyan/60">({row.openclaw.replace(/[^\x00-\x7F]/g, (c) => '')})</span>
+                        )}
+                      </div>
+                      <p className="text-xs text-pure-white/50 leading-relaxed">{row.openclawSub}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-6 bg-white/[0.01]">
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl mt-0.5 opacity-30">—</span>
+                    <div>
+                      <p className="font-medium text-pure-white/40">{row.claude}</p>
+                      <p className="text-xs text-pure-white/30 leading-relaxed mt-1">{row.claudeSub}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {/* CTA */}
+            <div className="p-6 bg-cyber-cyan/5 border-t border-cyber-cyan/20 text-center">
+              <p className="text-pure-white/70 mb-4">
+                {locale === 'zh-Hant'
+                  ? 'Claude Code 係一款出色工具。但如果你係 HK 中小企老闆，你需要嘅係 OpenClaw。'
+                  : "Claude Code is great. But if you're a HK SME owner, you need OpenClaw."}
+              </p>
+              <a href="#contact" className="btn-cyber-cyan">
+                {t('comparison_cta' as any)}
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>
