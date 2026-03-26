@@ -1,0 +1,71 @@
+# STATE.yaml — Celestial Tech / OpenClaw Hosting Integration
+# Project: Migrate HK OpenClaw Landing into Celestial Tech
+
+project: celestial-tech-openclaw-integration
+status: active
+phase: 1
+created: 2026-03-26
+
+## Goals
+- Import HK OpenClaw Landing content into Celestial Tech as /openclaw-hosting route
+- Convert to TypeScript + App Router (was Pages Router .js)
+- Adapt content to match Celestial Tech dark cyber design system
+- Add "OpenClaw Hosting" to nav dropdown
+
+## Design System (TARGET)
+- Background: #0A0A0A (deep-space)
+- Primary accent: #00F0FF (cyber-cyan)
+- Secondary accent: #8B5CF6 (cyber-purple)
+- Font: Inter
+- Glass morphism, neon glows, grid backgrounds
+- i18n: use existing i18n/index.tsx (EN + zh-Hant)
+
+## Tasks
+tasks:
+  - id: OC-001
+    status: todo
+    desc: "Create /openclaw-hosting/page.tsx — main landing page (converted from revenue-project/landing/src/app/page.js)"
+  - id: OC-002
+    status: todo
+    desc: "Update Navbar: add OpenClaw Hosting to nav (Services dropdown or direct link)"
+  - id: OC-003
+    status: todo
+    desc: "Create openclaw-hosting globals.css with brand-specific styles"
+  - id: OC-004
+    status: todo
+    desc: "Convert WhatsAppButton to TypeScript + match Celestial Tech dark theme"
+  - id: OC-005
+    status: todo
+    desc: "Update i18n locales: add OpenClaw Hosting section (EN + zh-Hant)"
+  - id: OC-006
+    status: todo
+    desc: "Update root layout metadata for /openclaw-hosting route"
+  - id: OC-007
+    status: todo
+    desc: "Add SEO: metadata for OpenClaw Hosting subpage"
+  - id: OC-008
+    status: todo
+    desc: "Local build test + verify no errors"
+  - id: OC-009
+    status: todo
+    desc: "Git push + Vercel deploy"
+
+## Content to Port
+From revenue-project/landing/src/app/page.js:
+- Hero section (bilingual Cantonese/English)
+- Features grid (6 features)
+- How It Works (3 steps)
+- Pricing (3 tiers: Starter/Pro/Business in HKD)
+- Testimonials (3 fake HK testimonials)
+- FAQ (4 Q&As)
+- Contact form (Formspree)
+
+## Key Design Adaptations
+- Light sky-blue theme → Dark cyber (#0A0A0A bg, #00F0FF/#8B5CF6 accents)
+- White cards → Glass cards with cyan/purple borders
+- btn-primary (sky-500) → btn-cyber-cyan
+- Standard form inputs → dark glass inputs with cyan focus rings
+- Landing's own Navbar/Footer → replaced with Celestial Tech shared components
+
+## Blocker
+- None

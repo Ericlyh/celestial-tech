@@ -10,6 +10,7 @@ const navLinks = [
   { key: 'nav_services', href: '#services' },
   { key: 'nav_whyUs', href: '#about' },
   { key: 'nav_caseStudies', href: '#case-studies' },
+  { key: 'nav_openclaw', href: '/openclaw-hosting' },
   { key: 'nav_blog', href: '/blog' },
   { key: 'nav_contact', href: '#contact' },
 ]

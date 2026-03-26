@@ -10,6 +10,7 @@ export const en = {
   nav_blog: 'Blog',
   nav_openMenu: 'Open menu',
   nav_closeMenu: 'Close menu',
+  nav_openclaw: 'OpenClaw Hosting',
 
   // Hero
   hero_headline: 'Where Cybersecurity Meets Artificial Intelligence',

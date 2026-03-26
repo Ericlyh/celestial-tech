@@ -12,6 +12,7 @@ export const zhHant: Record<LocaleKey, string> = {
   nav_blog: '部落格',
   nav_openMenu: '打開選單',
   nav_closeMenu: '關閉選單',
+  nav_openclaw: 'OpenClaw 托管服務',
 
   // Hero
   hero_headline: '網絡安全與人工智能的交匯點',
