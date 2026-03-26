@@ -106,13 +106,6 @@ export default function Navbar() {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
             <button
-              onClick={toggleLocale}
-              className="px-3 py-1.5 text-xs font-medium rounded border border-white/20 text-pure-white/70 hover:text-cyber-cyan hover:border-cyber-cyan/50 transition-colors duration-200"
-              aria-label="Toggle language"
-            >
-              {locale === 'en' ? 'EN' : '繁'}
-            </button>
-            <button
               onClick={() => handleNavClick('#contact')}
               className="btn-cyber-cyan text-sm"
             >

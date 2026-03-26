@@ -1,7 +1,6 @@
 'use client'
 
-import { useState } from 'react'
-import { Calendar, Clock, Share2, Globe, ArrowLeft } from 'lucide-react'
+import { Calendar, Clock, Share2, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { useTranslation } from '@/i18n'
 import MarkdownRenderer from './MarkdownRenderer'
@@ -37,8 +36,8 @@ interface BilingualBlogContentProps {
 }
 
 export default function BilingualBlogContent({ post, relatedPosts }: BilingualBlogContentProps) {
-  const [lang, setLang] = useState<'en' | 'zh'>('zh')
-  const t = (key: string) => key // fallback not needed
+  const { locale, toggleLocale } = useTranslation()
+  const lang = locale === 'zh-Hant' ? 'zh' : 'en'
   const categoryColor = CATEGORY_COLORS[post.category] || 'bg-white/10 text-white border-white/20'
 
   const title = lang === 'zh' ? post.titleZh : post.title
@@ -118,16 +117,16 @@ export default function BilingualBlogContent({ post, relatedPosts }: BilingualBl
         <CopyButton text={shareUrl} />
         <div className="ml-auto flex items-center gap-2">
           <button
-            onClick={() => setLang('zh')}
+            onClick={toggleLocale}
             className={`px-3 py-1.5 text-xs rounded border transition-colors ${lang === 'zh' ? 'border-cyber-cyan/40 bg-cyber-cyan/10 text-cyber-cyan' : 'border-white/10 text-gray-500 hover:text-white'}`}
           >
-            中文
+            {lang === 'zh' ? '中文 ✓' : '中文'}
           </button>
           <button
-            onClick={() => setLang('en')}
+            onClick={toggleLocale}
             className={`px-3 py-1.5 text-xs rounded border transition-colors ${lang === 'en' ? 'border-cyber-cyan/40 bg-cyber-cyan/10 text-cyber-cyan' : 'border-white/10 text-gray-500 hover:text-white'}`}
           >
-            EN
+            {lang === 'en' ? 'EN ✓' : 'EN'}
           </button>
         </div>
       </div>
