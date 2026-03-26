@@ -113,17 +113,26 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Hamburger */}
-          <button
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label={isOpen ? t('nav_closeMenu') : t('nav_openMenu')}
-          >
-            {isOpen ? (
-              <X size={22} className="text-pure-white" />
-            ) : (
-              <Menu size={22} className="text-pure-white" />
-            )}
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={toggleLocale}
+              className="px-3 py-1.5 text-xs font-medium rounded border border-white/20 text-pure-white/70 hover:text-cyber-cyan hover:border-cyber-cyan/50 transition-colors duration-200"
+              aria-label="Toggle language"
+            >
+              {locale === 'en' ? 'EN' : '繁'}
+            </button>
+            <button
+              className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? t('nav_closeMenu') : t('nav_openMenu')}
+            >
+              {isOpen ? (
+                <X size={22} className="text-pure-white" />
+              ) : (
+                <Menu size={22} className="text-pure-white" />
+              )}
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -148,10 +157,17 @@ export default function Navbar() {
                   {t(link.key as any)}
                 </a>
               ))}
-              <div className="pt-4 border-t border-white/5 mt-2">
+              <div className="pt-4 border-t border-white/5 mt-2 flex items-center justify-between">
+                <button
+                  onClick={toggleLocale}
+                  className="px-3 py-1.5 text-xs font-medium rounded border border-white/20 text-pure-white/70 hover:text-cyber-cyan hover:border-cyber-cyan/50 transition-colors duration-200"
+                  aria-label="Toggle language"
+                >
+                  {locale === 'en' ? '🌐 EN' : '🌐 繁'}
+                </button>
                 <button
                   onClick={() => handleNavClick('#contact')}
-                  className="btn-cyber-cyan w-full justify-center"
+                  className="btn-cyber-cyan text-sm px-6"
                 >
                   {t('nav_getProtected')}
                 </button>

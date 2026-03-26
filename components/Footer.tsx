@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Linkedin, Twitter, Github, Shield } from 'lucide-react'
 import { useTranslation } from '@/i18n'
+import { usePathname } from 'next/navigation'
 
 const socialLinks = [
   { icon: Linkedin, href: '#', label: 'LinkedIn' },
@@ -28,14 +29,16 @@ const itemVariants = {
 }
 
 export default function Footer() {
-  const { t } = useTranslation()
+  const { t, locale, toggleLocale } = useTranslation()
+  const pathname = usePathname()
+  const isOpenClaw = pathname?.startsWith('/openclaw-hosting')
 
   const quickLinks = [
-    { labelKey: 'footer_home' as const, href: '#' },
-    { labelKey: 'footer_services' as const, href: '#services' },
-    { labelKey: 'nav_caseStudies' as const, href: '#case-studies' },
-    { labelKey: 'footer_about' as const, href: '#founder' },
-    { labelKey: 'footer_contact' as const, href: '#contact' },
+    { labelKey: 'footer_home' as const, href: isOpenClaw ? '/' : '#' },
+    { labelKey: 'footer_services' as const, href: isOpenClaw ? '/#services' : '#services' },
+    { labelKey: 'nav_caseStudies' as const, href: isOpenClaw ? '/#case-studies' : '#case-studies' },
+    { labelKey: 'footer_about' as const, href: isOpenClaw ? '/#founder' : '#founder' },
+    { labelKey: 'footer_contact' as const, href: isOpenClaw ? '/openclaw-hosting#contact' : '#contact' },
   ]
 
   const legalLinks = [
@@ -136,6 +139,17 @@ export default function Footer() {
             <div className="mt-6 flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse" />
               <span className="text-gray-600 text-xs">{t('footer_soc')}</span>
+            </div>
+
+            {/* Language toggle */}
+            <div className="mt-4">
+              <button
+                onClick={toggleLocale}
+                className="px-3 py-1.5 text-xs font-medium rounded border border-white/10 text-gray-500 hover:text-[#00F0FF] hover:border-[#00F0FF]/30 transition-colors duration-200"
+                aria-label="Toggle language"
+              >
+                {locale === 'en' ? '🌐 EN' : '🌐 繁'}
+              </button>
             </div>
           </motion.div>
         </div>

@@ -26,7 +26,7 @@ const I18nContext = createContext<I18nContextValue>({
 })
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>('en')
+  const [locale, setLocaleState] = useState<Locale>('zh-Hant')
 
   const t = useCallback(
     (key: LocaleKey): string => {
