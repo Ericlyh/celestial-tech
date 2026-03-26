@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Calendar, Clock, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { useTranslation } from '@/i18n'
+import Navbar from '@/components/Navbar'
 
 interface Post {
   id: string
@@ -155,6 +156,7 @@ export default function BlogPage() {
 
   return (
     <main className="relative min-h-screen bg-deep-space overflow-x-hidden">
+      <Navbar />
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 overflow-hidden">
         {/* Background grid */}

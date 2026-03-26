@@ -1,10 +1,8 @@
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
-import { ArrowLeft, Calendar, Clock, Share2 } from 'lucide-react'
 import type { Metadata } from 'next'
 import { prisma } from '@/lib/prisma'
-import MarkdownRenderer from '@/components/MarkdownRenderer'
-import CopyButton from './CopyButton'
+import Navbar from '@/components/Navbar'
+import BilingualBlogContent from '@/components/BilingualBlogContent'
 
 // Static params for SSG
 export async function generateStaticParams() {
@@ -43,20 +41,19 @@ export async function generateMetadata({
   }
 }
 
-const CATEGORY_COLORS: Record<string, string> = {
-  Cybersecurity: 'bg-cyber-cyan/10 text-cyber-cyan border-cyber-cyan/20',
-  AI: 'bg-cyber-purple/10 text-cyber-purple border-cyber-purple/20',
-}
-
 interface PostData {
   id: string
   title: string
+  titleZh: string
   slug: string
   excerpt: string
+  excerptZh: string
   content: string
+  contentZh: string
   category: string
   coverImage: string | null
   author: string
+  authorZh: string
   readTime: number
   publishedAt: string
   sourceUrl: string | null
@@ -67,12 +64,15 @@ const STATIC_POSTS: Record<string, PostData> = {
   'ai-powered-soc-future-threat-detection': {
     id: '1',
     title: 'AI-Powered SOC: The Future of Threat Detection is Here',
+    titleZh: 'AI 驅動 SOC：威脅檢測的未來已來',
     slug: 'ai-powered-soc-future-threat-detection',
     excerpt:
       "Security Operations Centers are being transformed by artificial intelligence. Here's how AI-powered SOCs are redefining threat detection and why your organization needs one.",
+    excerptZh: '人工智能正在徹底改變安全運營中心。以下是 AI 驅動的 SOC 如何重新定義威脅檢測，以及您的組織為何需要它。',
     category: 'Cybersecurity',
     coverImage: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80',
     author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
     readTime: 6,
     publishedAt: '2026-03-20T00:00:00Z',
     sourceUrl: null,
@@ -113,16 +113,55 @@ The threat landscape has never been more hostile. Nation-state actors, ransomwar
 **Celestial Tech's AI-Powered SOC** combines advanced machine learning with expert human analysts to deliver continuous, proactive protection. Our hybrid approach catches what tools miss and responds faster than any pure-play SOC.
 
 Ready to transform your security operations? [Contact our team](/#contact) to learn how we can build an AI-powered SOC tailored to your organization.`,
+    contentZh: `## 安全運營的演變
+
+傳統的安全運營中心（SOC）基於一個簡單的前提：人類分析師監控儀表板、分揀警報並應對事件。但隨著攻擊面擴大，威脅行為者變得越來越複雜，這一模式開始崩潰。
+
+**數據說明了一切：** 如今，平均每家企業每天產生超過 **200 萬個安全事件**。一個 10 人分析師團隊根本無法跟上。结果？警報疲勞、遺漏威脅，以及數週未被發現的漏洞。
+
+## AI 驅動 SOC 的到來
+
+人工智能正在從根本上重塑 SOC 的運作方式。以下是正在發生的變化：
+
+- **速度**：AI 系統每秒分析數百萬個事件——這是人類團隊不可能做到的
+- **準確性**：機器學習模型通過學習歷史數據，將誤報率降低多達 90%
+- **上下文**：AI 關聯不同數據源的信號，描繪完整的威脅圖景
+- **持續學習**：與靜態規則不同，AI 模型每次交互都會改進
+
+## AI 驅動 SOC 的關鍵能力
+
+### 1. 行為威脅檢測
+
+AI 驅動的 SOC 不是依賴已知威脅特徵，而是為每個用戶、設備和系統建立基準行為。當活動偏離正常範圍時——即使只是一點點——系統會標記它以進行調查。
+
+### 2. 自動化事件響應
+
+當威脅被確認時，AI 驅動的 SOAR（安全編排、自動化和響應）平台可以自動控制受影響的系統、阻止惡意 IP 並隔離受損帳戶——通常在檢測後幾秒鐘內。
+
+### 3. 預測性威脅情報
+
+AI 不僅僅是對當前威脅做出反應——它還預測新興威脅。通過分析全球威脅模式、漏洞披露和暗網動態，AI 系統可以在威脅被主動利用之前警告組織。
+
+## 為何您的 SOC 現在需要 AI
+
+威脅環境從未如此惡劣。國家級行為者、勒索軟件團伙和供應鏈攻擊者以前所未有的複雜性運作。僅依靠人類的 SOC 運營不再是可行的策略。
+
+**Celestial Tech 的 AI 驅動 SOC** 結合先進的機器學習與專家人類分析師，提供持續、主動的保護。我們的混合方法能捕捉工具遺漏的內容，並比任何純 SOC 更快響應。
+
+準備好轉變您的安全運營了嗎？[聯絡我們的團隊](/#contact) 了解我們如何為您的組織量身定制 AI 驅動的 SOC。`,
   },
   'reactive-to-predictive-traditional-cybersecurity-failing': {
     id: '2',
     title: 'From Reactive to Predictive: Why Traditional Cybersecurity is Failing',
+    titleZh: '從被動到主動：為何傳統網絡安全正在失效',
     slug: 'reactive-to-predictive-traditional-cybersecurity-failing',
     excerpt:
       "Traditional cybersecurity waits for something to break. Predictive security stops threats before they happen. Here's why the paradigm shift is urgent — and inevitable.",
+    excerptZh: '傳統網絡安全等待事情發生後才反應。預測性安全在威脅發生前就阻止它們。為何這種模式轉變迫在眉睫——且不可避免。',
     category: 'Cybersecurity',
     coverImage: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=80',
     author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
     readTime: 5,
     publishedAt: '2026-03-18T00:00:00Z',
     sourceUrl: null,
@@ -168,16 +207,60 @@ Every day your organization runs on reactive security is a day your adversaries 
 Celestial Tech's predictive security platform combines AI-powered monitoring, expert-led threat hunting, and round-the-clock response capabilities — giving your organization the proactive defense it deserves.
 
 Don't wait for the breach. [Get ahead of it](/#contact).`,
+    contentZh: `## 被動陷阱
+
+數十年來，網絡安全一直基於被動模式運作。等待壞事發生。檢測它。響應它。從中恢復。整個行業——防火牆、防病毒、SEM——都是圍繞這個循環構建的。
+
+**問題在哪裡？** 被動安全在根本上是不對稱的。攻擊者只需成功一次。防守者必須每次都成功。
+
+如今，數據洩露的平均成本超過 **440 萬美元**。更令人震驚的是：平均停留時間——從初始入侵到檢測之間的時間——是 **207 天**。當大多數組織檢測到漏洞時，損害已經造成。
+
+## 預測性安全的真正含義
+
+預測性安全不只是一個營銷術語。這是一種根本不同的方法：
+
+### 主動威脅獵殺
+
+預測性 SOC 不是等待警報，而是主動搜索現有工具尚未標記的入侵指標。專家分析師結合 AI 分析，主動追蹤潛伏在您環境中的威脅。
+
+### 威脅建模
+
+預測性組織會模擬他們的對手。誰可能瞄準您？他們的戰術、技術和程序（TTP）是什麼？通過構建特定於您行業和組織的威脅模型，安全團隊可以將防禦重點放在最關鍵的地方。
+
+### 攻擊面監控
+
+持續監控您的外部攻擊面——暴露的 API、被遺忘的子域名、配置錯誤的雲存儲桶——在攻擊者發現之前發現漏洞。
+
+## 預測性安全的三個支柱
+
+| 支柱 | 描述 | 成果 |
+|--------|-------------|---------|
+| **情報** | 實時威脅情報 + 暗網監控 | 預知威脅 |
+| **自動化** | AI 驅動檢測 + SOAR 劇本 | 秒級響應 |
+| **專業知識** | 人類分析師 + 機器學習 | 每個警報都不遺漏 |
+
+## 不行動的代價
+
+您的組織每使用一天被動安全，您的對手就有一天的優勢。安全人才缺口意味著您無法通過招聘來解決問題——根本沒有足夠的技能分析師來按所需規模配備傳統 SOC。
+
+**答案不是更多的分析師。是更智能的架構。**
+
+Celestial Tech 的預測性安全平台結合 AI 驅動的監控、專家主導的威脅獵殺和全天候響應能力——為您的組織提供應有的主動防禦。
+
+不要等待漏洞。[走在它前面](/#contact)。`,
   },
   'convergence-ai-cybersecurity-enterprises-2026': {
     id: '3',
     title: 'The Convergence of AI and Cybersecurity: What Enterprises Need to Know in 2026',
+    titleZh: 'AI 與網絡安全的融合：2026 年企業需要知道的事',
     slug: 'convergence-ai-cybersecurity-enterprises-2026',
     excerpt:
       "AI and cybersecurity are no longer separate disciplines — they're converging into a single imperative. Here's what forward-thinking enterprises are doing differently.",
+    excerptZh: 'AI 與網絡安全不再是獨立的學科——它們正在融合成一個共同的當務之急。以下是前瞻性企業的不同之處。',
     category: 'AI',
     coverImage: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80',
     author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
     readTime: 7,
     publishedAt: '2026-03-15T00:00:00Z',
     sourceUrl: null,
@@ -237,6 +320,61 @@ The convergence of AI and cybersecurity isn't a future trend — it's a present 
 **Celestial Tech** specializes in helping enterprises navigate this convergence. From AI-powered SOC deployment to AI red teaming and Secure AI framework development, we help organizations build defenses that match the threat landscape they're actually facing.
 
 The time to act is now. [Speak with our team](/#contact) to understand your exposure and build a path forward.`,
+    contentZh: `## 兩個世界的碰撞
+
+到了 2026 年，AI 策略與網絡安全策略之間的界限已經實際消失。將兩者視為獨立領域的組織正在落後。將兩者融合的組織正在建立不可逾越的競爭優勢。
+
+**這種融合不是理論性的。** 它正在實時上演：
+
+- AI 正在被威脅行為者武器化，創建更令人信服的網絡釣魚攻擊、繞過認證系統並自動化漏洞發現
+- 同時，AI 是有史以來最強大的防禦工具——能夠識別人類分析師永遠看不到的模式
+- 在這個環境中獲勝的企業，是那些比攻擊者更快地使用 AI 進行防禦的企業
+
+## AI 驅動的威脅環境
+
+### AI 生成的社會工程
+
+生成式 AI 使魚叉式網絡釣魚幾乎與合法通信無法區分。攻擊者現在以工業規模製作個性化、有上下文意識的信息——以虛假發票請求瞄準 CFO、以假冒的 Jira 通知瞄準工程師、以令人信服的緊急請求瞄準高管。
+
+### 自主攻擊系統
+
+國家級行為者已經部署了能自主掃描、利用和傳播的 AI 系統。這些不是理論威脅——它們今天就在運作。平均每個企業網絡每天面對數千次自動攻擊嘗試。
+
+### 深度偽造欺詐
+
+語音克隆和視頻合成催生了一個新的欺詐類別。由深度偽造驅動的 CEO 欺詐、投資詐騙和身份盜竊已經讓企業損失了數十億美元。
+
+## 領先企業如何應對
+
+走在前面的組織有五個不同之處：
+
+### 1. 統一的 安全 + AI 領導力
+
+前瞻性企業現在讓 CISO 和首席 AI 官員並肩工作——或者在某些情況下，由一位高管對兩者負責。孤島化的安全和 AI 策略正在被整合的「安全 AI」框架所取代。
+
+### 2. AI 原生安全架構
+
+領先的組織不是將 AI 附加到傳統安全堆棧上，而是基於 AI 原生基礎重建。AI 驅動的 SOC、自主威脅響應和持續 AI 模型安全性現已成為標準實踐。
+
+### 3. AI 系統紅隊演練
+
+正如滲透測試數十年來一直是標準一樣，「AI 紅隊演練」——對 AI 系統本身進行對抗性測試——正在成為強制性要求。組織必須保護其 AI 模型免受提示注入、數據中毒和模型提取攻擊。
+
+### 4. 安全意識的 AI 治理
+
+AI 治理不再純粹是道德和合規問題。安全團隊參與每個 AI 部署決策，確保模型不僅準確，而且能抵抗操縱。
+
+### 5. AI 驅動的供應鏈安全
+
+第三方 AI 服務引入了新的攻擊向量。領先企業正在擴展其安全邊界，涵蓋 AI 模型供應鏈、訓練數據來源和推理基礎設施。
+
+## 行動的迫切性
+
+AI 與網絡安全的融合不是未來趨勢——它是當下現實。問題不是是否解決它。問題是您能以多快的速度行動。
+
+**Celestial Tech** 專門幫助企業應對這種融合。從 AI 驅動的 SOC 部署到 AI 紅隊演練和安全 AI 框架開發，我們幫助組織建立與其實際面臨的威脅環境相匹配的防禦。
+
+行動的時刻就是現在。[與我們的團隊交談](/#contact)，了解您的風險並建立前進的道路。`,
   },
 }
 
@@ -260,17 +398,17 @@ export default async function BlogPostPage({
     notFound()
   }
 
-  const formattedDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
-  const categoryColor = CATEGORY_COLORS[post.category] || 'bg-white/10 text-white border-white/20'
-  const shareUrl = `https://celestialtech.io/blog/${post.slug}`
-  const xShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(shareUrl)}`
-
-  // Related posts
-  const allPosts = Object.values(STATIC_POSTS).filter(p => p.slug !== params.slug && p.category === post.category)
+  const allPosts = Object.values(STATIC_POSTS).filter(
+    (p) => p.slug !== params.slug && p.category === post.category
+  )
+  const relatedPosts = allPosts.slice(0, 3).map((p) => ({
+    id: p.id,
+    title: p.title,
+    titleZh: p.titleZh,
+    slug: p.slug,
+    category: p.category,
+    readTime: p.readTime,
+  }))
 
   return (
     <main className="relative min-h-screen bg-deep-space overflow-x-hidden">
@@ -278,135 +416,8 @@ export default async function BlogPostPage({
       <div className="absolute inset-0 hero-grid opacity-20" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-cyber-cyan/5 rounded-full blur-[120px]" />
 
-      <article className="relative z-10 container-main pt-32 pb-24 max-w-4xl">
-        {/* Back link */}
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-cyber-cyan transition-colors mb-10 group"
-        >
-          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-          Back to Insights
-        </Link>
-
-        {/* Category badge */}
-        <span className={`inline-block px-3 py-1 text-xs font-medium rounded-full border mb-6 ${categoryColor}`}>
-          {post.category}
-        </span>
-
-        {/* Title */}
-        <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
-          {post.title}
-        </h1>
-
-        {/* Meta row */}
-        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-10 pb-8 border-b border-white/5">
-          <span className="text-white/70 font-medium">{post.author}</span>
-          <span className="text-white/20">·</span>
-          <div className="flex items-center gap-1.5">
-            <Calendar size={13} />
-            <span>{formattedDate}</span>
-          </div>
-          <span className="text-white/20">·</span>
-          <div className="flex items-center gap-1.5">
-            <Clock size={13} />
-            <span>{post.readTime} min read</span>
-          </div>
-          {post.sourceName && (
-            <>
-              <span className="text-white/20">·</span>
-              <span className="text-gray-500">Source: {post.sourceName}</span>
-            </>
-          )}
-        </div>
-
-        {/* Cover Image */}
-        {post.coverImage && (
-          <div className="relative h-72 md:h-96 rounded-2xl overflow-hidden mb-12">
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url(${post.coverImage})` }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-deep-space/80 via-transparent to-transparent" />
-          </div>
-        )}
-
-        {/* Share buttons */}
-        <div className="flex items-center gap-3 mb-12">
-          <div className="flex items-center gap-1.5 text-xs text-gray-500">
-            <Share2 size={14} />
-            <span>Share:</span>
-          </div>
-          <a
-            href={xShareUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-4 py-2 text-sm rounded-lg bg-white/[0.05] border border-white/10 text-gray-300 hover:text-cyber-cyan hover:border-cyber-cyan/30 transition-all duration-200"
-          >
-            Post on X
-          </a>
-          <CopyButton text={shareUrl} />
-        </div>
-
-        {/* Article content */}
-        <div className="max-w-3xl">
-          <MarkdownRenderer content={post.content} />
-        </div>
-
-        {/* Source attribution */}
-        {post.sourceUrl && (
-          <div className="mt-12 p-6 rounded-xl bg-white/[0.03] border border-white/6">
-            <p className="text-sm text-gray-400">
-              <strong className="text-white">Source:</strong>{' '}
-              <a
-                href={post.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-cyber-cyan hover:text-white underline"
-              >
-                {post.sourceUrl}
-              </a>
-            </p>
-          </div>
-        )}
-
-        {/* Related Posts */}
-        {allPosts.length > 0 && (
-          <section className="mt-20 pt-12 border-t border-white/5">
-            <h2 className="text-2xl font-bold text-white mb-8">Related Insights</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {allPosts.slice(0, 3).map((related) => (
-                <Link
-                  key={related.slug}
-                  href={`/blog/${related.slug}`}
-                  className="group block p-5 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:border-cyber-cyan/30 transition-all duration-300"
-                >
-                  <span className={`inline-block px-2.5 py-0.5 text-xs font-medium rounded-full border mb-3 ${categoryColor}`}>
-                    {related.category}
-                  </span>
-                  <h3 className="text-sm font-semibold text-white group-hover:text-cyber-cyan transition-colors line-clamp-2">
-                    {related.title}
-                  </h3>
-                  <p className="text-xs text-gray-500 mt-2">{related.readTime} min read</p>
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* CTA */}
-        <section className="mt-20 p-8 rounded-2xl bg-gradient-to-r from-cyber-cyan/10 to-cyber-purple/10 border border-white/[0.06] text-center">
-          <h2 className="text-2xl font-bold text-white mb-3">Stay Ahead of Emerging Threats</h2>
-          <p className="text-gray-400 mb-6 max-w-lg mx-auto">
-            Let our team assess your security posture and build a roadmap tailored to your organization&apos;s unique challenges.
-          </p>
-          <Link
-            href="/#contact"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-cyber-cyan text-deep-space font-semibold hover:bg-white transition-colors"
-          >
-            Talk to Our Team →
-          </Link>
-        </section>
-      </article>
+      <Navbar />
+      <BilingualBlogContent post={post} relatedPosts={relatedPosts} />
     </main>
   )
 }
