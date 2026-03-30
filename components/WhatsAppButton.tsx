@@ -3,7 +3,7 @@
 export default function WhatsAppButton() {
   return (
     <a
-      href="https://wa.me/852XXXXXXXX?text=你好，我對%20OpenClaw%20香港好有興趣！"
+      href="https://wa.me/85269946112?text=你好，我對%20OpenClaw%20香港好有興趣！"
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-50 flex items-center gap-3 glass-card px-5 py-3 hover:border-cyber-cyan/40 transition-all duration-200 hover:scale-105 group border-cyber-cyan/20"

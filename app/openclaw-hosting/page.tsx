@@ -695,7 +695,7 @@ export default function OpenClawHostingPage() {
             className="glass-card p-8"
           >
             <form
-              action="https://formspree.io/f/-placeholder"
+              action="https://formspree.io/f/69946112"
               method="POST"
               className="space-y-5"
               id="contact-form"
