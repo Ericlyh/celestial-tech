@@ -493,6 +493,181 @@ export default function OpenClawHostingPage() {
         </div>
       </section>
 
+      {/* Case Studies */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-cyan/10 text-cyber-cyan text-sm font-medium mb-6 border border-cyber-cyan/20">
+              ⭐ {locale === 'zh-Hant' ? t('cases_oc_label') : t('cases_oc_label')}
+            </span>
+            <h2 className="heading-lg text-pure-white mb-4">
+              {locale === 'zh-Hant' ? 'HK 成功案例' : 'Real Results from Real HK Businesses'}
+            </h2>
+            <p className="body-lg text-pure-white/50">
+              {locale === 'zh-Hant'
+                ? '睇下香港老闆點樣用 OpenClaw 改變佢哋嘅業務'
+                : 'See how HK business owners transformed their operations with OpenClaw'}
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          >
+            {/* Case 1 - 茶餐廳 */}
+            <motion.div variants={itemVariants} className="glass-card p-6 flex flex-col">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500/20 to-red-500/20 flex items-center justify-center text-2xl border border-orange-500/20">
+                  🍜
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-pure-white">
+                    {locale === 'zh-Hant' ? t('cases_oc_1_type') : 'Restaurant Owner'}
+                  </p>
+                  <p className="text-xs text-cyber-cyan">Pro Plan</p>
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-xs font-medium text-red-400/80 mb-1">
+                  {locale === 'zh-Hant' ? '❌ 之前：' : '❌ Before:'}
+                </p>
+                <p className="text-sm text-pure-white/60 leading-relaxed">
+                  {locale === 'zh-Hant' ? t('cases_oc_1_problem') : 'Answering WhatsApp customer queries until 2am daily'}
+                </p>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-xs font-medium text-cyber-cyan/80 mb-1">
+                  {locale === 'zh-Hant' ? '✅ 方案：' : '✅ Solution:'}
+                </p>
+                <p className="text-sm text-pure-white/60 leading-relaxed">
+                  {locale === 'zh-Hant' ? t('cases_oc_1_solution') : 'OpenClaw AI employee auto-replies FAQs and processes takeaway orders'}
+                </p>
+              </div>
+
+              <div className="mt-auto pt-4 border-t border-white/5">
+                <p className="text-xs font-medium text-cyber-cyan mb-1">
+                  {locale === 'zh-Hant' ? '📊 成果：' : '📊 Result:'}
+                </p>
+                <p className="text-base font-bold text-gradient-cyan leading-snug">
+                  {locale === 'zh-Hant' ? t('cases_oc_1_result') : 'Saved 12 hours/week on WhatsApp, takeaway orders up 25%'}
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Case 2 - 補習中心 */}
+            <motion.div variants={itemVariants} className="glass-card p-6 flex flex-col">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center text-2xl border border-blue-500/20">
+                  📚
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-pure-white">
+                    {locale === 'zh-Hant' ? t('cases_oc_2_type') : 'Tutoring Center Manager'}
+                  </p>
+                  <p className="text-xs text-cyber-cyan">Starter Plan</p>
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-xs font-medium text-red-400/80 mb-1">
+                  {locale === 'zh-Hant' ? '❌ 之前：' : '❌ Before:'}
+                </p>
+                <p className="text-sm text-pure-white/60 leading-relaxed">
+                  {locale === 'zh-Hant' ? t('cases_oc_2_problem') : 'Staff repeatedly answering the same questions all day'}
+                </p>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-xs font-medium text-cyber-cyan/80 mb-1">
+                  {locale === 'zh-Hant' ? '✅ 方案：' : '✅ Solution:'}
+                </p>
+                <p className="text-sm text-pure-white/60 leading-relaxed">
+                  {locale === 'zh-Hant' ? t('cases_oc_2_solution') : 'OpenClaw AI instantly answers parent queries, sends enrollment info and past papers automatically'}
+                </p>
+              </div>
+
+              <div className="mt-auto pt-4 border-t border-white/5">
+                <p className="text-xs font-medium text-cyber-cyan mb-1">
+                  {locale === 'zh-Hant' ? '📊 成果：' : '📊 Result:'}
+                </p>
+                <p className="text-base font-bold text-gradient-cyan leading-snug">
+                  {locale === 'zh-Hant' ? t('cases_oc_2_result') : 'Staff satisfaction improved, complaints down 80%'}
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Case 3 - 數碼營銷 Agency */}
+            <motion.div variants={itemVariants} className="glass-card p-6 flex flex-col">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500/20 to-rose-500/20 flex items-center justify-center text-2xl border border-pink-500/20">
+                  📈
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-pure-white">
+                    {locale === 'zh-Hant' ? t('cases_oc_3_type') : 'Digital Marketing Agency'}
+                  </p>
+                  <p className="text-xs text-cyber-cyan">Business Plan</p>
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-xs font-medium text-red-400/80 mb-1">
+                  {locale === 'zh-Hant' ? '❌ 之前：' : '❌ Before:'}
+                </p>
+                <p className="text-sm text-pure-white/60 leading-relaxed">
+                  {locale === 'zh-Hant' ? t('cases_oc_3_problem') : 'Client onboarding required dozens of back-and-forth emails'}
+                </p>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-xs font-medium text-cyber-cyan/80 mb-1">
+                  {locale === 'zh-Hant' ? '✅ 方案：' : '✅ Solution:'}
+                </p>
+                <p className="text-sm text-pure-white/60 leading-relaxed">
+                  {locale === 'zh-Hant' ? t('cases_oc_3_solution') : 'OpenClaw automates the entire onboarding workflow, clients ask AI directly'}
+                </p>
+              </div>
+
+              <div className="mt-auto pt-4 border-t border-white/5">
+                <p className="text-xs font-medium text-cyber-cyan mb-1">
+                  {locale === 'zh-Hant' ? '📊 成果：' : '📊 Result:'}
+                </p>
+                <p className="text-base font-bold text-gradient-cyan leading-snug">
+                  {locale === 'zh-Hant' ? t('cases_oc_3_result') : '3 hours saved per client, client NPS score up +25'}
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-center mt-12"
+          >
+            <p className="text-pure-white/60 mb-4">
+              {locale === 'zh-Hant' ? t('cases_oc_cta') : 'Want to be our next success story?'}
+            </p>
+            <a href="#contact" className="btn-cyber-cyan">
+              {locale === 'zh-Hant' ? '立即申請 →' : 'Apply Now →'}
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section id="faq" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">

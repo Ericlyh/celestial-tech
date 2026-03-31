@@ -139,6 +139,22 @@ export const zhHant: Record<LocaleKey, string> = {
   blog_readMore: '閱讀更多',
   blog_noPosts: '這個分類暫時未有文章。',
 
+  // OpenClaw HK Client Success Stories
+  cases_oc_label: 'HK 成功案例',
+  cases_oc_1_type: '茶餐廳老闆',
+  cases_oc_1_problem: '每日用 WhatsApp 覆客人查到凌晨 2 點',
+  cases_oc_1_solution: '用 OpenClaw AI 員工自動回覆常見問題 + 處理外賣訂單',
+  cases_oc_1_result: '每週減少 12 小時 WhatsApp 時間，外賣訂單增長 25%',
+  cases_oc_2_type: '補習中心負責人',
+  cases_oc_2_problem: '員工不斷重複回答同一個問題',
+  cases_oc_2_solution: 'OpenClaw AI 即時回答家長查詢，預約、試卷資料自動推送',
+  cases_oc_2_result: '員工滿意度提升，投訴減少 80%',
+  cases_oc_3_type: '數碼營銷 Agency',
+  cases_oc_3_problem: '客户 onboarding 需要大量 email 來回確認',
+  cases_oc_3_solution: '用 OpenClaw 自動化整個 onboarding workflow，客人問 AI 直接回答',
+  cases_oc_3_result: '每個客戶省 3 小時，客戶滿意度 NPS +25',
+  cases_oc_cta: '想成爲下一個成功故事？',
+
   // OpenClaw vs Claude Code
   comparison_label: '為何選擇 OpenClaw？',
   comparison_title: 'OpenClaw vs Claude Code Desktop — 有幾大分別？',

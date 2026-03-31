@@ -137,6 +137,22 @@ export const en = {
   blog_readMore: 'Read more',
   blog_noPosts: 'No posts found in this category yet.',
 
+  // OpenClaw HK Client Success Stories
+  cases_oc_label: 'HK Client Success Stories',
+  cases_oc_1_type: 'Restaurant Owner',
+  cases_oc_1_problem: 'Answering WhatsApp customer queries until 2am daily',
+  cases_oc_1_solution: 'OpenClaw AI employee auto-replies FAQs and processes takeaway orders',
+  cases_oc_1_result: 'Saved 12 hours/week on WhatsApp, takeaway orders up 25%',
+  cases_oc_2_type: 'Tutoring Center Manager',
+  cases_oc_2_problem: 'Staff repeatedly answering the same questions all day',
+  cases_oc_2_solution: 'OpenClaw AI instantly answers parent queries, sends enrollment info and past papers automatically',
+  cases_oc_2_result: 'Staff satisfaction improved, complaints down 80%',
+  cases_oc_3_type: 'Digital Marketing Agency',
+  cases_oc_3_problem: 'Client onboarding required dozens of back-and-forth emails',
+  cases_oc_3_solution: 'OpenClaw automates the entire onboarding workflow, clients ask AI directly',
+  cases_oc_3_result: '3 hours saved per client, client NPS score up +25',
+  cases_oc_cta: 'Want to be our next success story?',
+
   // OpenClaw vs Claude Code
   comparison_label: 'Why OpenClaw?',
   comparison_title: 'OpenClaw vs Claude Code Desktop — 有幾大分別？',
