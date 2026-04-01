@@ -549,7 +549,7 @@ export default function OpenClawHostingPage() {
                 <p className="text-sm text-pure-white/70 mb-4 leading-relaxed">「{locale === 'zh-Hant' ? t.quote : t.quoteEn}」</p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyber-cyan/40 to-cyber-purple/40 flex items-center justify-center text-pure-white font-bold text-sm">
-                    {t.name[0]}
+                    {locale === 'zh-Hant' ? t.name[0] : t.nameEn[0]}
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-pure-white">{locale === 'zh-Hant' ? t.name : t.nameEn}</p>
@@ -778,10 +778,10 @@ export default function OpenClawHostingPage() {
             className="text-center mb-12"
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-purple/10 text-cyber-purple text-sm font-medium mb-6 border border-cyber-purple/20">
-              {t('comparison_label')}
+              {locale === 'zh-Hant' ? '為何選擇 OpenClaw？' : 'Why OpenClaw?'}
             </span>
             <h2 className="heading-lg text-pure-white mb-4">
-              {t('comparison_title')}
+              {locale === 'zh-Hant' ? 'OpenClaw vs Claude Code Desktop — 有幾大分別？' : 'OpenClaw vs Claude Code Desktop — How Different Are They?'}
             </h2>
             <p className="body-lg text-pure-white/50 max-w-2xl mx-auto">
               {locale === 'zh-Hant' ? t('comparison_subtitle' as any) : 'Claude Code Desktop is a great AI coding assistant. But if you want real business automation, OpenClaw is in a different league.'}
@@ -816,7 +816,7 @@ export default function OpenClawHostingPage() {
                   </div>
                   <div>
                     <p className="font-bold text-pure-white/60">Claude Code Desktop</p>
-                    <p className="text-xs text-pure-white/30">AI Coding Assistant</p>
+                    <p className="text-xs text-pure-white/30">{locale === 'zh-Hant' ? 'AI 編程助手' : 'AI Coding Assistant'}</p>
                   </div>
                 </div>
               </div>

@@ -10,11 +10,14 @@ import Navbar from '@/components/Navbar'
 interface Post {
   id: string
   title: string
+  titleZh: string
   slug: string
   excerpt: string
+  excerptZh: string
   category: string
   coverImage: string | null
   author: string
+  authorZh: string
   readTime: number
   publishedAt: string
 }
@@ -34,10 +37,11 @@ const CATEGORY_COLORS: Record<string, string> = {
 }
 
 function BlogCard({ post, index }: { post: Post; index: number }) {
-  const { t } = useTranslation()
+  const { t, locale } = useTranslation()
   const categoryColor = CATEGORY_COLORS[post.category] || 'bg-white/10 text-white border-white/20'
+  const lang = locale === 'zh-Hant' ? 'zh' : 'en'
 
-  const formattedDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
+  const formattedDate = new Date(post.publishedAt).toLocaleDateString(lang === 'zh' ? 'zh-Hant' : 'en-US', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
@@ -73,12 +77,12 @@ function BlogCard({ post, index }: { post: Post; index: number }) {
           <div className="p-6 flex flex-col flex-1">
             {/* Title */}
             <h3 className="text-lg font-bold text-white group-hover:text-cyber-cyan transition-colors duration-300 mb-3 line-clamp-2">
-              {post.title}
+              {lang === 'zh' ? post.titleZh : post.title}
             </h3>
 
             {/* Excerpt */}
             <p className="text-gray-400 text-sm leading-relaxed flex-1 mb-4 line-clamp-3">
-              {post.excerpt}
+              {lang === 'zh' ? post.excerptZh : post.excerpt}
             </p>
 
             {/* Footer */}
@@ -114,10 +118,13 @@ export default function BlogPage() {
     {
       id: '1',
       title: 'AI-Powered SOC: The Future of Threat Detection is Here',
+      titleZh: 'AI 驅動 SOC：威脅檢測的未來已來',
       slug: 'ai-powered-soc-future-threat-detection',
       excerpt:
         "Security Operations Centers are being transformed by artificial intelligence. Here's how AI-powered SOCs are redefining threat detection and why your organization needs one.",
+      excerptZh: '人工智能正在徹底改變安全運營中心。以下是 AI 驅動的 SOC 如何重新定義威脅檢測，以及您的組織為何需要它。',
       category: 'Cybersecurity',
+      authorZh: 'Celestial Tech 團隊',
       coverImage: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80',
       author: 'Celestial Tech Team',
       readTime: 6,
@@ -126,22 +133,28 @@ export default function BlogPage() {
     {
       id: '2',
       title: 'From Reactive to Predictive: Why Traditional Cybersecurity is Failing',
+      titleZh: '從被動到主動：為何傳統網絡安全正在失效',
       slug: 'reactive-to-predictive-traditional-cybersecurity-failing',
       excerpt:
         'Traditional cybersecurity waits for something to break. Predictive security stops threats before they happen. Here\'s why the paradigm shift is urgent — and inevitable.',
+      excerptZh: '傳統網絡安全等待事情破裂後才行動。主動式安全在威脅發生前就阻止它們。呢度解釋點解呢個典範轉移迫切且不可避免。',
       category: 'Cybersecurity',
       coverImage: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=80',
       author: 'Celestial Tech Team',
+      authorZh: 'Celestial Tech 團隊',
       readTime: 5,
       publishedAt: '2026-03-18T00:00:00Z',
     },
     {
       id: '3',
       title: 'The Convergence of AI and Cybersecurity: What Enterprises Need to Know in 2026',
+      titleZh: 'AI 與網絡安全的融合：企業在 2026 年需要知道什麼',
       slug: 'convergence-ai-cybersecurity-enterprises-2026',
       excerpt:
         "AI and cybersecurity are no longer separate disciplines — they're converging into a single imperative. Here's what forward-thinking enterprises are doing differently.",
+      excerptZh: 'AI 與網絡安全不再係獨立學科——它們正在融合成一個必需品。呢度係有遠見的企業做嘢不同的地方。',
       category: 'AI',
+      authorZh: 'Celestial Tech 團隊',
       coverImage: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80',
       author: 'Celestial Tech Team',
       readTime: 7,
@@ -150,10 +163,13 @@ export default function BlogPage() {
     {
       id: '4',
       title: 'Building an Autonomous Execution Engine: Multi-Agent Patterns with OpenClaw',
+      titleZh: '構建自主執行引擎：OpenClaw 多代理模式',
       slug: 'openclaw-multi-agent-patterns-autonomous-execution-engine',
       excerpt:
         "Six months of building with OpenClaw taught me that the gap between 'AI chatbot' and 'autonomous execution engine' is exactly this: moving from 'AI answers questions' to 'AI completes projects.' Here's what multi-agent orchestration looks like in practice.",
+      excerptZh: '六個月嘅 OpenClaw 開發經驗告訴我，「AI 聊天機械人」和「自主執行引擎」之間的差距就係：從「AI 回答問題」到「AI 完成項目」。呢度係多代理編排在實踐中的樣子。',
       category: 'AI',
+      authorZh: 'Celestial Tech 團隊',
       coverImage: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80',
       author: 'Celestial Tech Team',
       readTime: 8,
