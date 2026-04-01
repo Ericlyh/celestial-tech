@@ -96,6 +96,13 @@ const plans = [
       'FPS 收款連結',
       'Email 支援',
     ],
+    featuresEn: [
+      '1 AI employee',
+      '1 Telegram Bot',
+      'Basic Cantonese skills',
+      'FPS payment link',
+      'Email support',
+    ],
     cta: '立即試用',
     ctaEn: 'Get Started',
     highlight: false,
@@ -114,6 +121,14 @@ const plans = [
       'FPS + Stripe 收款',
       '優先 WhatsApp 支援',
       '每月報告',
+    ],
+    featuresEn: [
+      '3 AI employees',
+      '3 Telegram Bots',
+      'All HK skill templates',
+      'FPS + Stripe payments',
+      'Priority WhatsApp support',
+      'Monthly reports',
     ],
     cta: '開始免費試用',
     ctaEn: 'Start Free Trial',
@@ -134,6 +149,15 @@ const plans = [
       '24/7 真人支援',
       '自訂技能開發',
       '白標選項',
+    ],
+    featuresEn: [
+      '10 AI employees',
+      '10 Telegram Bots',
+      'All HK skill templates',
+      'FPS + Stripe + AlipayHK',
+      '24/7 live support',
+      'Custom skill development',
+      'White-label option',
     ],
     cta: '聯絡我哋',
     ctaEn: 'Contact Us',
@@ -212,29 +236,27 @@ export default function OpenClawHostingPage() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-cyan/10 text-cyber-cyan text-sm font-medium mb-8 border border-cyber-cyan/20">
               <span className="w-2 h-2 rounded-full bg-cyber-cyan animate-pulse" />
-              首批 10 間 HK 企業搶先體驗
+              {locale === 'zh-Hant' ? '首批 10 間 HK 企業搶先體驗' : 'First 10 HK Businesses Get Early Access'}
             </div>
 
             <h1 className="heading-xl text-pure-white mb-6">
-              你嘅 AI 員工
+              {locale === 'zh-Hant' ? '你嘅 AI 員工' : 'Your AI Employee'}
               <br />
-              <span className="text-gradient-cyan">識聽廣東話</span>
+              <span className="text-gradient-cyan">{locale === 'zh-Hant' ? '識聽廣東話' : 'Speaks Cantonese'}</span>
             </h1>
             <p className="text-xl sm:text-2xl text-pure-white/60 mb-4 font-medium">
-              香港中小企 AI 助手平台
+              {locale === 'zh-Hant' ? '香港中小企 AI 助手平台' : 'AI Assistant Platform for HK SMEs'}
             </p>
             <p className="text-base sm:text-lg text-pure-white/40 mb-10 max-w-2xl mx-auto">
-              一鍵接通 Telegram，支援 FPS 收款。幫你慳時間、慳人手、慳金錢。
-              <br />
-              <span className="text-pure-white/30">Your AI employee that speaks Cantonese — built for Hong Kong SMEs.</span>
+              {locale === 'zh-Hant' ? '一鍵接通 Telegram，支援 FPS 收款。幫你慳時間、慳人手、慳金錢。' : 'One-click Telegram setup, FPS payment ready. Save time, save money, grow your business.'}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
               <a href="#contact" className="btn-cyber-cyan text-lg px-8 py-4 w-full sm:w-auto">
-                免費試用 7 日 →
+                {locale === 'zh-Hant' ? '免費試用 7 日 →' : 'Free 7-Day Trial →'}
               </a>
               <a href="#features" className="btn-cyber-purple text-lg px-8 py-4 w-full sm:w-auto">
-                睇下點運作
+                {locale === 'zh-Hant' ? '睇下點運作' : 'See How It Works'}
               </a>
             </div>
 
@@ -246,10 +268,10 @@ export default function OpenClawHostingPage() {
                     <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-cyber-cyan/40 to-cyber-purple/40 border-2 border-deep-space" />
                   ))}
                 </div>
-                <span>3 間 HK 企業已啟用</span>
+                <span>{locale === 'zh-Hant' ? '3 間 HK 企業已啟用' : '3 HK Businesses Already Live'}</span>
               </div>
               <div className="hidden sm:block w-px h-4 bg-pure-white/20" />
-              <span>無需信用卡</span>
+              <span>{locale === 'zh-Hant' ? '無需信用卡' : 'No Credit Card Required'}</span>
               <div className="hidden sm:block w-px h-4 bg-pure-white/20" />
               <span>{locale === 'zh-Hant' ? '5 分鐘完成設定' : '5-minute setup'}</span>
             </div>
@@ -270,38 +292,72 @@ export default function OpenClawHostingPage() {
                   <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
                   <div className="w-3 h-3 rounded-full bg-green-500/60" />
                 </div>
-                <div className="flex-1 text-center text-xs text-pure-white/40 font-mono">Telegram — 餐廳助理 Bot</div>
+                <div className="flex-1 text-center text-xs text-pure-white/40 font-mono">{locale === 'zh-Hant' ? 'Telegram — 餐廳助理 Bot' : 'Telegram — Restaurant Assistant Bot'}</div>
               </div>
               {/* Chat demo */}
               <div className="p-6 bg-gradient-to-br from-white/[0.02] to-white/[0.01]">
                 <div className="space-y-4">
-                  <div className="flex gap-3">
-                    <div className="w-8 h-8 rounded-full bg-cyber-cyan/20 flex-shrink-0 flex items-center justify-center text-sm">🤖</div>
-                    <div className="glass-card px-4 py-3 max-w-md">
-                      <p className="text-sm text-pure-white/80">
-                        👋 你好！我係你嘅餐廳助理 AI。<br /><br />
-                        我可以幫你：<br />
-                        🥡 處理外賣訂單<br />
-                        📅 預約座位<br />
-                        ❓ 回應客人查詢<br /><br />
-                        請問有咩可以幫到你？
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex gap-3 justify-end">
-                    <div className="bg-cyber-cyan/20 border border-cyber-cyan/30 rounded-2xl rounded-tr-sm px-4 py-3 max-w-md">
-                      <p className="text-sm text-pure-white/90">我想 booking 今晚 7 點，兩個人</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-3">
-                    <div className="w-8 h-8 rounded-full bg-cyber-cyan/20 flex-shrink-0 flex items-center justify-center text-sm">🤖</div>
-                    <div className="glass-card px-4 py-3 max-w-md">
-                      <p className="text-sm text-pure-white/80">
-                        ✅ 收到！我幫你 book 今晚 7 點，兩位。<br /><br />
-                        想唔想要個 FPS 連結嚟留座？客人通常會預早過數確認。
-                      </p>
-                    </div>
-                  </div>
+                  {locale === 'zh-Hant' ? (
+                    <>
+                      <div className="flex gap-3">
+                        <div className="w-8 h-8 rounded-full bg-cyber-cyan/20 flex-shrink-0 flex items-center justify-center text-sm">🤖</div>
+                        <div className="glass-card px-4 py-3 max-w-md">
+                          <p className="text-sm text-pure-white/80">
+                            👋 你好！我係你嘅餐廳助理 AI。<br /><br />
+                            我可以幫你：<br />
+                            🥡 處理外賣訂單<br />
+                            📅 預約座位<br />
+                            ❓ 回應客人查詢<br /><br />
+                            請問有咩可以幫到你？
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex gap-3 justify-end">
+                        <div className="bg-cyber-cyan/20 border border-cyber-cyan/30 rounded-2xl rounded-tr-sm px-4 py-3 max-w-md">
+                          <p className="text-sm text-pure-white/90">我想 booking 今晚 7 點，兩個人</p>
+                        </div>
+                      </div>
+                      <div className="flex gap-3">
+                        <div className="w-8 h-8 rounded-full bg-cyber-cyan/20 flex-shrink-0 flex items-center justify-center text-sm">🤖</div>
+                        <div className="glass-card px-4 py-3 max-w-md">
+                          <p className="text-sm text-pure-white/80">
+                            ✅ 收到！我幫你 book 今晚 7 點，兩位。<br /><br />
+                            想唔想要個 FPS 連結嚟留座？客人通常會預早過數確認。
+                          </p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex gap-3">
+                        <div className="w-8 h-8 rounded-full bg-cyber-cyan/20 flex-shrink-0 flex items-center justify-center text-sm">🤖</div>
+                        <div className="glass-card px-4 py-3 max-w-md">
+                          <p className="text-sm text-pure-white/80">
+                            👋 Hi! I am your restaurant assistant AI.<br /><br />
+                            I can help you with:<br />
+                            🥡 Process takeaway orders<br />
+                            📅 Book table reservations<br />
+                            ❓ Answer customer queries<br /><br />
+                            How can I help you today?
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex gap-3 justify-end">
+                        <div className="bg-cyber-cyan/20 border border-cyber-cyan/30 rounded-2xl rounded-tr-sm px-4 py-3 max-w-md">
+                          <p className="text-sm text-pure-white/90">I'd like to book for tonight at 7pm, for two people</p>
+                        </div>
+                      </div>
+                      <div className="flex gap-3">
+                        <div className="w-8 h-8 rounded-full bg-cyber-cyan/20 flex-shrink-0 flex items-center justify-center text-sm">🤖</div>
+                        <div className="glass-card px-4 py-3 max-w-md">
+                          <p className="text-sm text-pure-white/80">
+                            ✅ Got it! Booked for 7pm, two people.<br /><br />
+                            Would you like an FPS payment link to confirm your booking? Most customers pay in advance.
+                          </p>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -320,7 +376,7 @@ export default function OpenClawHostingPage() {
             className="text-center mb-16"
           >
             <h2 className="heading-lg text-pure-white mb-4">
-              專為香港中小企而設
+              {locale === 'zh-Hant' ? '專為香港中小企而設' : 'Built for HK Small & Medium Businesses'}
             </h2>
             <p className="body-lg text-pure-white/50">
               {locale === 'zh-Hant' ? '為你慳時間，為你賺錢。' : "Everything you need — nothing you don't. Built for HK SMEs."}
@@ -738,7 +794,7 @@ export default function OpenClawHostingPage() {
                   </div>
                   <div>
                     <p className="font-bold text-pure-white">OpenClaw</p>
-                    <p className="text-xs text-cyber-cyan">AI 員工平台</p>
+                    <p className="text-xs text-cyber-cyan">{locale === 'zh-Hant' ? 'AI 員工平台' : 'AI Employee Platform'}</p>
                   </div>
                 </div>
               </div>
@@ -761,7 +817,7 @@ export default function OpenClawHostingPage() {
                 icon: '🏢',
                 openclaw: t('comparison_1_title' as any),
                 openclawSub: locale === 'zh-Hant' ? t('comparison_1_desc' as any) : t('comparison_1_desc_en' as any),
-                claude: '幫你寫 Code',
+                claude: locale === 'zh-Hant' ? '幫你寫 Code' : 'Helps You Code',
                 claudeSub: locale === 'zh-Hant' ? '專為開發者而設嘅 AI coding 助手' : 'AI coding assistant for developers',
                 winner: 'openclaw',
               },
@@ -769,7 +825,7 @@ export default function OpenClawHostingPage() {
                 icon: '🇭🇰',
                 openclaw: t('comparison_2_title' as any),
                 openclawSub: locale === 'zh-Hant' ? t('comparison_2_desc' as any) : t('comparison_2_desc_en' as any),
-                claude: '英文為主',
+                claude: locale === 'zh-Hant' ? '英文為主' : 'English-First',
                 claudeSub: locale === 'zh-Hant' ? '主要支援英文，廣東話有限' : 'Primarily English, limited Cantonese support',
                 winner: 'openclaw',
               },
@@ -777,7 +833,7 @@ export default function OpenClawHostingPage() {
                 icon: '⚙️',
                 openclaw: t('comparison_3_title' as any),
                 openclawSub: locale === 'zh-Hant' ? t('comparison_3_desc' as any) : t('comparison_3_desc_en' as any),
-                claude: '需要 Prompt Engineering',
+                claude: locale === 'zh-Hant' ? '需要 Prompt Engineering' : 'Requires Prompt Engineering',
                 claudeSub: locale === 'zh-Hant' ? '需要懂得點樣寫 prompt 同理解 AI 輸出' : 'Requires prompt writing and AI output understanding',
                 winner: 'openclaw',
               },
@@ -785,7 +841,7 @@ export default function OpenClawHostingPage() {
                 icon: '⏰',
                 openclaw: t('comparison_4_title' as any),
                 openclawSub: locale === 'zh-Hant' ? t('comparison_4_desc' as any) : t('comparison_4_desc_en' as any),
-                claude: '需要你啟動',
+                claude: locale === 'zh-Hant' ? '需要你啟動' : 'Requires Manual Activation',
                 claudeSub: locale === 'zh-Hant' ? '需要人手啟動，唔係持續運行' : 'Requires manual invocation, not always running',
                 winner: 'openclaw',
               },
@@ -793,7 +849,7 @@ export default function OpenClawHostingPage() {
                 icon: '🛡️',
                 openclaw: t('comparison_5_title' as any),
                 openclawSub: locale === 'zh-Hant' ? t('comparison_5_desc' as any) : t('comparison_5_desc_en' as any),
-                claude: '自己管理',
+                claude: locale === 'zh-Hant' ? '自己管理' : 'Self-Managed',
                 claudeSub: locale === 'zh-Hant' ? '你需要自己管伺服器、更新、保安' : 'You manage servers, updates, and security yourself',
                 winner: 'openclaw',
               },
@@ -851,13 +907,10 @@ export default function OpenClawHostingPage() {
             className="text-center mb-12"
           >
             <h2 className="heading-lg text-pure-white mb-4">
-              準備好試用未？
+              {locale === 'zh-Hant' ? '準備好試用未？' : 'Ready to Get Started?'}
             </h2>
             <p className="text-lg text-pure-white/60">
-              填低以下資料，我哋會 WhatsApp 你。
-            </p>
-            <p className="text-sm text-pure-white/30 mt-1">
-              Leave your details and we&apos;ll WhatsApp you within 24 hours.
+              {locale === 'zh-Hant' ? '填低以下資料，我哋會 WhatsApp 你。' : 'Leave your details and we will WhatsApp you within 24 hours.'}
             </p>
           </motion.div>
 
@@ -876,66 +929,80 @@ export default function OpenClawHostingPage() {
             >
               <div>
                 <label className="block text-sm font-medium text-pure-white/80 mb-1">
-                  你嘅名字 / Your Name *
+                  {locale === 'zh-Hant' ? '你嘅名字 *' : 'Your Name *'}
                 </label>
                 <input
                   type="text"
                   name="name"
                   required
-                  placeholder="例如：陳大文"
+                  placeholder={locale === 'zh-Hant' ? '例如：陳大文' : 'e.g. John Smith'}
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-pure-white placeholder:text-pure-white/20 focus:border-cyber-cyan/50 focus:ring-2 focus:ring-cyber-cyan/20 outline-none transition text-sm"
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-pure-white/80 mb-1">
-                  WhatsApp 號碼 *
+                  {locale === 'zh-Hant' ? 'WhatsApp 號碼 *' : 'WhatsApp Number *'}
                 </label>
                 <input
                   type="tel"
                   name="whatsapp"
                   required
-                  placeholder="例如：+852 6123 4567"
+                  placeholder={locale === 'zh-Hant' ? '例如：+852 6123 4567' : 'e.g. +852 6123 4567'}
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-pure-white placeholder:text-pure-white/20 focus:border-cyber-cyan/50 focus:ring-2 focus:ring-cyber-cyan/20 outline-none transition text-sm"
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-pure-white/80 mb-1">
-                  業務類型 / Business Type
+                  {locale === 'zh-Hant' ? '業務類型 *' : 'Business Type *'}
                 </label>
                 <select
                   name="business_type"
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-pure-white/70 focus:border-cyber-cyan/50 focus:ring-2 focus:ring-cyber-cyan/20 outline-none transition text-sm"
                 >
-                  <option value="" className="bg-deep-space">請選擇 / Please select</option>
-                  <option value="restaurant" className="bg-deep-space">餐廳 / Restaurant</option>
-                  <option value="retail" className="bg-deep-space">零售店 / Retail</option>
-                  <option value="onlineshop" className="bg-deep-space">網店 / Online Shop</option>
-                  <option value="agency" className="bg-deep-space">Agency / 顧問</option>
-                  <option value="freelancer" className="bg-deep-space">Freelancer / 自由工作者</option>
-                  <option value="other" className="bg-deep-space">其他 / Other</option>
+                  {locale === 'zh-Hant' ? (
+                    <>
+                      <option value="" className="bg-deep-space">請選擇...</option>
+                      <option value="restaurant" className="bg-deep-space">餐廳</option>
+                      <option value="retail" className="bg-deep-space">零售店</option>
+                      <option value="onlineshop" className="bg-deep-space">網店</option>
+                      <option value="agency" className="bg-deep-space">Agency / 顧問</option>
+                      <option value="freelancer" className="bg-deep-space">Freelancer / 自由工作者</option>
+                      <option value="other" className="bg-deep-space">其他</option>
+                    </>
+                  ) : (
+                    <>
+                      <option value="" className="bg-deep-space">Select...</option>
+                      <option value="restaurant" className="bg-deep-space">Restaurant</option>
+                      <option value="retail" className="bg-deep-space">Retail Store</option>
+                      <option value="onlineshop" className="bg-deep-space">Online Shop</option>
+                      <option value="agency" className="bg-deep-space">Agency / Consultant</option>
+                      <option value="freelancer" className="bg-deep-space">Freelancer</option>
+                      <option value="other" className="bg-deep-space">Other</option>
+                    </>
+                  )}
                 </select>
               </div>
               <div>
                 <label className="block text-sm font-medium text-pure-white/80 mb-1">
-                  你遇到嘅最大問題 / Biggest Pain Point
+                  {locale === 'zh-Hant' ? '你遇到嘅最大問題 *' : 'Biggest Pain Point *'}
                 </label>
                 <textarea
                   name="pain_point"
                   rows={3}
-                  placeholder="例如：每日用 WhatsApp 覆客人查到好辛苦..."
+                  placeholder={locale === 'zh-Hant' ? '例如：每日用 WhatsApp 覆客人查到好辛苦...' : 'e.g. I am tired of replying to WhatsApp messages from customers all day...'}
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-pure-white placeholder:text-pure-white/20 focus:border-cyber-cyan/50 focus:ring-2 focus:ring-cyber-cyan/20 outline-none transition text-sm resize-none"
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-pure-white/80 mb-1">
-                  你想要咩 Plan？ / Preferred Plan
+                  {locale === 'zh-Hant' ? '你想要咩 Plan？ *' : 'Preferred Plan *'}
                 </label>
                 <div className="flex gap-4 flex-wrap">
                   {[
-                    { value: 'starter', label: 'Starter $199/月' },
-                    { value: 'pro', label: 'Pro $399/月' },
-                    { value: 'business', label: 'Business $799/月' },
-                    { value: 'unsure', label: '未決定 / Not sure' },
+                    { value: 'starter', label: locale === 'zh-Hant' ? 'Starter $199/月' : 'Starter $199/mo' },
+                    { value: 'pro', label: locale === 'zh-Hant' ? 'Pro $399/月' : 'Pro $399/mo' },
+                    { value: 'business', label: locale === 'zh-Hant' ? 'Business $799/月' : 'Business $799/mo' },
+                    { value: 'unsure', label: locale === 'zh-Hant' ? '未決定 / Not sure' : 'Undecided' },
                   ].map((opt) => (
                     <label key={opt.value} className="flex items-center gap-2 text-sm text-pure-white/60 cursor-pointer">
                       <input type="radio" name="plan" value={opt.value} className="text-cyber-cyan focus:ring-cyber-cyan/50" />
@@ -944,9 +1011,9 @@ export default function OpenClawHostingPage() {
                   ))}
                 </div>
               </div>
-              <input type="hidden" name="_subject" value="新 HK OpenClaw 查詢！" />
+              <input type="hidden" name="_subject" value={locale === 'zh-Hant' ? '新 HK OpenClaw 查詢！' : 'New HK OpenClaw Inquiry!'} />
               <button type="submit" className="w-full btn-cyber-cyan text-lg py-4">
-                提交 — 等我哋 WhatsApp 你！
+                {locale === 'zh-Hant' ? '提交 — 等我哋 WhatsApp 你！' : 'Submit — We will WhatsApp You!'}
               </button>
               <p className="text-center text-xs text-pure-white/30">
                 我哋唔會spam你。只係發送一次 WhatsApp 確認。
