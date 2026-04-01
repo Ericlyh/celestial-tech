@@ -444,9 +444,8 @@ export default function OpenClawHostingPage() {
                   {item.icon}
                 </div>
                 <div className="text-5xl font-extrabold text-pure-white/10 mb-4">{item.step}</div>
-                <h3 className="text-xl font-bold text-pure-white mb-2">{item.title}</h3>
-                <p className="text-sm text-pure-white/50 mb-2">{item.desc}</p>
-                <p className="text-xs text-pure-white/30">{item.descEn}</p>
+                <h3 className="text-xl font-bold text-pure-white mb-2">{locale === 'zh-Hant' ? item.title : item.titleEn}</h3>
+                <p className="text-sm text-cyber-cyan/80">{locale === 'zh-Hant' ? item.desc : item.descEn}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -901,7 +900,7 @@ export default function OpenClawHostingPage() {
                   : "Claude Code is great. But if you're a HK SME owner, you need OpenClaw."}
               </p>
               <a href="#contact" className="btn-cyber-cyan">
-                {t('comparison_cta' as any)}
+                {locale === 'zh-Hant' ? '試用 OpenClaw →' : 'Try OpenClaw →'}
               </a>
             </div>
           </motion.div>
