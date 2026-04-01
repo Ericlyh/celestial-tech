@@ -237,4 +237,18 @@ export const zhHant: Record<LocaleKey, string> = {
   footer_description: '結合軍用級網絡安全與 AI 驅動的威脅情報。我們全天候無妥協地保護推動世界前進的組織。',
   footer_soc: 'SOC 2  active monitoring',
   footer_crafted: '精密構建。智能安全保障。',
+
+  // How It Works
+  how_label: '工作流程',
+  how_title: '從評估到部署 — 4 步搞掂',
+  how_subtitle: '複雜嘢我哋搞掂。你專注做生意，我哋保護你嘅系統。',
+  how_step1_title: '評估風險',
+  how_step1_desc: '我哋審計你現有嘅安全態勢同 AI 準備情况。唔靠估——清楚知道你嘅處境。',
+  how_step2_title: '設計方案',
+  how_step2_desc: '我哋根據你嘅行業和風險情况，制訂結合 AI 驅動 SOC 與網絡安全嘅定制路線圖。',
+  how_step3_title: '部署與整合',
+  how_step3_desc: '我哋團隊負責實施、整合和員工培訓。你全程保持運營。',
+  how_step4_title: '監控與優化',
+  how_step4_desc: '24/7 威脅監控、每月報告、季度評估。我哋持續改進你嘅防御。',
+  how_cta: '免費諮詢評估',
 }

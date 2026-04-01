@@ -235,6 +235,20 @@ export const en = {
   contact_email_label: 'Email Us',
   contact_phone_label: 'Call Us',
   contact_success_another: 'Send another message →',
+
+  // How It Works
+  how_label: 'How It Works',
+  how_title: 'From Assessment to Deployment — In 4 Steps',
+  how_subtitle: "We cut through the complexity. Here's how we protect your business, step by step.",
+  how_step1_title: 'Assess Your Risk',
+  how_step1_desc: 'We audit your current security posture and AI readiness. No guesswork — just a clear picture of where you stand.',
+  how_step2_title: 'Design Your Solution',
+  how_step2_desc: 'We build a custom roadmap combining AI-driven SOC and cybersecurity measures tailored to your industry and risk profile.',
+  how_step3_title: 'Deploy & Integrate',
+  how_step3_desc: 'Our team handles implementation, integration, and staff training. You stay operational throughout.',
+  how_step4_title: 'Monitor & Optimize',
+  how_step4_desc: '24/7 threat monitoring, monthly reports, and quarterly reviews. We continuously improve your defenses.',
+  how_cta: 'Start with a Free Consultation',
 }
 
 export type LocaleKey = keyof typeof en

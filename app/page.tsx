@@ -10,6 +10,7 @@ import Founder from '@/components/Founder'
 import Testimonials from '@/components/Testimonials'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
+import HowItWorks from '@/components/HowItWorks'
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <About />
       <Services />
       <WhyUs />
+      <HowItWorks />
       <CaseStudies />
       <Founder />
       <Testimonials />
