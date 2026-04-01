@@ -19,10 +19,10 @@ export const en = {
   hero_cta_ai: 'Explore AI Solutions',
   hero_trust: 'Trusted by forward-thinking enterprises',
   hero_badge: 'Next-Generation Cybersecurity + AI',
-  hero_logo_fortune: 'Fortune 500',
-  hero_logo_banks: 'Global Banks',
-  hero_logo_tech: 'Tech Leaders',
-  hero_logo_defense: 'Defense Contractors',
+  hero_logo_fortune: 'SME Leaders',
+  hero_logo_banks: 'Regional Businesses',
+  hero_logo_tech: 'Startups',
+  hero_logo_defense: 'Growing Brands',
   hero_scroll: 'Scroll',
 
   // About
@@ -86,7 +86,7 @@ export const en = {
   why_support_title: '24/7 Expert Support',
   why_support_desc: 'Our security experts are available around the clock — because threats don\'t keep business hours.',
   why_track_title: 'Proven Track Record',
-  why_track_desc: 'From startups to Fortune 500s, our clients trust us to protect what matters most — and we deliver.',
+  why_track_desc: 'From startups to established enterprises, our clients trust us to protect what matters most — and we deliver.',
 
   // Case Studies
   cases_label: 'Case Studies',

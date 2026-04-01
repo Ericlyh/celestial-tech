@@ -54,20 +54,29 @@ const features = [
 const testimonials = [
   {
     quote: '我用咗佢 2 個禮拜，間餐廳嘅外賣booking全自動，員工少咗做嘢，我少咗煩。',
+    quoteEn: 'After 2 weeks, our takeaway orders are fully automated. My staff do less work, I worry less.',
     name: '陳生',
+    nameEn: 'Mr. Chan',
     business: '茶餐廳老闆',
+    businessEn: 'Restaurant Owner',
     plan: 'Pro Plan',
   },
   {
     quote: '終於有個 AI 識得用廣東話回應客人，唔使再麻煩員工覆 message。',
+    quoteEn: "Finally an AI that responds to customers in Cantonese. No more asking staff to reply to messages.",
     name: '李小姐',
+    nameEn: 'Ms. Li',
     business: '補習中心負責人',
+    businessEn: 'Tutoring Center Manager',
     plan: 'Starter Plan',
   },
   {
     quote: '我哋 agency 用佢幫客做 onboarding workflow，省咗好多 email 時間。',
+    quoteEn: "We use it for client onboarding workflows. Saves us so much back-and-forth email time.",
     name: '黃先生',
+    nameEn: 'Mr. Wong',
     business: '數碼營銷 Agency',
+    businessEn: 'Digital Marketing Agency',
     plan: 'Business Plan',
   },
 ]
@@ -88,6 +97,7 @@ const plans = [
       'Email 支援',
     ],
     cta: '立即試用',
+    ctaEn: 'Get Started',
     highlight: false,
   },
   {
@@ -106,6 +116,7 @@ const plans = [
       '每月報告',
     ],
     cta: '開始免費試用',
+    ctaEn: 'Start Free Trial',
     highlight: true,
   },
   {
@@ -125,6 +136,7 @@ const plans = [
       '白標選項',
     ],
     cta: '聯絡我哋',
+    ctaEn: 'Contact Us',
     highlight: false,
   },
 ]
@@ -157,9 +169,9 @@ const faqs = [
 ]
 
 const howItWorks = [
-  { step: '01', icon: '📋', title: '揀技能模板', desc: '喺我哋嘅 HK 商業模板入面，揀你想要嘅 AI 員工角色。', descEn: 'Choose from our HK business skill templates.' },
-  { step: '02', icon: '💬', title: '連接 Telegram', desc: '用你現有嘅 Telegram Bot Token，5 分鐘完成設定。', descEn: 'Connect your existing Telegram bot in 5 minutes.' },
-  { step: '03', icon: '🚀', title: '開始用囉', desc: '即刻幫你接訂單、覆客人、收錢。全自動。', descEn: 'Start taking orders, answering queries, collecting payment.' },
+  { step: '01', icon: '📋', title: '揀技能模板', titleEn: 'Choose Your Skill Template', desc: '喺我哋嘅 HK 商業模板入面，揀你想要嘅 AI 員工角色。', descEn: 'Choose from our HK business skill templates.' },
+  { step: '02', icon: '💬', title: '連接 Telegram', titleEn: 'Connect to Telegram', desc: '用你現有嘅 Telegram Bot Token，5 分鐘完成設定。', descEn: 'Connect your existing Telegram bot in 5 minutes.' },
+  { step: '03', icon: '🚀', title: '開始用囉', titleEn: 'Start Using It', desc: '即刻幫你接訂單、覆客人、收錢。全自動。', descEn: 'Start taking orders, answering queries, collecting payment.' },
 ]
 
 const containerVariants = {
@@ -239,7 +251,7 @@ export default function OpenClawHostingPage() {
               <div className="hidden sm:block w-px h-4 bg-pure-white/20" />
               <span>無需信用卡</span>
               <div className="hidden sm:block w-px h-4 bg-pure-white/20" />
-              <span>5 分鐘完成設定</span>
+              <span>{locale === 'zh-Hant' ? '5 分鐘完成設定' : '5-minute setup'}</span>
             </div>
           </motion.div>
 
@@ -311,7 +323,7 @@ export default function OpenClawHostingPage() {
               專為香港中小企而設
             </h2>
             <p className="body-lg text-pure-white/50">
-              Everything you need — nothing you don&apos;t. 為你慳時間，為你賺錢。
+              {locale === 'zh-Hant' ? '為你慳時間，為你賺錢。' : "Everything you need — nothing you don't. Built for HK SMEs."}
             </p>
           </motion.div>
 
@@ -325,10 +337,8 @@ export default function OpenClawHostingPage() {
             {features.map((f, i) => (
               <motion.div key={i} variants={itemVariants} className="glass-card p-6">
                 <div className="text-3xl mb-4">{f.icon}</div>
-                <h3 className="text-lg font-bold text-pure-white mb-1">{f.title}</h3>
-                <p className="text-xs font-medium text-cyber-cyan mb-3">{f.titleEn}</p>
-                <p className="text-sm text-pure-white/60 mb-1">{f.desc}</p>
-                <p className="text-xs text-pure-white/30">{f.descEn}</p>
+                <h3 className="text-lg font-bold text-pure-white mb-1">{locale === 'zh-Hant' ? f.title : f.titleEn}</h3>
+                <p className="text-sm text-cyber-cyan/80">{locale === 'zh-Hant' ? f.desc : f.descEn}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -346,10 +356,10 @@ export default function OpenClawHostingPage() {
             className="text-center mb-16"
           >
             <h2 className="heading-lg text-pure-white mb-4">
-              3 步驟，5 分鐘搞掂
+              {locale === 'zh-Hant' ? '3 步驟，5 分鐘搞掂' : '3 Steps, 5 Minutes to Setup'}
             </h2>
             <p className="body-lg text-pure-white/50">
-              From zero to AI employee in 5 minutes — no code required.
+              {locale === 'zh-Hant' ? '由零到 AI 員工，5 分鐘完成 — 唔使寫 code。' : 'From zero to AI employee in 5 minutes — no code required.'}
             </p>
           </motion.div>
 
@@ -386,13 +396,10 @@ export default function OpenClawHostingPage() {
             className="text-center mb-16"
           >
             <h2 className="heading-lg text-pure-white mb-4">
-              簡單、透明的定價
+              {locale === 'zh-Hant' ? '簡單、透明的定價' : 'Simple, Transparent Pricing'}
             </h2>
             <p className="body-lg text-pure-white/50">
-              比請一個 part-time admin 平 95%。隨時可以取消。
-            </p>
-            <p className="text-sm text-pure-white/30 mt-2">
-              Simple, transparent pricing. 95% cheaper than a part-time admin. Cancel anytime.
+              {locale === 'zh-Hant' ? '比請一個 part-time admin 平 95%。隨時可以取消。' : '95% cheaper than a part-time admin. Cancel anytime.'}
             </p>
           </motion.div>
 
@@ -407,18 +414,16 @@ export default function OpenClawHostingPage() {
               <motion.div key={i} variants={itemVariants} className={`glass-card p-6 flex flex-col relative ${plan.highlight ? 'border-cyber-cyan/40' : ''}`}>
                 {plan.highlight && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="bg-cyber-cyan text-deep-space text-xs font-bold px-4 py-1 rounded-full">最受歡迎 · MOST POPULAR</span>
+                    <span className="bg-cyber-cyan text-deep-space text-xs font-bold px-4 py-1 rounded-full">{locale === 'zh-Hant' ? '最受歡迎' : 'MOST POPULAR'}</span>
                   </div>
                 )}
                 <div className="mb-6">
-                  <h3 className="text-lg font-bold text-pure-white">{plan.name}</h3>
-                  <p className="text-xs text-cyber-cyan font-medium">{plan.nameZh}</p>
+                  <h3 className="text-lg font-bold text-pure-white">{locale === 'zh-Hant' ? plan.name : plan.name}</h3>
                   <div className="mt-4 flex items-baseline gap-1">
                     <span className="text-4xl font-extrabold text-pure-white">${plan.price}</span>
-                    <span className="text-pure-white/40 text-sm">{plan.period}</span>
+                    <span className="text-pure-white/40 text-sm">{locale === 'zh-Hant' ? plan.period : '/mo'}</span>
                   </div>
-                  <p className="text-xs text-pure-white/50 mt-1">{plan.desc}</p>
-                  <p className="text-xs text-pure-white/30">{plan.descEn}</p>
+                  <p className="text-xs text-pure-white/60 mt-1">{locale === 'zh-Hant' ? plan.desc : plan.descEn}</p>
                 </div>
                 <ul className="space-y-3 flex-1 mb-6">
                   {plan.features.map((f, j) => (
@@ -444,9 +449,7 @@ export default function OpenClawHostingPage() {
             viewport={{ once: true }}
             className="text-center text-xs text-pure-white/30 mt-8"
           >
-            所有價錢以 HKD 計算。年繳可享 17% 折扣，相等於 2 個月免費。
-            <br />
-            All prices in HKD. Annual plans save 17% — equivalent to 2 months free.
+            {locale === 'zh-Hant' ? '所有價錢以 HKD 計算。年繳可享 17% 折扣，相等於 2 個月免費。' : 'All prices in HKD. Annual plans save 17% — equivalent to 2 months free.'}
           </motion.p>
         </div>
       </section>
@@ -462,9 +465,8 @@ export default function OpenClawHostingPage() {
             className="text-center mb-12"
           >
             <h2 className="heading-lg text-pure-white mb-4">
-              HK 老闆點樣用？
+              {locale === 'zh-Hant' ? 'HK 老闆點樣用？' : 'What HK Business Owners Are Saying'}
             </h2>
-            <p className="body-lg text-pure-white/50">What HK business owners are saying.</p>
           </motion.div>
 
           <motion.div
@@ -678,8 +680,7 @@ export default function OpenClawHostingPage() {
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
           >
-            <h2 className="heading-lg text-pure-white mb-4">常見問題</h2>
-            <p className="body-lg text-pure-white/50">Frequently Asked Questions.</p>
+            <h2 className="heading-lg text-pure-white mb-4">{locale === 'zh-Hant' ? '常見問題' : 'Frequently Asked Questions'}</h2>
           </motion.div>
 
           <motion.div
@@ -691,10 +692,8 @@ export default function OpenClawHostingPage() {
           >
             {faqs.map((faq, i) => (
               <motion.div key={i} variants={itemVariants} className="glass-card p-6">
-                <h3 className="font-semibold text-pure-white mb-1">{faq.q}</h3>
-                <p className="text-xs text-cyber-cyan mb-2 font-medium">{faq.qEn}</p>
-                <p className="text-sm text-pure-white/60 mb-1">{faq.a}</p>
-                <p className="text-xs text-pure-white/30">{faq.aEn}</p>
+                <h3 className="font-semibold text-pure-white mb-1">{locale === 'zh-Hant' ? faq.q : faq.qEn}</h3>
+                <p className="text-sm text-cyber-cyan/80 mt-2">{locale === 'zh-Hant' ? faq.a : faq.aEn}</p>
               </motion.div>
             ))}
           </motion.div>

@@ -21,10 +21,10 @@ export const zhHant: Record<LocaleKey, string> = {
   hero_cta_ai: '探索 AI 方案',
   hero_trust: '深受進取型企業信賴',
   hero_badge: '下一代網絡安全 + AI',
-  hero_logo_fortune: '財富 500 強',
-  hero_logo_banks: '全球銀行',
-  hero_logo_tech: '科技領袖',
-  hero_logo_defense: '國防承包商',
+  hero_logo_fortune: '中小企',
+  hero_logo_banks: '本地企業',
+  hero_logo_tech: '初創公司',
+  hero_logo_defense: '成長品牌',
   hero_scroll: '滾動',
 
   // About
