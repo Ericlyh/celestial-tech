@@ -93,6 +93,7 @@ const plans = [
       '1 個 AI 員工',
       '1 個 Telegram Bot',
       '基本廣東話技能',
+      '自動安全備份',
       'FPS 收款連結',
       'Email 支援',
     ],
@@ -100,6 +101,7 @@ const plans = [
       '1 AI employee',
       '1 Telegram Bot',
       'Basic Cantonese skills',
+      'Auto security backup',
       'FPS payment link',
       'Email support',
     ],
@@ -118,6 +120,8 @@ const plans = [
       '3 個 AI 員工',
       '3 個 Telegram Bot',
       '全部 HK 技能模板',
+      '自動安全備份',
+      '對話記憶增強',
       'FPS + Stripe 收款',
       '優先 WhatsApp 支援',
       '每月報告',
@@ -126,6 +130,8 @@ const plans = [
       '3 AI employees',
       '3 Telegram Bots',
       'All HK skill templates',
+      'Auto security backup',
+      'Enhanced conversation memory',
       'FPS + Stripe payments',
       'Priority WhatsApp support',
       'Monthly reports',
@@ -145,6 +151,9 @@ const plans = [
       '10 個 AI 員工',
       '10 個 Telegram Bot',
       '全部 HK 技能模板',
+      '自動安全備份',
+      '對話記憶增強',
+      '效能優化',
       'FPS + Stripe + AlipayHK',
       '24/7 真人支援',
       '自訂技能開發',
@@ -154,6 +163,9 @@ const plans = [
       '10 AI employees',
       '10 Telegram Bots',
       'All HK skill templates',
+      'Auto security backup',
+      'Enhanced conversation memory',
+      'Performance optimization',
       'FPS + Stripe + AlipayHK',
       '24/7 live support',
       'Custom skill development',
@@ -482,7 +494,7 @@ export default function OpenClawHostingPage() {
                   <p className="text-xs text-pure-white/60 mt-1">{locale === 'zh-Hant' ? plan.desc : plan.descEn}</p>
                 </div>
                 <ul className="space-y-3 flex-1 mb-6">
-                  {plan.features.map((f, j) => (
+                  {(locale === 'zh-Hant' ? plan.features : plan.featuresEn).map((f, j) => (
                     <li key={j} className="flex items-start gap-2 text-sm text-pure-white/60">
                       <span className="text-cyber-cyan mt-0.5">✓</span>
                       {f}
@@ -493,7 +505,7 @@ export default function OpenClawHostingPage() {
                   href="#contact"
                   className={`w-full text-center py-3 rounded-xl font-semibold transition-all ${plan.highlight ? 'btn-cyber-cyan' : 'bg-white/5 text-pure-white/80 border border-white/10 hover:bg-white/10 hover:border-white/20'}`}
                 >
-                  {plan.cta}
+                  {locale === 'zh-Hant' ? plan.cta : plan.ctaEn}
                 </a>
               </motion.div>
             ))}
@@ -535,14 +547,14 @@ export default function OpenClawHostingPage() {
             {testimonials.map((t, i) => (
               <motion.div key={i} variants={itemVariants} className="glass-card p-6">
                 <div className="text-cyber-cyan text-lg mb-3">★★★★★</div>
-                <p className="text-sm text-pure-white/70 mb-4 leading-relaxed">「{t.quote}」</p>
+                <p className="text-sm text-pure-white/70 mb-4 leading-relaxed">「{locale === 'zh-Hant' ? t.quote : t.quoteEn}」</p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyber-cyan/40 to-cyber-purple/40 flex items-center justify-center text-pure-white font-bold text-sm">
                     {t.name[0]}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-pure-white">{t.name}</p>
-                    <p className="text-xs text-pure-white/40">{t.business} · {t.plan}</p>
+                    <p className="text-sm font-semibold text-pure-white">{locale === 'zh-Hant' ? t.name : t.nameEn}</p>
+                    <p className="text-xs text-pure-white/40">{locale === 'zh-Hant' ? t.business : t.businessEn} · {t.plan}</p>
                   </div>
                 </div>
               </motion.div>
@@ -815,7 +827,7 @@ export default function OpenClawHostingPage() {
             {[
               {
                 icon: '🏢',
-                openclaw: t('comparison_1_title' as any),
+                openclaw: locale === 'zh-Hant' ? t('comparison_1_title' as any) : t('comparison_1_title_en' as any),
                 openclawSub: locale === 'zh-Hant' ? t('comparison_1_desc' as any) : t('comparison_1_desc_en' as any),
                 claude: locale === 'zh-Hant' ? '幫你寫 Code' : 'Helps You Code',
                 claudeSub: locale === 'zh-Hant' ? '專為開發者而設嘅 AI coding 助手' : 'AI coding assistant for developers',
@@ -823,7 +835,7 @@ export default function OpenClawHostingPage() {
               },
               {
                 icon: '🇭🇰',
-                openclaw: t('comparison_2_title' as any),
+                openclaw: locale === 'zh-Hant' ? t('comparison_2_title' as any) : t('comparison_2_title_en' as any),
                 openclawSub: locale === 'zh-Hant' ? t('comparison_2_desc' as any) : t('comparison_2_desc_en' as any),
                 claude: locale === 'zh-Hant' ? '英文為主' : 'English-First',
                 claudeSub: locale === 'zh-Hant' ? '主要支援英文，廣東話有限' : 'Primarily English, limited Cantonese support',
@@ -831,7 +843,7 @@ export default function OpenClawHostingPage() {
               },
               {
                 icon: '⚙️',
-                openclaw: t('comparison_3_title' as any),
+                openclaw: locale === 'zh-Hant' ? t('comparison_3_title' as any) : t('comparison_3_title_en' as any),
                 openclawSub: locale === 'zh-Hant' ? t('comparison_3_desc' as any) : t('comparison_3_desc_en' as any),
                 claude: locale === 'zh-Hant' ? '需要 Prompt Engineering' : 'Requires Prompt Engineering',
                 claudeSub: locale === 'zh-Hant' ? '需要懂得點樣寫 prompt 同理解 AI 輸出' : 'Requires prompt writing and AI output understanding',
@@ -839,7 +851,7 @@ export default function OpenClawHostingPage() {
               },
               {
                 icon: '⏰',
-                openclaw: t('comparison_4_title' as any),
+                openclaw: locale === 'zh-Hant' ? t('comparison_4_title' as any) : t('comparison_4_title_en' as any),
                 openclawSub: locale === 'zh-Hant' ? t('comparison_4_desc' as any) : t('comparison_4_desc_en' as any),
                 claude: locale === 'zh-Hant' ? '需要你啟動' : 'Requires Manual Activation',
                 claudeSub: locale === 'zh-Hant' ? '需要人手啟動，唔係持續運行' : 'Requires manual invocation, not always running',
@@ -847,7 +859,7 @@ export default function OpenClawHostingPage() {
               },
               {
                 icon: '🛡️',
-                openclaw: t('comparison_5_title' as any),
+                openclaw: locale === 'zh-Hant' ? t('comparison_5_title' as any) : t('comparison_5_title_en' as any),
                 openclawSub: locale === 'zh-Hant' ? t('comparison_5_desc' as any) : t('comparison_5_desc_en' as any),
                 claude: locale === 'zh-Hant' ? '自己管理' : 'Self-Managed',
                 claudeSub: locale === 'zh-Hant' ? '你需要自己管伺服器、更新、保安' : 'You manage servers, updates, and security yourself',

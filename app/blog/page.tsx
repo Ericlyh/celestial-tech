@@ -110,7 +110,7 @@ export default function BlogPage() {
   const [activeTab, setActiveTab] = useState<'All' | 'AI' | 'Cybersecurity'>('All')
 
   // Static posts for client-side rendering
-  const posts: Post[] = [
+  const _allPosts: Post[] = [
     {
       id: '1',
       title: 'AI-Powered SOC: The Future of Threat Detection is Here',
@@ -159,7 +159,8 @@ export default function BlogPage() {
       readTime: 8,
       publishedAt: '2026-04-01T00:00:00Z',
     },
-  ]
+  ].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+  const posts = _allPosts
 
   const filteredPosts =
     activeTab === 'All' ? posts : posts.filter((p) => p.category === activeTab)
