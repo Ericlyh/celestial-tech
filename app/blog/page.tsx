@@ -147,6 +147,18 @@ export default function BlogPage() {
       readTime: 7,
       publishedAt: '2026-03-15T00:00:00Z',
     },
+    {
+      id: '4',
+      title: 'Building an Autonomous Execution Engine: Multi-Agent Patterns with OpenClaw',
+      slug: 'openclaw-multi-agent-patterns-autonomous-execution-engine',
+      excerpt:
+        "Six months of building with OpenClaw taught me that the gap between 'AI chatbot' and 'autonomous execution engine' is exactly this: moving from 'AI answers questions' to 'AI completes projects.' Here's what multi-agent orchestration looks like in practice.",
+      category: 'AI',
+      coverImage: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80',
+      author: 'Celestial Tech Team',
+      readTime: 8,
+      publishedAt: '2026-04-01T00:00:00Z',
+    },
   ]
 
   const filteredPosts =
