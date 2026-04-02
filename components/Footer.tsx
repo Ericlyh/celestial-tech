@@ -42,8 +42,8 @@ export default function Footer() {
   ]
 
   const legalLinks = [
-    { labelKey: 'footer_privacy' as const, href: '#' },
-    { labelKey: 'footer_terms' as const, href: '#' },
+    { labelKey: 'footer_privacy' as const, href: '/privacy-policy' },
+    { labelKey: 'footer_terms' as const, href: '/terms-of-service' },
   ]
 
   return (
