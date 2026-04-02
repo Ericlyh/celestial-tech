@@ -86,7 +86,7 @@ interface MarkdownRendererProps {
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   return (
-    <div className="markdown-content">
+    <div className="markdown-content" suppressHydrationWarning={true}>
       <ReactMarkdown components={components}>{content}</ReactMarkdown>
     </div>
   )
