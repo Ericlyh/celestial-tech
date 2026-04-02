@@ -15,13 +15,13 @@ const fadeUp = {
 }
 
 const infoCards = [
-  { icon: Mail, label: 'Email Us', value: 'hello@celestialtech.io', sub: 'We respond within 24 hours' },
-  { icon: Phone, label: 'Call Us', value: '+1 (888) 988-CYBER', sub: 'Mon–Fri, 9am–6pm HKT' },
-  { icon: MapPin, label: 'Location', value: 'Hong Kong · Singapore · London', sub: 'Global SOC, 24/7 coverage' },
+  { icon: Mail, labelKey: 'contact_email_label', value: 'hello@celestialtech.io', subKey: 'contact_calendly_info' },
+  { icon: Phone, labelKey: 'contact_phone_label', value: '+1 (888) 988-CYBER', subKey: 'contact_calendly_hours' },
+  { icon: MapPin, labelKey: 'contact_location_label', value: 'Hong Kong · Singapore · London', subKey: 'contact_calendly_locations' },
 ] as const
 
 export default function Contact() {
-  const { t } = useTranslation()
+  const { t, locale } = useTranslation()
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -110,10 +110,10 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-gray-400 text-xs uppercase tracking-wider mb-1">
-                    {card.label}
+                    {t(card.labelKey as any)}
                   </p>
                   <p className="text-white font-medium">{card.value}</p>
-                  <p className="text-gray-500 text-sm">{card.sub}</p>
+                  <p className="text-gray-500 text-sm">{t(card.subKey as any)}</p>
                 </div>
               </motion.div>
               )
@@ -165,15 +165,15 @@ export default function Contact() {
                 className="bg-white/[0.03] border border-[#00F0FF]/20 rounded-2xl p-12 text-center"
               >
                 <CheckCircle className="w-16 h-16 text-[#00F0FF] mx-auto mb-6" />
-                <h3 className="text-2xl font-bold text-white mb-3">Message Received!</h3>
+                <h3 className="text-2xl font-bold text-white mb-3">{t('contact_success_title')}</h3>
                 <p className="text-gray-400 mb-6">
-                  Thank you for reaching out. A member of our team will be in touch within 24 hours.
+                  {t('contact_success_message')}
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
                   className="text-[#00F0FF] hover:text-white transition-colors duration-300 text-sm"
                 >
-                  Send another message →
+                  {t('contact_success_another')}
                 </button>
               </motion.div>
             ) : (
@@ -195,7 +195,7 @@ export default function Contact() {
                       required
                       value={formState.name}
                       onChange={handleChange}
-                      placeholder="Jane Doe"
+                      placeholder={locale === "zh-Hant" ? "王小明" : "Jane Doe"}
                       className="w-full px-4 py-3 rounded-lg bg-white/[0.05] border border-white/[0.1]
                                  text-white placeholder:text-gray-600
                                  focus:outline-none focus:border-[#00F0FF]/50 focus:bg-white/[0.08]
@@ -215,7 +215,7 @@ export default function Contact() {
                       required
                       value={formState.email}
                       onChange={handleChange}
-                      placeholder="jane@company.com"
+                      placeholder={locale === "zh-Hant" ? "wang@公司.com" : "jane@company.com"}
                       className="w-full px-4 py-3 rounded-lg bg-white/[0.05] border border-white/[0.1]
                                  text-white placeholder:text-gray-600
                                  focus:outline-none focus:border-[#00F0FF]/50 focus:bg-white/[0.08]
@@ -235,7 +235,7 @@ export default function Contact() {
                     type="text"
                     value={formState.company}
                     onChange={handleChange}
-                    placeholder="Acme Corp"
+                    placeholder={locale === "zh-Hant" ? "ABC 集團" : "Acme Corp"}
                     className="w-full px-4 py-3 rounded-lg bg-white/[0.05] border border-white/[0.1]
                                text-white placeholder:text-gray-600
                                focus:outline-none focus:border-[#00F0FF]/50 focus:bg-white/[0.08]
@@ -303,7 +303,9 @@ export default function Contact() {
                 </button>
 
                 <p className="text-center text-gray-500 text-xs">
-                  By submitting, you agree to our Privacy Policy. We&apos;ll never spam you or share your data.
+                  {locale === 'zh-Hant'
+                    ? '提交即表示您同意我們的隱私政策。我們不會發送垃圾郵件或分享您的數據。'
+                    : "By submitting, you agree to our Privacy Policy. We'll never spam you or share your data."}
                 </p>
               </form>
             )}
