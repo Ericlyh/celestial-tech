@@ -6,7 +6,7 @@ export default function WhatsAppButton() {
   const { locale } = useTranslation()
   return (
     <a
-      href={locale === 'zh-Hant' ? 'https://wa.me/85269946112?text=你好，我對%20OpenClaw%20香港好有興趣！' : 'https://wa.me/85269946112?text=Hi%2C%20I%27m%20interested%20in%20OpenClaw%20HK!'}
+      href={locale === 'zh-Hant' ? 'https://wa.me/85269946112?text=你好，我對%20Hermes%20Agent%20香港好有興趣！' : 'https://wa.me/85269946112?text=Hi%2C%20I%27m%20interested%20in%20Hermes%20Agent%20HK!'}
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-50 flex items-center gap-3 glass-card px-5 py-3 hover:border-cyber-cyan/40 transition-all duration-200 hover:scale-105 group border-cyber-cyan/20"

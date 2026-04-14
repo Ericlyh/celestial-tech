@@ -185,10 +185,10 @@ const faqs = [
     aEn: 'Absolutely! We built this for non-technical HK business owners. You pick the skill, we handle everything else.',
   },
   {
-    q: 'OpenClaw 係乜嘢？',
-    qEn: 'What is OpenClaw?',
-    a: 'OpenClaw 係一個開源嘅 AI Agent 框架，全球有 230,000+ 開發者用緊。我哋幫 HK 企業包裝成托管服務，你唔使自己管伺服器。',
-    aEn: "OpenClaw is an open-source AI agent framework with 230,000+ developers. We manage the hosting so you don't have to.",
+    q: 'Hermes Agent 係乜嘢？',
+    qEn: 'What is Hermes Agent?',
+    a: 'Hermes Agent 係我哋基於 OpenClaw 開發嘅下一代 AI 員工平台。我哋幫 HK 企業包裝成托管服務，唔使自己管伺服器。',
+    aEn: "Hermes Agent is our next-generation AI employee platform, built on OpenClaw's architecture. We manage the hosting so you don't have to.",
   },
   {
     q: 'FPS 收款係點運作？',
@@ -223,7 +223,7 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 }
 
-export default function OpenClawHostingPage() {
+export default function HermesAgentHostingPage() {
   const { t, locale } = useTranslation()
 
   return (
@@ -580,8 +580,8 @@ export default function OpenClawHostingPage() {
             </h2>
             <p className="body-lg text-pure-white/50">
               {locale === 'zh-Hant'
-                ? '睇下香港老闆點樣用 OpenClaw 改變佢哋嘅業務'
-                : 'See how HK business owners transformed their operations with OpenClaw'}
+                ? '睇下香港老闆點樣用 Hermes Agent 改變佢哋嘅業務'
+                : 'See how HK business owners transformed their operations with Hermes Agent'}
             </p>
           </motion.div>
 
@@ -620,7 +620,7 @@ export default function OpenClawHostingPage() {
                   {locale === 'zh-Hant' ? '✅ 方案：' : '✅ Solution:'}
                 </p>
                 <p className="text-sm text-pure-white/60 leading-relaxed">
-                  {locale === 'zh-Hant' ? t('cases_oc_1_solution') : 'OpenClaw AI employee auto-replies FAQs and processes takeaway orders'}
+                  {locale === 'zh-Hant' ? t('cases_oc_1_solution') : 'Hermes Agent employee auto-replies FAQs and processes takeaway orders'}
                 </p>
               </div>
 
@@ -662,7 +662,7 @@ export default function OpenClawHostingPage() {
                   {locale === 'zh-Hant' ? '✅ 方案：' : '✅ Solution:'}
                 </p>
                 <p className="text-sm text-pure-white/60 leading-relaxed">
-                  {locale === 'zh-Hant' ? t('cases_oc_2_solution') : 'OpenClaw AI instantly answers parent queries, sends enrollment info and past papers automatically'}
+                  {locale === 'zh-Hant' ? t('cases_oc_2_solution') : 'Hermes Agent instantly answers parent queries, sends enrollment info and past papers automatically'}
                 </p>
               </div>
 
@@ -704,7 +704,7 @@ export default function OpenClawHostingPage() {
                   {locale === 'zh-Hant' ? '✅ 方案：' : '✅ Solution:'}
                 </p>
                 <p className="text-sm text-pure-white/60 leading-relaxed">
-                  {locale === 'zh-Hant' ? t('cases_oc_3_solution') : 'OpenClaw automates the entire onboarding workflow, clients ask AI directly'}
+                  {locale === 'zh-Hant' ? t('cases_oc_3_solution') : 'Hermes Agent automates the entire onboarding workflow, clients ask AI directly'}
                 </p>
               </div>
 
@@ -767,7 +767,7 @@ export default function OpenClawHostingPage() {
         </div>
       </section>
 
-      {/* Comparison: OpenClaw vs Claude Code Desktop */}
+      {/* Comparison: Hermes Agent vs Claude Code Desktop */}
       <section id="comparison" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -778,13 +778,13 @@ export default function OpenClawHostingPage() {
             className="text-center mb-12"
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-purple/10 text-cyber-purple text-sm font-medium mb-6 border border-cyber-purple/20">
-              {locale === 'zh-Hant' ? '為何選擇 OpenClaw？' : 'Why OpenClaw?'}
+              {locale === 'zh-Hant' ? '為何選擇 Hermes Agent？' : 'Why Hermes Agent?'}
             </span>
             <h2 className="heading-lg text-pure-white mb-4">
-              {locale === 'zh-Hant' ? 'OpenClaw vs Claude Code Desktop — 有幾大分別？' : 'OpenClaw vs Claude Code Desktop — How Different Are They?'}
+              {locale === 'zh-Hant' ? 'Hermes Agent vs Claude Code Desktop — 有幾大分別？' : 'Hermes Agent vs Claude Code Desktop — How Different Are They?'}
             </h2>
             <p className="body-lg text-pure-white/50 max-w-2xl mx-auto">
-              {locale === 'zh-Hant' ? t('comparison_subtitle' as any) : 'Claude Code Desktop is a great AI coding assistant. But if you want real business automation, OpenClaw is in a different league.'}
+              {locale === 'zh-Hant' ? t('comparison_subtitle' as any) : 'Claude Code Desktop is a great AI coding assistant. But if you want real business automation, Hermes Agent is in a different league.'}
             </p>
           </motion.div>
 
@@ -804,7 +804,7 @@ export default function OpenClawHostingPage() {
                     <span className="text-lg">🤖</span>
                   </div>
                   <div>
-                    <p className="font-bold text-pure-white">OpenClaw</p>
+                    <p className="font-bold text-pure-white">Hermes Agent</p>
                     <p className="text-xs text-cyber-cyan">{locale === 'zh-Hant' ? 'AI 員工平台' : 'AI Employee Platform'}</p>
                   </div>
                 </div>
@@ -896,11 +896,155 @@ export default function OpenClawHostingPage() {
             <div className="p-6 bg-cyber-cyan/5 border-t border-cyber-cyan/20 text-center">
               <p className="text-pure-white/70 mb-4">
                 {locale === 'zh-Hant'
-                  ? 'Claude Code 係一款出色工具。但如果你係 HK 中小企老闆，你需要嘅係 OpenClaw。'
-                  : "Claude Code is great. But if you're a HK SME owner, you need OpenClaw."}
+                  ? 'Claude Code 係一款出色工具。但如果你係 HK 中小企老闆，你需要嘅係 Hermes Agent。'
+                  : "Claude Code is great. But if you're a HK SME owner, you need Hermes Agent."}
               </p>
               <a href="#contact" className="btn-cyber-cyan">
-                {locale === 'zh-Hant' ? '試用 OpenClaw →' : 'Try OpenClaw →'}
+                {locale === 'zh-Hant' ? '試用 Hermes Agent →' : 'Try Hermes Agent →'}
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* NEW Comparison: Hermes Agent vs OpenClaw (Legacy) */}
+      <section id="hermes-vs-legacy" className="py-20 px-4 sm:px-6 lg:px-8 bg-deep-space">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-cyan/10 text-cyber-cyan text-sm font-medium mb-6 border border-cyber-cyan/20">
+              {locale === 'zh-Hant' ? t('hermes_vs_legacy_label') : t('hermes_vs_legacy_label_en')}
+            </span>
+            <h2 className="heading-lg text-pure-white mb-4">
+              {locale === 'zh-Hant' ? t('hermes_vs_legacy_title') : t('hermes_vs_legacy_title_en')}
+            </h2>
+            <p className="body-lg text-pure-white/50 max-w-2xl mx-auto">
+              {locale === 'zh-Hant' ? t('hermes_vs_legacy_subtitle') : t('hermes_vs_legacy_subtitle_en')}
+            </p>
+          </motion.div>
+
+          {/* Comparison table */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="glass-card overflow-hidden"
+          >
+            {/* Table header */}
+            <div className="grid grid-cols-2 gap-0">
+              <div className="p-6 border-b border-cyber-cyan/20 bg-cyber-cyan/5">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-cyber-cyan/20 flex items-center justify-center border border-cyber-cyan/30">
+                    <span className="text-lg">🚀</span>
+                  </div>
+                  <div>
+                    <p className="font-bold text-cyber-cyan">Hermes Agent</p>
+                    <p className="text-xs text-cyber-cyan/60">{locale === 'zh-Hant' ? '升級版 — 為 HK 中小企而設' : 'Upgrade — Built for HK SMEs'}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-6 border-b border-white/5 bg-white/[0.02]">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10">
+                    <span className="text-lg">⚙️</span>
+                  </div>
+                  <div>
+                    <p className="font-bold text-pure-white/60">OpenClaw</p>
+                    <p className="text-xs text-pure-white/30">{locale === 'zh-Hant' ? '舊版 — Legacy' : 'Legacy — Original'}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Rows */}
+            {[
+              {
+                icon: '🏗️',
+                hermes: locale === 'zh-Hant' ? t('hermes_vs_legacy_row1_hermes') : t('hermes_vs_legacy_row1_hermes_en'),
+                hermesSub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row1_hermes_sub') : t('hermes_vs_legacy_row1_hermes_sub_en'),
+                legacy: locale === 'zh-Hant' ? t('hermes_vs_legacy_row1_legacy') : t('hermes_vs_legacy_row1_legacy_en'),
+                legacySub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row1_legacy_sub') : t('hermes_vs_legacy_row1_legacy_sub_en'),
+              },
+              {
+                icon: '🇭🇰',
+                hermes: locale === 'zh-Hant' ? t('hermes_vs_legacy_row2_hermes') : t('hermes_vs_legacy_row2_hermes_en'),
+                hermesSub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row2_hermes_sub') : t('hermes_vs_legacy_row2_hermes_sub_en'),
+                legacy: locale === 'zh-Hant' ? t('hermes_vs_legacy_row2_legacy') : t('hermes_vs_legacy_row2_legacy_en'),
+                legacySub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row2_legacy_sub') : t('hermes_vs_legacy_row2_legacy_sub_en'),
+              },
+              {
+                icon: '📋',
+                hermes: locale === 'zh-Hant' ? t('hermes_vs_legacy_row3_hermes') : t('hermes_vs_legacy_row3_hermes_en'),
+                hermesSub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row3_hermes_sub') : t('hermes_vs_legacy_row3_hermes_sub_en'),
+                legacy: locale === 'zh-Hant' ? t('hermes_vs_legacy_row3_legacy') : t('hermes_vs_legacy_row3_legacy_en'),
+                legacySub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row3_legacy_sub') : t('hermes_vs_legacy_row3_legacy_sub_en'),
+              },
+              {
+                icon: '☁️',
+                hermes: locale === 'zh-Hant' ? t('hermes_vs_legacy_row4_hermes') : t('hermes_vs_legacy_row4_hermes_en'),
+                hermesSub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row4_hermes_sub') : t('hermes_vs_legacy_row4_hermes_sub_en'),
+                legacy: locale === 'zh-Hant' ? t('hermes_vs_legacy_row4_legacy') : t('hermes_vs_legacy_row4_legacy_en'),
+                legacySub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row4_legacy_sub') : t('hermes_vs_legacy_row4_legacy_sub_en'),
+              },
+              {
+                icon: '💳',
+                hermes: locale === 'zh-Hant' ? t('hermes_vs_legacy_row5_hermes') : t('hermes_vs_legacy_row5_hermes_en'),
+                hermesSub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row5_hermes_sub') : t('hermes_vs_legacy_row5_hermes_sub_en'),
+                legacy: locale === 'zh-Hant' ? t('hermes_vs_legacy_row5_legacy') : t('hermes_vs_legacy_row5_legacy_en'),
+                legacySub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row5_legacy_sub') : t('hermes_vs_legacy_row5_legacy_sub_en'),
+              },
+              {
+                icon: '⚡',
+                hermes: locale === 'zh-Hant' ? t('hermes_vs_legacy_row6_hermes') : t('hermes_vs_legacy_row6_hermes_en'),
+                hermesSub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row6_hermes_sub') : t('hermes_vs_legacy_row6_hermes_sub_en'),
+                legacy: locale === 'zh-Hant' ? t('hermes_vs_legacy_row6_legacy') : t('hermes_vs_legacy_row6_legacy_en'),
+                legacySub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row6_legacy_sub') : t('hermes_vs_legacy_row6_legacy_sub_en'),
+              },
+              {
+                icon: '🛡️',
+                hermes: locale === 'zh-Hant' ? t('hermes_vs_legacy_row7_hermes') : t('hermes_vs_legacy_row7_hermes_en'),
+                hermesSub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row7_hermes_sub') : t('hermes_vs_legacy_row7_hermes_sub_en'),
+                legacy: locale === 'zh-Hant' ? t('hermes_vs_legacy_row7_legacy') : t('hermes_vs_legacy_row7_legacy_en'),
+                legacySub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row7_legacy_sub') : t('hermes_vs_legacy_row7_legacy_sub_en'),
+              },
+            ].map((row, i) => (
+              <div key={i} className="grid grid-cols-2 gap-0 border-b border-white/5 last:border-0">
+                <div className="p-6 border-r border-cyber-cyan/10 bg-cyber-cyan/[0.02]">
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl mt-0.5">{row.icon}</span>
+                    <div>
+                      <p className="font-semibold text-cyber-cyan mb-1">{row.hermes}</p>
+                      <p className="text-xs text-pure-white/50 leading-relaxed">{row.hermesSub}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-6 bg-white/[0.01]">
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl mt-0.5 text-pure-white/30">—</span>
+                    <div>
+                      <p className="font-medium text-pure-white/40 mb-1">{row.legacy}</p>
+                      <p className="text-xs text-pure-white/30 leading-relaxed">{row.legacySub}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {/* CTA */}
+            <div className="p-6 bg-cyber-cyan/5 border-t border-cyber-cyan/20 text-center">
+              <p className="text-pure-white/70 mb-4">
+                {locale === 'zh-Hant'
+                  ? 'Hermes Agent 係 OpenClaw 嘅下一代升級版——你值得擁有更好嘅 AI 員工。'
+                  : 'Hermes Agent is the next-generation upgrade to OpenClaw — you deserve a better AI employee.'}
+              </p>
+              <a href="#contact" className="btn-cyber-cyan">
+                {locale === 'zh-Hant' ? t('hermes_vs_legacy_cta') : t('hermes_vs_legacy_cta_en')}
               </a>
             </div>
           </motion.div>
