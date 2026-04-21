@@ -187,25 +187,25 @@ export default function BlogPage() {
     <main className="relative min-h-screen bg-deep-space overflow-x-hidden">
       <Navbar />
       {/* Hero Section */}
-      <section className="relative pt-32 pb-16 overflow-hidden">
+      <section className="relative pt-28 sm:pt-36 pb-12 sm:pb-16 overflow-hidden">
         {/* Background grid */}
         <div className="absolute inset-0 hero-grid opacity-30" />
         {/* Radial glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-cyber-cyan/5 rounded-full blur-[100px]" />
 
-        <div className="container-main relative z-10 text-center">
+        <div className="container-main relative z-10 text-center px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-block px-4 py-1.5 text-xs font-medium rounded-full border border-cyber-cyan/30 text-cyber-cyan bg-cyber-cyan/5 mb-6">
+            <span className="inline-block px-4 py-1.5 text-xs font-medium rounded-full border border-cyber-cyan/30 text-cyber-cyan bg-cyber-cyan/5 mb-5 sm:mb-6">
               Celestial Tech Insights
             </span>
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4">
               {t('blog_title')}
             </h1>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto">
               {t('blog_subtitle')}
             </p>
           </motion.div>
@@ -213,14 +213,14 @@ export default function BlogPage() {
       </section>
 
       {/* Filter Tabs */}
-      <section className="pb-12">
+      <section className="pb-10 sm:pb-12 px-4">
         <div className="container-main">
-          <div className="flex items-center gap-2 p-1 bg-white/[0.03] backdrop-blur-md rounded-xl border border-white/[0.06] w-fit mx-auto">
+          <div className="flex items-center gap-2 p-1 bg-white/[0.03] backdrop-blur-md rounded-xl border border-white/[0.06] w-fit mx-auto overflow-x-auto">
             {tabs.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                className={`px-4 sm:px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300 whitespace-nowrap ${
                   activeTab === tab
                     ? 'bg-cyber-cyan/10 text-cyber-cyan border border-cyber-cyan/30 shadow-[0_0_12px_rgba(0,240,255,0.15)]'
                     : 'text-gray-400 hover:text-white'
@@ -234,9 +234,9 @@ export default function BlogPage() {
       </section>
 
       {/* Blog Grid */}
-      <section className="pb-24">
+      <section className="pb-20 sm:pb-24 px-4">
         <div className="container-main">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {filteredPosts.map((post, index) => (
               <BlogCard key={post.id} post={post} index={index} />
             ))}

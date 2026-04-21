@@ -1,0 +1,1187 @@
+'use client'
+
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
+import WhatsAppButton from '@/components/WhatsAppButton'
+import { motion } from 'framer-motion'
+import { useTranslation } from '@/i18n'
+
+const features = [
+  {
+    icon: '🗣️',
+    title: '識聽廣東話',
+    titleEn: 'Speaks Natural Cantonese',
+    desc: 'AI 以地道廣東話即時回應，無需再依賴英文。客戶清晰理解，店主安心使用。',
+    descEn: 'Natural Cantonese responses — no more English-only AI. Your customers understand, you stay in control.',
+  },
+  {
+    icon: '💬',
+    title: '一鍵接通 Telegram',
+    titleEn: 'One-Click Telegram Bot',
+    desc: '連接您現有的 Telegram Bot，5 分鐘完成。我們代您設定，無需編寫程式碼。',
+    descEn: 'Connect your existing Telegram bot in 5 minutes. We handle the setup — zero coding required.',
+  },
+  {
+    icon: '💳',
+    title: '支援 FPS 收款',
+    titleEn: 'FPS Payment Ready',
+    desc: '直接在對話中發送 FPS 收款連結，客戶確認付款後即時通知您。',
+    descEn: 'Send FPS payment links directly in chat. Customers pay, you get notified instantly.',
+  },
+  {
+    icon: '🤖',
+    title: '預設 HK 商業技能',
+    titleEn: 'Pre-Built HK Business Skills',
+    desc: '餐廳助理、接待處、網店助手 — 選擇後即時啟用，無需訓練。',
+    descEn: 'Restaurant assistant, reception, online shop — pick a template, deploy instantly.',
+  },
+  {
+    icon: '📱',
+    title: 'WhatsApp / Telegram 雙支援',
+    titleEn: 'WhatsApp + Telegram',
+    desc: '您的客戶習慣使用甚麼，我們就支援甚麼。毋需要求任何人下載新應用程式。',
+    descEn: 'Your customers use WhatsApp? Telegram? We support both. No app downloads needed.',
+  },
+  {
+    icon: '🔒',
+    title: '香港數據本地存放',
+    titleEn: 'HK Data Residency',
+    desc: '所有數據存放於香港伺服器，私隱有保障。符合香港個人資料（私隱）條例。',
+    descEn: 'All data stored on HK servers. Privacy-compliant with PDPO.',
+  },
+]
+
+const testimonials = [
+  {
+    quote: '使用兩週，餐廳外賣預訂全面自動化，員工工作量大減，我亦無需再為此煩惱。',
+    quoteEn: 'After 2 weeks, our takeaway orders are fully automated. My staff do less work, I worry less.',
+    name: '陳生',
+    nameEn: 'Mr. Chan',
+    business: '茶餐廳東主',
+    businessEn: 'Restaurant Owner',
+    plan: 'Pro Plan',
+  },
+  {
+    quote: '終於有一個 AI 能以廣東話回應客戶，無需再請員工代為回覆訊息。',
+    quoteEn: "Finally an AI that responds to customers in Cantonese. No more asking staff to reply to messages.",
+    name: '李小姐',
+    nameEn: 'Ms. Li',
+    business: '補習中心負責人',
+    businessEn: 'Tutoring Center Manager',
+    plan: 'Starter Plan',
+  },
+  {
+    quote: '我們的 agency 使用它為客戶建立 onboarding 工作流程，大量節省往返電郵的時間。',
+    quoteEn: "We use it for client onboarding workflows. Saves us so much back-and-forth email time.",
+    name: '黃先生',
+    nameEn: 'Mr. Wong',
+    business: '數碼營銷 Agency',
+    businessEn: 'Digital Marketing Agency',
+    plan: 'Business Plan',
+  },
+]
+
+const plans = [
+  {
+    name: 'Starter',
+    nameZh: '起步',
+    price: '199',
+    period: '/月',
+    desc: '最適合自由工作者及微型企業',
+    descEn: 'Perfect for freelancers & micro-SMEs',
+    features: [
+      '1 個 AI 員工',
+      '1 個 Telegram Bot',
+      '基本廣東話技能',
+      '自動安全備份',
+      'FPS 收款連結',
+      '電郵支援',
+    ],
+    featuresEn: [
+      '1 AI employee',
+      '1 Telegram Bot',
+      'Basic Cantonese skills',
+      'Auto security backup',
+      'FPS payment link',
+      'Email support',
+    ],
+    cta: '立即試用',
+    ctaEn: 'Get Started',
+    highlight: false,
+  },
+  {
+    name: 'Pro',
+    nameZh: '專業',
+    price: '399',
+    period: '/月',
+    desc: '最適合成長中的中小型企業',
+    descEn: 'For growing SMEs',
+    features: [
+      '3 個 AI 員工',
+      '3 個 Telegram Bot',
+      '全部香港技能模板',
+      '自動安全備份',
+      '對話記憶增強',
+      'FPS + Stripe 收款',
+      '優先 WhatsApp 支援',
+      '每月報告',
+    ],
+    featuresEn: [
+      '3 AI employees',
+      '3 Telegram Bots',
+      'All HK skill templates',
+      'Auto security backup',
+      'Enhanced conversation memory',
+      'FPS + Stripe payments',
+      'Priority WhatsApp support',
+      'Monthly reports',
+    ],
+    cta: '開始免費試用',
+    ctaEn: 'Start Free Trial',
+    highlight: true,
+  },
+  {
+    name: 'Business',
+    nameZh: '企業',
+    price: '799',
+    period: '/月',
+    desc: '最適合擁有多分店業務的東主',
+    descEn: 'For multi-location businesses',
+    features: [
+      '10 個 AI 員工',
+      '10 個 Telegram Bot',
+      '全部香港技能模板',
+      '自動安全備份',
+      '對話記憶增強',
+      '效能優化',
+      'FPS + Stripe + AlipayHK',
+      '24/7 真人支援',
+      '自訂技能開發',
+      '白標選項',
+    ],
+    featuresEn: [
+      '10 AI employees',
+      '10 Telegram Bots',
+      'All HK skill templates',
+      'Auto security backup',
+      'Enhanced conversation memory',
+      'Performance optimization',
+      'FPS + Stripe + AlipayHK',
+      '24/7 live support',
+      'Custom skill development',
+      'White-label option',
+    ],
+    cta: '聯絡我們',
+    ctaEn: 'Contact Us',
+    highlight: false,
+  },
+]
+
+const faqs = [
+  {
+    q: '我不懂寫程式碼，可以使用嗎？',
+    qEn: 'Can I use this without coding knowledge?',
+    a: '完全可以！我們專為不懂寫程式碼的香港店主而設。您只需選擇所需的技能，我們代您完成所有設定。',
+    aEn: 'Absolutely! We built this for non-technical HK business owners. You pick the skill, we handle everything else.',
+  },
+  {
+    q: 'Hermes Agent 是甚麼？',
+    qEn: 'What is Hermes Agent?',
+    a: 'Hermes Agent 是我們基於 OpenClaw 開發的下一代 AI 員工平台。我們為香港企業包裝成托管服務，無需自行管理伺服器。',
+    aEn: "Hermes Agent is our next-generation AI employee platform, built on OpenClaw's architecture. We manage the hosting so you don't have to.",
+  },
+  {
+    q: 'FPS 收款如何運作？',
+    qEn: 'How does FPS payment work?',
+    a: '我們會為您生成 FPS QR code 或連結，客戶過數後您會收到通知，然後我們手動確認啟動服務。M V P 階段為半自動，隨後將升級至全自動。',
+    aEn: 'We generate an FPS QR code/link for each payment. You get notified, then we manually confirm activation. Semi-automated at MVP, full automation coming soon.',
+  },
+  {
+    q: '月費合約綁定多久？',
+    qEn: 'Any long-term contracts?',
+    a: '月費可以隨時取消，冇長期合約。不過年繳可以慳 2 個月費用。',
+    aEn: 'Monthly plans cancel anytime, no long-term contracts. Annual plans save you 2 months.',
+  },
+]
+
+const howItWorks = [
+  { step: '01', icon: '📋', title: '揀技能模板', titleEn: 'Choose Your Skill Template', desc: '喺我哋嘅 HK 商業模板入面，揀你想要嘅 AI 員工角色。', descEn: 'Choose from our HK business skill templates.' },
+  { step: '02', icon: '💬', title: '連接 Telegram', titleEn: 'Connect to Telegram', desc: '用你現有嘅 Telegram Bot Token，5 分鐘完成設定。', descEn: 'Connect your existing Telegram bot in 5 minutes.' },
+  { step: '03', icon: '🚀', title: '開始用囉', titleEn: 'Start Using It', desc: '即刻幫你接訂單、覆客人、收錢。全自動。', descEn: 'Start taking orders, answering queries, collecting payment.' },
+]
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+}
+
+export default function HermesAgentHostingPage() {
+  const { t, locale } = useTranslation()
+
+  return (
+    <main className="relative min-h-screen bg-deep-space overflow-x-hidden">
+      {/* Hero canvas */}
+      <div className="hero-canvas-container">
+        <div className="hero-grid-overlay" />
+        <div className="hero-radial-overlay" />
+      </div>
+
+      <Navbar />
+
+      {/* Hero */}
+      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="relative max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-4xl mx-auto"
+          >
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-cyan/10 text-cyber-cyan text-sm font-medium mb-8 border border-cyber-cyan/20">
+              <span className="w-2 h-2 rounded-full bg-cyber-cyan animate-pulse" />
+              {locale === 'zh-Hant' ? '首批 10 間 HK 企業搶先體驗' : 'First 10 HK Businesses Get Early Access'}
+            </div>
+
+            <h1 className="heading-xl text-pure-white mb-6">
+              {locale === 'zh-Hant' ? '你嘅 AI 員工' : 'Your AI Employee'}
+              <br />
+              <span className="text-gradient-cyan">{locale === 'zh-Hant' ? '識聽廣東話' : 'Speaks Cantonese'}</span>
+            </h1>
+            <p className="text-xl sm:text-2xl text-pure-white/60 mb-4 font-medium">
+              {locale === 'zh-Hant' ? '香港中小企 AI 助手平台' : 'AI Assistant Platform for HK SMEs'}
+            </p>
+            <p className="text-base sm:text-lg text-pure-white/40 mb-10 max-w-2xl mx-auto">
+              {locale === 'zh-Hant' ? '一鍵接通 Telegram，支援 FPS 收款。幫你慳時間、慳人手、慳金錢。' : 'One-click Telegram setup, FPS payment ready. Save time, save money, grow your business.'}
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+              <a href="#contact" className="btn-cyber-cyan text-lg px-8 py-4 w-full sm:w-auto">
+                {locale === 'zh-Hant' ? '免費試用 7 日 →' : 'Free 7-Day Trial →'}
+              </a>
+              <a href="#features" className="btn-cyber-purple text-lg px-8 py-4 w-full sm:w-auto">
+                {locale === 'zh-Hant' ? '睇下點運作' : 'See How It Works'}
+              </a>
+            </div>
+
+            {/* Social proof */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-pure-white/40">
+              <div className="flex items-center gap-2">
+                <div className="flex -space-x-2">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-cyber-cyan/40 to-cyber-purple/40 border-2 border-deep-space" />
+                  ))}
+                </div>
+                <span>{locale === 'zh-Hant' ? '3 間 HK 企業已啟用' : '3 HK Businesses Already Live'}</span>
+              </div>
+              <div className="hidden sm:block w-px h-4 bg-pure-white/20" />
+              <span>{locale === 'zh-Hant' ? '無需信用卡' : 'No Credit Card Required'}</span>
+              <div className="hidden sm:block w-px h-4 bg-pure-white/20" />
+              <span>{locale === 'zh-Hant' ? '5 分鐘完成設定' : '5-minute setup'}</span>
+            </div>
+          </motion.div>
+
+          {/* Demo screenshot */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-16 max-w-4xl mx-auto"
+          >
+            <div className="relative rounded-2xl overflow-hidden glass-card border border-white/10 shadow-neon-cyan">
+              {/* Window chrome */}
+              <div className="bg-white/5 px-4 py-3 flex items-center gap-2 border-b border-white/5">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-red-500/60" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
+                  <div className="w-3 h-3 rounded-full bg-green-500/60" />
+                </div>
+                <div className="flex-1 text-center text-xs text-pure-white/40 font-mono">{locale === 'zh-Hant' ? 'Telegram — 餐廳助理 Bot' : 'Telegram — Restaurant Assistant Bot'}</div>
+              </div>
+              {/* Chat demo */}
+              <div className="p-6 bg-gradient-to-br from-white/[0.02] to-white/[0.01]">
+                <div className="space-y-4">
+                  {locale === 'zh-Hant' ? (
+                    <>
+                      <div className="flex gap-3">
+                        <div className="w-8 h-8 rounded-full bg-cyber-cyan/20 flex-shrink-0 flex items-center justify-center text-sm">🤖</div>
+                        <div className="glass-card px-4 py-3 max-w-md">
+                          <p className="text-sm text-pure-white/80">
+                            👋 你好！我係你嘅餐廳助理 AI。<br /><br />
+                            我可以幫你：<br />
+                            🥡 處理外賣訂單<br />
+                            📅 預約座位<br />
+                            ❓ 回應客人查詢<br /><br />
+                            請問有咩可以幫到你？
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex gap-3 justify-end">
+                        <div className="bg-cyber-cyan/20 border border-cyber-cyan/30 rounded-2xl rounded-tr-sm px-4 py-3 max-w-md">
+                          <p className="text-sm text-pure-white/90">我想 booking 今晚 7 點，兩個人</p>
+                        </div>
+                      </div>
+                      <div className="flex gap-3">
+                        <div className="w-8 h-8 rounded-full bg-cyber-cyan/20 flex-shrink-0 flex items-center justify-center text-sm">🤖</div>
+                        <div className="glass-card px-4 py-3 max-w-md">
+                          <p className="text-sm text-pure-white/80">
+                            ✅ 收到！我幫你 book 今晚 7 點，兩位。<br /><br />
+                            想唔想要個 FPS 連結嚟留座？客人通常會預早過數確認。
+                          </p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex gap-3">
+                        <div className="w-8 h-8 rounded-full bg-cyber-cyan/20 flex-shrink-0 flex items-center justify-center text-sm">🤖</div>
+                        <div className="glass-card px-4 py-3 max-w-md">
+                          <p className="text-sm text-pure-white/80">
+                            👋 Hi! I am your restaurant assistant AI.<br /><br />
+                            I can help you with:<br />
+                            🥡 Process takeaway orders<br />
+                            📅 Book table reservations<br />
+                            ❓ Answer customer queries<br /><br />
+                            How can I help you today?
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex gap-3 justify-end">
+                        <div className="bg-cyber-cyan/20 border border-cyber-cyan/30 rounded-2xl rounded-tr-sm px-4 py-3 max-w-md">
+                          <p className="text-sm text-pure-white/90">I'd like to book for tonight at 7pm, for two people</p>
+                        </div>
+                      </div>
+                      <div className="flex gap-3">
+                        <div className="w-8 h-8 rounded-full bg-cyber-cyan/20 flex-shrink-0 flex items-center justify-center text-sm">🤖</div>
+                        <div className="glass-card px-4 py-3 max-w-md">
+                          <p className="text-sm text-pure-white/80">
+                            ✅ Got it! Booked for 7pm, two people.<br /><br />
+                            Would you like an FPS payment link to confirm your booking? Most customers pay in advance.
+                          </p>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section id="features" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-16"
+          >
+            <h2 className="heading-lg text-pure-white mb-4">
+              {locale === 'zh-Hant' ? '專為香港中小企而設' : 'Built for HK Small & Medium Businesses'}
+            </h2>
+            <p className="body-lg text-pure-white/50">
+              {locale === 'zh-Hant' ? '為你慳時間，為你賺錢。' : "Everything you need — nothing you don't. Built for HK SMEs."}
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {features.map((f, i) => (
+              <motion.div key={i} variants={itemVariants} className="glass-card p-6">
+                <div className="text-3xl mb-4">{f.icon}</div>
+                <h3 className="text-lg font-bold text-pure-white mb-1">{locale === 'zh-Hant' ? f.title : f.titleEn}</h3>
+                <p className="text-sm text-cyber-cyan/80">{locale === 'zh-Hant' ? f.desc : f.descEn}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-16"
+          >
+            <h2 className="heading-lg text-pure-white mb-4">
+              {locale === 'zh-Hant' ? '3 步驟，5 分鐘搞掂' : '3 Steps, 5 Minutes to Setup'}
+            </h2>
+            <p className="body-lg text-pure-white/50">
+              {locale === 'zh-Hant' ? '由零到 AI 員工，5 分鐘完成 — 唔使寫 code。' : 'From zero to AI employee in 5 minutes — no code required.'}
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
+            {howItWorks.map((item, i) => (
+              <motion.div key={i} variants={itemVariants} className="text-center">
+                <div className="w-16 h-16 rounded-2xl bg-cyber-cyan/10 flex items-center justify-center text-3xl mx-auto mb-6 border border-cyber-cyan/20">
+                  {item.icon}
+                </div>
+                <div className="text-5xl font-extrabold text-pure-white/10 mb-4">{item.step}</div>
+                <h3 className="text-xl font-bold text-pure-white mb-2">{locale === 'zh-Hant' ? item.title : item.titleEn}</h3>
+                <p className="text-sm text-cyber-cyan/80">{locale === 'zh-Hant' ? item.desc : item.descEn}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-16"
+          >
+            <h2 className="heading-lg text-pure-white mb-4">
+              {locale === 'zh-Hant' ? '簡單、透明的定價' : 'Simple, Transparent Pricing'}
+            </h2>
+            <p className="body-lg text-pure-white/50">
+              {locale === 'zh-Hant' ? '比請一個 part-time admin 平 95%。隨時可以取消。' : '95% cheaper than a part-time admin. Cancel anytime.'}
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto"
+          >
+            {plans.map((plan, i) => (
+              <motion.div key={i} variants={itemVariants} className={`glass-card p-6 flex flex-col relative ${plan.highlight ? 'border-cyber-cyan/40' : ''}`}>
+                {plan.highlight && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <span className="bg-cyber-cyan text-deep-space text-xs font-bold px-4 py-1 rounded-full">{locale === 'zh-Hant' ? '最受歡迎' : 'MOST POPULAR'}</span>
+                  </div>
+                )}
+                <div className="mb-6">
+                  <h3 className="text-lg font-bold text-pure-white">{locale === 'zh-Hant' ? plan.name : plan.name}</h3>
+                  <div className="mt-4 flex items-baseline gap-1">
+                    <span className="text-4xl font-extrabold text-pure-white">${plan.price}</span>
+                    <span className="text-pure-white/40 text-sm">{locale === 'zh-Hant' ? plan.period : '/mo'}</span>
+                  </div>
+                  <p className="text-xs text-pure-white/60 mt-1">{locale === 'zh-Hant' ? plan.desc : plan.descEn}</p>
+                </div>
+                <ul className="space-y-3 flex-1 mb-6">
+                  {(locale === 'zh-Hant' ? plan.features : plan.featuresEn).map((f, j) => (
+                    <li key={j} className="flex items-start gap-2 text-sm text-pure-white/60">
+                      <span className="text-cyber-cyan mt-0.5">✓</span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="#contact"
+                  className={`w-full text-center py-3 rounded-xl font-semibold transition-all ${plan.highlight ? 'btn-cyber-cyan' : 'bg-white/5 text-pure-white/80 border border-white/10 hover:bg-white/10 hover:border-white/20'}`}
+                >
+                  {locale === 'zh-Hant' ? plan.cta : plan.ctaEn}
+                </a>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center text-xs text-pure-white/30 mt-8"
+          >
+            {locale === 'zh-Hant' ? '所有價錢以 HKD 計算。年繳可享 17% 折扣，相等於 2 個月免費。' : 'All prices in HKD. Annual plans save 17% — equivalent to 2 months free.'}
+          </motion.p>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <h2 className="heading-lg text-pure-white mb-4">
+              {locale === 'zh-Hant' ? '香港企業實例' : 'What HK Business Owners Are Saying'}
+            </h2>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          >
+            {testimonials.map((t, i) => (
+              <motion.div key={i} variants={itemVariants} className="glass-card p-6">
+                <div className="text-cyber-cyan text-lg mb-3">★★★★★</div>
+                <p className="text-sm text-pure-white/70 mb-4 leading-relaxed">「{locale === 'zh-Hant' ? t.quote : t.quoteEn}」</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyber-cyan/40 to-cyber-purple/40 flex items-center justify-center text-pure-white font-bold text-sm">
+                    {locale === 'zh-Hant' ? t.name[0] : t.nameEn[0]}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-pure-white">{locale === 'zh-Hant' ? t.name : t.nameEn}</p>
+                    <p className="text-xs text-pure-white/40">{locale === 'zh-Hant' ? t.business : t.businessEn} · {t.plan}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Case Studies */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-cyan/10 text-cyber-cyan text-sm font-medium mb-6 border border-cyber-cyan/20">
+              ⭐ {locale === 'zh-Hant' ? t('cases_oc_label') : t('cases_oc_label')}
+            </span>
+            <h2 className="heading-lg text-pure-white mb-4">
+              {locale === 'zh-Hant' ? 'HK 成功案例' : 'Real Results from Real HK Businesses'}
+            </h2>
+            <p className="body-lg text-pure-white/50">
+              {locale === 'zh-Hant'
+                ? '看看香港企業如何以 Hermes Agent 改變營運方式'
+                : 'See how HK business owners transformed their operations with Hermes Agent'}
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          >
+            {/* Case 1 - 茶餐廳 */}
+            <motion.div variants={itemVariants} className="glass-card p-6 flex flex-col">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500/20 to-red-500/20 flex items-center justify-center text-2xl border border-orange-500/20">
+                  🍜
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-pure-white">
+                    {locale === 'zh-Hant' ? t('cases_oc_1_type') : 'Restaurant Owner'}
+                  </p>
+                  <p className="text-xs text-cyber-cyan">Pro Plan</p>
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-xs font-medium text-red-400/80 mb-1">
+                  {locale === 'zh-Hant' ? '❌ 之前：' : '❌ Before:'}
+                </p>
+                <p className="text-sm text-pure-white/60 leading-relaxed">
+                  {locale === 'zh-Hant' ? t('cases_oc_1_problem') : 'Answering WhatsApp customer queries until 2am daily'}
+                </p>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-xs font-medium text-cyber-cyan/80 mb-1">
+                  {locale === 'zh-Hant' ? '✅ 方案：' : '✅ Solution:'}
+                </p>
+                <p className="text-sm text-pure-white/60 leading-relaxed">
+                  {locale === 'zh-Hant' ? t('cases_oc_1_solution') : 'Hermes Agent employee auto-replies FAQs and processes takeaway orders'}
+                </p>
+              </div>
+
+              <div className="mt-auto pt-4 border-t border-white/5">
+                <p className="text-xs font-medium text-cyber-cyan mb-1">
+                  {locale === 'zh-Hant' ? '📊 成果：' : '📊 Result:'}
+                </p>
+                <p className="text-base font-bold text-gradient-cyan leading-snug">
+                  {locale === 'zh-Hant' ? t('cases_oc_1_result') : 'Saved 12 hours/week on WhatsApp, takeaway orders up 25%'}
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Case 2 - 補習中心 */}
+            <motion.div variants={itemVariants} className="glass-card p-6 flex flex-col">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center text-2xl border border-blue-500/20">
+                  📚
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-pure-white">
+                    {locale === 'zh-Hant' ? t('cases_oc_2_type') : 'Tutoring Center Manager'}
+                  </p>
+                  <p className="text-xs text-cyber-cyan">Starter Plan</p>
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-xs font-medium text-red-400/80 mb-1">
+                  {locale === 'zh-Hant' ? '❌ 之前：' : '❌ Before:'}
+                </p>
+                <p className="text-sm text-pure-white/60 leading-relaxed">
+                  {locale === 'zh-Hant' ? t('cases_oc_2_problem') : 'Staff repeatedly answering the same questions all day'}
+                </p>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-xs font-medium text-cyber-cyan/80 mb-1">
+                  {locale === 'zh-Hant' ? '✅ 方案：' : '✅ Solution:'}
+                </p>
+                <p className="text-sm text-pure-white/60 leading-relaxed">
+                  {locale === 'zh-Hant' ? t('cases_oc_2_solution') : 'Hermes Agent instantly answers parent queries, sends enrollment info and past papers automatically'}
+                </p>
+              </div>
+
+              <div className="mt-auto pt-4 border-t border-white/5">
+                <p className="text-xs font-medium text-cyber-cyan mb-1">
+                  {locale === 'zh-Hant' ? '📊 成果：' : '📊 Result:'}
+                </p>
+                <p className="text-base font-bold text-gradient-cyan leading-snug">
+                  {locale === 'zh-Hant' ? t('cases_oc_2_result') : 'Staff satisfaction improved, complaints down 80%'}
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Case 3 - 數碼營銷 Agency */}
+            <motion.div variants={itemVariants} className="glass-card p-6 flex flex-col">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500/20 to-rose-500/20 flex items-center justify-center text-2xl border border-pink-500/20">
+                  📈
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-pure-white">
+                    {locale === 'zh-Hant' ? t('cases_oc_3_type') : 'Digital Marketing Agency'}
+                  </p>
+                  <p className="text-xs text-cyber-cyan">Business Plan</p>
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-xs font-medium text-red-400/80 mb-1">
+                  {locale === 'zh-Hant' ? '❌ 之前：' : '❌ Before:'}
+                </p>
+                <p className="text-sm text-pure-white/60 leading-relaxed">
+                  {locale === 'zh-Hant' ? t('cases_oc_3_problem') : 'Client onboarding required dozens of back-and-forth emails'}
+                </p>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-xs font-medium text-cyber-cyan/80 mb-1">
+                  {locale === 'zh-Hant' ? '✅ 方案：' : '✅ Solution:'}
+                </p>
+                <p className="text-sm text-pure-white/60 leading-relaxed">
+                  {locale === 'zh-Hant' ? t('cases_oc_3_solution') : 'Hermes Agent automates the entire onboarding workflow, clients ask AI directly'}
+                </p>
+              </div>
+
+              <div className="mt-auto pt-4 border-t border-white/5">
+                <p className="text-xs font-medium text-cyber-cyan mb-1">
+                  {locale === 'zh-Hant' ? '📊 成果：' : '📊 Result:'}
+                </p>
+                <p className="text-base font-bold text-gradient-cyan leading-snug">
+                  {locale === 'zh-Hant' ? t('cases_oc_3_result') : '3 hours saved per client, client NPS score up +25'}
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-center mt-12"
+          >
+            <p className="text-pure-white/60 mb-4">
+              {locale === 'zh-Hant' ? t('cases_oc_cta') : 'Want to be our next success story?'}
+            </p>
+            <a href="#contact" className="btn-cyber-cyan">
+              {locale === 'zh-Hant' ? '立即申請 →' : 'Apply Now →'}
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <h2 className="heading-lg text-pure-white mb-4">{locale === 'zh-Hant' ? '常見問題' : 'Frequently Asked Questions'}</h2>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="space-y-4"
+          >
+            {faqs.map((faq, i) => (
+              <motion.div key={i} variants={itemVariants} className="glass-card p-6">
+                <h3 className="font-semibold text-pure-white mb-1">{locale === 'zh-Hant' ? faq.q : faq.qEn}</h3>
+                <p className="text-sm text-cyber-cyan/80 mt-2">{locale === 'zh-Hant' ? faq.a : faq.aEn}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Comparison: Hermes Agent vs Claude Code Desktop */}
+      <section id="comparison" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-purple/10 text-cyber-purple text-sm font-medium mb-6 border border-cyber-purple/20">
+              {locale === 'zh-Hant' ? '為何選擇 Hermes Agent？' : 'Why Hermes Agent?'}
+            </span>
+            <h2 className="heading-lg text-pure-white mb-4">
+              {locale === 'zh-Hant' ? 'Hermes Agent 與 Claude Code Desktop — 兩者有何不同？' : 'Hermes Agent vs Claude Code Desktop — How Different Are They?'}
+            </h2>
+            <p className="body-lg text-pure-white/50 max-w-2xl mx-auto">
+              {locale === 'zh-Hant' ? t('comparison_subtitle' as any) : 'Claude Code Desktop is a great AI coding assistant. But if you want real business automation, Hermes Agent is in a different league.'}
+            </p>
+          </motion.div>
+
+          {/* Comparison table */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="glass-card overflow-hidden"
+          >
+            {/* Table header */}
+            <div className="grid grid-cols-2 gap-0">
+              <div className="p-6 border-b border-white/5 bg-white/[0.02]">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-cyber-cyan/20 flex items-center justify-center border border-cyber-cyan/30">
+                    <span className="text-lg">🤖</span>
+                  </div>
+                  <div>
+                    <p className="font-bold text-pure-white">Hermes Agent</p>
+                    <p className="text-xs text-cyber-cyan">{locale === 'zh-Hant' ? 'AI 員工平台' : 'AI Employee Platform'}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-6 border-b border-white/5 bg-white/[0.02]">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10">
+                    <span className="text-lg">💻</span>
+                  </div>
+                  <div>
+                    <p className="font-bold text-pure-white/60">Claude Code Desktop</p>
+                    <p className="text-xs text-pure-white/30">{locale === 'zh-Hant' ? 'AI 編程助手' : 'AI Coding Assistant'}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Rows */}
+            {[
+              {
+                icon: '🏢',
+                openclaw: locale === 'zh-Hant' ? t('comparison_1_title' as any) : t('comparison_1_title_en' as any),
+                openclawSub: locale === 'zh-Hant' ? t('comparison_1_desc' as any) : t('comparison_1_desc_en' as any),
+                claude: locale === 'zh-Hant' ? '協助編寫代碼' : 'Helps You Code',
+                claudeSub: locale === 'zh-Hant' ? '專為開發者而設的 AI 編程助手' : 'AI coding assistant for developers',
+                winner: 'openclaw',
+              },
+              {
+                icon: '🇭🇰',
+                openclaw: locale === 'zh-Hant' ? t('comparison_2_title' as any) : t('comparison_2_title_en' as any),
+                openclawSub: locale === 'zh-Hant' ? t('comparison_2_desc' as any) : t('comparison_2_desc_en' as any),
+                claude: locale === 'zh-Hant' ? '英文為主' : 'English-First',
+                claudeSub: locale === 'zh-Hant' ? '主要支援英文，廣東話支援有限' : 'Primarily English, limited Cantonese support',
+                winner: 'openclaw',
+              },
+              {
+                icon: '⚙️',
+                openclaw: locale === 'zh-Hant' ? t('comparison_3_title' as any) : t('comparison_3_title_en' as any),
+                openclawSub: locale === 'zh-Hant' ? t('comparison_3_desc' as any) : t('comparison_3_desc_en' as any),
+                claude: locale === 'zh-Hant' ? '需要 Prompt Engineering' : 'Requires Prompt Engineering',
+                claudeSub: locale === 'zh-Hant' ? '需要懂得撰寫提示詞並理解 AI 輸出' : 'Requires prompt writing and AI output understanding',
+                winner: 'openclaw',
+              },
+              {
+                icon: '⏰',
+                openclaw: locale === 'zh-Hant' ? t('comparison_4_title' as any) : t('comparison_4_title_en' as any),
+                openclawSub: locale === 'zh-Hant' ? t('comparison_4_desc' as any) : t('comparison_4_desc_en' as any),
+                claude: locale === 'zh-Hant' ? '需要你啟動' : 'Requires Manual Activation',
+                claudeSub: locale === 'zh-Hant' ? '需要人手啟動，非持續運行' : 'Requires manual invocation, not always running',
+                winner: 'openclaw',
+              },
+              {
+                icon: '🛡️',
+                openclaw: locale === 'zh-Hant' ? t('comparison_5_title' as any) : t('comparison_5_title_en' as any),
+                openclawSub: locale === 'zh-Hant' ? t('comparison_5_desc' as any) : t('comparison_5_desc_en' as any),
+                claude: locale === 'zh-Hant' ? '自己管理' : 'Self-Managed',
+                claudeSub: locale === 'zh-Hant' ? '需要自行管理伺服器、更新及保安' : 'You manage servers, updates, and security yourself',
+                winner: 'openclaw',
+              },
+            ].map((row, i) => (
+              <div key={i} className="grid grid-cols-2 gap-0 border-b border-white/5 last:border-0">
+                <div className="p-6 border-r border-white/5">
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl mt-0.5">{row.icon}</span>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <p className="font-semibold text-pure-white">{row.openclaw}</p>
+                        {locale === 'en' && (
+                          <span className="text-xs text-cyber-cyan/60">({row.openclaw.replace(/[^\x00-\x7F]/g, (c) => '')})</span>
+                        )}
+                      </div>
+                      <p className="text-xs text-pure-white/50 leading-relaxed">{row.openclawSub}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-6 bg-white/[0.01]">
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl mt-0.5 opacity-30">—</span>
+                    <div>
+                      <p className="font-medium text-pure-white/40">{row.claude}</p>
+                      <p className="text-xs text-pure-white/30 leading-relaxed mt-1">{row.claudeSub}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {/* CTA */}
+            <div className="p-6 bg-cyber-cyan/5 border-t border-cyber-cyan/20 text-center">
+              <p className="text-pure-white/70 mb-4">
+                {locale === 'zh-Hant'
+                  ? 'Claude Code 是一款出色的工具。但若您是香港中小企東主，您需要的是 Hermes Agent。'
+                  : "Claude Code is great. But if you're a HK SME owner, you need Hermes Agent."}
+              </p>
+              <a href="#contact" className="btn-cyber-cyan">
+                {locale === 'zh-Hant' ? '立即試用 Hermes Agent →' : 'Try Hermes Agent →'}
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* NEW Comparison: Hermes Agent vs OpenClaw (Legacy) */}
+      <section id="hermes-vs-legacy" className="py-20 px-4 sm:px-6 lg:px-8 bg-deep-space">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-cyan/10 text-cyber-cyan text-sm font-medium mb-6 border border-cyber-cyan/20">
+              {locale === 'zh-Hant' ? t('hermes_vs_legacy_label') : t('hermes_vs_legacy_label_en')}
+            </span>
+            <h2 className="heading-lg text-pure-white mb-4">
+              {locale === 'zh-Hant' ? t('hermes_vs_legacy_title') : t('hermes_vs_legacy_title_en')}
+            </h2>
+            <p className="body-lg text-pure-white/50 max-w-2xl mx-auto">
+              {locale === 'zh-Hant' ? t('hermes_vs_legacy_subtitle') : t('hermes_vs_legacy_subtitle_en')}
+            </p>
+          </motion.div>
+
+          {/* Comparison table */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="glass-card overflow-hidden"
+          >
+            {/* Table header */}
+            <div className="grid grid-cols-2 gap-0">
+              <div className="p-6 border-b border-cyber-cyan/20 bg-cyber-cyan/5">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-cyber-cyan/20 flex items-center justify-center border border-cyber-cyan/30">
+                    <span className="text-lg">🚀</span>
+                  </div>
+                  <div>
+                    <p className="font-bold text-cyber-cyan">Hermes Agent</p>
+                    <p className="text-xs text-cyber-cyan/60">{locale === 'zh-Hant' ? '升級版 — 專為香港中小企而設' : 'Upgrade — Built for HK SMEs'}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-6 border-b border-white/5 bg-white/[0.02]">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center border border-white/10">
+                    <span className="text-lg">⚙️</span>
+                  </div>
+                  <div>
+                    <p className="font-bold text-pure-white/60">OpenClaw</p>
+                    <p className="text-xs text-pure-white/30">{locale === 'zh-Hant' ? '舊版 — Legacy' : 'Legacy — Original'}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Rows */}
+            {[
+              {
+                icon: '🏗️',
+                hermes: locale === 'zh-Hant' ? t('hermes_vs_legacy_row1_hermes') : t('hermes_vs_legacy_row1_hermes_en'),
+                hermesSub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row1_hermes_sub') : t('hermes_vs_legacy_row1_hermes_sub_en'),
+                legacy: locale === 'zh-Hant' ? t('hermes_vs_legacy_row1_legacy') : t('hermes_vs_legacy_row1_legacy_en'),
+                legacySub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row1_legacy_sub') : t('hermes_vs_legacy_row1_legacy_sub_en'),
+              },
+              {
+                icon: '🇭🇰',
+                hermes: locale === 'zh-Hant' ? t('hermes_vs_legacy_row2_hermes') : t('hermes_vs_legacy_row2_hermes_en'),
+                hermesSub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row2_hermes_sub') : t('hermes_vs_legacy_row2_hermes_sub_en'),
+                legacy: locale === 'zh-Hant' ? t('hermes_vs_legacy_row2_legacy') : t('hermes_vs_legacy_row2_legacy_en'),
+                legacySub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row2_legacy_sub') : t('hermes_vs_legacy_row2_legacy_sub_en'),
+              },
+              {
+                icon: '📋',
+                hermes: locale === 'zh-Hant' ? t('hermes_vs_legacy_row3_hermes') : t('hermes_vs_legacy_row3_hermes_en'),
+                hermesSub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row3_hermes_sub') : t('hermes_vs_legacy_row3_hermes_sub_en'),
+                legacy: locale === 'zh-Hant' ? t('hermes_vs_legacy_row3_legacy') : t('hermes_vs_legacy_row3_legacy_en'),
+                legacySub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row3_legacy_sub') : t('hermes_vs_legacy_row3_legacy_sub_en'),
+              },
+              {
+                icon: '☁️',
+                hermes: locale === 'zh-Hant' ? t('hermes_vs_legacy_row4_hermes') : t('hermes_vs_legacy_row4_hermes_en'),
+                hermesSub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row4_hermes_sub') : t('hermes_vs_legacy_row4_hermes_sub_en'),
+                legacy: locale === 'zh-Hant' ? t('hermes_vs_legacy_row4_legacy') : t('hermes_vs_legacy_row4_legacy_en'),
+                legacySub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row4_legacy_sub') : t('hermes_vs_legacy_row4_legacy_sub_en'),
+              },
+              {
+                icon: '💳',
+                hermes: locale === 'zh-Hant' ? t('hermes_vs_legacy_row5_hermes') : t('hermes_vs_legacy_row5_hermes_en'),
+                hermesSub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row5_hermes_sub') : t('hermes_vs_legacy_row5_hermes_sub_en'),
+                legacy: locale === 'zh-Hant' ? t('hermes_vs_legacy_row5_legacy') : t('hermes_vs_legacy_row5_legacy_en'),
+                legacySub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row5_legacy_sub') : t('hermes_vs_legacy_row5_legacy_sub_en'),
+              },
+              {
+                icon: '⚡',
+                hermes: locale === 'zh-Hant' ? t('hermes_vs_legacy_row6_hermes') : t('hermes_vs_legacy_row6_hermes_en'),
+                hermesSub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row6_hermes_sub') : t('hermes_vs_legacy_row6_hermes_sub_en'),
+                legacy: locale === 'zh-Hant' ? t('hermes_vs_legacy_row6_legacy') : t('hermes_vs_legacy_row6_legacy_en'),
+                legacySub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row6_legacy_sub') : t('hermes_vs_legacy_row6_legacy_sub_en'),
+              },
+              {
+                icon: '🛡️',
+                hermes: locale === 'zh-Hant' ? t('hermes_vs_legacy_row7_hermes') : t('hermes_vs_legacy_row7_hermes_en'),
+                hermesSub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row7_hermes_sub') : t('hermes_vs_legacy_row7_hermes_sub_en'),
+                legacy: locale === 'zh-Hant' ? t('hermes_vs_legacy_row7_legacy') : t('hermes_vs_legacy_row7_legacy_en'),
+                legacySub: locale === 'zh-Hant' ? t('hermes_vs_legacy_row7_legacy_sub') : t('hermes_vs_legacy_row7_legacy_sub_en'),
+              },
+            ].map((row, i) => (
+              <div key={i} className="grid grid-cols-2 gap-0 border-b border-white/5 last:border-0">
+                <div className="p-6 border-r border-cyber-cyan/10 bg-cyber-cyan/[0.02]">
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl mt-0.5">{row.icon}</span>
+                    <div>
+                      <p className="font-semibold text-cyber-cyan mb-1">{row.hermes}</p>
+                      <p className="text-xs text-pure-white/50 leading-relaxed">{row.hermesSub}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-6 bg-white/[0.01]">
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl mt-0.5 text-pure-white/30">—</span>
+                    <div>
+                      <p className="font-medium text-pure-white/40 mb-1">{row.legacy}</p>
+                      <p className="text-xs text-pure-white/30 leading-relaxed">{row.legacySub}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {/* CTA */}
+            <div className="p-6 bg-cyber-cyan/5 border-t border-cyber-cyan/20 text-center">
+              <p className="text-pure-white/70 mb-4">
+                {locale === 'zh-Hant'
+                  ? 'Hermes Agent 是 OpenClaw 的下一代升級版——您值得擁有更好的 AI 員工。'
+                  : 'Hermes Agent is the next-generation upgrade to OpenClaw — you deserve a better AI employee.'}
+              </p>
+              <a href="#contact" className="btn-cyber-cyan">
+                {locale === 'zh-Hant' ? t('hermes_vs_legacy_cta') : t('hermes_vs_legacy_cta_en')}
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-2xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <h2 className="heading-lg text-pure-white mb-4">
+              {locale === 'zh-Hant' ? '準備好開始了嗎？' : 'Ready to Get Started?'}
+            </h2>
+            <p className="text-lg text-pure-white/60">
+              {locale === 'zh-Hant' ? '請填寫以下資料，我們將通過 WhatsApp 與您聯絡。' : 'Leave your details and we will WhatsApp you within 24 hours.'}
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="glass-card p-8"
+          >
+            <form
+              action="https://formspree.io/f/69946112"
+              method="POST"
+              className="space-y-5"
+              id="contact-form"
+            >
+              <div>
+                <label className="block text-sm font-medium text-pure-white/80 mb-1">
+                  {locale === 'zh-Hant' ? '您的姓名 *' : 'Your Name *'}
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  placeholder={locale === 'zh-Hant' ? '例如：陳大文' : 'e.g. John Smith'}
+                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-pure-white placeholder:text-pure-white/20 focus:border-cyber-cyan/50 focus:ring-2 focus:ring-cyber-cyan/20 outline-none transition text-sm"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-pure-white/80 mb-1">
+                  {locale === 'zh-Hant' ? 'WhatsApp 號碼 *' : 'WhatsApp Number *'}
+                </label>
+                <input
+                  type="tel"
+                  name="whatsapp"
+                  required
+                  placeholder={locale === 'zh-Hant' ? '例如：+852 6123 4567' : 'e.g. +852 6123 4567'}
+                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-pure-white placeholder:text-pure-white/20 focus:border-cyber-cyan/50 focus:ring-2 focus:ring-cyber-cyan/20 outline-none transition text-sm"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-pure-white/80 mb-1">
+                  {locale === 'zh-Hant' ? '業務類型 *' : 'Business Type *'}
+                </label>
+                <select
+                  name="business_type"
+                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-pure-white/70 focus:border-cyber-cyan/50 focus:ring-2 focus:ring-cyber-cyan/20 outline-none transition text-sm"
+                >
+                  {locale === 'zh-Hant' ? (
+                    <>
+                      <option value="" className="bg-deep-space">請選擇...</option>
+                      <option value="restaurant" className="bg-deep-space">餐廳</option>
+                      <option value="retail" className="bg-deep-space">零售店</option>
+                      <option value="onlineshop" className="bg-deep-space">網店</option>
+                      <option value="agency" className="bg-deep-space">代理商 / 顧問</option>
+                      <option value="freelancer" className="bg-deep-space">Freelancer / 自由工作者</option>
+                      <option value="other" className="bg-deep-space">其他</option>
+                    </>
+                  ) : (
+                    <>
+                      <option value="" className="bg-deep-space">Select...</option>
+                      <option value="restaurant" className="bg-deep-space">Restaurant</option>
+                      <option value="retail" className="bg-deep-space">Retail Store</option>
+                      <option value="onlineshop" className="bg-deep-space">Online Shop</option>
+                      <option value="agency" className="bg-deep-space">Agency / Consultant</option>
+                      <option value="freelancer" className="bg-deep-space">Freelancer</option>
+                      <option value="other" className="bg-deep-space">Other</option>
+                    </>
+                  )}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-pure-white/80 mb-1">
+                  {locale === 'zh-Hant' ? '您面臨的最大挑戰 *' : 'Biggest Pain Point *'}
+                </label>
+                <textarea
+                  name="pain_point"
+                  rows={3}
+                  placeholder={locale === 'zh-Hant' ? '例如：每日以 WhatsApp 回覆客戶查詢至凌晨，耗費大量時間...' : 'e.g. I am tired of replying to WhatsApp messages from customers all day...'}
+                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-pure-white placeholder:text-pure-white/20 focus:border-cyber-cyan/50 focus:ring-2 focus:ring-cyber-cyan/20 outline-none transition text-sm resize-none"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-pure-white/80 mb-1">
+                  {locale === 'zh-Hant' ? '您需要哪種方案？ *' : 'Preferred Plan *'}
+                </label>
+                <div className="flex gap-4 flex-wrap">
+                  {[
+                    { value: 'starter', label: locale === 'zh-Hant' ? 'Starter $199/月' : 'Starter $199/mo' },
+                    { value: 'pro', label: locale === 'zh-Hant' ? 'Pro $399/月' : 'Pro $399/mo' },
+                    { value: 'business', label: locale === 'zh-Hant' ? 'Business $799/月' : 'Business $799/mo' },
+                    { value: 'unsure', label: locale === 'zh-Hant' ? '尚未決定' : 'Undecided' },
+                  ].map((opt) => (
+                    <label key={opt.value} className="flex items-center gap-2 text-sm text-pure-white/60 cursor-pointer">
+                      <input type="radio" name="plan" value={opt.value} className="text-cyber-cyan focus:ring-cyber-cyan/50" />
+                      {opt.label}
+                    </label>
+                  ))}
+                </div>
+              </div>
+              <input type="hidden" name="_subject" value={locale === 'zh-Hant' ? '新香港 OpenClaw 查詢！' : 'New HK OpenClaw Inquiry!'} />
+              <button type="submit" className="w-full btn-cyber-cyan text-lg py-4">
+                {locale === 'zh-Hant' ? '提交 — 我們將通過 WhatsApp 與您聯絡！' : 'Submit — We will WhatsApp You!'}
+              </button>
+              <p className="text-center text-xs text-pure-white/30">
+                我們不會向您發送垃圾訊息。只會發送一次 WhatsApp 確認。
+                <br />
+                We won&apos;t spam you. Just one WhatsApp to confirm.
+              </p>
+            </form>
+          </motion.div>
+        </div>
+      </section>
+
+      <Footer />
+      <WhatsAppButton />
+    </main>
+  )
+}

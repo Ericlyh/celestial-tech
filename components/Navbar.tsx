@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 import { Shield, Menu, X } from 'lucide-react'
 import { useTranslation } from '@/i18n'
 import { usePathname } from 'next/navigation'
@@ -11,7 +12,7 @@ const navLinks = [
   { key: 'nav_services', href: '#services' },
   { key: 'nav_whyUs', href: '#about' },
   { key: 'nav_caseStudies', href: '#case-studies' },
-  { key: 'nav_openclaw', href: '/openclaw-hosting' },
+  { key: 'nav_openclaw', href: '/hermes-agent-hosting' },
   { key: 'nav_blog', href: '/blog' },
   { key: 'nav_contact', href: '#contact' },
 ]
@@ -67,20 +68,13 @@ export default function Navbar() {
             onClick={(e) => { e.preventDefault(); handleNavClick('#home') }}
             className="flex items-center gap-2.5 group"
           >
-            <div className="relative">
-              <Shield
-                size={28}
-                className="text-cyber-cyan transition-all duration-300 group-hover:text-cyber-purple"
-                strokeWidth={2}
-              />
-              {/* Glow ring */}
-              <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{
-                  boxShadow: '0 0 12px rgba(0, 240, 255, 0.5)',
-                  transform: 'scale(1.3)',
-                }}
-              />
-            </div>
+            <Image
+              src="/logo.jpg"
+              alt="Celestial Tech"
+              width={36}
+              height={36}
+              className="object-contain"
+            />
             <span className="text-xl font-bold tracking-tight whitespace-nowrap">
               <span className="text-pure-white">Celestial</span>{' '}
               <span className="text-gradient-cyan">Tech</span>
