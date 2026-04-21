@@ -73,7 +73,7 @@ export default function Navbar() {
               alt="Celestial Tech"
               width={36}
               height={36}
-              className="object-contain"
+              className="object-cover mix-blend-multiply"
             />
             <span className="text-xl font-bold tracking-tight whitespace-nowrap">
               <span className="text-pure-white">Celestial</span>{' '}

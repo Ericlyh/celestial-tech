@@ -210,6 +210,58 @@ const howItWorks = [
   { step: '03', icon: '🚀', title: '開始用囉', titleEn: 'Start Using It', desc: '即刻幫你接訂單、覆客人、收錢。全自動。', descEn: 'Start taking orders, answering queries, collecting payment.' },
 ]
 
+// Normal user (personal life) use cases — distinct from SME/business
+const personalUseCases = [
+  {
+    icon: '👨‍👩‍👧',
+    title: '家庭行程協調',
+    titleEn: 'Family Schedule Coordination',
+    desc: '幫你打理一家人的行程、預約、提醒。學校活動、醫生覆診、家庭聚會，一個對話就搞掂。',
+    descEn: 'Manage your family\'s schedules, appointments, and reminders. School events, medical checkups, family gatherings — handled in one chat.',
+    highlight: false,
+  },
+  {
+    icon: '✈️',
+    title: '旅行計劃助手',
+    titleEn: 'Travel Planning Assistant',
+    desc: '幫你整理行程、機票、酒店、景點建議。一個對話取代幾個小時的資料搜集。',
+    descEn: 'Organize itineraries, flights, hotels, and attractions. One conversation replaces hours of research.',
+    highlight: false,
+  },
+  {
+    icon: '💰',
+    title: '個人理財幫手',
+    titleEn: 'Personal Finance Helper',
+    desc: '幫你追蹤開支、整理帳單、回答預算問題。清楚掌握每月收支狀況。',
+    descEn: 'Track spending, organize bills, and answer budget questions. Stay on top of your monthly finances.',
+    highlight: false,
+  },
+  {
+    icon: '📚',
+    title: '學習與研究助理',
+    titleEn: 'Study & Research Assistant',
+    desc: '幫你整理學習筆記、回答問題、幫你理解艱深概念。個人學習教練，隨時在線。',
+    descEn: 'Summarize study notes, answer questions, and explain complex concepts. Your personal study coach, always available.',
+    highlight: false,
+  },
+  {
+    icon: '🏋️',
+    title: '健康生活伙伴',
+    titleEn: 'Health & Wellness Companion',
+    desc: '幫你記錄運動、追蹤飲食、提供健康建議。協助你建立更好的生活習慣。',
+    descEn: 'Log workouts, track nutrition, and provide wellness tips. Help you build better habits.',
+    highlight: false,
+  },
+  {
+    icon: '🛒',
+    title: '網購比價助手',
+    titleEn: 'Shopping Research Assistant',
+    desc: '幫你比較不同平台既價格、評價，俾你嘅購物決策更有信心。',
+    descEn: 'Compare prices and reviews across platforms. Shop smarter with AI-powered recommendations.',
+    highlight: false,
+  },
+]
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -448,6 +500,68 @@ export default function HermesAgentHostingPage() {
                 <p className="text-sm text-cyber-cyan/80">{locale === 'zh-Hant' ? item.desc : item.descEn}</p>
               </motion.div>
             ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Personal / Normal User Use Cases */}
+      <section id="personal-use-cases" className="py-20 px-4 sm:px-6 lg:px-8 bg-deep-space">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-16"
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-purple/10 text-cyber-purple text-sm font-medium mb-6 border border-cyber-purple/20">
+              ✨ {locale === 'zh-Hant' ? '個人用途' : 'Personal Use Cases'}
+            </span>
+            <h2 className="heading-lg text-pure-white mb-4">
+              {locale === 'zh-Hant' ? '不只是商業' : 'Not Just for Business'}
+            </h2>
+            <p className="body-lg text-pure-white/50 max-w-2xl mx-auto">
+              {locale === 'zh-Hant'
+                ? 'Hermes Agent 同時適合計劃生活的人。家庭、旅行、理財、學習——全部可以係用同一個平台。'
+                : 'Hermes Agent works for personal life too. Family, travel, finances, learning — all in one platform.'}
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {personalUseCases.map((uc, i) => (
+              <motion.div key={i} variants={itemVariants} className="glass-card p-6 flex flex-col gap-3">
+                <div className="text-3xl mb-1">{uc.icon}</div>
+                <h3 className="text-base font-bold text-pure-white">
+                  {locale === 'zh-Hant' ? uc.title : uc.titleEn}
+                </h3>
+                <p className="text-sm text-pure-white/60 leading-relaxed">
+                  {locale === 'zh-Hant' ? uc.desc : uc.descEn}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-center mt-12"
+          >
+            <p className="text-pure-white/60 mb-4 text-sm">
+              {locale === 'zh-Hant'
+                ? '無論係商業定個人用途——一個平台，全部搞掂。'
+                : 'Business or personal — one platform handles everything.'}
+            </p>
+            <a href="#contact" className="btn-cyber-purple">
+              {locale === 'zh-Hant' ? '立即試用 →' : 'Try It Free →'}
+            </a>
           </motion.div>
         </div>
       </section>
