@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronDown, ArrowRight, Sparkles } from 'lucide-react'
 import { useTranslation } from '@/i18n'
+import { ScrambledText, GradientMesh, MagneticButton } from './Animations'
 
 /* =============================================
    STAR PARTICLE CANVAS
@@ -114,6 +115,9 @@ export default function Hero() {
         style={{ zIndex: 0 }}
       />
 
+      {/* ── Animated Gradient Mesh ── */}
+      <GradientMesh />
+
       {/* ── Digital Grid Overlay ── */}
       <div className="hero-grid-overlay" />
 
@@ -191,7 +195,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
           className="heading-xl mb-6 max-w-5xl mx-auto"
         >
-          {t('hero_headline')}
+          <ScrambledText text={t('hero_headline')} className="inline" delay={300} />
         </motion.h1>
 
         {/* Subheadline */}
@@ -211,14 +215,18 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.3, ease: 'easeOut' }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <button onClick={scrollToContact} className="btn-cyber-cyan text-base px-8 py-3.5">
-            {t('hero_cta_protected')}
-            <ArrowRight size={18} />
-          </button>
-          <button onClick={scrollToServices} className="btn-cyber-purple text-base px-8 py-3.5">
-            {t('hero_cta_ai')}
-            <ArrowRight size={18} />
-          </button>
+          <MagneticButton onClick={scrollToContact}>
+            <button className="btn-cyber-cyan text-base px-8 py-3.5 flex items-center gap-2">
+              {t('hero_cta_protected')}
+              <ArrowRight size={18} />
+            </button>
+          </MagneticButton>
+          <MagneticButton onClick={scrollToServices}>
+            <button className="btn-cyber-purple text-base px-8 py-3.5 flex items-center gap-2">
+              {t('hero_cta_ai')}
+              <ArrowRight size={18} />
+            </button>
+          </MagneticButton>
         </motion.div>
 
         {/* Trust Signals */}
