@@ -51,6 +51,19 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth`}>
       <body className="bg-deep-space text-pure-white antialiased font-sans overflow-x-hidden">
+        {/* SVG noise filter */}
+        <svg className="fixed inset-0 w-full h-full pointer-events-none z-[9999] opacity-[0.025] mix-blend-overlay" aria-hidden="true">
+          <filter id="noise">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.65"
+              numOctaves="3"
+              stitchTiles="stitch"
+            />
+            <feColorMatrix type="saturate" values="0" />
+          </filter>
+          <rect width="100%" height="100%" filter="url(#noise)" />
+        </svg>
         <Providers>{children}</Providers>
       </body>
     </html>
