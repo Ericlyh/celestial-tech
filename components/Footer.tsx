@@ -164,7 +164,7 @@ export default function Footer() {
             © 2026 Celestial Tech. {t('footer_rights')}
           </p>
           <p className="text-gray-700 text-xs">
-            Crafted with precision. Secured with intelligence.
+            {t('footer_crafted')}
           </p>
         </motion.div>
       </motion.div>

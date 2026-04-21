@@ -532,7 +532,7 @@ export default function HermesAgentHostingPage() {
             className="text-center mb-12"
           >
             <h2 className="heading-lg text-pure-white mb-4">
-              {locale === 'zh-Hant' ? 'HK 老闆點樣用？' : 'What HK Business Owners Are Saying'}
+              {locale === 'zh-Hant' ? '香港企業實例' : 'What HK Business Owners Are Saying'}
             </h2>
           </motion.div>
 
@@ -580,7 +580,7 @@ export default function HermesAgentHostingPage() {
             </h2>
             <p className="body-lg text-pure-white/50">
               {locale === 'zh-Hant'
-                ? '睇下香港老闆點樣用 Hermes Agent 改變佢哋嘅業務'
+                ? '看看香港企業如何以 Hermes Agent 改變營運方式'
                 : 'See how HK business owners transformed their operations with Hermes Agent'}
             </p>
           </motion.div>
@@ -781,7 +781,7 @@ export default function HermesAgentHostingPage() {
               {locale === 'zh-Hant' ? '為何選擇 Hermes Agent？' : 'Why Hermes Agent?'}
             </span>
             <h2 className="heading-lg text-pure-white mb-4">
-              {locale === 'zh-Hant' ? 'Hermes Agent vs Claude Code Desktop — 有幾大分別？' : 'Hermes Agent vs Claude Code Desktop — How Different Are They?'}
+              {locale === 'zh-Hant' ? 'Hermes Agent 與 Claude Code Desktop — 兩者有何不同？' : 'Hermes Agent vs Claude Code Desktop — How Different Are They?'}
             </h2>
             <p className="body-lg text-pure-white/50 max-w-2xl mx-auto">
               {locale === 'zh-Hant' ? t('comparison_subtitle' as any) : 'Claude Code Desktop is a great AI coding assistant. But if you want real business automation, Hermes Agent is in a different league.'}
@@ -828,8 +828,8 @@ export default function HermesAgentHostingPage() {
                 icon: '🏢',
                 openclaw: locale === 'zh-Hant' ? t('comparison_1_title' as any) : t('comparison_1_title_en' as any),
                 openclawSub: locale === 'zh-Hant' ? t('comparison_1_desc' as any) : t('comparison_1_desc_en' as any),
-                claude: locale === 'zh-Hant' ? '幫你寫 Code' : 'Helps You Code',
-                claudeSub: locale === 'zh-Hant' ? '專為開發者而設嘅 AI coding 助手' : 'AI coding assistant for developers',
+                claude: locale === 'zh-Hant' ? '協助編寫代碼' : 'Helps You Code',
+                claudeSub: locale === 'zh-Hant' ? '專為開發者而設的 AI 編程助手' : 'AI coding assistant for developers',
                 winner: 'openclaw',
               },
               {
@@ -837,7 +837,7 @@ export default function HermesAgentHostingPage() {
                 openclaw: locale === 'zh-Hant' ? t('comparison_2_title' as any) : t('comparison_2_title_en' as any),
                 openclawSub: locale === 'zh-Hant' ? t('comparison_2_desc' as any) : t('comparison_2_desc_en' as any),
                 claude: locale === 'zh-Hant' ? '英文為主' : 'English-First',
-                claudeSub: locale === 'zh-Hant' ? '主要支援英文，廣東話有限' : 'Primarily English, limited Cantonese support',
+                claudeSub: locale === 'zh-Hant' ? '主要支援英文，廣東話支援有限' : 'Primarily English, limited Cantonese support',
                 winner: 'openclaw',
               },
               {
@@ -845,7 +845,7 @@ export default function HermesAgentHostingPage() {
                 openclaw: locale === 'zh-Hant' ? t('comparison_3_title' as any) : t('comparison_3_title_en' as any),
                 openclawSub: locale === 'zh-Hant' ? t('comparison_3_desc' as any) : t('comparison_3_desc_en' as any),
                 claude: locale === 'zh-Hant' ? '需要 Prompt Engineering' : 'Requires Prompt Engineering',
-                claudeSub: locale === 'zh-Hant' ? '需要懂得點樣寫 prompt 同理解 AI 輸出' : 'Requires prompt writing and AI output understanding',
+                claudeSub: locale === 'zh-Hant' ? '需要懂得撰寫提示詞並理解 AI 輸出' : 'Requires prompt writing and AI output understanding',
                 winner: 'openclaw',
               },
               {
@@ -853,7 +853,7 @@ export default function HermesAgentHostingPage() {
                 openclaw: locale === 'zh-Hant' ? t('comparison_4_title' as any) : t('comparison_4_title_en' as any),
                 openclawSub: locale === 'zh-Hant' ? t('comparison_4_desc' as any) : t('comparison_4_desc_en' as any),
                 claude: locale === 'zh-Hant' ? '需要你啟動' : 'Requires Manual Activation',
-                claudeSub: locale === 'zh-Hant' ? '需要人手啟動，唔係持續運行' : 'Requires manual invocation, not always running',
+                claudeSub: locale === 'zh-Hant' ? '需要人手啟動，非持續運行' : 'Requires manual invocation, not always running',
                 winner: 'openclaw',
               },
               {
@@ -861,7 +861,7 @@ export default function HermesAgentHostingPage() {
                 openclaw: locale === 'zh-Hant' ? t('comparison_5_title' as any) : t('comparison_5_title_en' as any),
                 openclawSub: locale === 'zh-Hant' ? t('comparison_5_desc' as any) : t('comparison_5_desc_en' as any),
                 claude: locale === 'zh-Hant' ? '自己管理' : 'Self-Managed',
-                claudeSub: locale === 'zh-Hant' ? '你需要自己管伺服器、更新、保安' : 'You manage servers, updates, and security yourself',
+                claudeSub: locale === 'zh-Hant' ? '需要自行管理伺服器、更新及保安' : 'You manage servers, updates, and security yourself',
                 winner: 'openclaw',
               },
             ].map((row, i) => (
@@ -896,11 +896,11 @@ export default function HermesAgentHostingPage() {
             <div className="p-6 bg-cyber-cyan/5 border-t border-cyber-cyan/20 text-center">
               <p className="text-pure-white/70 mb-4">
                 {locale === 'zh-Hant'
-                  ? 'Claude Code 係一款出色工具。但如果你係 HK 中小企老闆，你需要嘅係 Hermes Agent。'
+                  ? 'Claude Code 是一款出色的工具。但若您是香港中小企東主，您需要的是 Hermes Agent。'
                   : "Claude Code is great. But if you're a HK SME owner, you need Hermes Agent."}
               </p>
               <a href="#contact" className="btn-cyber-cyan">
-                {locale === 'zh-Hant' ? '試用 Hermes Agent →' : 'Try Hermes Agent →'}
+                {locale === 'zh-Hant' ? '立即試用 Hermes Agent →' : 'Try Hermes Agent →'}
               </a>
             </div>
           </motion.div>
@@ -945,7 +945,7 @@ export default function HermesAgentHostingPage() {
                   </div>
                   <div>
                     <p className="font-bold text-cyber-cyan">Hermes Agent</p>
-                    <p className="text-xs text-cyber-cyan/60">{locale === 'zh-Hant' ? '升級版 — 為 HK 中小企而設' : 'Upgrade — Built for HK SMEs'}</p>
+                    <p className="text-xs text-cyber-cyan/60">{locale === 'zh-Hant' ? '升級版 — 專為香港中小企而設' : 'Upgrade — Built for HK SMEs'}</p>
                   </div>
                 </div>
               </div>
@@ -1040,7 +1040,7 @@ export default function HermesAgentHostingPage() {
             <div className="p-6 bg-cyber-cyan/5 border-t border-cyber-cyan/20 text-center">
               <p className="text-pure-white/70 mb-4">
                 {locale === 'zh-Hant'
-                  ? 'Hermes Agent 係 OpenClaw 嘅下一代升級版——你值得擁有更好嘅 AI 員工。'
+                  ? 'Hermes Agent 是 OpenClaw 的下一代升級版——您值得擁有更好的 AI 員工。'
                   : 'Hermes Agent is the next-generation upgrade to OpenClaw — you deserve a better AI employee.'}
               </p>
               <a href="#contact" className="btn-cyber-cyan">
@@ -1062,10 +1062,10 @@ export default function HermesAgentHostingPage() {
             className="text-center mb-12"
           >
             <h2 className="heading-lg text-pure-white mb-4">
-              {locale === 'zh-Hant' ? '準備好試用未？' : 'Ready to Get Started?'}
+              {locale === 'zh-Hant' ? '準備好開始了嗎？' : 'Ready to Get Started?'}
             </h2>
             <p className="text-lg text-pure-white/60">
-              {locale === 'zh-Hant' ? '填低以下資料，我哋會 WhatsApp 你。' : 'Leave your details and we will WhatsApp you within 24 hours.'}
+              {locale === 'zh-Hant' ? '請填寫以下資料，我們將通過 WhatsApp 與您聯絡。' : 'Leave your details and we will WhatsApp you within 24 hours.'}
             </p>
           </motion.div>
 
@@ -1084,7 +1084,7 @@ export default function HermesAgentHostingPage() {
             >
               <div>
                 <label className="block text-sm font-medium text-pure-white/80 mb-1">
-                  {locale === 'zh-Hant' ? '你嘅名字 *' : 'Your Name *'}
+                  {locale === 'zh-Hant' ? '您的姓名 *' : 'Your Name *'}
                 </label>
                 <input
                   type="text"
@@ -1120,7 +1120,7 @@ export default function HermesAgentHostingPage() {
                       <option value="restaurant" className="bg-deep-space">餐廳</option>
                       <option value="retail" className="bg-deep-space">零售店</option>
                       <option value="onlineshop" className="bg-deep-space">網店</option>
-                      <option value="agency" className="bg-deep-space">Agency / 顧問</option>
+                      <option value="agency" className="bg-deep-space">代理商 / 顧問</option>
                       <option value="freelancer" className="bg-deep-space">Freelancer / 自由工作者</option>
                       <option value="other" className="bg-deep-space">其他</option>
                     </>
@@ -1139,25 +1139,25 @@ export default function HermesAgentHostingPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-pure-white/80 mb-1">
-                  {locale === 'zh-Hant' ? '你遇到嘅最大問題 *' : 'Biggest Pain Point *'}
+                  {locale === 'zh-Hant' ? '您面臨的最大挑戰 *' : 'Biggest Pain Point *'}
                 </label>
                 <textarea
                   name="pain_point"
                   rows={3}
-                  placeholder={locale === 'zh-Hant' ? '例如：每日用 WhatsApp 覆客人查到好辛苦...' : 'e.g. I am tired of replying to WhatsApp messages from customers all day...'}
+                  placeholder={locale === 'zh-Hant' ? '例如：每日以 WhatsApp 回覆客戶查詢至凌晨，耗費大量時間...' : 'e.g. I am tired of replying to WhatsApp messages from customers all day...'}
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-pure-white placeholder:text-pure-white/20 focus:border-cyber-cyan/50 focus:ring-2 focus:ring-cyber-cyan/20 outline-none transition text-sm resize-none"
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-pure-white/80 mb-1">
-                  {locale === 'zh-Hant' ? '你想要咩 Plan？ *' : 'Preferred Plan *'}
+                  {locale === 'zh-Hant' ? '您需要哪種方案？ *' : 'Preferred Plan *'}
                 </label>
                 <div className="flex gap-4 flex-wrap">
                   {[
                     { value: 'starter', label: locale === 'zh-Hant' ? 'Starter $199/月' : 'Starter $199/mo' },
                     { value: 'pro', label: locale === 'zh-Hant' ? 'Pro $399/月' : 'Pro $399/mo' },
                     { value: 'business', label: locale === 'zh-Hant' ? 'Business $799/月' : 'Business $799/mo' },
-                    { value: 'unsure', label: locale === 'zh-Hant' ? '未決定 / Not sure' : 'Undecided' },
+                    { value: 'unsure', label: locale === 'zh-Hant' ? '尚未決定' : 'Undecided' },
                   ].map((opt) => (
                     <label key={opt.value} className="flex items-center gap-2 text-sm text-pure-white/60 cursor-pointer">
                       <input type="radio" name="plan" value={opt.value} className="text-cyber-cyan focus:ring-cyber-cyan/50" />
@@ -1166,12 +1166,12 @@ export default function HermesAgentHostingPage() {
                   ))}
                 </div>
               </div>
-              <input type="hidden" name="_subject" value={locale === 'zh-Hant' ? '新 HK OpenClaw 查詢！' : 'New HK OpenClaw Inquiry!'} />
+              <input type="hidden" name="_subject" value={locale === 'zh-Hant' ? '新香港 OpenClaw 查詢！' : 'New HK OpenClaw Inquiry!'} />
               <button type="submit" className="w-full btn-cyber-cyan text-lg py-4">
-                {locale === 'zh-Hant' ? '提交 — 等我哋 WhatsApp 你！' : 'Submit — We will WhatsApp You!'}
+                {locale === 'zh-Hant' ? '提交 — 我們將通過 WhatsApp 與您聯絡！' : 'Submit — We will WhatsApp You!'}
               </button>
               <p className="text-center text-xs text-pure-white/30">
-                我哋唔會spam你。只係發送一次 WhatsApp 確認。
+                我們不會向您發送垃圾訊息。只會發送一次 WhatsApp 確認。
                 <br />
                 We won&apos;t spam you. Just one WhatsApp to confirm.
               </p>
