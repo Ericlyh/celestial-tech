@@ -3,7 +3,7 @@ import type { LocaleKey } from '@/locales/en'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Celestial Tech — AI Employees That Speak Cantonese',
+  title: 'Privacy Policy | Celestial Tech',
   description:
     'Celestial Tech privacy policy. Learn how we collect, use, and protect your data when you use our AI SOC and cybersecurity services.',
 }

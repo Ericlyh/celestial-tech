@@ -32,7 +32,7 @@ export default function LegalPage({
       <div className="hero-grid-overlay" />
       <div className="hero-radial-overlay" />
       <Navbar />
-      <div className="relative z-10 pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 pt-28 sm:pt-36 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <motion.div

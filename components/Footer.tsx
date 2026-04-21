@@ -31,7 +31,7 @@ const itemVariants = {
 export default function Footer() {
   const { t, locale, toggleLocale } = useTranslation()
   const pathname = usePathname()
-  const isOpenClaw = pathname?.startsWith('/openclaw-hosting')
+  const isOpenClaw = pathname?.startsWith('/openclaw-hosting') || pathname?.startsWith('/hermes-agent-hosting')
 
   const quickLinks = [
     { labelKey: 'footer_home' as const, href: isOpenClaw ? '/' : '#' },
