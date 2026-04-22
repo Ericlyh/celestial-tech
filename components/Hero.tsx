@@ -35,7 +35,7 @@ export default function Hero() {
       {/* ── Background Image (semi-transparent) ── */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-[0.07]"
-        style={{ backgroundImage: "url('/bg-network.jpg')" }}
+        style={{ backgroundImage: "url('/bg-cyber-code.jpg')" }}
       />
 
       {/* ── Animated Gradient Mesh ── */}

@@ -44,10 +44,10 @@ tasks:
     title: OpenClaw → Hermes Agent rebranding
     completed: 2026-04-14
   - id: CT-006
-    status: in_progress
+    status: done
     title: Fix blog markdown rendering (marked.js replacement)
-    started: 2026-04-21
-    notes: ReactMarkdown SSR issue → replaced with marked.js + dangerouslySetInnerHTML
+    completed: 2026-04-22
+    notes: Verified — blog posts render correctly at actual URLs. Git push 67d8cd2 applied.
   - id: CT-007
     status: todo
     title: Enhancement: pricing tier comparison table
@@ -73,6 +73,4 @@ decisions:
     summary: All OpenClaw references rebranded to Hermes Agent across the site
 
 next_actions:
-  - "dev: Run npm install to get marked package"
-  - "dev: Verify blog post renders correctly on deployed site"
   - "ethan: Review enhancement ideas (CT-007 to CT-009) for prioritization"

@@ -95,7 +95,7 @@ export default function Services() {
       {/* Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-[0.06]"
-        style={{ backgroundImage: "url('/bg-data.jpg')" }}
+        style={{ backgroundImage: "url('/bg-handshake.jpg')" }}
       />
 
       <div className="relative max-w-7xl mx-auto">
