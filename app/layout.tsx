@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 import Providers from './providers'
+import { Plus_Jakarta_Sans } from 'next/font/google'
 
-const inter = Inter({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-plus-jakarta',
 })
 
 export const metadata: Metadata = {
@@ -49,7 +49,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} scroll-smooth`}>
+    <html lang="en" className={`${plusJakartaSans.variable} scroll-smooth`}>
       <body className="bg-deep-space text-pure-white antialiased font-sans overflow-x-hidden">
         {/* SVG noise filter */}
         <svg className="fixed inset-0 w-full h-full pointer-events-none z-[9999] opacity-[0.025] mix-blend-overlay" aria-hidden="true">
