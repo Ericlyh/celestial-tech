@@ -69,11 +69,11 @@ export default function Navbar() {
             className="flex items-center gap-2.5 group"
           >
             <Image
-              src="/logo.jpg"
+              src="/logo.png"
               alt="Celestial Tech"
               width={36}
               height={36}
-              className="object-cover mix-blend-multiply"
+              className="object-contain"
             />
             <span className="text-xl font-bold tracking-tight whitespace-nowrap">
               <span className="text-pure-white">Celestial</span>{' '}
