@@ -130,7 +130,7 @@ export default function CaseStudies() {
 
                 {/* Metrics */}
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {t(study.metricsKey as any).split(',').map((metric: string) => (
+                  {t(study.metricsKey as any).split(/[,·]/).map((metric: string) => (
                     <span
                       key={metric}
                       className="text-xs text-[#00F0FF] bg-[#00F0FF]/10 border border-[#00F0FF]/20
