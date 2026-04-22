@@ -32,6 +32,12 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
+      {/* ── Background Image (semi-transparent) ── */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-[0.07]"
+        style={{ backgroundImage: "url('/bg-network.jpg')" }}
+      />
+
       {/* ── Animated Gradient Mesh ── */}
       <GradientMesh />
 

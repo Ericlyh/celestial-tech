@@ -81,6 +81,11 @@ export default function About() {
     >
       {/* Background subtle gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-deep-space via-deep-space/95 to-deep-space pointer-events-none" />
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-[0.06]"
+        style={{ backgroundImage: "url('/bg-circuit.jpg')" }}
+      />
 
       {/* Decorative celestial element */}
       <CelestialDecoration />

@@ -92,6 +92,11 @@ export default function Services() {
       {/* Background accent */}
       <div className="absolute inset-0 bg-gradient-to-b from-deep-space via-[#0d0d1a] to-deep-space pointer-events-none" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-cyber-cyan/5 rounded-full blur-[100px] pointer-events-none" />
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-[0.06]"
+        style={{ backgroundImage: "url('/bg-data.jpg')" }}
+      />
 
       <div className="relative max-w-7xl mx-auto">
         {/* Section header */}
