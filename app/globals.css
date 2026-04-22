@@ -20,7 +20,7 @@
   --color-border-purple: rgba(139, 92, 246, 0.2);
 
   /* Typography */
-  --font-family: 'Plus Jakarta Sans', var(--font-plus-jakarta), system-ui, -apple-system, sans-serif;
+  --font-family: 'Noto Sans SC', var(--font-noto-sc), system-ui, -apple-system, sans-serif;
 }
 
 /* =============================================

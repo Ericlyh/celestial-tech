@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Providers from './providers'
-import { Plus_Jakarta_Sans } from 'next/font/google'
+import { Noto_Sans_SC } from 'next/font/google'
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const notoSansSC = Noto_Sans_SC({
   subsets: ['latin'],
-  variable: '--font-plus-jakarta',
+  variable: '--font-noto-sc',
 })
 
 export const metadata: Metadata = {
@@ -49,7 +49,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${plusJakartaSans.variable} scroll-smooth`}>
+    <html lang="en" className={`${notoSansSC.variable} scroll-smooth`}>
       <body className="bg-deep-space text-pure-white antialiased font-sans overflow-x-hidden">
         {/* SVG noise filter */}
         <svg className="fixed inset-0 w-full h-full pointer-events-none z-[9999] opacity-[0.025] mix-blend-overlay" aria-hidden="true">

@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import Image from 'next/image'
 import { Shield, Menu, X } from 'lucide-react'
 import { useTranslation } from '@/i18n'
 import { usePathname } from 'next/navigation'
@@ -68,13 +67,6 @@ export default function Navbar() {
             onClick={(e) => { e.preventDefault(); handleNavClick('#home') }}
             className="flex items-center gap-2.5 group"
           >
-            <Image
-              src="/logo.png"
-              alt="Celestial Tech"
-              width={36}
-              height={36}
-              className="object-contain"
-            />
             <span className="text-xl font-bold tracking-tight whitespace-nowrap">
               <span className="text-pure-white">Celestial</span>{' '}
               <span className="text-gradient-cyan">Tech</span>
