@@ -23,7 +23,8 @@ const cardVariants = {
 }
 
 export default function CaseStudies() {
-  const { t } = useTranslation()
+  const { t, locale } = useTranslation()
+  const lang = locale === 'zh-Hant' ? 'zh' : 'en'
 
   const caseStudies = [
     {
@@ -130,7 +131,10 @@ export default function CaseStudies() {
 
                 {/* Metrics */}
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {t(study.metricsKey as any).split(/[,·]/).map((metric: string) => (
+                  {(lang === 'zh'
+                    ? t(study.metricsKey as any).split(' · ')
+                    : t(study.metricsKey as any).split(', ')
+                  ).map((metric: string) => (
                     <span
                       key={metric}
                       className="text-xs text-[#00F0FF] bg-[#00F0FF]/10 border border-[#00F0FF]/20

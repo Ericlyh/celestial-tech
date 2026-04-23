@@ -60,7 +60,8 @@ tasks:
     status: todo
   - id: CT-010
     title: OpenClaw Hosting sitemap.xml + Google Search Console
-    status: todo
+    status: done
+    completed: 2026-04-23
 
 decisions:
   - id: CT-DEC-001
