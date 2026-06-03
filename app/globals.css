@@ -401,19 +401,23 @@ h1, h2, h3, h4, h5, h6,
   }
 
   .heading-xl {
-    @apply text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight;
+    @apply text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light leading-[1.05] tracking-tight;
+    font-family: var(--font-display);
   }
 
   .heading-lg {
-    @apply text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight;
+    @apply text-3xl sm:text-4xl lg:text-5xl font-light leading-[1.1] tracking-tight;
+    font-family: var(--font-display);
   }
 
   .heading-md {
-    @apply text-2xl sm:text-3xl font-semibold leading-snug;
+    @apply text-2xl sm:text-3xl font-normal leading-snug tracking-tight;
+    font-family: var(--font-display);
   }
 
   .heading-sm {
-    @apply text-xl sm:text-2xl font-semibold;
+    @apply text-xl sm:text-2xl font-medium tracking-tight;
+    font-family: var(--font-display);
   }
 
   .body-lg {

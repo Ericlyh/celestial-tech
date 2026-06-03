@@ -103,12 +103,12 @@ export default function About() {
           </span>
         </motion.div>
 
-        {/* Section Heading */}
+        {/* Section Heading — Fraunces serif for editorial weight */}
         <motion.h2
           initial={{ opacity: 0, y: 25 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.05 }}
-          className="heading-lg mb-6 max-w-3xl"
+          className="font-display font-light text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.05] tracking-tight mb-6 max-w-3xl"
         >
           {t('about_title')}
         </motion.h2>
