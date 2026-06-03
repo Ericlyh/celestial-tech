@@ -11,12 +11,16 @@ datasource db {
 model Post {
   id          String   @id @default(cuid())
   title       String
+  titleZh     String?  // Chinese (Traditional) title — falls back to title if null
   slug        String   @unique
   excerpt     String
-  content     String   // markdown body
+  excerptZh   String?  // Chinese excerpt — falls back to excerpt if null
+  content     String   // markdown body (English source of truth)
+  contentZh   String?  // Chinese markdown body — falls back to content if null
   category    String   // "AI" | "Cybersecurity"
   coverImage  String?
   author      String   @default("Celestial Tech Team")
+  authorZh    String?  // Chinese author label
   readTime    Int      @default(5)
   published   Boolean  @default(true)
   publishedAt DateTime @default(now())

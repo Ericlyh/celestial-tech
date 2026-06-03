@@ -5,9 +5,11 @@ const prisma = new PrismaClient()
 const posts = [
   {
     title: 'AI-Powered SOC: The Future of Threat Detection is Here',
+    titleZh: 'AI 驅動 SOC：威脅檢測的未來已來',
     slug: 'ai-powered-soc-future-threat-detection',
     excerpt:
-      'Security Operations Centers are being transformed by artificial intelligence. Here\'s how AI-powered SOCs are redefining threat detection and why your organization needs one.',
+      "Security Operations Centers are being transformed by artificial intelligence. Here's how AI-powered SOCs are redefining threat detection and why your organization needs one.",
+    excerptZh: '人工智能正在徹底改變安全運營中心。以下是 AI 驅動的 SOC 如何重新定義威脅檢測，以及您的組織為何需要它。',
     content: `## The Evolution of Security Operations
 
 The traditional Security Operations Center (SOC) was built on a simple premise: human analysts monitoring dashboards, triaging alerts, and responding to incidents. But as attack surfaces expanded and threat actors grew more sophisticated, the model began to crack under its own weight.
@@ -16,7 +18,7 @@ The traditional Security Operations Center (SOC) was built on a simple premise: 
 
 ## Enter AI-Powered SOC
 
-Artificial intelligence is fundamentally reshaping how SOCs operate. Here\'s what's changing:
+Artificial intelligence is fundamentally reshaping how SOCs operate. Here's what's changing:
 
 - **Speed**: AI systems analyze millions of events per second — something impossible for human teams
 - **Accuracy**: Machine learning models reduce false positives by up to 90% by learning from historical data
@@ -44,18 +46,57 @@ The threat landscape has never been more hostile. Nation-state actors, ransomwar
 **Celestial Tech's AI-Powered SOC** combines advanced machine learning with expert human analysts to deliver continuous, proactive protection. Our hybrid approach catches what tools miss and responds faster than any pure-play SOC.
 
 Ready to transform your security operations? [Contact our team](/#contact) to learn how we can build an AI-powered SOC tailored to your organization.`,
+    contentZh: `## 安全運營的演變
+
+傳統的安全運營中心（SOC）基於一個簡單的前提：人類分析師監控儀表板、分揀警報並應對事件。但隨著攻擊面擴大，威脅行為者變得越來越複雜，這一模式開始崩潰。
+
+**數據說明了一切：** 如今，平均每家企業每天產生超過 **200 萬個安全事件**。一個 10 人分析師團隊根本無法跟上。结果？警報疲勞、遺漏威脅，以及數週未被發現的漏洞。
+
+## AI 驅動 SOC 的到來
+
+人工智能正在從根本上重塑 SOC 的運作方式。以下是正在發生的變化：
+
+- **速度**：AI 系統每秒分析數百萬個事件——這是人類團隊不可能做到的
+- **準確性**：機器學習模型通過學習歷史數據，將誤報率降低多達 90%
+- **上下文**：AI 關聯不同數據源的信號，描繪完整的威脅圖景
+- **持續學習**：與靜態規則不同，AI 模型每次交互都會改進
+
+## AI 驅動 SOC 的關鍵能力
+
+### 1. 行為威脅檢測
+
+AI 驅動的 SOC 不是依賴已知威脅特徵，而是為每個用戶、設備和系統建立基準行為。當活動偏離正常範圍時——即使只是一點點——系統會標記它以進行調查。
+
+### 2. 自動化事件響應
+
+當威脅被確認時，AI 驅動的 SOAR（安全編排、自動化和響應）平台可以自動控制受影響的系統、阻止惡意 IP 並隔離受損帳戶——通常在檢測後幾秒鐘內。
+
+### 3. 預測性威脅情報
+
+AI 不僅僅是對當前威脅做出反應——它還預測新興威脅。通過分析全球威脅模式、漏洞披露和暗網動態，AI 系統可以在威脅被主動利用之前警告組織。
+
+## 為何您的 SOC 現在需要 AI
+
+威脅環境從未如此惡劣。國家級行為者、勒索軟件團伙和供應鏈攻擊者以前所未有的複雜性運作。僅依靠人類的 SOC 運營不再是可行的策略。
+
+**Celestial Tech 的 AI 驅動 SOC** 結合先進的機器學習與專家人類分析師，提供持續、主動的保護。我們的混合方法能捕捉工具遺漏的內容，並比任何純 SOC 更快響應。
+
+準備好轉變您的安全運營了嗎？[聯絡我們的團隊](/#contact) 了解我們如何為您的組織量身定制 AI 驅動的 SOC。`,
     category: 'Cybersecurity',
     coverImage: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80',
     author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
     readTime: 6,
     published: true,
     sourceName: 'Editorial',
   },
   {
     title: 'From Reactive to Predictive: Why Traditional Cybersecurity is Failing',
+    titleZh: '從被動到主動：為何傳統網絡安全正在失效',
     slug: 'reactive-to-predictive-traditional-cybersecurity-failing',
     excerpt:
       'Traditional cybersecurity waits for something to break. Predictive security stops threats before they happen. Here\'s why the paradigm shift is urgent — and inevitable.',
+    excerptZh: '傳統網絡安全在被動等待事故發生後才作出反應。預測性安全則在威脅成形之前將其阻止。為何這個範式轉移刻不容緩——且不可逆轉。',
     content: `## The Reactive Trap
 
 For decades, cybersecurity operated on a reactive model. Wait for something bad to happen. Detect it. Respond to it. Recover from it. The entire industry — firewalls, antivirus, SIEMs — was built around this cycle.
@@ -97,18 +138,62 @@ Every day your organization runs on reactive security is a day your adversaries 
 Celestial Tech's predictive security platform combines AI-powered monitoring, expert-led threat hunting, and round-the-clock response capabilities — giving your organization the proactive defense it deserves.
 
 Don't wait for the breach. [Get ahead of it](/#contact).`,
+    contentZh: `## 被動陷阱
+
+數十年來，網絡安全一直基於被動模式運作。等待壞事發生。檢測它。響應它。從中恢復。整個行業——防火牆、防病毒、SEM——都是圍繞這個循環構建的。
+
+**問題在哪裡？** 被動安全在根本上是不對稱的。攻擊者只需成功一次。防守者必須每次都成功。
+
+如今，數據洩露的平均成本超過 **440 萬美元**。更令人震驚的是：平均停留時間——從初始入侵到檢測之間的時間——是 **207 天**。當大多數組織檢測到漏洞時，損害已經造成。
+
+## 預測性安全的真正含義
+
+預測性安全不只是一個營銷術語。這是一種根本不同的方法：
+
+### 主動威脅獵殺
+
+預測性 SOC 不是等待警報，而是主動搜索現有工具尚未標記的入侵指標。專家分析師結合 AI 分析，主動追蹤潛伏在您環境中的威脅。
+
+### 威脅建模
+
+預測性組織會模擬他們的對手。誰可能瞄準您？他們的戰術、技術和程序（TTP）是什麼？通過構建特定於您行業和組織的威脅模型，安全團隊可以將防禦重點放在最關鍵的地方。
+
+### 攻擊面監控
+
+持續監控您的外部攻擊面——暴露的 API、被遺忘的子域名、配置錯誤的雲存儲桶——在攻擊者發現之前發現漏洞。
+
+## 預測性安全的三個支柱
+
+| 支柱 | 描述 | 成果 |
+|--------|-------------|---------|
+| **情報** | 實時威脅情報 + 暗網監控 | 預知威脅 |
+| **自動化** | AI 驅動檢測 + SOAR 劇本 | 秒級響應 |
+| **專業知識** | 人類分析師 + 機器學習 | 每個警報都不遺漏 |
+
+## 不行動的代價
+
+您的組織每使用一天被動安全，您的對手就有一天的優勢。安全人才缺口意味著您無法通過招聘來解決問題——根本沒有足夠的技能分析師來按所需規模配備傳統 SOC。
+
+**答案不是更多的分析師。是更智能的架構。**
+
+Celestial Tech 的預測性安全平台結合 AI 驅動的監控、專家主導的威脅獵殺和全天候響應能力——為您的組織提供應有的主動防禦。
+
+不要等待漏洞。[走在它前面](/#contact)。`,
     category: 'Cybersecurity',
     coverImage: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=80',
     author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
     readTime: 5,
     published: true,
     sourceName: 'Editorial',
   },
   {
     title: 'The Convergence of AI and Cybersecurity: What Enterprises Need to Know in 2026',
+    titleZh: 'AI 與網絡安全的融合：2026 年企業需要知道的事',
     slug: 'convergence-ai-cybersecurity-enterprises-2026',
     excerpt:
-      'AI and cybersecurity are no longer separate disciplines — they\'re converging into a single imperative. Here\'s what forward-thinking enterprises are doing differently.',
+      "AI and cybersecurity are no longer separate disciplines — they're converging into a single imperative. Here's what forward-thinking enterprises are doing differently.",
+    excerptZh: 'AI 與網絡安全已不再是兩個獨立領域——兩者正融合為一個共同的必然要求。以下是前瞻性企業與別不同之處。',
     content: `## Two Worlds Colliding
 
 In 2026, the line between AI strategy and cybersecurity strategy has effectively disappeared. Organizations that treat them as separate domains are already falling behind. Those that are fusing them are building unassailable competitive advantages.
@@ -164,10 +249,228 @@ The convergence of AI and cybersecurity isn't a future trend — it's a present 
 **Celestial Tech** specializes in helping enterprises navigate this convergence. From AI-powered SOC deployment to AI red teaming and Secure AI framework development, we help organizations build defenses that match the threat landscape they're actually facing.
 
 The time to act is now. [Speak with our team](/#contact) to understand your exposure and build a path forward.`,
+    contentZh: `## 兩個世界的碰撞
+
+到了 2026 年，AI 策略與網絡安全策略之間的界限已經實際消失。將兩者視為獨立領域的組織正在落後。將兩者融合的組織正在建立不可逾越的競爭優勢。
+
+**這種融合不是理論性的。** 它正在實時上演：
+
+- AI 正在被威脅行為者武器化，創建更令人信服的網絡釣魚攻擊、繞過認證系統並自動化漏洞發現
+- 同時，AI 是有史以來最強大的防禦工具——能夠識別人類分析師永遠看不到的模式
+- 在這個環境中獲勝的企業，是那些比攻擊者更快地使用 AI 進行防禦的企業
+
+## AI 驅動的威脅環境
+
+### AI 生成的社會工程
+
+生成式 AI 使魚叉式網絡釣魚幾乎與合法通信無法區分。攻擊者現在以工業規模製作個性化、有上下文意識的信息——以虛假發票請求瞄準 CFO、以假冒的 Jira 通知瞄準工程師、以令人信服的緊急請求瞄準高管。
+
+### 自主攻擊系統
+
+國家級行為者已經部署了能自主掃描、利用和傳播的 AI 系統。這些不是理論威脅——它們今天就在運作。平均每個企業網絡每天面對數千次自動攻擊嘗試。
+
+### 深度偽造欺詐
+
+語音克隆和視頻合成催生了一個新的欺詐類別。由深度偽造驅動的 CEO 欺詐、投資詐騙和身份盜竊已經讓企業損失了數十億美元。
+
+## 領先企業如何應對
+
+走在前面的組織有五個不同之處：
+
+### 1. 統一的 安全 + AI 領導力
+
+前瞻性企業現在讓 CISO 和首席 AI 官員並肩工作——或者在某些情況下，由一位高管對兩者負責。孤島化的安全和 AI 策略正在被整合的「安全 AI」框架所取代。
+
+### 2. AI 原生安全架構
+
+領先的組織不是將 AI 附加到傳統安全堆棧上，而是基於 AI 原生基礎重建。AI 驅動的 SOC、自主威脅響應和持續 AI 模型安全性現已成為標準實踐。
+
+### 3. AI 系統紅隊演練
+
+正如滲透測試數十年來一直是標準一樣，「AI 紅隊演練」——對 AI 系統本身進行對抗性測試——正在成為強制性要求。組織必須保護其 AI 模型免受提示注入、數據中毒和模型提取攻擊。
+
+### 4. 安全意識的 AI 治理
+
+AI 治理不再純粹是道德和合規問題。安全團隊參與每個 AI 部署決策，確保模型不僅準確，而且能抵抗操縱。
+
+### 5. AI 驅動的供應鏈安全
+
+第三方 AI 服務引入了新的攻擊向量。領先企業正在擴展其安全邊界，涵蓋 AI 模型供應鏈、訓練數據來源和推理基礎設施。
+
+## 行動的迫切性
+
+AI 與網絡安全的融合不是未來趨勢——它是當下現實。問題不是是否解決它。問題是您能以多快的速度行動。
+
+**Celestial Tech** 專門幫助企業應對這種融合。從 AI 驅動的 SOC 部署到 AI 紅隊演練和安全 AI 框架開發，我們幫助組織建立與其實際面臨的威脅環境相匹配的防禦。
+
+行動的時刻就是現在。[與我們的團隊交談](/#contact)，了解您的風險並建立前進的道路。`,
     category: 'AI',
     coverImage: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80',
     author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
     readTime: 7,
+    published: true,
+    sourceName: 'Editorial',
+  },
+  {
+    title: 'Building an Autonomous Execution Engine: Multi-Agent Patterns with OpenClaw',
+    titleZh: '構建自主執行引擎：OpenClaw 多代理模式',
+    slug: 'openclaw-multi-agent-patterns-autonomous-execution-engine',
+    excerpt:
+      "Six months of building with OpenClaw taught me that the gap between 'AI chatbot' and 'autonomous execution engine' is exactly this: moving from 'AI answers questions' to 'AI completes projects.' Here's what multi-agent orchestration looks like in practice.",
+    excerptZh: '六個月的 OpenClaw 開發經驗告訴我，「AI 聊天機械人」與「自主執行引擎」之間的鴻溝就在於：從「AI 回答問題」到「AI 完成項目」。以下是多代理編排在實踐中的具體運作方式。',
+    content: `## What Is OpenClaw?
+
+[OpenClaw](https://github.com/openclaw/openclaw) is an open-source agentic AI assistant framework built by [Peter Steinberger](https://x.com/steipete) (who recently joined OpenAI to work on agents). It provides the infrastructure layer for running autonomous AI subagents that can read files, execute shell commands, spawn child agents, and coordinate their work through a shared state system.
+
+Think of it as an operating system for AI agents. Instead of one LLM doing everything in a single conversation, OpenClaw lets you spin up multiple specialized agents that work in parallel, communicate through a structured event log, and defer to a project manager agent for coordination.
+
+The key insight: **single-agent systems bottleneck on context window limits and sequential execution**. A multi-agent system distributes cognitive load across specialized agents, each carrying only the context it needs.
+
+## Why Multi-Agent Systems Matter
+
+The AI productivity space is crowded. Zapier connects 8,000+ apps. Make offers visual workflow automation. n8n provides open-source workflow engine with AI agent nodes. Microsoft Copilot Studio embeds agents deep into enterprise ecosystems.
+
+These are all real products solving real problems. But most of them are **deterministic automation dressed up as AI**. They trigger on events, run predefined logic, connect A to B. Powerful, but brittle.
+
+What multi-agent orchestration unlocks is **adaptive, reasoning-driven automation**:
+
+- **Parallelism = speed.** Independent tasks run simultaneously. Research, writing, coding, and outreach happen at the same time instead of sequentially.
+- **Specialization.** A research agent doesn't carry deployment pipeline context. A coding agent doesn't need to know your content calendar. Each agent is scoped to its domain.
+- **Resilience.** If one agent crashes, the others keep working. Tasks are independent by design.
+- **Context liberation.** Instead of stuffing everything into one context window, each agent operates with focused, relevant context.
+
+## The Three-Layer Architecture
+
+### Layer 1: The Conversational Layer
+
+This is what the human sees and talks to. Natural language goes in; status updates, summaries, and completed work come out. The conversational layer never executes tasks directly. It only coordinates. This is the **CEO rule**: the main session is a coordinator, not a worker.
+
+### Layer 2: The Event / State Layer
+
+Everything significant gets logged to a shared event store. This includes:
+
+- **progress** — task started, completed, or updated
+- **blocker** — something is blocking work
+- **decision** — a significant choice was made
+- **pivot** — direction changed
+
+The event layer is the memory of the system. Any agent can query it to understand what happened, what's blocked, and why a particular decision was made.
+
+### Layer 3: The Execution Layer
+
+This is where work actually happens. Subagents are spawned per project or per task, running in parallel, coordinated through the state layer. Results are written back to the event layer.
+
+## Core Patterns That Actually Work
+
+### The PM Delegation Pattern (CEO Rule)
+
+The main session coordinates. Subagents execute. If the main session tries to do work directly, it becomes a bottleneck. The moment a project is assigned, the main session spawns a PM subagent and steps back.
+
+PM agents own STATE.yaml. They spawn workers, track progress, emit events. The main session only intervenes for decisions or blockers that need human input.
+
+### Event-Driven Coordination
+
+Agents don't poll each other. They communicate through the event log. When a worker finishes a task, it emits a progress event. The PM agent picks this up and updates state.
+
+This means the system is **asynchronous by default**. Any agent can die and be restarted without losing work. The event log is the source of truth.
+
+### The Two-File Rule
+
+The secret to preventing race conditions:
+
+- **AUTONOMOUS.md** — token-light goals and backlog. Only the main session touches this.
+- **memory/tasks-log.md** — append-only completed tasks. Subagents only ever add new lines at the bottom.
+
+Append-only logs have zero merge conflicts. An agent either appends successfully or it doesn't — no silent data loss.
+
+## Lessons Learned
+
+**Start with one agent, not five.** The temptation is to spawn a team of specialists immediately. Don't. Start with 1 PM + 1 worker. Understand the coordination overhead before scaling.
+
+**Event log everything, even the boring stuff.** I initially skipped logging for minor tasks. Then I needed to reconstruct why a particular stack decision was made three weeks ago. Now I log progress events for everything.
+
+**Define blocker escalation explicitly.** Early on, agents would get stuck in loops — retrying the same failing action indefinitely. Now blockers automatically escalate after two retries.
+
+The gap between "AI chatbot" and "autonomous execution engine" is exactly this: moving from "AI answers questions" to "AI completes projects." Multi-agent orchestration enables that shift — not as science fiction, but as a daily workflow.
+
+Ready to build your own execution engine? [Contact our team](/#contact) to learn how we can help you set up an AI-powered automation system tailored to your business.`,
+    contentZh: `## 什麼是 OpenClaw？
+
+[OpenClaw](https://github.com/openclaw/openclaw) 是一個開源的 AI Agent 框架，由 [Peter Steinberger](https://x.com/steipete)（最近加入 OpenAI 從事 Agent 工作）開發。它提供基礎設施，讓您可以運行多個自主 AI 子代理，它們可以讀取文件、執行 shell 命令、生成子代理，並通過共享狀態系統協調工作。
+
+可以將其想像為 AI 代理的作業系統。不再是一個 LLM 在單一對話中完成所有任務，OpenClaw 讓您啟動多個專業代理並行工作，通過結構化事件日誌溝通，並由項目經理代理進行協調。
+
+關鍵洞察：**單代理系統會因為上下文窗口限制和順序執行而出現瓶頸**。多代理系統將認知負擔分佈到各個專業代理，每個代理只攜帶其所需的上下文。
+
+## 為什麼多代理系統如此重要？
+
+AI 生產力領域已經相當擁擠。Zapier 連接 8,000+ 應用。Make 提供視覺化工作流自動化。Microsoft Copilot Studio 將代理深度嵌入企業生態系統。
+
+這些都是解決真實問題的真實產品。但它們大多數都是**包裝成 AI 的確定性自動化**。強大，但脆弱。
+
+多代理編排所實現的是**自适应、推理驅動的自動化**：
+
+- **並行 = 速度**：獨立任務同時運行。
+- **專業化**：研究代理不會帶著部署流水線上下文。每個代理專注於自己的領域。
+- **韌性**：如果一個代理崩潰，其他代理繼續工作。
+- **上下文解放**：不再將所有內容塞進一個上下文窗口，每個代理專注於相關上下文。
+
+## 三層架構
+
+### 第一層：對話層
+
+這層是人類看到和交流的對象。自然語言輸入，狀態更新、摘要和完成的工作輸出。對話層從不直接執行任務，僅進行協調。這就是**CEO 規則**：主會話是協調者，而非工作者。
+
+### 第二層：事件 / 狀態層
+
+所有重要的事情都會記錄到共享事件存儲。包括 progress、blocker、decision、pivot 等。
+
+事件層是系統的記憶。任何代理都可以查詢，了解發生了什麼、什麼被阻塞、為什麼做了某個決定。
+
+### 第三層：執行層
+
+這層是實際工作發生的地方。子代理按項目或任務生成，並行運行，通過狀態層協調。結果寫回事件層。
+
+## 真正有效的核心模式
+
+### PM 委託模式（CEO 規則）
+
+主會話協調。子代理執行。如果主會話嘗試自己做工作，就會成為瓶頸。一旦項目被分配，主會話生成 PM 子代理然後退後。
+
+PM 代理擁有 STATE.yaml。它們生成工作者、跟蹤進度、發出事件。主會話只在需要人類輸入的決策或阻塞時干預。
+
+### 事件驅動協調
+
+代理不會相互輪詢。它們通過事件日誌溝通。當工作者完成任務時，它發出 progress 事件。PM 代理在下一個查詢週期揀起並更新狀態。
+
+這意味著系統**默認異步**。任何代理死亡並重啟都不會丟失工作。事件日誌是事實來源。
+
+### 兩文件規則
+
+防止競爭條件的秘密：
+
+- **AUTONOMOUS.md** — token-light 目標和待辦。只有主會話觸摸這個。
+- **memory/tasks-log.md** — 僅追加的已完成任務日誌。子代理只在底部添加新行。
+
+僅追加日誌有零合併衝突。代理要么成功追加，要么失敗——沒有隱性數據丟失。
+
+## 經驗教訓
+
+**從一個代理開始，而非五個。** 從 1 個 PM + 1 個工作者開始。在擴展之前了解協調開銷。
+
+**記錄所有事件，即使是無關緊要的事情。** 我最初跳過記錄小任務。然後我需要重建三週前為什麼做某個技術棧決定。現在我記錄所有事情的進度事件。
+
+**明確定義阻塞升級。** 早期代理會卡在循環中——反覆重試相同失敗的動作。現在阻塞自動在兩次重試後升級。
+
+「AI 聊天機械人」和「自主執行引擎」之間的差距就在於此：從「AI 回答問題」到「AI 完成項目」。多代理編排實現了這個轉變——不是科幻，而是日常工作流程。
+
+準備好建立您自己的執行引擎？[聯繫我們的團隊](/#contact) 了解我們如何幫您設置適合您業務的 AI 驅動自動化系統。`,
+    category: 'AI',
+    coverImage: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&q=80',
+    author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
+    readTime: 8,
     published: true,
     sourceName: 'Editorial',
   },
@@ -185,14 +488,14 @@ async function main() {
     console.log(`Seeded: ${post.title}`)
   }
 
-  console.log('Done!')
+  console.log(`\nDone! Seeded ${posts.length} posts with bilingual content.`)
 }
 
 main()
   .catch((e) => {
-    console.error(e)
-    process.exit(1)
-  })
+  console.error(e)
+  process.exit(1)
+})
   .finally(async () => {
-    await prisma.$disconnect()
-  })
+  await prisma.$disconnect()
+})

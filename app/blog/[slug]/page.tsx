@@ -561,20 +561,46 @@ PM 代理擁有 STATE.yaml。它們生成工作者、跟蹤進度、發出事件
   },
 }
 
+/**
+ * Merge a DB post with the static fallback so the rendered post ALWAYS has
+ * every bilingual field populated. If the DB is missing a field, the static
+ * version fills in. If the DB is missing entirely, we use the static one.
+ */
+function mergePost(dbPost: any, staticPost: PostData | null): PostData | null {
+  if (!staticPost) return dbPost ?? null
+  if (!dbPost) return staticPost
+  // DB takes priority, but fall back to static for any missing/empty field
+  return {
+    ...staticPost,
+    ...dbPost,
+    title: dbPost.title || staticPost.title,
+    titleZh: dbPost.titleZh || staticPost.titleZh,
+    excerpt: dbPost.excerpt || staticPost.excerpt,
+    excerptZh: dbPost.excerptZh || staticPost.excerptZh,
+    content: dbPost.content || staticPost.content,
+    contentZh: dbPost.contentZh || staticPost.contentZh,
+    author: dbPost.author || staticPost.author,
+    authorZh: dbPost.authorZh || staticPost.authorZh,
+    coverImage: dbPost.coverImage || staticPost.coverImage,
+    sourceUrl: dbPost.sourceUrl ?? staticPost.sourceUrl,
+    sourceName: dbPost.sourceName ?? staticPost.sourceName,
+  } as PostData
+}
+
 export default async function BlogPostPage({
   params,
 }: {
   params: { slug: string }
 }) {
-  let post: PostData | null = STATIC_POSTS[params.slug] ?? null
+  const staticPost = STATIC_POSTS[params.slug] ?? null
+  let post: PostData | null = staticPost
 
   try {
     const dbPost = await prisma.post.findUnique({ where: { slug: params.slug } })
-    if (dbPost) {
-      post = dbPost as unknown as PostData
-    }
+    post = mergePost(dbPost, staticPost)
   } catch {
-    // DB not available, use static data
+    // DB not available — use static data
+    post = staticPost
   }
 
   if (!post) {

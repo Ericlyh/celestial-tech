@@ -44,10 +44,12 @@ export default function BilingualBlogContent({ post, relatedPosts }: BilingualBl
   const lang = locale === 'zh-Hant' ? 'zh' : 'en'
   const tone = CATEGORY_TONE[post.category] || CATEGORY_TONE.Cybersecurity
 
-  const title = lang === 'zh' ? post.titleZh : post.title
-  const excerpt = lang === 'zh' ? post.excerptZh : post.excerpt
-  const content = lang === 'zh' ? post.contentZh : post.content
-  const author = lang === 'zh' ? post.authorZh : post.author
+  // Resolve localized fields. If the requested locale's field is missing,
+  // fall back to the English version so the page never renders with a hole.
+  const title = (lang === 'zh' ? post.titleZh : post.title) || post.title
+  const excerpt = (lang === 'zh' ? post.excerptZh : post.excerpt) || post.excerpt
+  const content = (lang === 'zh' ? post.contentZh : post.content) || post.content || ''
+  const author = (lang === 'zh' ? post.authorZh : post.author) || post.author
 
   const formattedDate = new Date(post.publishedAt).toLocaleDateString(
     lang === 'zh' ? 'zh-Hant' : 'en-US',
@@ -56,6 +58,7 @@ export default function BilingualBlogContent({ post, relatedPosts }: BilingualBl
 
   // Word count + estimated reading time
   const wordCount = useMemo(() => {
+    if (!content) return 0
     const stripped = content.replace(/```[\s\S]*?```/g, '').replace(/[#*`_\->\[\]\(\)]/g, '')
     const words = stripped.split(/\s+/).filter(Boolean).length
     const cjkChars = (stripped.match(/[一-鿿]/g) || []).length
