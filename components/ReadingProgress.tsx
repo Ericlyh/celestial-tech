@@ -11,18 +11,23 @@ export default function ReadingProgress() {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
+    let frame = 0
     const onScroll = () => {
-      const article = document.getElementById('article-body')
-      if (!article) {
-        setProgress(0)
-        return
-      }
-      const rect = article.getBoundingClientRect()
-      const top = window.scrollY + rect.top
-      const total = article.offsetHeight - window.innerHeight
-      const scrolled = window.scrollY - top
-      const pct = Math.max(0, Math.min(1, scrolled / Math.max(total, 1)))
-      setProgress(pct)
+      if (frame) return
+      frame = requestAnimationFrame(() => {
+        frame = 0
+        const article = document.getElementById('article-body')
+        if (!article) {
+          setProgress(0)
+          return
+        }
+        const rect = article.getBoundingClientRect()
+        const top = window.scrollY + rect.top
+        const total = article.offsetHeight - window.innerHeight
+        const scrolled = window.scrollY - top
+        const pct = Math.max(0, Math.min(1, scrolled / Math.max(total, 1)))
+        setProgress(pct)
+      })
     }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -30,6 +35,7 @@ export default function ReadingProgress() {
     return () => {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
+      if (frame) cancelAnimationFrame(frame)
     }
   }, [])
 

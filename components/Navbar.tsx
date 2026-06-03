@@ -23,9 +23,26 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20)
+    // Throttled with rAF — only check once per animation frame, and only
+    // setState if the boolean actually changes. Without this, the navbar
+    // re-renders on every scroll event (~hundreds per second on a trackpad).
+    let frame = 0
+    const handleScroll = () => {
+      if (frame) return
+      frame = requestAnimationFrame(() => {
+        frame = 0
+        setScrolled((prev) => {
+          const next = window.scrollY > 20
+          return next === prev ? prev : next
+        })
+      })
+    }
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    handleScroll()
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (frame) cancelAnimationFrame(frame)
+    }
   }, [])
 
   const handleNavClick = (href: string) => {

@@ -11,10 +11,24 @@ export default function ScrollToTop() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > window.innerHeight)
+    // rAF-throttled so the button doesn't re-render on every scroll event
+    let frame = 0
+    const onScroll = () => {
+      if (frame) return
+      frame = requestAnimationFrame(() => {
+        frame = 0
+        setVisible((prev) => {
+          const next = window.scrollY > window.innerHeight
+          return next === prev ? prev : next
+        })
+      })
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (frame) cancelAnimationFrame(frame)
+    }
   }, [])
 
   return (

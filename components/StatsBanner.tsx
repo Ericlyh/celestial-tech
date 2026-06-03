@@ -13,15 +13,16 @@ const stats = [
 ]
 
 export default function StatsBanner() {
-  const { t } = useTranslation()
+  const { locale } = useTranslation()
+  const lang = locale === 'zh-Hant' ? 'zh' : 'en'
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
     <section className="relative py-20 overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-cyber-cyan/5 via-cyber-purple/5 to-cyber-cyan/5 pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#00F0FF08_0%,_transparent_60%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-stellar-cyan/5 via-cosmic-violet/5 to-stellar-cyan/5 pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(94,234,212,0.03)_0%,_transparent_60%)] pointer-events-none" />
 
       <div ref={ref} className="relative max-w-7xl mx-auto px-6">
         <motion.div
@@ -39,20 +40,19 @@ export default function StatsBanner() {
               className="text-center group"
             >
               {/* Number */}
-              <div className="text-4xl lg:text-5xl font-bold tracking-tight mb-2 bg-gradient-to-r from-cyber-cyan to-cyber-purple bg-clip-text text-transparent">
+              <div className="text-4xl lg:text-5xl font-bold tracking-tight mb-2 bg-gradient-to-r from-stellar-cyan to-cosmic-violet bg-clip-text text-transparent">
                 <CounterValue target={stat.target} suffix={stat.suffix} prefix={stat.prefix} duration={2} />
               </div>
-              {/* Label */}
-              <div className="text-xs lg:text-sm text-white/40 tracking-widest uppercase">
-                <span className="hidden lg:inline">{stat.label}</span>
-                <span className="lg:hidden">{stat.labelZh}</span>
+              {/* Label — locale-driven (NOT viewport-driven) so it matches the user's language preference */}
+              <div className="text-xs lg:text-sm text-white/50 tracking-widest uppercase font-mono">
+                {lang === 'zh' ? stat.labelZh : stat.label}
               </div>
               {/* Divider line */}
               <motion.div
                 initial={{ scaleX: 0 }}
                 animate={isInView ? { scaleX: 1 } : {}}
                 transition={{ delay: i * 0.12 + 0.3, duration: 0.6 }}
-                className="mt-3 mx-auto h-px bg-gradient-to-r from-transparent via-cyber-cyan/40 to-transparent origin-center"
+                className="mt-3 mx-auto h-px bg-gradient-to-r from-transparent via-stellar-cyan/40 to-transparent origin-center"
               />
             </motion.div>
           ))}

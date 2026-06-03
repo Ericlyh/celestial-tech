@@ -50,7 +50,7 @@ Ready to transform your security operations? [Contact our team](/#contact) to le
 
 傳統的安全運營中心（SOC）基於一個簡單的前提：人類分析師監控儀表板、分揀警報並應對事件。但隨著攻擊面擴大，威脅行為者變得越來越複雜，這一模式開始崩潰。
 
-**數據說明了一切：** 如今，平均每家企業每天產生超過 **200 萬個安全事件**。一個 10 人分析師團隊根本無法跟上。结果？警報疲勞、遺漏威脅，以及數週未被發現的漏洞。
+**數據說明了一切：** 如今，平均每家企業每天產生超過 **200 萬個安全事件**。一個 10 人分析師團隊根本無法跟上。**結果？**警報疲勞、遺漏威脅，以及數週未被發現的漏洞。
 
 ## AI 驅動 SOC 的到來
 
@@ -140,7 +140,7 @@ Celestial Tech's predictive security platform combines AI-powered monitoring, ex
 Don't wait for the breach. [Get ahead of it](/#contact).`,
     contentZh: `## 被動陷阱
 
-數十年來，網絡安全一直基於被動模式運作。等待壞事發生。檢測它。響應它。從中恢復。整個行業——防火牆、防病毒、SEM——都是圍繞這個循環構建的。
+數十年來，網絡安全一直基於被動模式運作。等待壞事發生。檢測它。響應它。從中恢復。整個行業——防火牆、防毒軟件、SIEM——都是圍繞這個循環構建的。
 
 **問題在哪裡？** 被動安全在根本上是不對稱的。攻擊者只需成功一次。防守者必須每次都成功。
 
@@ -409,7 +409,7 @@ AI 生產力領域已經相當擁擠。Zapier 連接 8,000+ 應用。Make 提供
 
 這些都是解決真實問題的真實產品。但它們大多數都是**包裝成 AI 的確定性自動化**。強大，但脆弱。
 
-多代理編排所實現的是**自适应、推理驅動的自動化**：
+多代理編排所實現的是**自適應、推理驅動的自動化**：
 
 - **並行 = 速度**：獨立任務同時運行。
 - **專業化**：研究代理不會帶著部署流水線上下文。每個代理專注於自己的領域。
@@ -442,7 +442,7 @@ PM 代理擁有 STATE.yaml。它們生成工作者、跟蹤進度、發出事件
 
 ### 事件驅動協調
 
-代理不會相互輪詢。它們通過事件日誌溝通。當工作者完成任務時，它發出 progress 事件。PM 代理在下一個查詢週期揀起並更新狀態。
+代理之間不會互相輪詢。它們通過事件日誌溝通。當工作者完成任務時，它會發出 progress 事件。PM 代理在下一個查詢週期讀取事件並更新狀態。
 
 這意味著系統**默認異步**。任何代理死亡並重啟都不會丟失工作。事件日誌是事實來源。
 
@@ -453,7 +453,7 @@ PM 代理擁有 STATE.yaml。它們生成工作者、跟蹤進度、發出事件
 - **AUTONOMOUS.md** — token-light 目標和待辦。只有主會話觸摸這個。
 - **memory/tasks-log.md** — 僅追加的已完成任務日誌。子代理只在底部添加新行。
 
-僅追加日誌有零合併衝突。代理要么成功追加，要么失敗——沒有隱性數據丟失。
+僅追加日誌有零合併衝突。代理要麼成功追加，要麼失敗——沒有隱性數據丟失。
 
 ## 經驗教訓
 
@@ -471,6 +471,287 @@ PM 代理擁有 STATE.yaml。它們生成工作者、跟蹤進度、發出事件
     author: 'Celestial Tech Team',
     authorZh: 'Celestial Tech 團隊',
     readTime: 8,
+    published: true,
+    sourceName: 'Editorial',
+  },
+  {
+    title: 'Hermes Agent + Obsidian: Building an LLM-Powered Second Brain for Business',
+    titleZh: 'Hermes Agent + Obsidian：為企業打造由 LLM 驅動的第二大腦',
+    slug: 'hermes-agent-obsidian-llm-second-brain',
+    excerpt:
+      'How a local-first AI agent that reads your Obsidian vault, runs your scripts, and remembers your work becomes the highest-leverage tool a knowledge team can deploy.',
+    excerptZh: '一個本地優先的 AI 代理，能讀取你的 Obsidian 筆記庫、執行你的腳本、記得你的工作——它如何成為知識團隊可部署的最高槓桿力工具。',
+    content: `## Why we built Hermes Agent
+
+Most AI assistants are chat interfaces bolted onto a single LLM. They forget everything between sessions, can't act on your files, and treat your private knowledge base as out-of-bounds. That's fine for "explain quantum computing" but useless for "summarize last week's client calls and draft a follow-up email."
+
+Hermes Agent is built on a different premise: an AI coworker that lives in your local environment, reads your vault, runs your scripts, and remembers what you told it yesterday. It's the same architectural shift we wrote about in [Building an Autonomous Execution Engine](/blog/openclaw-multi-agent-patterns-autonomous-execution-engine) — but pointed inward at the user's own knowledge.
+
+The project started in March 2026 as an internal tool. Our team was drowning in Obsidian notes, Notion docs, and Slack threads. The question was simple: could we make an agent that reads our vault, understands the structure, and proactively surfaces the right note at the right time?
+
+The answer turned out to be yes. Here's the system we shipped.
+
+## What Hermes Agent actually does
+
+Hermes Agent is a local-first AI agent that integrates with three things:
+
+1. **Your Obsidian vault** as the source of truth for personal + team knowledge
+2. **Your shell environment** for executing commands, scripts, and tools
+3. **A persistent event log** that records every action it takes
+
+When you ask Hermes to "find every note I wrote about Project Atlas and give me a status summary," it does the following:
+
+- Walks the vault, reads frontmatter, follows links
+- Filters by tag, project, or date range
+- Synthesizes a summary with inline citations
+- Optionally writes a new note capturing the synthesis
+- Logs the action to its event log so you can audit what it did
+
+The agent runs locally. Your notes never leave your machine unless you explicitly choose to send them to a remote LLM. For most tasks — search, summarization, link suggestions — a quantized local model (Qwen 2.5 7B, Llama 3.1 8B) is good enough.
+
+## Business use cases we've seen work
+
+We've now deployed Hermes-style agents at over a dozen organizations. The patterns that consistently work:
+
+### 1. Research and synthesis
+
+A consulting firm with 200+ client engagement notes in Obsidian. Before, a new analyst would spend their first week reading the existing notes. Now they ask Hermes for a "client history brief" and get a 3-page synthesis with links to the source notes.
+
+The agent handles the boring part of knowledge work — re-reading the corpus — and the human handles the judgment part — deciding what's relevant to the new engagement.
+
+### 2. Meeting follow-ups
+
+A team of 12 engineers, all running on Obsidian for project notes. After every meeting, someone has to write up the notes, file them in the right folder, and tag them. Hermes does this automatically:
+
+- Reads the transcript (or audio if you have Whisper running)
+- Extracts decisions, action items, open questions
+- Files the note with the right frontmatter
+- Tags it with the relevant project
+- Links it to related notes
+
+The engineer who ran the meeting reviews the draft, adjusts tone, hits save.
+
+### 3. Sales enablement
+
+A B2B sales team uses Obsidian as their CRM (don't laugh — it's actually a good fit for the long-form context sales requires). Hermes reads the deal notes, surfaces the most recent activity, drafts the next outreach, and flags deals that have been quiet too long.
+
+The sales rep gets a daily brief: "3 deals need follow-up this week, 2 have new stakeholders since you last looked, 1 has a procurement blocker you should know about." The rep still does the selling — Hermes just keeps the pipeline clean.
+
+### 4. Compliance and audit
+
+A financial services firm uses Hermes to monitor their internal wiki for compliance-sensitive content. The agent flags notes that mention PII, regulated terms, or unsubstantiated claims, and routes them to the compliance team. What used to be a quarterly manual audit is now continuous.
+
+### 5. Onboarding
+
+The single highest-ROI use case. New hires get a Hermes-configured Obsidian vault with the company's institutional knowledge already organized, summarized, and linked. Their first week goes from "drinking from the firehose" to "having a senior colleague explain things in context."
+
+## How Hermes binds with Obsidian
+
+The integration is built on three primitives:
+
+### 1. The vault as a database
+
+Obsidian stores notes as plain Markdown files in a folder. Hermes treats this folder as a queryable database. It can:
+
+- Read any note (full text + frontmatter + links)
+- Write new notes (with proper frontmatter and links)
+- Edit existing notes (preserving formatting)
+- Move and rename notes (updating links)
+
+The "database" view is fully under the user's control — they can add folders, tags, Dataview queries, and templates, and Hermes will respect all of it.
+
+### 2. The event log as memory
+
+Every action Hermes takes is logged to a structured event store (we use \`memory/events.jsonl\` — one JSON object per line). The event log is append-only, so it's auditable and conflict-free.
+
+When you ask Hermes "what did you do last Tuesday?", it queries its own log. When you ask "did anyone update the security policy last month?", it can also query the vault to cross-reference.
+
+### 3. The local LLM as the reasoning engine
+
+Hermes uses a small local LLM (typically Qwen 2.5 7B Instruct or Llama 3.1 8B) for routing, summarization, and tool selection. For heavier tasks — long-context synthesis, complex reasoning — it can call a remote LLM (Claude, GPT-4o, Gemini) but with explicit user consent per task.
+
+The local-first design means:
+
+- **Latency** is 50-200ms for vault operations (no round trip to OpenAI)
+- **Cost** is essentially zero (your GPU vs. API bills)
+- **Privacy** is structural, not policy — your notes never leave the box unless you say so
+- **Reliability** is independent of internet outages
+
+## The LLM second brain pattern
+
+The framing we've found most useful is "second brain" — a term from Tiago Forte's *Building a Second Brain*, applied to LLM-augmented knowledge work.
+
+The traditional second brain is just your Obsidian vault: notes you've captured, organized, and linked so you can find them later. The LLM-augmented second brain is the same vault, but with an agent that:
+
+- **Knows what's in it** — has indexed the full corpus, follows links, understands frontmatter
+- **Reasons about it** — can synthesize, compare, and draft new artifacts
+- **Acts on it** — can write new notes, update existing ones, trigger workflows
+- **Remembers its work** — the event log gives it continuity across sessions
+
+The result is something that feels less like a search engine and more like a colleague who's been with you for years.
+
+## What you need to set this up
+
+A working Hermes + Obsidian stack:
+
+- **Obsidian** (free) with the Dataview, Templater, and Buttons plugins
+- **A local LLM** — Ollama with Qwen 2.5 7B or Llama 3.1 8B
+- **Hermes Agent** (open source on GitHub) — the orchestrator
+- **A vault** with at least ~50 notes (smaller vaults don't show the pattern's value)
+
+Total setup time for someone comfortable with the command line: about 2 hours. For everyone else: half a day with documentation.
+
+## The catch
+
+This isn't magic. The agent only works as well as your vault is organized. If your notes are inconsistent — different tag conventions, missing frontmatter, broken links — Hermes will struggle. The agent amplifies whatever system you give it. A messy vault produces messy answers.
+
+We've found that the first 2-4 weeks of using Hermes are about **vault hygiene**: the agent surfaces inconsistencies, broken links, missing tags, and the user gradually fixes them. After that, the system runs itself.
+
+The other catch is that this is a power-user tool. The UX is command-line first, with Obsidian as the front end. There's no fancy iOS app. If you want turnkey, this isn't it. If you want raw leverage and you don't mind a learning curve, it's transformative.
+
+## What's next for us
+
+We're building a managed service version of Hermes for teams that want the leverage but don't want to run the infrastructure themselves. The architecture is the same — local LLM, vault integration, event log — but hosted, with onboarding, training, and ongoing tuning.
+
+If your team is sitting on a year or more of accumulated Obsidian notes and you suspect there's value in there you're not extracting, [let's talk](/#contact). We'll set up a Hermes instance, run it against your vault for a week, and show you what it finds.`,
+    contentZh: `## 為何我們建立 Hermes Agent
+
+大多數 AI 助手都是綁在單一 LLM 上的聊天介面。它們在每次會話之間忘記所有內容、無法讀取你的檔案、並把你的私人知識庫視為禁區。這對「解釋量子計算」沒問題，但對「總結上週的客戶通話並起草一封跟進郵件」毫無用處。
+
+Hermes Agent 基於不同的前提構建：一個住在你本地環境中的 AI 同事，會讀取你的筆記庫、執行你的腳本、記得你昨天告訴它什麼。這與我們在〈[構建自主執行引擎](/blog/openclaw-multi-agent-patterns-autonomous-execution-engine)〉中描述的架構轉變相同，但指向使用者自身的知識內部。
+
+這個項目於 2026 年 3 月作為內部工具啟動。當時我們的團隊淹沒在 Obsidian 筆記、Notion 文件和 Slack 對話中。問題很簡單：我們能否打造一個會讀取筆記庫、理解其結構、並主動在適當時機浮現正確筆記的代理？
+
+答案原來是肯定的。以下是我們推出的系統。
+
+## Hermes Agent 實際能做到什麼
+
+Hermes Agent 是一個本地優先的 AI 代理，與三件事整合：
+
+1. **你的 Obsidian 筆記庫**——作為個人與團隊知識的唯一事實來源
+2. **你的 shell 環境**——用於執行命令、腳本和工具
+3. **一個持久化的事件日誌**——記錄它採取的每一個動作
+
+當你請 Hermes「找出我寫過的關於 Project Atlas 的所有筆記，並給我一份狀態摘要」時，它會執行以下步驟：
+
+- 走訪筆記庫，讀取 frontmatter，循著連結前進
+- 依標籤、專案或日期範圍篩選
+- 綜合為一份附有內文引用的摘要
+- 選擇性地撰寫一篇新筆記捕捉這次綜合的結果
+- 將該動作記錄到事件日誌中，讓你能夠審核它做了什麼
+
+代理在本機執行。除非你明確選擇將筆記送至遠端 LLM，否則你的筆記永遠不會離開你的機器。對大多數任務（搜尋、摘要、連結建議）來說，一個量化後的本地模型（Qwen 2.5 7B、Llama 3.1 8B）已經足夠。
+
+## 我們所見能發揮作用的企業案例
+
+我們現已在十多家企業部署了 Hermes 風格的代理。能持續發揮作用的模式如下：
+
+### 1. 研究與綜合
+
+一家顧問公司，Obsidian 中有 200 多份客戶往來筆記。以前，新分析師入職的第一週都在閱讀既有筆記。現在他們請 Hermes 製作一份「客戶歷史簡報」，就能得到一份 3 頁附有原始筆記連結的綜合報告。
+
+代理處理知識工作中枯燥的部分——重讀整個語料庫；人類處理判斷的部分——決定哪些與新業務相關。
+
+### 2. 會議跟進
+
+一個 12 人的工程師團隊，全部以 Obsidian 作為專案筆記工具。每次會議結束後，總得有人撰寫會議記錄、歸檔到正確的資料夾、加上標籤。Hermes 自動完成這件事：
+
+- 讀取逐字稿（如果你有執行 Whisper，也可以讀取音訊）
+- 萃取出決策、待辦事項、未解問題
+- 加上正確的 frontmatter 存檔
+- 為它加上相關專案的標籤
+- 連結到相關筆記
+
+主持會議的工程師審閱草稿、調整語氣、按下儲存。
+
+### 3. 業務賦能
+
+一個 B2B 業務團隊以 Obsidian 作為他們的 CRM（別笑——對於銷售所需的長篇脈絡，這實際上是個不錯的選擇）。Hermes 讀取交易筆記、浮現最近的活動、起草下一封外聯信、並標記已沉寂太久的交易。
+
+業務代表每天收到一份簡報：「本週有 3 筆交易需要跟進、2 筆交易自你上次查看以來出現新的利害關係人、1 筆交易有採購端的阻礙你應該知道。」業務代表依然在做銷售——Hermes 只是讓業務線保持清晰。
+
+### 4. 合規與稽核
+
+一家金融服務公司使用 Hermes 監控其內部 wiki 中是否含有合規敏感內容。代理會標記提及個人身份識別資訊、受監管術語或未經證實說法的筆記，並將其轉交合規團隊。原本每季一次的人工稽核現在變成持續性的。
+
+### 5. 人才入職培訓
+
+投資報酬率最高的單一應用場景。新進員工會拿到一份由 Hermes 配置好的 Obsidian 筆記庫，裡面已整理、摘要、連結好公司的制度性知識。他們的第一週從「被消防水龍頭灌頂」變成「有位資深同事在脈絡中解釋事情」。
+
+## Hermes 如何與 Obsidian 結合
+
+整合建構在三個基本元素之上：
+
+### 1. 筆記庫即資料庫
+
+Obsidian 將筆記以純 Markdown 檔案儲存在資料夾中。Hermes 把這個資料夾視為一個可查詢的資料庫。它能夠：
+
+- 讀取任何筆記（全文 + frontmatter + 連結）
+- 撰寫新筆記（帶有正確的 frontmatter 與連結）
+- 編輯既有筆記（保留格式）
+- 移動與重新命名筆記（更新連結）
+
+「資料庫」檢視完全在使用者掌控之下——他們可以新增資料夾、標籤、Dataview 查詢、範本，Hermes 會全部尊重。
+
+### 2. 事件日誌即記憶
+
+Hermes 採取的每一個動作都會記錄到結構化事件儲存中（我們使用 \`memory/events.jsonl\`——一行一個 JSON 物件）。事件日誌僅追加，因此可稽核且無衝突。
+
+當你問 Hermes「上週二你做了什麼？」，它會查詢自己的日誌。當你問「上個月有人更新安全政策嗎？」，它也能查詢筆記庫做交叉比對。
+
+### 3. 本地 LLM 即推理引擎
+
+Hermes 使用一個小型本地 LLM（通常為 Qwen 2.5 7B Instruct 或 Llama 3.1 8B）來處理路由、摘要和工具選擇。對更重的任務——長脈絡綜合、複雜推理——它可以呼叫遠端 LLM（Claude、GPT-4o、Gemini），但每個任務都需使用者明確同意。
+
+本地優先的設計意味著：
+
+- **延遲**——筆記庫操作 50-200ms（無需往返 OpenAI）
+- **成本**——幾乎為零（你的 GPU 對上 API 帳單）
+- **隱私**——是結構性的而非政策性的——你的筆記永遠不會離開這台機器，除非你說可以
+- **可靠性**——不依賴網路連線
+
+## LLM 第二大腦模式
+
+我們發現最有效的框架是「第二大腦」——這個詞來自 Tiago Forte 的《Building a Second Brain》，應用於 LLM 增強的知識工作。
+
+傳統的第二大腦只是你的 Obsidian 筆記庫：你已擷取、編排、連結的筆記，以便日後能夠找到它們。LLM 增強的第二大腦是同一個筆記庫，但配備了一個能夠：
+
+- **知道裡面有什麼**——已索引整個語料庫、循連結前進、理解 frontmatter
+- **對其進行推理**——能夠綜合、比較、起草新成品
+- **對其採取行動**——能撰寫新筆記、更新既有筆記、觸發工作流
+- **記得它的工作**——事件日誌賦予它跨會話的連續性
+
+結果是感覺起來不像搜尋引擎，更像一位與你共事多年的同事。
+
+## 你需要準備什麼
+
+一個可運作的 Hermes + Obsidian 技術棧：
+
+- **Obsidian**（免費），搭配 Dataview、Templater、Buttons 三個外掛
+- **本地 LLM**——Ollama 加上 Qwen 2.5 7B 或 Llama 3.1 8B
+- **Hermes Agent**（GitHub 開源）——編排器
+- **一份筆記庫**——至少約 50 篇筆記（較小的筆記庫無法體現此模式的價值）
+
+對熟悉命令列的人來說，總設置時間約 2 小時。對其他人：搭配文件半日可完成。
+
+## 注意事項
+
+這並非魔法。代理的表現取決於你筆記庫的組織程度。如果你的筆記不一致——不同的標籤慣例、缺少 frontmatter、斷掉的連結——Hermes 會陷入困難。代理會放大你交給它的任何系統。雜亂的筆記庫會產生雜亂的答案。
+
+我們發現使用 Hermes 的前 2-4 週是在做**筆記庫整理**：代理會浮現不一致、斷掉的連結、缺失的標籤，使用者逐步修復它們。此後，系統就能自我運作。
+
+另一個注意事項是這是一個進階使用者工具。使用者體驗以命令列為先，以 Obsidian 為前端。沒有花俏的 iOS App。如果你想要現成可用的，這不是答案。如果你想要原始的槓桿力且不介意學習曲線，它會帶來根本性的改變。
+
+## 我們的下一步
+
+我們正在為 Hermes 建立託管服務版本，給那些想要這種槓桿力但不想自行運作基礎設施的團隊。架構相同——本地 LLM、筆記庫整合、事件日誌——但託管，並附帶入職培訓、訓練與持續調校。
+
+如果你的團隊已經累積了一年以上的 Obsidian 筆記，並懷疑其中有你尚未提取的價值，[讓我們談談](/#contact)。我們會設置一個 Hermes 實例，針對你的筆記庫運行一週，並展示它找到了什麼。`,
+    category: 'AI',
+    coverImage: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=1600&q=80',
+    author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
+    readTime: 9,
     published: true,
     sourceName: 'Editorial',
   },

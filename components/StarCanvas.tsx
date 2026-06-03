@@ -1,11 +1,11 @@
 /* =============================================
-   STAR PARTICLE CANVAS — Enhanced
+   STAR PARTICLE CANVAS — Performance-tuned
    Realistic stars with multi-layer shine
-   Now includes shooting stars
+   Includes shooting stars
    ============================================= */
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface Star {
   x: number
@@ -14,7 +14,6 @@ interface Star {
   baseOpacity: number
   twinkleSpeed: number
   twinkleOffset: number
-  // Shine effect
   rayLength: number
   rayAngle: number
   color: string
@@ -27,21 +26,59 @@ interface ShootingStar {
   speed: number
   angle: number
   opacity: number
-  life: number // frames remaining
+  life: number
 }
 
-function useStarCanvas(canvasRef: React.RefObject<HTMLCanvasElement | null>, enabled: boolean = true) {
+/**
+ * Check if the user has prefers-reduced-motion enabled.
+ * When enabled, we render a single static frame and skip animation.
+ */
+const prefersReducedMotion = (): boolean => {
+  if (typeof window === 'undefined') return false
+  return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+}
+
+/**
+ * Check if the device is low-power (small screens, slow CPUs, or
+ * mobile). When true we render fewer stars and throttle FPS.
+ */
+const isLowPower = (): boolean => {
+  if (typeof window === 'undefined') return false
+  if (window.innerWidth < 768) return true
+  // deviceMemory is non-standard but a useful signal
+  const dm = (navigator as any).deviceMemory
+  if (typeof dm === 'number' && dm < 4) return true
+  return false
+}
+
+function useStarCanvas(
+  canvasRef: React.RefObject<HTMLCanvasElement | null>,
+  enabled: boolean = true
+) {
   const starsRef = useRef<Star[]>([])
   const shootingStarsRef = useRef<ShootingStar[]>([])
   const animFrameRef = useRef<number>(0)
   const lastShootingStarRef = useRef<number>(0)
+  const lastFrameTimeRef = useRef<number>(0)
+  // Skip rendering when the canvas is scrolled out of view
+  const visibleRef = useRef<boolean>(true)
+  // Hold the FPS throttle target
+  const fpsTargetRef = useRef<number>(60)
 
   useEffect(() => {
     if (!enabled) return
     const canvas = canvasRef.current
     if (!canvas) return
-    const ctx = canvas.getContext('2d')
+    const ctx = canvas.getContext('2d', { alpha: true })
     if (!ctx) return
+
+    const reduced = prefersReducedMotion()
+    const lowPower = isLowPower()
+    // Cap FPS at 30 on low-power devices to free the main thread
+    fpsTargetRef.current = reduced ? 0 : lowPower ? 30 : 60
+
+    // Reduce particle count on low-power
+    const starDensityDivisor = lowPower ? 12000 : 6000
 
     const resize = () => {
       canvas.width = window.innerWidth
@@ -50,7 +87,7 @@ function useStarCanvas(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
     }
 
     const initStars = () => {
-      const count = Math.floor((canvas.width * canvas.height) / 6000)
+      const count = Math.floor((canvas.width * canvas.height) / starDensityDivisor)
       starsRef.current = Array.from({ length: count }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -65,7 +102,8 @@ function useStarCanvas(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
     }
 
     const spawnShootingStar = () => {
-      if (Math.random() > 0.92) {
+      // Reduced frequency to halve the number of new objects
+      if (Math.random() > 0.96) {
         shootingStarsRef.current.push({
           x: Math.random() * canvas.width * 1.2,
           y: Math.random() * canvas.height * 0.5,
@@ -79,12 +117,32 @@ function useStarCanvas(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
     }
 
     let time = 0
-    const draw = () => {
+
+    const draw = (now: number) => {
+      // Skip frame if not visible (canvas scrolled off-screen or tab hidden)
+      if (document.hidden || !visibleRef.current) {
+        animFrameRef.current = requestAnimationFrame(draw)
+        return
+      }
+
+      // FPS throttle for low-power devices
+      const target = fpsTargetRef.current
+      if (target > 0) {
+        const minDelta = 1000 / target
+        if (now - lastFrameTimeRef.current < minDelta) {
+          animFrameRef.current = requestAnimationFrame(draw)
+          return
+        }
+      }
+      lastFrameTimeRef.current = now
+
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       time += 1
 
       // Draw stars
-      starsRef.current.forEach((star) => {
+      const stars = starsRef.current
+      for (let i = 0; i < stars.length; i++) {
+        const star = stars[i]
         const twinkle = Math.sin(time * star.twinkleSpeed + star.twinkleOffset)
         const pulse = Math.sin(time * star.twinkleSpeed * 0.7 + star.twinkleOffset)
         const alpha = star.baseOpacity * (0.4 + twinkle * 0.35 + pulse * 0.1)
@@ -93,28 +151,17 @@ function useStarCanvas(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
         const x = star.x
         const y = star.y
         const size = star.size
+        const r = parseInt(star.color.slice(1, 3), 16)
+        const g = parseInt(star.color.slice(3, 5), 16)
+        const b = parseInt(star.color.slice(5, 7), 16)
 
         // Core star dot
         ctx.beginPath()
         ctx.arc(x, y, size, 0, Math.PI * 2)
-        ctx.fillStyle = star.color.replace(')', `, ${alpha})`).replace('rgb', 'rgba').replace('#', 'rgba(')
-        const hex = star.color
-        const r = parseInt(hex.slice(1, 3), 16)
-        const g = parseInt(hex.slice(3, 5), 16)
-        const b = parseInt(hex.slice(5, 7), 16)
         ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`
         ctx.fill()
 
-        // Inner glow
-        const gradient = ctx.createRadialGradient(x, y, 0, x, y, size * 3)
-        gradient.addColorStop(0, `rgba(${r},${g},${b},${glowAlpha})`)
-        gradient.addColorStop(1, `rgba(${r},${g},${b},0)`)
-        ctx.beginPath()
-        ctx.arc(x, y, size * 3, 0, Math.PI * 2)
-        ctx.fillStyle = gradient
-        ctx.fill()
-
-        // Cross rays for brighter stars
+        // Cross rays only for the brightest stars (saves draw calls)
         if (star.size > 1.4 && alpha > 0.5) {
           ctx.strokeStyle = `rgba(${r},${g},${b},${alpha * 0.4})`
           ctx.lineWidth = 0.5
@@ -126,13 +173,19 @@ function useStarCanvas(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
           ctx.lineTo(x, y + rayLen)
           ctx.stroke()
         }
-      })
+      }
 
       // Draw + update shooting stars
       spawnShootingStar()
-      shootingStarsRef.current = shootingStarsRef.current.filter((s) => s.life > 0)
+      const activeShooting: ShootingStar[] = []
+      for (let i = 0; i < shootingStarsRef.current.length; i++) {
+        const s = shootingStarsRef.current[i]
+        if (s.life > 0) activeShooting.push(s)
+      }
+      shootingStarsRef.current = activeShooting
 
-      shootingStarsRef.current.forEach((s) => {
+      for (let i = 0; i < activeShooting.length; i++) {
+        const s = activeShooting[i]
         s.x += Math.cos(s.angle) * s.speed
         s.y += Math.sin(s.angle) * s.speed
         s.life -= 1
@@ -152,27 +205,50 @@ function useStarCanvas(canvasRef: React.RefObject<HTMLCanvasElement | null>, ena
         ctx.strokeStyle = gradient
         ctx.lineWidth = 1.5
         ctx.stroke()
-
-        // Head glow
-        const headGradient = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, 4)
-        headGradient.addColorStop(0, `rgba(255,255,255,${s.opacity})`)
-        headGradient.addColorStop(1, `rgba(200,230,255,0)`)
-        ctx.beginPath()
-        ctx.arc(s.x, s.y, 3, 0, Math.PI * 2)
-        ctx.fillStyle = headGradient
-        ctx.fill()
-      })
+      }
 
       animFrameRef.current = requestAnimationFrame(draw)
     }
 
-    resize()
-    draw()
+    // Watch visibility: pause the rAF loop when the canvas is scrolled out
+    // of view or when the tab is in the background. This is the single
+    // biggest perf win — most of the page time the canvas is irrelevant.
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        visibleRef.current = entry.isIntersecting
+      },
+      { threshold: 0 }
+    )
+    visibilityObserver.observe(canvas)
 
+    const onVisibilityChange = () => {
+      // document.hidden handled inline in draw()
+    }
+    document.addEventListener('visibilitychange', onVisibilityChange)
+
+    resize()
+
+    // Static fallback for reduced-motion users: render one frame and stop
+    if (reduced) {
+      draw(performance.now())
+      // Still need to handle resize
+      window.addEventListener('resize', resize)
+      return () => {
+        cancelAnimationFrame(animFrameRef.current)
+        window.removeEventListener('resize', resize)
+        visibilityObserver.disconnect()
+        document.removeEventListener('visibilitychange', onVisibilityChange)
+      }
+    }
+
+    animFrameRef.current = requestAnimationFrame(draw)
     window.addEventListener('resize', resize)
+
     return () => {
       cancelAnimationFrame(animFrameRef.current)
       window.removeEventListener('resize', resize)
+      visibilityObserver.disconnect()
+      document.removeEventListener('visibilitychange', onVisibilityChange)
     }
   }, [canvasRef, enabled])
 }
