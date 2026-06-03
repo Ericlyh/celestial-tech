@@ -22,22 +22,39 @@ export async function generateStaticParams() {
   }
 }
 
-// Dynamic metadata
+// Dynamic metadata — never throws, falls back to static data on any DB error
 export async function generateMetadata({
   params,
 }: {
   params: { slug: string }
 }): Promise<Metadata> {
-  const post = await prisma.post.findUnique({ where: { slug: params.slug } })
-  if (!post) return { title: 'Post Not Found' }
+  const staticPost = STATIC_POSTS[params.slug]
+  try {
+    const dbPost = await prisma.post.findUnique({ where: { slug: params.slug } })
+    if (dbPost) {
+      return {
+        title: `${dbPost.title} | Celestial Tech`,
+        description: dbPost.excerpt,
+        openGraph: {
+          title: dbPost.title,
+          description: dbPost.excerpt,
+          type: 'article',
+          images: dbPost.coverImage ? [dbPost.coverImage] : [],
+        },
+      }
+    }
+  } catch {
+    // DB unavailable — fall through to static
+  }
+  if (!staticPost) return { title: 'Post Not Found | Celestial Tech' }
   return {
-    title: `${post.title} | Celestial Tech`,
-    description: post.excerpt,
+    title: `${staticPost.title} | Celestial Tech`,
+    description: staticPost.excerpt,
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
+      title: staticPost.title,
+      description: staticPost.excerpt,
       type: 'article',
-      images: post.coverImage ? [post.coverImage] : [],
+      images: staticPost.coverImage ? [staticPost.coverImage] : [],
     },
   }
 }
