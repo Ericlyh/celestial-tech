@@ -3,24 +3,39 @@
 @tailwind utilities;
 
 /* =============================================
-   CSS VARIABLES — CELESTIAL TECH PALETTE
+   CSS VARIABLES — STELLAR CARTOGRAPHY PALETTE
+   Refined from original cyber-cyan/purple to softer, more distinctive tones
    ============================================= */
 :root {
-  --color-deep-space: #0A0A0A;
-  --color-cyber-cyan: #00F0FF;
-  --color-cyber-purple: #8B5CF6;
+  --color-deep-space: #070A14;
+  --color-space-mid: #0E1322;
+  --color-space-soft: #161C30;
+  --color-stellar-cyan: #5EEAD4;
+  --color-stellar-cyan-soft: #A7F3D0;
+  --color-cosmic-violet: #A78BFA;
+  --color-cosmic-violet-soft: #C4B5FD;
+  --color-nova-amber: #F4B860;
   --color-pure-white: #FFFFFF;
 
-  /* Derived / semantic */
-  --color-glow-cyan: rgba(0, 240, 255, 0.4);
-  --color-glow-purple: rgba(139, 92, 246, 0.4);
-  --color-surface: rgba(255, 255, 255, 0.03);
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-cyan: rgba(0, 240, 255, 0.2);
-  --color-border-purple: rgba(139, 92, 246, 0.2);
+  /* Legacy aliases for backward compatibility */
+  --color-cyber-cyan: #5EEAD4;
+  --color-cyber-purple: #A78BFA;
 
-  /* Typography */
-  --font-family: 'Noto Sans SC', var(--font-noto-sc), system-ui, -apple-system, sans-serif;
+  /* Derived / semantic */
+  --color-glow-cyan: rgba(94, 234, 212, 0.4);
+  --color-glow-purple: rgba(167, 139, 250, 0.4);
+  --color-glow-amber: rgba(244, 184, 96, 0.4);
+  --color-surface: rgba(255, 255, 255, 0.03);
+  --color-surface-2: rgba(255, 255, 255, 0.05);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-cyan: rgba(94, 234, 212, 0.2);
+  --color-border-purple: rgba(167, 139, 250, 0.2);
+
+  /* Typography — Manrope body, Fraunces display, JetBrains Mono data */
+  --font-display: var(--font-fraunces), Georgia, 'Times New Roman', serif;
+  --font-family: var(--font-manrope), system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: var(--font-mono), 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+  --font-cjk: var(--font-noto-tc), 'PingFang TC', 'Microsoft JhengHei', system-ui, sans-serif;
 }
 
 /* =============================================
@@ -41,9 +56,25 @@ body {
   font-family: var(--font-family);
   background-color: var(--color-deep-space);
   color: var(--color-pure-white);
-  line-height: 1.6;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'ss01', 'cv11';
+}
+
+/* Display headings — Fraunces serif */
+h1, h2, h3, h4, h5, h6,
+.font-display {
+  font-family: var(--font-display);
+  font-feature-settings: 'ss01', 'ss02';
+  letter-spacing: -0.01em;
+}
+
+/* CJK support — fall back to TC font when content is Chinese */
+:lang(zh-Hant) body,
+:lang(zh-Hant) h1, :lang(zh-Hant) h2, :lang(zh-Hant) h3, :lang(zh-Hant) h4 {
+  font-family: var(--font-cjk), var(--font-display);
 }
 
 /* =============================================
@@ -407,4 +438,327 @@ body {
     color: var(--color-cyber-purple);
     border: 1px solid rgba(139, 92, 246, 0.2);
   }
+}
+
+/* =============================================
+   MARKDOWN CONTENT — STELLAR TYPOGRAPHY
+   Editorial-grade prose for long-form articles
+   ============================================= */
+.markdown-content {
+  font-family: var(--font-family);
+  color: var(--color-pure-white);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  font-feature-settings: 'ss01', 'kern';
+}
+
+.markdown-content > * + * {
+  margin-top: 1.25rem;
+}
+
+.markdown-content .md-h2 {
+  scroll-margin-top: 6rem;
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.75rem;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--color-pure-white);
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(94, 234, 212, 0.15);
+}
+
+.markdown-content .md-h2 .md-heading-text {
+  background: linear-gradient(180deg, #FFFFFF 0%, #CBD5E1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.markdown-content .md-anchor-link {
+  opacity: 0;
+  margin-left: 0.25rem;
+  color: var(--color-stellar-cyan);
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.875em;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  -webkit-text-fill-color: var(--color-stellar-cyan);
+}
+
+.markdown-content .md-h2:hover .md-anchor-link,
+.markdown-content h1:hover .md-anchor-link,
+.markdown-content h3:hover .md-anchor-link {
+  opacity: 0.7;
+}
+
+.markdown-content .md-anchor-link:hover {
+  opacity: 1 !important;
+}
+
+.markdown-content .md-h3 {
+  scroll-margin-top: 6rem;
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.3125rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.95);
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+  padding-left: 0.875rem;
+  border-left: 2px solid var(--color-cosmic-violet);
+}
+
+.markdown-content .md-p {
+  color: rgba(226, 232, 240, 0.88);
+  line-height: 1.75;
+  margin-top: 1.25rem;
+  margin-bottom: 0;
+}
+
+.markdown-content .md-strong {
+  color: var(--color-pure-white);
+  font-weight: 600;
+}
+
+.markdown-content .md-em {
+  color: var(--color-stellar-cyan-soft);
+  font-style: italic;
+}
+
+.markdown-content .md-link {
+  color: var(--color-stellar-cyan);
+  text-decoration: underline;
+  text-decoration-color: rgba(94, 234, 212, 0.3);
+  text-underline-offset: 3px;
+  transition: all 0.2s ease;
+}
+
+.markdown-content .md-link:hover {
+  color: var(--color-pure-white);
+  text-decoration-color: var(--color-pure-white);
+}
+
+/* Lists */
+.markdown-content .md-ul {
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0;
+  space-y: 0.5rem;
+}
+
+.markdown-content .md-ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.markdown-content .md-li {
+  position: relative;
+  padding-left: 1.75rem;
+  color: rgba(226, 232, 240, 0.88);
+  line-height: 1.7;
+}
+
+.markdown-content .md-li::before {
+  content: '';
+  position: absolute;
+  left: 0.25rem;
+  top: 0.625rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border: 1.5px solid var(--color-stellar-cyan);
+  transform: rotate(45deg);
+  background: transparent;
+}
+
+.markdown-content .md-ol {
+  list-style: none;
+  counter-reset: md-counter;
+  padding: 0;
+  margin: 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.markdown-content .md-li-numbered {
+  position: relative;
+  padding-left: 2.25rem;
+  color: rgba(226, 232, 240, 0.88);
+  line-height: 1.7;
+  counter-increment: md-counter;
+}
+
+.markdown-content .md-li-numbered::before {
+  content: counter(md-counter, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-stellar-cyan);
+  letter-spacing: 0.1em;
+}
+
+/* Blockquote — editorial pull-quote treatment */
+.markdown-content .md-blockquote {
+  position: relative;
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem 1.25rem 2rem;
+  background: linear-gradient(135deg, rgba(94, 234, 212, 0.04) 0%, rgba(167, 139, 250, 0.04) 100%);
+  border-left: 3px solid var(--color-cosmic-violet);
+  border-radius: 0 0.75rem 0.75rem 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: rgba(226, 232, 240, 0.92);
+}
+
+.markdown-content .md-blockquote::before {
+  content: '“';
+  position: absolute;
+  top: -0.5rem;
+  left: 0.5rem;
+  font-size: 4rem;
+  color: var(--color-cosmic-violet);
+  opacity: 0.4;
+  font-family: var(--font-display);
+  line-height: 1;
+}
+
+/* Tables */
+.markdown-content .md-table-wrap {
+  margin: 1.75rem 0;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+}
+
+.markdown-content .md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.markdown-content .md-thead {
+  background: rgba(94, 234, 212, 0.06);
+  border-bottom: 1px solid rgba(94, 234, 212, 0.2);
+}
+
+.markdown-content .md-th {
+  padding: 0.875rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-pure-white);
+  font-family: var(--font-display);
+  letter-spacing: -0.005em;
+}
+
+.markdown-content .md-td {
+  padding: 0.75rem 1rem;
+  color: rgba(226, 232, 240, 0.88);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.markdown-content .md-tbody tr:nth-child(even),
+.markdown-content tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+/* Inline code */
+.markdown-content .md-code-inline {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  padding: 0.15em 0.4em;
+  border-radius: 0.25rem;
+  background: rgba(94, 234, 212, 0.08);
+  border: 1px solid rgba(94, 234, 212, 0.15);
+  color: var(--color-stellar-cyan-soft);
+  white-space: nowrap;
+}
+
+/* Code block */
+.markdown-content .md-pre {
+  position: relative;
+  margin: 1.75rem 0;
+  padding: 0;
+  background: linear-gradient(180deg, #0E1322 0%, #070A14 100%);
+  border: 1px solid rgba(94, 234, 212, 0.12);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  font-family: var(--font-mono);
+}
+
+.markdown-content .md-pre-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(94, 234, 212, 0.08);
+}
+
+.markdown-content .md-pre-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--color-stellar-cyan);
+  box-shadow: 0 0 6px rgba(94, 234, 212, 0.5);
+}
+
+.markdown-content .md-pre-lang {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(94, 234, 212, 0.7);
+}
+
+.markdown-content pre {
+  padding: 1rem 1.25rem;
+  margin: 0;
+  overflow-x: auto;
+  color: rgba(226, 232, 240, 0.95);
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+.markdown-content pre code {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  color: inherit !important;
+  font-size: inherit !important;
+  white-space: pre;
+}
+
+/* Horizontal rule */
+.markdown-content .md-hr {
+  border: 0;
+  height: 1px;
+  margin: 3rem auto;
+  width: 30%;
+  background: linear-gradient(90deg, transparent, rgba(94, 234, 212, 0.4), transparent);
+}
+
+/* CJK font fallback for Chinese posts */
+:lang(zh-Hant) .markdown-content {
+  font-family: var(--font-cjk), var(--font-family);
+}
+
+:lang(zh-Hant) .markdown-content .md-h2,
+:lang(zh-Hant) .markdown-content .md-h3 {
+  font-family: var(--font-cjk), var(--font-display);
+  font-weight: 600;
 }

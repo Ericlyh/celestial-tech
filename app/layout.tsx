@@ -1,11 +1,34 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Providers from './providers'
-import { Noto_Sans_SC } from 'next/font/google'
+import { Fraunces, Manrope, JetBrains_Mono, Noto_Sans_TC } from 'next/font/google'
 
-const notoSansSC = Noto_Sans_SC({
+// Display: Fraunces — variable serif with character, optical sizing, evokes astronomical charts
+const fraunces = Fraunces({
   subsets: ['latin'],
-  variable: '--font-noto-sc',
+  variable: '--font-fraunces',
+  display: 'swap',
+})
+
+// Body: Manrope — modern, geometric, more distinctive than Inter
+const manrope = Manrope({
+  subsets: ['latin'],
+  variable: '--font-manrope',
+  display: 'swap',
+})
+
+// Mono: JetBrains Mono — for data, code, technical details
+const jetbrains = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+})
+
+// CJK: Noto Sans TC for traditional Chinese characters
+const notoTC = Noto_Sans_TC({
+  subsets: ['latin'],
+  variable: '--font-noto-tc',
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -24,21 +47,19 @@ export const metadata: Metadata = {
   authors: [{ name: 'Celestial Tech' }],
   openGraph: {
     title: 'Celestial Tech | Cybersecurity Meets Artificial Intelligence',
-    description:
-      'Where cybersecurity meets artificial intelligence — next-generation protection and intelligence for the digital frontier.',
+    description: 'Where cybersecurity meets artificial intelligence — next-generation protection and intelligence for the digital frontier.',
     type: 'website',
     locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Celestial Tech | Cybersecurity Meets AI',
-    description:
-      'Where cybersecurity meets artificial intelligence — next-generation protection.',
+    description: 'Where cybersecurity meets artificial intelligence — next-generation protection.',
   },
 }
 
 export const viewport = {
-  themeColor: '#0A0A0A',
+  themeColor: '#070A14',
   width: 'device-width',
   initialScale: 1,
 }
@@ -49,7 +70,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${notoSansSC.variable} scroll-smooth`}>
+    <html
+      lang="en"
+      className={`${fraunces.variable} ${manrope.variable} ${jetbrains.variable} ${notoTC.variable} scroll-smooth`}
+    >
       <body className="bg-deep-space text-pure-white antialiased font-sans overflow-x-hidden">
         {/* SVG noise filter */}
         <svg className="fixed inset-0 w-full h-full pointer-events-none z-[9999] opacity-[0.025] mix-blend-overlay" aria-hidden="true">

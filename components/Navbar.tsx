@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Shield, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { useTranslation } from '@/i18n'
 import { usePathname } from 'next/navigation'
 
@@ -22,23 +22,18 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
-  // Handle scroll: add glass effect once page is scrolled
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
+    const handleScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const handleNavClick = (href: string) => {
     setIsOpen(false)
-    // Absolute paths navigate normally
     if (href.startsWith('/')) {
       window.location.href = href
       return
     }
-    // Hash links: on homepage, smooth scroll; on subpages, go to homepage first
     if (href.startsWith('#')) {
       const isHomepage = pathname === '/'
       if (isHomepage) {
@@ -47,114 +42,122 @@ export default function Navbar() {
       } else {
         window.location.href = `/${href}`
       }
-      return
     }
   }
 
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
             ? 'glass-nav py-3'
             : 'bg-transparent py-5'
         }`}
       >
         <div className="container-main flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo — Fraunces serif for editorial feel */}
           <a
             href="#home"
             onClick={(e) => { e.preventDefault(); handleNavClick('#home') }}
             className="flex items-center gap-2.5 group"
           >
-            <span className="text-xl font-bold tracking-tight whitespace-nowrap">
-              <span className="text-pure-white">Celestial</span>{' '}
-              <span className="text-gradient-cyan">Tech</span>
+            {/* Stellar dot mark */}
+            <span className="relative w-7 h-7 flex items-center justify-center">
+              <span className="absolute inset-0 rounded-full bg-stellar-cyan/20 blur-md group-hover:bg-stellar-cyan/40 transition-all" />
+              <span className="relative w-2 h-2 rounded-full bg-stellar-cyan shadow-[0_0_8px_rgba(94,234,212,0.8)]" />
+            </span>
+            <span className="font-display text-lg sm:text-xl tracking-tight whitespace-nowrap">
+              <span className="text-white">Celestial</span>{' '}
+              <span className="text-stellar-cyan italic">Tech</span>
             </span>
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.key}
-                href={link.href}
-                onClick={(e) => { e.preventDefault(); handleNavClick(link.href) }}
-                className="body-md text-pure-white/70 hover:text-cyber-cyan transition-colors duration-200 relative group"
-              >
-                {t(link.key as any)}
-                {/* Underline hover effect */}
-                <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-cyber-cyan rounded-full transition-all duration-300 group-hover:w-full" />
-              </a>
-            ))}
+          <div className="hidden md:flex items-center gap-7 lg:gap-9">
+            {navLinks.map((link) => {
+              const isActive =
+                (link.href === '/blog' && pathname?.startsWith('/blog')) ||
+                (link.href === '/hermes-agent-hosting' && pathname?.startsWith('/hermes-agent-hosting'))
+              return (
+                <a
+                  key={link.key}
+                  href={link.href}
+                  onClick={(e) => { e.preventDefault(); handleNavClick(link.href) }}
+                  className={`text-[13px] font-medium tracking-wide transition-colors duration-200 relative group ${
+                    isActive ? 'text-stellar-cyan' : 'text-ink-200 hover:text-white'
+                  }`}
+                >
+                  {t(link.key as any)}
+                  <span className={`absolute -bottom-1 left-0 h-px bg-stellar-cyan transition-all duration-300 ${
+                    isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`} />
+                </a>
+              )
+            })}
           </div>
 
-          {/* Desktop CTA */}
+          {/* Desktop CTA + lang toggle */}
           <div className="hidden md:flex items-center gap-3">
             <button
+              onClick={toggleLocale}
+              aria-label="Toggle language"
+              className="px-2.5 py-1 text-[10px] font-mono uppercase tracking-[0.1em] rounded border border-white/[0.1] text-ink-300 hover:text-stellar-cyan hover:border-stellar-cyan/40 transition-colors"
+            >
+              {locale === 'en' ? '繁中' : 'EN'}
+            </button>
+            <button
               onClick={() => handleNavClick('#contact')}
-              className="btn-cyber-cyan text-sm"
+              className="px-4 py-2 text-[13px] font-semibold rounded-lg bg-stellar-cyan text-deep-space hover:bg-stellar-cyan-soft transition-colors shadow-[0_0_20px_rgba(94,234,212,0.25)] hover:shadow-[0_0_28px_rgba(94,234,212,0.4)]"
             >
               {t('nav_getProtected')}
             </button>
           </div>
 
-          {/* Mobile Hamburger */}
-          <div className="flex items-center gap-2">
+          {/* Mobile */}
+          <div className="flex items-center gap-2 md:hidden">
             <button
               onClick={toggleLocale}
-              className="px-3 py-1.5 text-xs font-medium rounded border border-white/20 text-pure-white/70 hover:text-cyber-cyan hover:border-cyber-cyan/50 transition-colors duration-200"
               aria-label="Toggle language"
+              className="px-2.5 py-1 text-[10px] font-mono uppercase tracking-[0.1em] rounded border border-white/[0.1] text-ink-300"
             >
-              {locale === 'en' ? 'EN' : '繁'}
+              {locale === 'en' ? '繁中' : 'EN'}
             </button>
             <button
-              className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors"
+              className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors"
               onClick={() => setIsOpen(!isOpen)}
               aria-label={isOpen ? t('nav_closeMenu') : t('nav_openMenu')}
             >
-              {isOpen ? (
-                <X size={22} className="text-pure-white" />
-              ) : (
-                <Menu size={22} className="text-pure-white" />
-              )}
+              {isOpen ? <X size={20} className="text-white" /> : <Menu size={20} className="text-white" />}
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="fixed top-[72px] left-0 right-0 z-40 glass-nav border-t border-white/5"
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.18, ease: 'easeOut' }}
+            className="fixed top-[68px] left-0 right-0 z-40 glass-nav border-t border-white/[0.06]"
           >
-            <div className="container-main py-6 flex flex-col gap-1">
+            <div className="container-main py-5 flex flex-col gap-1">
               {navLinks.map((link) => (
                 <a
                   key={link.key}
                   href={link.href}
                   onClick={(e) => { e.preventDefault(); handleNavClick(link.href) }}
-                  className="py-3 px-4 rounded-lg text-pure-white/80 hover:text-cyber-cyan hover:bg-white/5 transition-all duration-200 font-medium"
+                  className="py-3 px-3 rounded-lg text-ink-200 hover:text-stellar-cyan hover:bg-white/[0.04] transition-all font-medium text-sm"
                 >
                   {t(link.key as any)}
                 </a>
               ))}
-              <div className="pt-4 border-t border-white/5 mt-2 flex items-center justify-between">
-                <button
-                  onClick={toggleLocale}
-                  className="px-3 py-1.5 text-xs font-medium rounded border border-white/20 text-pure-white/70 hover:text-cyber-cyan hover:border-cyber-cyan/50 transition-colors duration-200"
-                  aria-label="Toggle language"
-                >
-                  {locale === 'en' ? '🌐 EN' : '🌐 繁'}
-                </button>
+              <div className="pt-3 border-t border-white/[0.06] mt-2">
                 <button
                   onClick={() => handleNavClick('#contact')}
-                  className="btn-cyber-cyan text-sm px-6"
+                  className="w-full py-3 rounded-lg bg-stellar-cyan text-deep-space font-semibold text-sm"
                 >
                   {t('nav_getProtected')}
                 </button>
