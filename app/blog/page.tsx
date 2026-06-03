@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useMemo } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useMemo, useDeferredValue } from 'react'
+import { motion } from 'framer-motion'
 import { Calendar, Clock, ArrowUpRight, Sparkles, Search } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
@@ -127,7 +127,7 @@ function FeaturedCard({ post }: { post: Post }) {
 }
 
 function PostCard({ post, index }: { post: Post; index: number }) {
-  const { locale, t } = useTranslation()
+  const { locale } = useTranslation()
   const lang = locale === 'zh-Hant' ? 'zh' : 'en'
   const tone = CATEGORY_TONE[post.category] || CATEGORY_TONE.Cybersecurity
 
@@ -136,22 +136,19 @@ function PostCard({ post, index }: { post: Post; index: number }) {
     { year: 'numeric', month: 'short', day: 'numeric' }
   )
 
+  // CSS-only stagger via inline animation-delay — no framer-motion, no
+  // IntersectionObserver per card. The blog list renders up to 5 cards
+  // and framer-motion + per-card observers were the main source of jank.
+  const style = { animationDelay: `${Math.min(index, 8) * 40}ms` }
+
   return (
-    <motion.div
-      custom={index}
-      variants={fadeInUp}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: '-50px' }}
-      className="group"
-    >
+    <div className="group blog-fade-in" style={style}>
       <Link href={`/blog/${post.slug}`} className="block h-full">
-        <article className="relative h-full flex flex-col bg-white/[0.025] rounded-2xl border border-white/[0.06] hover:border-stellar-cyan/30 hover:bg-white/[0.04] transition-all duration-500 overflow-hidden hover:-translate-y-1">
-          {/* Cover */}
+        <article className="relative h-full flex flex-col bg-white/[0.025] rounded-2xl border border-white/[0.06] hover:border-stellar-cyan/30 hover:bg-white/[0.04] transition-colors duration-300 overflow-hidden hover:-translate-y-1 will-change-transform">
           {post.coverImage && (
             <div className="relative h-44 overflow-hidden">
               <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 will-change-transform"
                 style={{ backgroundImage: `url(${post.coverImage})` }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-deep-space/90 via-deep-space/30 to-transparent" />
@@ -188,13 +185,12 @@ function PostCard({ post, index }: { post: Post; index: number }) {
             </div>
           </div>
 
-          {/* Hover arrow */}
           <div className="absolute bottom-5 right-5 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 pointer-events-none">
             <ArrowUpRight size={16} className="text-stellar-cyan" />
           </div>
         </article>
       </Link>
-    </motion.div>
+    </div>
   )
 }
 
@@ -202,6 +198,8 @@ export default function BlogPage() {
   const { t, locale } = useTranslation()
   const [activeTab, setActiveTab] = useState<'All' | 'AI' | 'Cybersecurity'>('All')
   const [search, setSearch] = useState('')
+  // useDeferredValue keeps the input responsive even when filtering is heavy
+  const deferredSearch = useDeferredValue(search)
   const lang = locale === 'zh-Hant' ? 'zh' : 'en'
 
   // Static posts for client-side rendering
@@ -230,7 +228,7 @@ export default function BlogPage() {
           slug: 'reactive-to-predictive-traditional-cybersecurity-failing',
           excerpt:
             'Traditional cybersecurity waits for something to break. Predictive security stops threats before they happen. Here\'s why the paradigm shift is urgent — and inevitable.',
-          excerptZh: '傳統網絡安全等待事情破裂後才行動。主動式安全在威脅發生前就阻止它們。呢度解釋點解呢個典範轉移迫切且不可避免。',
+          excerptZh: '傳統網絡安全在被動等待事故發生後才作出反應。預測性安全則在威脅成形之前將其阻止。為何這個範式轉移刻不容緩——且不可逆轉。',
           category: 'Cybersecurity',
           coverImage: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1600&q=80',
           author: 'Celestial Tech Team',
@@ -245,7 +243,7 @@ export default function BlogPage() {
           slug: 'convergence-ai-cybersecurity-enterprises-2026',
           excerpt:
             "AI and cybersecurity are no longer separate disciplines — they're converging into a single imperative. Here's what forward-thinking enterprises are doing differently.",
-          excerptZh: 'AI 與網絡安全不再係獨立學科——它們正在融合成一個必需品。呢度係有遠見的企業做嘢不同的地方。',
+          excerptZh: 'AI 與網絡安全已不再是兩個獨立領域——兩者正融合為一個共同的必然要求。以下是前瞻性企業與別不同之處。',
           category: 'AI',
           authorZh: 'Celestial Tech 團隊',
           coverImage: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&q=80',
@@ -260,13 +258,28 @@ export default function BlogPage() {
           slug: 'openclaw-multi-agent-patterns-autonomous-execution-engine',
           excerpt:
             "Six months of building with OpenClaw taught me that the gap between 'AI chatbot' and 'autonomous execution engine' is exactly this: moving from 'AI answers questions' to 'AI completes projects.' Here's what multi-agent orchestration looks like in practice.",
-          excerptZh: '六個月嘅 OpenClaw 開發經驗告訴我，「AI 聊天機械人」和「自主執行引擎」之間的差距就係：從「AI 回答問題」到「AI 完成項目」。呢度係多代理編排在實踐中的樣子。',
+          excerptZh: '六個月的 OpenClaw 開發經驗告訴我，「AI 聊天機械人」與「自主執行引擎」之間的鴻溝就在於：從「AI 回答問題」到「AI 完成項目」。以下是多代理編排在實踐中的具體運作方式。',
           category: 'AI',
           authorZh: 'Celestial Tech 團隊',
           coverImage: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&q=80',
           author: 'Celestial Tech Team',
           readTime: 8,
           publishedAt: '2026-04-01T00:00:00Z',
+        },
+        {
+          id: '5',
+          title: 'Hermes Agent + Obsidian: Building an LLM-Powered Second Brain for Business',
+          titleZh: 'Hermes Agent + Obsidian：為企業打造由 LLM 驅動的第二大腦',
+          slug: 'hermes-agent-obsidian-llm-second-brain',
+          excerpt:
+            'How a local-first AI agent that reads your Obsidian vault, runs your scripts, and remembers your work becomes the highest-leverage tool a knowledge team can deploy.',
+          excerptZh: '一個本地優先的 AI 代理，能讀取你的 Obsidian 筆記庫、執行你的腳本、記得你的工作——它如何成為知識團隊可部署的最高槓桿力工具。',
+          category: 'AI',
+          authorZh: 'Celestial Tech 團隊',
+          coverImage: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=1600&q=80',
+          author: 'Celestial Tech Team',
+          readTime: 9,
+          publishedAt: '2026-05-15T00:00:00Z',
         },
       ].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()),
     []
@@ -285,7 +298,7 @@ export default function BlogPage() {
       )
     }
     return result
-  }, [allPosts, activeTab, search])
+  }, [allPosts, activeTab, deferredSearch])
 
   const featured = filtered[0]
   const rest = filtered.slice(1)
@@ -386,11 +399,9 @@ export default function BlogPage() {
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-            <AnimatePresence mode="popLayout">
-              {(activeTab === 'All' && !search ? rest : filtered).map((post, index) => (
-                <PostCard key={post.slug} post={post} index={index} />
-              ))}
-            </AnimatePresence>
+            {(activeTab === 'All' && !search ? rest : filtered).map((post, index) => (
+              <PostCard key={post.slug} post={post} index={index} />
+            ))}
           </div>
 
           {filtered.length === 0 && (

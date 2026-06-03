@@ -766,3 +766,29 @@ h1, h2, h3, h4, h5, h6,
   font-family: var(--font-cjk), var(--font-display);
   font-weight: 600;
 }
+
+/* =============================================
+   BLOG LIST CARD FADE-IN
+   Replaces per-card framer-motion + IntersectionObserver.
+   Pure CSS — compositor-only animation, no JS work.
+   ============================================= */
+.blog-fade-in {
+  animation: blog-fade-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes blog-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-fade-in {
+    animation: none;
+  }
+}

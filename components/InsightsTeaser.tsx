@@ -20,6 +20,17 @@ interface Insight {
 
 const POSTS: Insight[] = [
   {
+    id: '5',
+    title: 'Hermes Agent + Obsidian: Building an LLM-Powered Second Brain for Business',
+    titleZh: 'Hermes Agent + Obsidian：為企業打造由 LLM 驅動的第二大腦',
+    slug: 'hermes-agent-obsidian-llm-second-brain',
+    excerpt: 'How a local-first AI agent that reads your Obsidian vault becomes the highest-leverage tool a knowledge team can deploy.',
+    excerptZh: '一個本地優先的 AI 代理，能讀取你的 Obsidian 筆記庫——它如何成為知識團隊可部署的最高槓桿力工具。',
+    category: 'AI',
+    readTime: 9,
+    publishedAt: '2026-05-15',
+  },
+  {
     id: '1',
     title: 'AI-Powered SOC: The Future of Threat Detection is Here',
     titleZh: 'AI 驅動 SOC：威脅檢測的未來已來',
@@ -40,17 +51,6 @@ const POSTS: Insight[] = [
     category: 'AI',
     readTime: 7,
     publishedAt: '2026-03-15',
-  },
-  {
-    id: '4',
-    title: 'Multi-Agent Patterns: From AI Chatbot to Execution Engine',
-    titleZh: '構建自主執行引擎：OpenClaw 多代理模式',
-    slug: 'openclaw-multi-agent-patterns-autonomous-execution-engine',
-    excerpt: "Six months of building with multi-agent systems: what works, what doesn't, and how to ship.",
-    excerptZh: '六個月的多代理系統開發經驗：甚麼有效、甚麼無效，以及如何交付。',
-    category: 'AI',
-    readTime: 8,
-    publishedAt: '2026-04-01',
   },
 ]
 
