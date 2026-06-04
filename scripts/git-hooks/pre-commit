@@ -1,0 +1,87 @@
+#!/usr/bin/env python3
+"""
+pre-commit hook — auto-log every commit to events/events.db
+
+Install: ./scripts/install-hooks.sh (already run for this repo)
+Or:      git config core.hooksPath scripts/git-hooks
+"""
+import json
+import os
+import sqlite3
+import subprocess
+import sys
+from pathlib import Path
+
+WORKSPACE_ROOT = Path("/opt/data/openclaw-workspace-makethingsdone")
+EVENTS_DB = WORKSPACE_ROOT / "events" / "events.db"
+
+
+def get_repo_root() -> Path:
+    return Path(subprocess.check_output(
+        ["git", "rev-parse", "--show-toplevel"], text=True
+    ).strip())
+
+
+def get_staged_files() -> list[str]:
+    out = subprocess.check_output(
+        ["git", "diff", "--cached", "--name-only"], text=True
+    ).strip()
+    return [f for f in out.split("\n") if f]
+
+
+def get_diffstat() -> str:
+    try:
+        return subprocess.check_output(
+            ["git", "diff", "--cached", "--shortstat"], text=True
+        ).strip()
+    except subprocess.CalledProcessError:
+        return ""
+
+
+def main() -> int:
+    repo_root = get_repo_root()
+    project_name = repo_root.name
+
+    if not EVENTS_DB.exists():
+        print(f"auto-log-event: events.db not found at {EVENTS_DB} — skipping")
+        return 0
+
+    staged = get_staged_files()
+    staged_count = len(staged)
+    diffstat = get_diffstat()
+    top_files = ",".join(staged[:3])[:60]
+    description = f"commit: {top_files} (+{staged_count} files)"
+    if diffstat:
+        description = f"{description} [{diffstat}]"
+
+    try:
+        conn = sqlite3.connect(str(EVENTS_DB))
+        cur = conn.cursor()
+        cur.execute("SELECT id FROM projects WHERE name=?", (project_name,))
+        row = cur.fetchone()
+        if not row:
+            print(f"auto-log-event: WARNING — project '{project_name}' not in events.db, skipping")
+            print(f"  Hint: INSERT INTO projects (name) VALUES ('{project_name}');")
+            conn.close()
+            return 0
+        project_id = row[0]
+        cur.execute(
+            """INSERT INTO events (project_id, event_type, description, context, task_id)
+               VALUES (?, 'progress', ?, ?, NULL)""",
+            (project_id, description, json.dumps({"source": "pre-commit-hook", "files": staged_count})),
+        )
+        cur.execute(
+            "UPDATE projects SET last_update=CURRENT_TIMESTAMP WHERE id=?",
+            (project_id,),
+        )
+        conn.commit()
+        conn.close()
+        print(f"auto-log-event: logged to events.db → {description}")
+    except Exception as e:
+        print(f"auto-log-event: WARNING — failed: {e}")
+        # Don't block the commit
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
