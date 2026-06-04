@@ -62,6 +62,21 @@ tasks:
     title: OpenClaw Hosting sitemap.xml + Google Search Console
     status: done
     completed: 2026-04-23
+  - id: CT-011
+    title: Status audit + backfill today's 4 untracked commits
+    status: done
+    completed: 2026-06-03
+    notes: Audit surfaced AGENTS.md violation — work outside PM loop. Resolved by CT-013.
+  - id: CT-012
+    title: Commits not auto-logging to events.db
+    status: done
+    completed: 2026-06-04
+    notes: Resolved by CT-013. Hook is now active in this repo (core.hooksPath = scripts/git-hooks).
+  - id: CT-013
+    title: Pre-commit auto event-logger hook
+    status: done
+    completed: 2026-06-04
+    notes: scripts/git-hooks/pre-commit (Python, ~70 LoC) auto-inserts progress event into events.db on every commit. scripts/install-hooks.sh bootstraps core.hooksPath. Tested: 1 smoke event logged. Commit 1e61b6d.
 
 decisions:
   - id: CT-DEC-001
