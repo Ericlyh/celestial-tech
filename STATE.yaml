@@ -77,6 +77,11 @@ tasks:
     status: done
     completed: 2026-06-04
     notes: scripts/git-hooks/pre-commit (Python, ~70 LoC) auto-inserts progress event into events.db on every commit. scripts/install-hooks.sh bootstraps core.hooksPath. Tested: 1 smoke event logged. Commit 1e61b6d.
+  - id: CT-014
+    title: Weekly events.db snapshot safeguard
+    status: done
+    completed: 2026-06-05
+    notes: scripts/snapshot-events-db.py uses sqlite3 backup API to copy events.db to backups/events/events-YYYY-MM-DD-HHMMSS.db, retains last 8 (~2 months weekly). scripts/install-snapshot-cron.sh one-time install for Sun 23:00 cron. First run: snapshot created (155,648 bytes, 21 projects, 533 events), verified. README updated with hook + snapshot docs. Hook = keep log current; snapshot = keep log recoverable.
 
 decisions:
   - id: CT-DEC-001
