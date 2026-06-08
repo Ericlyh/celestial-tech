@@ -333,7 +333,7 @@ export default function Contact() {
                 {/* Submit */}
                 <button
                   type="submit"
-                  disabled={!turnstileToken || submitting}
+                  disabled={(!!turnstileSiteKey && !turnstileToken) || submitting}
                   className="w-full py-4 rounded-xl font-semibold text-white
                              bg-gradient-to-r from-[#00F0FF] to-[#8B5CF6]
                              hover:shadow-[0_0_30px_rgba(0,240,255,0.25)]
