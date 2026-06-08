@@ -5,6 +5,7 @@ import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import { motion } from 'framer-motion'
 import { useTranslation } from '@/i18n'
+import { FormEvent } from 'react'
 
 const features = [
   {
@@ -187,8 +188,8 @@ const faqs = [
   {
     q: 'Hermes Agent 是甚麼？',
     qEn: 'What is Hermes Agent?',
-    a: 'Hermes Agent 是我們基於 OpenClaw 開發的下一代 AI 員工平台。我們為香港企業包裝成托管服務，無需自行管理伺服器。',
-    aEn: "Hermes Agent is our next-generation AI employee platform, built on OpenClaw's architecture. We manage the hosting so you don't have to.",
+    a: 'Hermes Agent 是我們為香港中小企而設的自托管 AI 代理平台，24/7 為您在 Telegram 運行業務助手，原生支援廣東話。我們負責託管及維護，您專注業務。',
+    aEn: 'Hermes Agent is our self-hosted AI agent platform built for Hong Kong small and medium businesses — it runs your Telegram business assistant 24/7 with native Cantonese support. We handle the hosting and maintenance so you can focus on your customers.',
   },
   {
     q: 'FPS 收款如何運作？',
@@ -277,6 +278,31 @@ const itemVariants = {
 
 export default function HermesAgentHostingPage() {
   const { t, locale } = useTranslation()
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const fd = new FormData(e.currentTarget)
+    const name = (fd.get('name') as string) || ''
+    const whatsapp = (fd.get('whatsapp') as string) || ''
+    const businessType = (fd.get('business_type') as string) || ''
+    const painPoint = (fd.get('pain_point') as string) || ''
+    const plan = (fd.get('plan') as string) || ''
+    const subject = encodeURIComponent(
+      locale === 'zh-Hant'
+        ? `Hermes Agent 查詢 — ${name}`
+        : `Hermes Agent inquiry — ${name}`
+    )
+    const body = encodeURIComponent(
+      [
+        `Name: ${name}`,
+        `WhatsApp: ${whatsapp}`,
+        `Business Type: ${businessType}`,
+        `Pain Point: ${painPoint}`,
+        `Plan: ${plan}`,
+      ].join('\n')
+    )
+    window.location.href = `mailto:lyheric127@gmail.com?subject=${subject}&body=${body}`
+  }
 
   return (
     <main className="relative min-h-screen bg-deep-space overflow-x-hidden">
@@ -1191,8 +1217,10 @@ export default function HermesAgentHostingPage() {
             className="glass-card p-8"
           >
             <form
-              action="https://formspree.io/f/69946112"
+              action="mailto:lyheric127@gmail.com"
               method="POST"
+              encType="text/plain"
+              onSubmit={handleSubmit}
               className="space-y-5"
               id="contact-form"
             >
@@ -1280,7 +1308,6 @@ export default function HermesAgentHostingPage() {
                   ))}
                 </div>
               </div>
-              <input type="hidden" name="_subject" value={locale === 'zh-Hant' ? '新香港 OpenClaw 查詢！' : 'New HK OpenClaw Inquiry!'} />
               <button type="submit" className="w-full btn-cyber-cyan text-lg py-4">
                 {locale === 'zh-Hant' ? '提交 — 我們將通過 WhatsApp 與您聯絡！' : 'Submit — We will WhatsApp You!'}
               </button>

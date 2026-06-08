@@ -33,6 +33,19 @@ export default function Contact() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
+    const subject = encodeURIComponent(
+      locale === 'zh-Hant' ? `網站聯絡 — ${formState.name}` : `Website contact — ${formState.name}`
+    )
+    const lines = [
+      `Name: ${formState.name}`,
+      `Email: ${formState.email}`,
+      `Company: ${formState.company || '-'}`,
+      `Service: ${formState.service || '-'}`,
+      '',
+      formState.message,
+    ]
+    const body = encodeURIComponent(lines.join('\n'))
+    window.location.href = `mailto:lyheric127@gmail.com?subject=${subject}&body=${body}`
     setSubmitted(true)
   }
 
@@ -90,8 +103,8 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-2 space-y-8"
           >
-            {/* Info cards */}
-            {infoCards.map((card, i) => {
+            {/* Info cards — hidden (kept data + map for easy restore) */}
+            {false && infoCards.map((card, i) => {
               const Icon = card.icon
               return (
               <motion.div

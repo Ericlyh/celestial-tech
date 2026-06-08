@@ -34,7 +34,7 @@ export function useTextScramble(text: string, active: boolean = true) {
       const scrambled = original
         .split('')
         .map((char, i) => {
-          if (i < frame / (12 / length)) return char
+          if (i < frame / (90 / length)) return char
           return CHARS[Math.floor(Math.random() * CHARS.length)]
         })
         .join('')

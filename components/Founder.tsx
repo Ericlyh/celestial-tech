@@ -8,7 +8,7 @@ export default function Founder() {
   const { t } = useTranslation()
 
   return (
-    <section id="founder" className="relative py-24 px-6 md:px-12 overflow-hidden">
+    <section id="founder" className="hidden relative py-24 px-6 md:px-12 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-[#0d0d14] to-[#0A0A0A] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_#00F0FF08_0%,_transparent_60%)] pointer-events-none" />
