@@ -84,6 +84,7 @@ export default function Contact() {
   ]
 
   const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+  const turnstileEnabled = process.env.NEXT_PUBLIC_TURNSTILE_ENABLED === 'true'
 
   return (
     <section id="contact" className="relative py-24 px-6 md:px-12 overflow-hidden">
@@ -312,7 +313,7 @@ export default function Contact() {
                 />
 
                 {/* Turnstile */}
-                {turnstileSiteKey ? (
+                {turnstileEnabled && turnstileSiteKey ? (
                   <div className="flex justify-start">
                     <Turnstile
                       siteKey={turnstileSiteKey}
@@ -333,7 +334,7 @@ export default function Contact() {
                 {/* Submit */}
                 <button
                   type="submit"
-                  disabled={(!!turnstileSiteKey && !turnstileToken) || submitting}
+                  disabled={(turnstileEnabled && !turnstileToken) || submitting}
                   className="w-full py-4 rounded-xl font-semibold text-white
                              bg-gradient-to-r from-[#00F0FF] to-[#8B5CF6]
                              hover:shadow-[0_0_30px_rgba(0,240,255,0.25)]

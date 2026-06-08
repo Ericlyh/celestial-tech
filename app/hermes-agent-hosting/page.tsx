@@ -327,6 +327,7 @@ export default function HermesAgentHostingPage() {
   }
 
   const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+  const turnstileEnabled = process.env.NEXT_PUBLIC_TURNSTILE_ENABLED === 'true'
 
   return (
     <main className="relative min-h-screen bg-deep-space overflow-x-hidden">
@@ -1364,7 +1365,7 @@ export default function HermesAgentHostingPage() {
                 />
 
                 {/* Turnstile */}
-                {turnstileSiteKey ? (
+                {turnstileEnabled && turnstileSiteKey ? (
                   <div className="flex justify-start">
                     <Turnstile
                       siteKey={turnstileSiteKey}
@@ -1384,7 +1385,7 @@ export default function HermesAgentHostingPage() {
 
                 <button
                   type="submit"
-                  disabled={(!!turnstileSiteKey && !turnstileToken) || submitting}
+                  disabled={(turnstileEnabled && !turnstileToken) || submitting}
                   className="w-full btn-cyber-cyan text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {submitting
