@@ -29,14 +29,25 @@ const MAX_TEXT = 5000
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const WHATSAPP_RE = /\d{7,}/
 
-// Same-origin check: allow only when Origin/Referer match APP_ORIGIN or fall back to req.nextUrl.origin.
+// Same-origin check: trust the request's Host header (Vercel preserves it
+// even when internal URL rewriting changes req.nextUrl.origin). On Vercel the
+// browser's Origin matches Host, not the internal nextUrl origin. If a proxy
+// rewrites Host, set APP_ORIGIN as an explicit override.
 function isSameOrigin(req: NextRequest): boolean {
-  const expected = (process.env.APP_ORIGIN || req.nextUrl.origin).replace(/\/$/, '')
-  const origin = (req.headers.get('origin') || '').replace(/\/$/, '')
-  const referer = (req.headers.get('referer') || '').replace(/\/$/, '')
-  if (origin && origin === expected) return true
-  if (referer && referer.startsWith(expected)) return true
-  return false
+  const origin = req.headers.get('origin') || ''
+  if (!origin) return false
+  const host = req.headers.get('host') || ''
+
+  if (process.env.APP_ORIGIN) {
+    const expected = process.env.APP_ORIGIN.replace(/\/$/, '')
+    return origin.replace(/\/$/, '') === expected
+  }
+
+  try {
+    return new URL(origin).host === host
+  } catch {
+    return false
+  }
 }
 
 interface InboundBody {
@@ -56,6 +67,7 @@ interface InboundBody {
 
 export async function POST(req: NextRequest) {
   if (!isSameOrigin(req)) {
+    console.warn('[contact] Forbidden — origin:', req.headers.get('origin'), 'host:', req.headers.get('host'))
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 

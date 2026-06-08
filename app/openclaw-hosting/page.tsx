@@ -255,10 +255,12 @@ export default function HermesAgentHostingPage() {
         body: JSON.stringify(payload),
       })
       if (!res.ok) {
+        const data = await res.json().catch(() => ({} as { error?: string }))
+        const serverMsg = data?.error || `Server returned ${res.status}`
         setSubmitError(
           locale === 'zh-Hant'
-            ? '提交失敗，請稍後再試。'
-            : 'Submission failed. Please try again.'
+            ? `提交失敗：${serverMsg}`
+            : `Submission failed: ${serverMsg}`
         )
         return
       }
