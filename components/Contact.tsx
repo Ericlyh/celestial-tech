@@ -1,9 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Mail, MapPin, Phone, Calendar, ArrowRight, CheckCircle } from 'lucide-react'
+import { Calendar, ArrowRight, CheckCircle } from 'lucide-react'
 import { useState, FormEvent } from 'react'
 import { useTranslation } from '@/i18n'
+import { Turnstile } from '@marsidev/react-turnstile'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -13,12 +14,6 @@ const fadeUp = {
     transition: { duration: 0.6, delay: i * 0.1, ease: 'easeOut' },
   }),
 }
-
-const infoCards = [
-  { icon: Mail, labelKey: 'contact_email_label', value: 'hello@celestialtech.io', subKey: 'contact_calendly_info' },
-  { icon: Phone, labelKey: 'contact_phone_label', value: '+1 (888) 988-CYBER', subKey: 'contact_calendly_hours' },
-  { icon: MapPin, labelKey: 'contact_location_label', value: 'Hong Kong · Singapore · London', subKey: 'contact_calendly_locations' },
-] as const
 
 export default function Contact() {
   const { t, locale } = useTranslation()
@@ -30,23 +25,43 @@ export default function Contact() {
     message: '',
   })
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    const subject = encodeURIComponent(
-      locale === 'zh-Hant' ? `網站聯絡 — ${formState.name}` : `Website contact — ${formState.name}`
-    )
-    const lines = [
-      `Name: ${formState.name}`,
-      `Email: ${formState.email}`,
-      `Company: ${formState.company || '-'}`,
-      `Service: ${formState.service || '-'}`,
-      '',
-      formState.message,
-    ]
-    const body = encodeURIComponent(lines.join('\n'))
-    window.location.href = `mailto:lyheric127@gmail.com?subject=${subject}&body=${body}`
-    setSubmitted(true)
+    setSubmitError(null)
+    setSubmitting(true)
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          turnstileToken: turnstileToken ?? undefined,
+          ...formState,
+          _source: 'home',
+          _honey: '',
+        }),
+      })
+      if (!res.ok) {
+        setSubmitError(
+          locale === 'zh-Hant'
+            ? '提交失敗，請稍後再試。'
+            : 'Submission failed. Please try again.'
+        )
+        return
+      }
+      setSubmitted(true)
+    } catch {
+      setSubmitError(
+        locale === 'zh-Hant'
+          ? '網絡錯誤，請檢查連線後再試。'
+          : 'Network error. Please check your connection and try again.'
+      )
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const handleChange = (
@@ -67,6 +82,8 @@ export default function Contact() {
     'contact_service_ai_deploy',
     'contact_service_ai_train',
   ]
+
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
 
   return (
     <section id="contact" className="relative py-24 px-6 md:px-12 overflow-hidden">
@@ -103,35 +120,6 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-2 space-y-8"
           >
-            {/* Info cards — hidden (kept data + map for easy restore) */}
-            {false && infoCards.map((card, i) => {
-              const Icon = card.icon
-              return (
-              <motion.div
-                key={i}
-                custom={i}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="flex items-start gap-4 p-5 bg-white/[0.03] border border-white/[0.06]
-                           rounded-xl hover:border-[#00F0FF]/20 transition-colors duration-300"
-              >
-                <div className="w-10 h-10 rounded-lg bg-[#00F0FF]/10 border border-[#00F0FF]/20
-                                flex items-center justify-center flex-shrink-0">
-                  <Icon className="w-5 h-5 text-[#00F0FF]" />
-                </div>
-                <div>
-                  <p className="text-gray-400 text-xs uppercase tracking-wider mb-1">
-                    {t(card.labelKey as any)}
-                  </p>
-                  <p className="text-white font-medium">{card.value}</p>
-                  <p className="text-gray-500 text-sm">{t(card.subKey as any)}</p>
-                </div>
-              </motion.div>
-              )
-            })}
-
             {/* Calendly CTA */}
             <motion.div
               custom={3}
@@ -149,7 +137,9 @@ export default function Contact() {
                   30 minutes. No sales pitch — just an honest conversation about your security needs.
                 </p>
                 <a
-                  href="#"
+                  href="https://calendly.com/lyheric127"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-lg
                              bg-gradient-to-r from-[#00F0FF] to-[#8B5CF6]
                              text-white font-semibold text-sm
@@ -178,12 +168,20 @@ export default function Contact() {
                 className="bg-white/[0.03] border border-[#00F0FF]/20 rounded-2xl p-12 text-center"
               >
                 <CheckCircle className="w-16 h-16 text-[#00F0FF] mx-auto mb-6" />
-                <h3 className="text-2xl font-bold text-white mb-3">{t('contact_success_title')}</h3>
+                <h3 className="text-2xl font-bold text-white mb-3">
+                  {locale === 'zh-Hant' ? '感謝您的查詢！' : 'Thanks for reaching out!'}
+                </h3>
                 <p className="text-gray-400 mb-6">
-                  {t('contact_success_message')}
+                  {locale === 'zh-Hant'
+                    ? '我們已收到您的訊息，將於 24 小時內回覆您。'
+                    : "We've received your message and will get back to you within 24 hours."}
                 </p>
                 <button
-                  onClick={() => setSubmitted(false)}
+                  onClick={() => {
+                    setSubmitted(false)
+                    setFormState({ name: '', email: '', company: '', service: '', message: '' })
+                    setTurnstileToken(null)
+                  }}
                   className="text-[#00F0FF] hover:text-white transition-colors duration-300 text-sm"
                 >
                   {t('contact_success_another')}
@@ -302,16 +300,50 @@ export default function Contact() {
                   />
                 </div>
 
+                {/* Honeypot (hidden from real users, caught by bots) */}
+                <input
+                  type="text"
+                  name="_honey"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={{ position: 'absolute', left: '-9999px' }}
+                  defaultValue=""
+                />
+
+                {/* Turnstile */}
+                {turnstileSiteKey ? (
+                  <div className="flex justify-start">
+                    <Turnstile
+                      siteKey={turnstileSiteKey}
+                      onSuccess={(token) => setTurnstileToken(token)}
+                      onExpire={() => setTurnstileToken(null)}
+                      onError={() => setTurnstileToken(null)}
+                      options={{ theme: 'dark', size: 'flexible' }}
+                    />
+                  </div>
+                ) : null}
+
+                {submitError && (
+                  <p className="text-sm text-red-400" role="alert">
+                    {submitError}
+                  </p>
+                )}
+
                 {/* Submit */}
                 <button
                   type="submit"
+                  disabled={!turnstileToken || submitting}
                   className="w-full py-4 rounded-xl font-semibold text-white
                              bg-gradient-to-r from-[#00F0FF] to-[#8B5CF6]
                              hover:shadow-[0_0_30px_rgba(0,240,255,0.25)]
                              active:scale-[0.98]
-                             transition-all duration-300"
+                             transition-all duration-300
+                             disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none"
                 >
-                  {t('contact_submit')}
+                  {submitting
+                    ? (locale === 'zh-Hant' ? '提交中…' : 'Submitting…')
+                    : t('contact_submit')}
                   <ArrowRight className="inline-block ml-2 w-4 h-4" />
                 </button>
 

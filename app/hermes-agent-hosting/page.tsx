@@ -5,7 +5,9 @@ import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import { motion } from 'framer-motion'
 import { useTranslation } from '@/i18n'
-import { FormEvent } from 'react'
+import { FormEvent, useState } from 'react'
+import { Turnstile } from '@marsidev/react-turnstile'
+import { CheckCircle } from 'lucide-react'
 
 const features = [
   {
@@ -278,31 +280,53 @@ const itemVariants = {
 
 export default function HermesAgentHostingPage() {
   const { t, locale } = useTranslation()
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const fd = new FormData(e.currentTarget)
-    const name = (fd.get('name') as string) || ''
-    const whatsapp = (fd.get('whatsapp') as string) || ''
-    const businessType = (fd.get('business_type') as string) || ''
-    const painPoint = (fd.get('pain_point') as string) || ''
-    const plan = (fd.get('plan') as string) || ''
-    const subject = encodeURIComponent(
-      locale === 'zh-Hant'
-        ? `Hermes Agent 查詢 — ${name}`
-        : `Hermes Agent inquiry — ${name}`
-    )
-    const body = encodeURIComponent(
-      [
-        `Name: ${name}`,
-        `WhatsApp: ${whatsapp}`,
-        `Business Type: ${businessType}`,
-        `Pain Point: ${painPoint}`,
-        `Plan: ${plan}`,
-      ].join('\n')
-    )
-    window.location.href = `mailto:lyheric127@gmail.com?subject=${subject}&body=${body}`
+    setSubmitError(null)
+    setSubmitting(true)
+    try {
+      const fd = new FormData(e.currentTarget)
+      const payload = {
+        turnstileToken: turnstileToken ?? undefined,
+        name: (fd.get('name') as string) || '',
+        whatsapp: (fd.get('whatsapp') as string) || '',
+        business_type: (fd.get('business_type') as string) || '',
+        pain_point: (fd.get('pain_point') as string) || '',
+        plan: (fd.get('plan') as string) || '',
+        _source: 'hermes-agent-hosting',
+        _honey: (fd.get('_honey') as string) || '',
+      }
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      if (!res.ok) {
+        setSubmitError(
+          locale === 'zh-Hant'
+            ? '提交失敗，請稍後再試。'
+            : 'Submission failed. Please try again.'
+        )
+        return
+      }
+      setSubmitted(true)
+    } catch {
+      setSubmitError(
+        locale === 'zh-Hant'
+          ? '網絡錯誤，請檢查連線後再試。'
+          : 'Network error. Please check your connection and try again.'
+      )
+    } finally {
+      setSubmitting(false)
+    }
   }
+
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
 
   return (
     <main className="relative min-h-screen bg-deep-space overflow-x-hidden">
@@ -1216,107 +1240,164 @@ export default function HermesAgentHostingPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="glass-card p-8"
           >
-            <form
-              action="mailto:lyheric127@gmail.com"
-              method="POST"
-              encType="text/plain"
-              onSubmit={handleSubmit}
-              className="space-y-5"
-              id="contact-form"
-            >
-              <div>
-                <label className="block text-sm font-medium text-pure-white/80 mb-1">
-                  {locale === 'zh-Hant' ? '您的姓名 *' : 'Your Name *'}
-                </label>
+            {submitted ? (
+              <div className="text-center py-8">
+                <CheckCircle className="w-16 h-16 text-cyber-cyan mx-auto mb-6" />
+                <h3 className="text-2xl font-bold text-pure-white mb-3">
+                  {locale === 'zh-Hant' ? '感謝您的查詢！' : 'Thanks for reaching out!'}
+                </h3>
+                <p className="text-pure-white/60 mb-6">
+                  {locale === 'zh-Hant'
+                    ? '我們已收到您的訊息，將於 24 小時內通過 WhatsApp 與您聯絡。'
+                    : "We've received your message and will WhatsApp you within 24 hours."}
+                </p>
+                <button
+                  onClick={() => {
+                    setSubmitted(false)
+                    setTurnstileToken(null)
+                  }}
+                  className="text-cyber-cyan hover:text-pure-white transition-colors duration-300 text-sm"
+                >
+                  {locale === 'zh-Hant' ? '提交另一個查詢' : 'Submit another inquiry'}
+                </button>
+              </div>
+            ) : (
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-5"
+                id="contact-form"
+              >
+                <div>
+                  <label className="block text-sm font-medium text-pure-white/80 mb-1">
+                    {locale === 'zh-Hant' ? '您的姓名 *' : 'Your Name *'}
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    placeholder={locale === 'zh-Hant' ? '例如：陳大文' : 'e.g. John Smith'}
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-pure-white placeholder:text-pure-white/20 focus:border-cyber-cyan/50 focus:ring-2 focus:ring-cyber-cyan/20 outline-none transition text-sm"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-pure-white/80 mb-1">
+                    {locale === 'zh-Hant' ? 'WhatsApp 號碼 *' : 'WhatsApp Number *'}
+                  </label>
+                  <input
+                    type="tel"
+                    name="whatsapp"
+                    required
+                    placeholder={locale === 'zh-Hant' ? '例如：+852 6123 4567' : 'e.g. +852 6123 4567'}
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-pure-white placeholder:text-pure-white/20 focus:border-cyber-cyan/50 focus:ring-2 focus:ring-cyber-cyan/20 outline-none transition text-sm"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-pure-white/80 mb-1">
+                    {locale === 'zh-Hant' ? '業務類型 *' : 'Business Type *'}
+                  </label>
+                  <select
+                    name="business_type"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-pure-white/70 focus:border-cyber-cyan/50 focus:ring-2 focus:ring-cyber-cyan/20 outline-none transition text-sm"
+                  >
+                    {locale === 'zh-Hant' ? (
+                      <>
+                        <option value="" className="bg-deep-space">請選擇...</option>
+                        <option value="restaurant" className="bg-deep-space">餐廳</option>
+                        <option value="retail" className="bg-deep-space">零售店</option>
+                        <option value="onlineshop" className="bg-deep-space">網店</option>
+                        <option value="agency" className="bg-deep-space">代理商 / 顧問</option>
+                        <option value="freelancer" className="bg-deep-space">Freelancer / 自由工作者</option>
+                        <option value="other" className="bg-deep-space">其他</option>
+                      </>
+                    ) : (
+                      <>
+                        <option value="" className="bg-deep-space">Select...</option>
+                        <option value="restaurant" className="bg-deep-space">Restaurant</option>
+                        <option value="retail" className="bg-deep-space">Retail Store</option>
+                        <option value="onlineshop" className="bg-deep-space">Online Shop</option>
+                        <option value="agency" className="bg-deep-space">Agency / Consultant</option>
+                        <option value="freelancer" className="bg-deep-space">Freelancer</option>
+                        <option value="other" className="bg-deep-space">Other</option>
+                      </>
+                    )}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-pure-white/80 mb-1">
+                    {locale === 'zh-Hant' ? '您面臨的最大挑戰 *' : 'Biggest Pain Point *'}
+                  </label>
+                  <textarea
+                    name="pain_point"
+                    rows={3}
+                    placeholder={locale === 'zh-Hant' ? '例如：每日以 WhatsApp 回覆客戶查詢至凌晨，耗費大量時間...' : 'e.g. I am tired of replying to WhatsApp messages from customers all day...'}
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-pure-white placeholder:text-pure-white/20 focus:border-cyber-cyan/50 focus:ring-2 focus:ring-cyber-cyan/20 outline-none transition text-sm resize-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-pure-white/80 mb-1">
+                    {locale === 'zh-Hant' ? '您需要哪種方案？ *' : 'Preferred Plan *'}
+                  </label>
+                  <div className="flex gap-4 flex-wrap">
+                    {[
+                      { value: 'starter', label: locale === 'zh-Hant' ? 'Starter $199/月' : 'Starter $199/mo' },
+                      { value: 'pro', label: locale === 'zh-Hant' ? 'Pro $399/月' : 'Pro $399/mo' },
+                      { value: 'business', label: locale === 'zh-Hant' ? 'Business $799/月' : 'Business $799/mo' },
+                      { value: 'unsure', label: locale === 'zh-Hant' ? '尚未決定' : 'Undecided' },
+                    ].map((opt) => (
+                      <label key={opt.value} className="flex items-center gap-2 text-sm text-pure-white/60 cursor-pointer">
+                        <input type="radio" name="plan" value={opt.value} className="text-cyber-cyan focus:ring-cyber-cyan/50" />
+                        {opt.label}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Honeypot (hidden from real users, caught by bots) */}
                 <input
                   type="text"
-                  name="name"
-                  required
-                  placeholder={locale === 'zh-Hant' ? '例如：陳大文' : 'e.g. John Smith'}
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-pure-white placeholder:text-pure-white/20 focus:border-cyber-cyan/50 focus:ring-2 focus:ring-cyber-cyan/20 outline-none transition text-sm"
+                  name="_honey"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={{ position: 'absolute', left: '-9999px' }}
+                  defaultValue=""
                 />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-pure-white/80 mb-1">
-                  {locale === 'zh-Hant' ? 'WhatsApp 號碼 *' : 'WhatsApp Number *'}
-                </label>
-                <input
-                  type="tel"
-                  name="whatsapp"
-                  required
-                  placeholder={locale === 'zh-Hant' ? '例如：+852 6123 4567' : 'e.g. +852 6123 4567'}
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-pure-white placeholder:text-pure-white/20 focus:border-cyber-cyan/50 focus:ring-2 focus:ring-cyber-cyan/20 outline-none transition text-sm"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-pure-white/80 mb-1">
-                  {locale === 'zh-Hant' ? '業務類型 *' : 'Business Type *'}
-                </label>
-                <select
-                  name="business_type"
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-pure-white/70 focus:border-cyber-cyan/50 focus:ring-2 focus:ring-cyber-cyan/20 outline-none transition text-sm"
+
+                {/* Turnstile */}
+                {turnstileSiteKey ? (
+                  <div className="flex justify-start">
+                    <Turnstile
+                      siteKey={turnstileSiteKey}
+                      onSuccess={(token) => setTurnstileToken(token)}
+                      onExpire={() => setTurnstileToken(null)}
+                      onError={() => setTurnstileToken(null)}
+                      options={{ theme: 'dark', size: 'flexible' }}
+                    />
+                  </div>
+                ) : null}
+
+                {submitError && (
+                  <p className="text-sm text-red-400 text-center" role="alert">
+                    {submitError}
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={!turnstileToken || submitting}
+                  className="w-full btn-cyber-cyan text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {locale === 'zh-Hant' ? (
-                    <>
-                      <option value="" className="bg-deep-space">請選擇...</option>
-                      <option value="restaurant" className="bg-deep-space">餐廳</option>
-                      <option value="retail" className="bg-deep-space">零售店</option>
-                      <option value="onlineshop" className="bg-deep-space">網店</option>
-                      <option value="agency" className="bg-deep-space">代理商 / 顧問</option>
-                      <option value="freelancer" className="bg-deep-space">Freelancer / 自由工作者</option>
-                      <option value="other" className="bg-deep-space">其他</option>
-                    </>
-                  ) : (
-                    <>
-                      <option value="" className="bg-deep-space">Select...</option>
-                      <option value="restaurant" className="bg-deep-space">Restaurant</option>
-                      <option value="retail" className="bg-deep-space">Retail Store</option>
-                      <option value="onlineshop" className="bg-deep-space">Online Shop</option>
-                      <option value="agency" className="bg-deep-space">Agency / Consultant</option>
-                      <option value="freelancer" className="bg-deep-space">Freelancer</option>
-                      <option value="other" className="bg-deep-space">Other</option>
-                    </>
-                  )}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-pure-white/80 mb-1">
-                  {locale === 'zh-Hant' ? '您面臨的最大挑戰 *' : 'Biggest Pain Point *'}
-                </label>
-                <textarea
-                  name="pain_point"
-                  rows={3}
-                  placeholder={locale === 'zh-Hant' ? '例如：每日以 WhatsApp 回覆客戶查詢至凌晨，耗費大量時間...' : 'e.g. I am tired of replying to WhatsApp messages from customers all day...'}
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-pure-white placeholder:text-pure-white/20 focus:border-cyber-cyan/50 focus:ring-2 focus:ring-cyber-cyan/20 outline-none transition text-sm resize-none"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-pure-white/80 mb-1">
-                  {locale === 'zh-Hant' ? '您需要哪種方案？ *' : 'Preferred Plan *'}
-                </label>
-                <div className="flex gap-4 flex-wrap">
-                  {[
-                    { value: 'starter', label: locale === 'zh-Hant' ? 'Starter $199/月' : 'Starter $199/mo' },
-                    { value: 'pro', label: locale === 'zh-Hant' ? 'Pro $399/月' : 'Pro $399/mo' },
-                    { value: 'business', label: locale === 'zh-Hant' ? 'Business $799/月' : 'Business $799/mo' },
-                    { value: 'unsure', label: locale === 'zh-Hant' ? '尚未決定' : 'Undecided' },
-                  ].map((opt) => (
-                    <label key={opt.value} className="flex items-center gap-2 text-sm text-pure-white/60 cursor-pointer">
-                      <input type="radio" name="plan" value={opt.value} className="text-cyber-cyan focus:ring-cyber-cyan/50" />
-                      {opt.label}
-                    </label>
-                  ))}
-                </div>
-              </div>
-              <button type="submit" className="w-full btn-cyber-cyan text-lg py-4">
-                {locale === 'zh-Hant' ? '提交 — 我們將通過 WhatsApp 與您聯絡！' : 'Submit — We will WhatsApp You!'}
-              </button>
-              <p className="text-center text-xs text-pure-white/30">
-                我們不會向您發送垃圾訊息。只會發送一次 WhatsApp 確認。
-                <br />
-                We won&apos;t spam you. Just one WhatsApp to confirm.
-              </p>
-            </form>
+                  {submitting
+                    ? (locale === 'zh-Hant' ? '提交中…' : 'Submitting…')
+                    : (locale === 'zh-Hant' ? '提交 — 我們將通過 WhatsApp 與您聯絡！' : 'Submit — We will WhatsApp You!')}
+                </button>
+                <p className="text-center text-xs text-pure-white/30">
+                  我們不會向您發送垃圾訊息。只會發送一次 WhatsApp 確認。
+                  <br />
+                  We won&apos;t spam you. Just one WhatsApp to confirm.
+                </p>
+              </form>
+            )}
           </motion.div>
         </div>
       </section>
