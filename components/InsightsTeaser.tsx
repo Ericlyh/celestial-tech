@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowUpRight, Calendar, Clock } from 'lucide-react'
@@ -18,7 +18,7 @@ interface Insight {
   publishedAt: string
 }
 
-const POSTS: Insight[] = [
+const FALLBACK_POSTS: Insight[] = [
   {
     id: '5',
     title: 'Hermes Agent + Obsidian: Building an LLM-Powered Second Brain for Business',
@@ -65,6 +65,52 @@ export default function InsightsTeaser() {
   const [isInView] = useState(true) // simple — keep visible for SSR consistency
   const lang = locale === 'zh-Hant' ? 'zh' : 'en'
 
+  // Live fetch from /api/blog. /api/blog returns the latest 3 published posts
+  // (most recent first). Fallback to the hardcoded 3 if the API fails so the
+  // section never goes blank.
+  const [posts, setPosts] = useState<Insight[]>(FALLBACK_POSTS)
+  useEffect(() => {
+    let cancelled = false
+    async function load() {
+      try {
+        const res = await fetch('/api/blog?limit=3', { cache: 'no-store' })
+        if (!res.ok) return
+        const data = await res.json()
+        if (cancelled || !data?.posts?.length) return
+        const mapped: Insight[] = data.posts
+          .map(
+            (p: {
+              id: string
+              title: string
+              slug: string
+              excerpt: string
+              category: string
+              readTime: number
+              publishedAt: string
+            }) => ({
+              id: p.id,
+              title: p.title,
+              titleZh: p.title, // bilingual fields not exposed by listing API
+              slug: p.slug,
+              excerpt: p.excerpt,
+              excerptZh: p.excerpt,
+              category: p.category,
+              readTime: p.readTime || 5,
+              publishedAt: p.publishedAt,
+            })
+          )
+          .slice(0, 3)
+        setPosts(mapped)
+      } catch {
+        // Network error — keep fallback.
+      }
+    }
+    load()
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
   return (
     <section
       ref={ref}
@@ -106,7 +152,7 @@ export default function InsightsTeaser() {
 
         {/* Insights grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
-          {POSTS.map((post, i) => {
+          {posts.map((post, i) => {
             const tone = CATEGORY_TONE[post.category] || CATEGORY_TONE.Cybersecurity
             const formattedDate = new Date(post.publishedAt).toLocaleDateString(
               lang === 'zh' ? 'zh-Hant' : 'en-US',

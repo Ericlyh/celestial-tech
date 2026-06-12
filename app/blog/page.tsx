@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useDeferredValue } from 'react'
+import { useState, useMemo, useEffect, useDeferredValue } from 'react'
 import { motion } from 'framer-motion'
 import { Calendar, Clock, ArrowUpRight, Sparkles, Search } from 'lucide-react'
 import Link from 'next/link'
@@ -202,10 +202,13 @@ export default function BlogPage() {
   const deferredSearch = useDeferredValue(search)
   const lang = locale === 'zh-Hant' ? 'zh' : 'en'
 
-  // Static posts for client-side rendering
-  const allPosts: Post[] = useMemo(
+  // Initial fallback: original 5 hand-curated posts. The /api/blog fetch below
+  // replaces this with live data from the DB, so new posts created by the
+  // Vercel cron job (app/api/cron) appear here too. Fallback is preserved for
+  // offline / API-error cases.
+  const FALLBACK_POSTS: Post[] = useMemo(
     () =>
-      [
+      ([
         {
           id: '1',
           title: 'AI-Powered SOC: The Future of Threat Detection is Here',
@@ -281,9 +284,70 @@ export default function BlogPage() {
           readTime: 9,
           publishedAt: '2026-05-15T00:00:00Z',
         },
-      ].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()),
+      ] as Post[]).sort(
+        (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+      ),
     []
   )
+
+  const [allPosts, setAllPosts] = useState<Post[]>(FALLBACK_POSTS)
+
+  // Fetch live posts from the DB. /api/blog returns the same fields we need;
+  // titleZh / excerptZh aren't on the listing endpoint, so we fall back to
+  // the English versions (ZH versions still exist on the detail page).
+  useEffect(() => {
+    let cancelled = false
+    async function load() {
+      try {
+        const res = await fetch('/api/blog?limit=50', { cache: 'no-store' })
+        if (!res.ok) return
+        const data = await res.json()
+        if (cancelled || !data?.posts?.length) return
+        const mapped: Post[] = data.posts.map(
+          (p: {
+            id: string
+            title: string
+            slug: string
+            excerpt: string
+            category: string
+            coverImage: string | null
+            author: string
+            readTime: number
+            publishedAt: string
+          }) => ({
+            id: p.id,
+            title: p.title,
+            titleZh: p.title, // bilingual fields not exposed by listing API
+            slug: p.slug,
+            excerpt: p.excerpt,
+            excerptZh: p.excerpt,
+            category: p.category,
+            coverImage: p.coverImage,
+            author: p.author || 'Celestial Tech Team',
+            authorZh: 'Celestial Tech 團隊',
+            readTime: p.readTime || 5,
+            publishedAt: p.publishedAt,
+          })
+        )
+        // Merge: API posts first, then any fallback posts whose slugs the
+        // API didn't return (extra safety in case of partial / filtered
+        // responses). Then sort by publishedAt desc.
+        const apiSlugs = new Set(mapped.map((p) => p.slug))
+        const missingFallbacks = FALLBACK_POSTS.filter((p) => !apiSlugs.has(p.slug))
+        const merged = [...mapped, ...missingFallbacks].sort(
+          (a, b) =>
+            new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+        )
+        setAllPosts(merged)
+      } catch {
+        // Network error — keep fallback posts.
+      }
+    }
+    load()
+    return () => {
+      cancelled = true
+    }
+  }, [FALLBACK_POSTS])
 
   const filtered = useMemo(() => {
     let result = activeTab === 'All' ? allPosts : allPosts.filter((p) => p.category === activeTab)
