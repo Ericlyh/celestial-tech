@@ -31,3 +31,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# MTD runtime/state protection
+node_modules/
+*.db
+*.env*
+.vercel/
+prisma/dev.db
