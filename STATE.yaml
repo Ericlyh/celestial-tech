@@ -82,6 +82,28 @@ tasks:
     status: done
     completed: 2026-06-05
     notes: scripts/snapshot-events-db.py uses sqlite3 backup API to copy events.db to backups/events/events-YYYY-MM-DD-HHMMSS.db, retains last 8 (~2 months weekly). scripts/install-snapshot-cron.sh one-time install for Sun 23:00 cron. First run: snapshot created (155,648 bytes, 21 projects, 533 events), verified. README updated with hook + snapshot docs. Hook = keep log current; snapshot = keep log recoverable.
+  - id: CT-015
+    title: Fix blog listing page — fetch from /api/blog instead of hardcoded array
+    status: done
+    completed: 2026-06-12
+    notes: |
+      Root cause: app/blog/page.tsx and components/InsightsTeaser.tsx had posts hardcoded
+      as constant arrays. The Vercel cron (app/api/cron) created new posts in the SQLite
+      DB at 23:00 daily, but neither component read from the DB or from the existing
+      /api/blog endpoint. /blog/[slug] did read from Prisma, so direct URLs worked.
+      User symptom: "I can't see the new blogs in Vercel."
+
+      Fix: both components now fetch /api/blog on mount via useEffect and replace the
+      hardcoded list with live data. Hardcoded arrays remain as a fallback if the API
+      fails. SSR still ships the fallback for meaningful pre-hydration content.
+
+      Verified: npm run build clean (0 type errors), /api/blog 200, /blog 200 with
+      5 slugs, / InsightsTeaser 200 with 3 slugs. Commit 10f3b45 pushed.
+
+      Follow-up concern (NOT in this task): Vercel serverless has ephemeral
+      filesystem, so SQLite writes at runtime may not persist across cold starts.
+      If new posts still don't appear after this fix, migrate to Vercel Postgres /
+      Turso / Neon.
 
 decisions:
   - id: CT-DEC-001
