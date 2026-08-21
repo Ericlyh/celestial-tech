@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Celestial Tech — Direction C: Risograph Cosmos (hero mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..700,30..100&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF6EC;
+    --paper-soft:#F2EAD3;
+    --paper-deep:#E9DCB4;
+    --ink:#1A1A1A;
+    --ink-soft:#3A3A3A;
+    --ink-dim:#7A716A;
+    --coral:#F25C54;
+    --sun:#F7B538;
+    --sky:#4A6FA5;
+    --fern:#5A8C5A;
+    --plum:#7C5C9E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+
+  /* Paper texture — subtle grain */
+  body{
+    background-image:
+      radial-gradient(circle at 30% 20%, rgba(247,181,56,.08) 0, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(242,92,84,.05) 0, transparent 40%),
+      linear-gradient(180deg, var(--paper) 0%, var(--paper-soft) 100%);
+  }
+
+  /* Halftone tile — used for accent blocks */
+  .halftone-coral{
+    background-image: radial-gradient(var(--coral) 1.4px, transparent 1.6px);
+    background-size: 6px 6px;
+  }
+  .halftone-sun{
+    background-image: radial-gradient(var(--sun) 1.4px, transparent 1.6px);
+    background-size: 6px 6px;
+  }
+  .halftone-sky{
+    background-image: radial-gradient(var(--sky) 1.4px, transparent 1.6px);
+    background-size: 6px 6px;
+  }
+  .halftone-fern{
+    background-image: radial-gradient(var(--fern) 1.4px, transparent 1.6px);
+    background-size: 6px 6px;
+  }
+
+  /* Off-register print effect — solid color with a 4px coral shadow offset */
+  .off-register{
+    position:relative;
+  }
+  .off-register::after{
+    content:attr(data-print);
+    position:absolute;
+    left:5px; top:5px;
+    color:var(--coral);
+    z-index:-1;
+    opacity:.55;
+  }
+  .off-register-sun::after{ color:var(--sun); }
+  .off-register-sky::after{ color:var(--sky); }
+  .off-register-fern::after{ color:var(--fern); }
+
+  /* NAV */
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:28px 56px; border-bottom:2px solid var(--ink);
+  }
+  .brand{
+    display:flex; align-items:center; gap:14px;
+    font-family:'Fraunces',serif; font-weight:600; font-size:24px;
+    letter-spacing:-.01em;
+  }
+  .brand-mark{
+    width:42px; height:42px;
+    background:var(--paper-deep);
+    border:2px solid var(--ink);
+    position:relative;
+  }
+  .brand-mark::before{
+    content:"✦"; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    font-size:20px; color:var(--ink);
+  }
+  .brand-mark::after{
+    content:""; position:absolute; left:-3px; top:-3px;
+    width:42px; height:42px;
+    border:2px solid var(--coral);
+  }
+  .nav-links{
+    display:flex; gap:32px;
+    font-family:'IBM Plex Mono',monospace; font-size:11px;
+    text-transform:uppercase; letter-spacing:.14em;
+  }
+  .nav-links a{
+    padding-bottom:4px;
+    border-bottom:2px solid transparent;
+  }
+  .nav-links a:hover{ border-bottom-color:var(--coral); }
+  .nav-links a.active{ border-bottom-color:var(--ink); }
+
+  /* HERO */
+  .hero{
+    display:grid; grid-template-columns:1.05fr 1fr;
+    gap:48px; padding:80px 56px 64px;
+    align-items:end;
+    border-bottom:2px solid var(--ink);
+    position:relative;
+  }
+  .hero-left{
+    position:relative; z-index:2;
+  }
+  .hero-eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono',monospace; font-size:11px;
+    text-transform:uppercase; letter-spacing:.18em;
+    color:var(--ink); margin-bottom:24px;
+    padding:6px 12px;
+    border:2px solid var(--ink);
+  }
+  .hero-eyebrow .dot{
+    width:10px; height:10px; background:var(--coral);
+    border:2px solid var(--ink); border-radius:50%;
+  }
+  h1{
+    font-family:'Fraunces',serif; font-weight:600;
+    font-size:clamp(44px, 6.4vw, 92px); line-height:1.02;
+    letter-spacing:-.025em; color:var(--ink);
+    margin-bottom:24px;
+  }
+  h1 em{
+    font-style:italic; font-weight:400;
+    color:var(--coral);
+  }
+  h1 .under-sun{
+    background:linear-gradient(180deg, transparent 60%, var(--sun) 60% 90%, transparent 90%);
+    padding:0 4px;
+  }
+  .hero-sub{
+    font-size:18px; line-height:1.55; color:var(--ink-soft);
+    max-width:480px; margin-bottom:32px;
+  }
+  .hero-ctas{ display:flex; gap:14px; align-items:center; }
+  .btn-ink{
+    display:inline-block;
+    padding:14px 22px;
+    background:var(--ink); color:var(--paper);
+    font-family:'IBM Plex Mono',monospace; font-size:12px;
+    text-transform:uppercase; letter-spacing:.14em;
+    border:2px solid var(--ink);
+  }
+  .btn-ink:hover{ background:var(--coral); border-color:var(--coral); }
+  .btn-paper{
+    display:inline-block;
+    padding:14px 22px;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Mono',monospace; font-size:12px;
+    text-transform:uppercase; letter-spacing:.14em;
+    border:2px solid var(--ink);
+  }
+  .btn-paper:hover{ background:var(--sun); }
+
+  /* HERO ILLUSTRATION — hand-drawn Cygnus constellation (the Swan) */
+  .hero-right{
+    position:relative;
+    min-height:480px;
+  }
+  .illustration-frame{
+    position:relative;
+    border:2px solid var(--ink);
+    background:var(--paper-deep);
+    aspect-ratio: 1 / 1.05;
+    overflow:hidden;
+  }
+  /* Sky color wash behind illustration */
+  .illustration-frame::before{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(ellipse at 30% 30%, rgba(74,111,165,.18) 0%, transparent 60%),
+               radial-gradient(ellipse at 70% 70%, rgba(247,181,56,.18) 0%, transparent 60%);
+    z-index:0;
+  }
+  /* Halftone corners */
+  .halftone-corner-tl{
+    position:absolute; top:0; left:0; width:120px; height:120px;
+    z-index:1; opacity:.85;
+  }
+  .halftone-corner-br{
+    position:absolute; bottom:0; right:0; width:140px; height:140px;
+    z-index:1; opacity:.85;
+  }
+
+  /* The constellation SVG fills the frame */
+  .constellation{
+    position:absolute; inset:0; width:100%; height:100%;
+    z-index:2;
+  }
+
+  /* Star label tags */
+  .star-tag{
+    position:absolute;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px; text-transform:uppercase; letter-spacing:.12em;
+    color:var(--ink);
+    padding:3px 7px;
+    border:1.5px solid var(--ink);
+    background:var(--paper);
+    z-index:3;
+    white-space:nowrap;
+  }
+  .star-tag.coral{ border-color:var(--coral); color:var(--coral); }
+  .star-tag.sky{ border-color:var(--sky); color:var(--sky); }
+  .star-tag.sun{ border-color:var(--sun); color:var(--sun); }
+
+  /* Cap-badge — like a magazine cover stamp */
+  .cap-badge{
+    position:absolute; bottom:14px; left:14px;
+    z-index:4;
+    font-family:'IBM Plex Mono',monospace; font-size:10px;
+    text-transform:uppercase; letter-spacing:.18em;
+    color:var(--paper);
+    background:var(--ink);
+    padding:6px 10px;
+  }
+  .cap-badge .accent{ color:var(--sun); }
+
+  /* SECTIONS STRIP — magazine spread */
+  .strip{
+    display:grid; grid-template-columns:repeat(4, 1fr);
+    border-bottom:2px solid var(--ink);
+  }
+  .strip-cell{
+    padding:32px 24px;
+    border-right:2px solid var(--ink);
+    position:relative;
+  }
+  .strip-cell:last-child{ border-right:none; }
+  .strip-cell .no{
+    font-family:'IBM Plex Mono',monospace; font-size:10px;
+    color:var(--ink-dim); text-transform:uppercase; letter-spacing:.2em;
+    margin-bottom:8px;
+  }
+  .strip-cell h3{
+    font-family:'Fraunces',serif; font-weight:600; font-size:22px;
+    line-height:1.15; color:var(--ink); margin-bottom:10px;
+  }
+  .strip-cell p{
+    font-size:14px; color:var(--ink-soft); line-height:1.5;
+  }
+  .strip-cell.swatch-coral{ background:rgba(242,92,84,.07); }
+  .strip-cell.swatch-sun{ background:rgba(247,181,56,.08); }
+  .strip-cell.swatch-sky{ background:rgba(74,111,165,.08); }
+  .strip-cell.swatch-fern{ background:rgba(90,140,90,.07); }
+
+  /* Section label — print-style */
+  .section-label{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace; font-size:11px;
+    text-transform:uppercase; letter-spacing:.2em;
+    color:var(--ink);
+    border-bottom:3px solid var(--coral);
+    padding-bottom:4px;
+    margin-bottom:14px;
+  }
+
+  /* About strip */
+  .about-strip{
+    display:grid; grid-template-columns:1fr 2fr;
+    gap:48px; padding:56px;
+    border-bottom:2px solid var(--ink);
+  }
+  .about-strip h2{
+    font-family:'Fraunces',serif; font-weight:600;
+    font-size:38px; line-height:1.05; color:var(--ink);
+    letter-spacing:-.015em;
+  }
+  .about-strip h2 em{ font-style:italic; color:var(--sky); }
+  .about-strip p{ margin-bottom:14px; color:var(--ink-soft); max-width:680px; }
+
+  /* Footer */
+  footer{
+    padding:28px 56px;
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:'IBM Plex Mono',monospace; font-size:11px;
+    text-transform:uppercase; letter-spacing:.16em;
+    color:var(--ink);
+  }
+  footer .colophon{ color:var(--coral); }
+
+  /* Ornament — like a magazine pull-quote divider */
+  .ornament{
+    text-align:center; padding:18px;
+    font-size:14px; color:var(--ink-dim);
+    border-bottom:2px solid var(--ink);
+  }
+  .ornament span{ margin:0 14px; color:var(--coral); }
+
+  /* Responsive */
+  @media (max-width: 880px){
+    nav{ padding:20px 24px; }
+    .hero{ grid-template-columns:1fr; padding:48px 24px; }
+    .hero-right{ min-height:340px; }
+    .strip{ grid-template-columns:1fr 1fr; }
+    .strip-cell{ border-bottom:2px solid var(--ink); }
+    .about-strip{ grid-template-columns:1fr; padding:32px 24px; }
+    footer{ padding:20px 24px; flex-direction:column; gap:10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">
+    <div class="brand-mark"></div>
+    <span>Celestial&nbsp;<em style="font-style:italic;color:var(--coral)">Tech</em></span>
+  </div>
+  <div class="nav-links">
+    <a href="#" class="active">Home</a>
+    <a href="#">Hermes Agent</a>
+    <a href="#">Services</a>
+    <a href="#">Blog</a>
+    <a href="#">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span class="dot"></span>Cybersecurity · AI · Hong Kong</div>
+
+    <h1 class="off-register" data-print="Cybersecurity, illustrated.">
+      Cyber<span class="under-sun">security</span>,<br/>
+      <em>illustrated</em> like<br/>
+      a&nbsp;<span style="color:var(--sky)">constellation</span>.
+    </h1>
+
+    <p class="hero-sub">
+      We sit at the seam of two crafts: protecting systems, and teaching machines to think.
+      Celestial Tech was founded by practitioners — not consultants with slide decks.
+      Our work reads like a magazine spread, not a SaaS template.
+    </p>
+
+    <div class="hero-ctas">
+      <a href="#" class="btn-ink">↗ Start an engagement</a>
+      <a href="#" class="btn-paper">Read our essays</a>
+    </div>
+  </div>
+
+  <!-- Hand-drawn constellation illustration -->
+  <div class="hero-right">
+    <div class="illustration-frame">
+
+      <!-- Sky color wash via ::before in CSS -->
+
+      <!-- Halftone corners -->
+      <div class="halftone-corner-tl halftone-sky"></div>
+      <div class="halftone-corner-br halftone-coral"></div>
+
+      <!-- The constellation: Cygnus the Swan -->
+      <svg class="constellation" viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg">
+        <!-- Subtle paper-grain dots -->
+        <g opacity=".4">
+          <circle cx="50" cy="80" r="1.5" fill="#1A1A1A"/>
+          <circle cx="120" cy="40" r="1" fill="#1A1A1A"/>
+          <circle cx="280" cy="60" r="1.2" fill="#1A1A1A"/>
+          <circle cx="350" cy="120" r="1" fill="#1A1A1A"/>
+          <circle cx="80" cy="200" r="1.3" fill="#1A1A1A"/>
+          <circle cx="330" cy="280" r="1" fill="#1A1A1A"/>
+          <circle cx="60" cy="350" r="1.4" fill="#1A1A1A"/>
+          <circle cx="300" cy="380" r="1" fill="#1A1A1A"/>
+        </g>
+
+        <!-- Constellation lines (Cygnus cross shape) -->
+        <g stroke="#1A1A1A" stroke-width="2" fill="none" stroke-linecap="round">
+          <!-- The Northern Cross -->
+          <line x1="200" y1="80"  x2="200" y2="340"/>  <!-- Deneb (top) to Albireo (bottom) -->
+          <line x1="100" y1="210" x2="320" y2="210"/>  <!-- Wing to wing -->
+          <!-- Wing tips -->
+          <line x1="100" y1="210" x2="80"  y2="180"/>
+          <line x1="320" y1="210" x2="340" y2="240"/>
+        </g>
+
+        <!-- Off-register "second print" — coral offset of the lines -->
+        <g stroke="#F25C54" stroke-width="2" fill="none" stroke-linecap="round" opacity=".5">
+          <line x1="203" y1="82"  x2="203" y2="342"/>
+          <line x1="103" y1="212" x2="323" y2="212"/>
+        </g>
+
+        <!-- Star points (Cygnus stars) -->
+        <g>
+          <!-- Deneb (top) -->
+          <circle cx="200" cy="80"  r="8" fill="#1A1A1A"/>
+          <circle cx="200" cy="80"  r="3" fill="#FAF6EC"/>
+          <!-- Sadr (center) — brightest -->
+          <circle cx="200" cy="210" r="11" fill="#1A1A1A"/>
+          <circle cx="200" cy="210" r="4" fill="#FAF6EC"/>
+          <!-- Albireo (bottom) -->
+          <circle cx="200" cy="340" r="7" fill="#1A1A1A"/>
+          <circle cx="200" cy="340" r="2.5" fill="#FAF6EC"/>
+          <!-- Wing stars -->
+          <circle cx="100" cy="210" r="6" fill="#1A1A1A"/>
+          <circle cx="320" cy="210" r="6" fill="#1A1A1A"/>
+          <circle cx="80"  cy="180" r="4" fill="#1A1A1A"/>
+          <circle cx="340" cy="240" r="4" fill="#1A1A1A"/>
+        </g>
+
+        <!-- Brand mark — the user's "dot" pinned to Deneb -->
+        <g>
+          <circle cx="200" cy="80" r="16" fill="none" stroke="#F25C54" stroke-width="2"/>
+          <line x1="200" y1="60" x2="200" y2="50" stroke="#F25C54" stroke-width="2"/>
+          <line x1="200" y1="110" x2="200" y2="120" stroke="#F25C54" stroke-width="2"/>
+          <line x1="180" y1="80" x2="170" y2="80" stroke="#F25C54" stroke-width="2"/>
+          <line x1="220" y1="80" x2="230" y2="80" stroke="#F25C54" stroke-width="2"/>
+        </g>
+
+        <!-- Labels -->
+        <g font-family="IBM Plex Mono, monospace" font-size="9" fill="#1A1A1A" letter-spacing="0.1em">
+          <text x="218" y="76">DENEB</text>
+          <text x="218" y="214">SADR</text>
+          <text x="218" y="344">ALBIREO</text>
+          <text x="46"  y="218">GIH</text>
+          <text x="332" y="218">ζ CYG</text>
+        </g>
+      </svg>
+
+      <!-- Star tags (overlay) -->
+      <div class="star-tag coral" style="top:14%; left:46%;">★ Brand = Deneb</div>
+      <div class="star-tag" style="top:48%; left:46%;">Sadr · SOC heart</div>
+      <div class="star-tag sky" style="top:78%; left:46%;">Albireo · AI model</div>
+
+      <div class="cap-badge">Vol. <span class="accent">III</span> · Cygnus · HKT</div>
+    </div>
+  </div>
+</section>
+
+<!-- MAGAZINE-SPREAD STRIP — 4 sections at a glance -->
+<div class="strip">
+
+  <div class="strip-cell swatch-coral">
+    <div class="no">No. 01 — SOC</div>
+    <h3>Tiered monitoring,<br/>not alert spam.</h3>
+    <p>24/7 SOC tier-2 analysts + AI co-pilots. Heartbeat 99.98%, FP rate 0.4%.</p>
+  </div>
+
+  <div class="strip-cell swatch-sun">
+    <div class="no">No. 02 — AI</div>
+    <h3>Models that<br/>do the work.</h3>
+    <p>Hermes Agent — a Cantonese-fluent AI employee that drafts, replies, files.</p>
+  </div>
+
+  <div class="strip-cell swatch-sky">
+    <div class="no">No. 03 — Host</div>
+    <h3>One-click<br/>agent deployment.</h3>
+    <p>Hermes Agent Hosting — open-source runtime on Hong Kong infrastructure.</p>
+  </div>
+
+  <div class="strip-cell swatch-fern">
+    <div class="no">No. 04 — Privacy</div>
+    <h3>Your data,<br/>your orbit.</h3>
+    <p>No third-party training. Local LLMs optional. Encrypted at rest.</p>
+  </div>
+
+</div>
+
+<div class="ornament">❦ <span>·</span> ✦ <span>·</span> ❦</div>
+
+<!-- ABOUT STRIP -->
+<section class="about-strip">
+  <div>
+    <div class="section-label">No. 05 — About</div>
+    <h2>An atlas for the<br/><em>intersection</em>.</h2>
+  </div>
+  <div>
+    <p>
+      We sit at the seam of two crafts: protecting systems, and teaching machines to think.
+      Most firms treat one of these as decoration. We treat both as the work itself.
+    </p>
+    <p>
+      Celestial Tech was founded by practitioners — not consultants with slide decks. Our team
+      has shipped security at three Fortune 500s and built AI for two of the largest open-source
+      model labs. When you engage us, you get the engineers, not the account managers.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <span>© MMXXVI · Celestial Tech</span>
+  <span class="colophon">Printed in Hong Kong · CMYK + 1 spot</span>
+  <span>Privacy · Terms · Contact</span>
+</footer>
+
+</body>
+</html>
