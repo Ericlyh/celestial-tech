@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>OpenClaw Hosting — Celestial Tech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg:#070A14; --bg-mid:#0E1322; --bg-soft:#161C30; --ink:#F4F6FB; --ink-mid:#CBD5E1; --ink-dim:#94A3B8; --cyan:#5EEAD4; --violet:#A78BFA; --amber:#F4B860; --display:"Fraunces",Georgia,serif; --sans:"Manrope",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); }
+  a { color:var(--cyan); text-decoration:none; }
+  .nav { position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:22px 40px; background:rgba(7,10,20,0.78); backdrop-filter:blur(14px); border-bottom:1px solid rgba(94,234,212,0.10); }
+  .nav .logo { font-family:var(--display); font-weight:900; font-size:22px; letter-spacing:-0.02em; color:var(--ink); display:flex; align-items:center; gap:10px; }
+  .nav .logo .dot { width:10px; height:10px; border-radius:50%; background:var(--cyan); box-shadow:0 0 18px var(--cyan); }
+  .nav ul { display:flex; gap:28px; list-style:none; padding:0; margin:0; }
+  .nav ul a { color:var(--ink); font-weight:500; font-size:14px; text-transform:uppercase; letter-spacing:0.08em; }
+  .nav .cta { padding:10px 18px; border:1px solid var(--cyan); border-radius:999px; color:var(--cyan); font-size:13px; text-transform:uppercase; letter-spacing:0.08em; }
+
+  .hero { padding:80px 40px 40px; max-width:1440px; margin:0 auto; display:grid; grid-template-columns:1.4fr 1fr; gap:60px; align-items:center; }
+  .eyebrow { font-family:var(--mono); font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--cyan); margin-bottom:24px; }
+  .hero h1 { font-family:var(--display); font-weight:900; font-size:clamp(56px,8.5vw,140px); line-height:0.92; letter-spacing:-0.04em; margin:0 0 24px; }
+  .hero h1 em { font-style:italic; color:var(--violet); font-weight:500; }
+  .hero .lede { font-family:var(--display); font-style:italic; font-size:22px; color:var(--ink-mid); max-width:680px; line-height:1.5; margin-bottom:32px; }
+
+  /* Terminal mock */
+  .term { background:#0B1020; border:1px solid rgba(94,234,212,0.25); border-radius:8px; padding:24px; font-family:var(--mono); font-size:13px; color:var(--ink-mid); }
+  .term .hd { display:flex; gap:6px; margin-bottom:14px; }
+  .term .hd span { width:10px; height:10px; border-radius:50%; background:#FF5F57; }
+  .term .hd span:nth-child(2) { background:#FEBC2E; }
+  .term .hd span:nth-child(3) { background:#28C840; }
+  .term .ln { white-space:pre; line-height:1.7; }
+  .term .prompt { color:var(--cyan); }
+  .term .cmd { color:var(--ink); }
+  .term .ok { color:#A7F3D0; }
+  .term .warn { color:var(--amber); }
+  .term .dim { color:var(--ink-dim); }
+
+  section { max-width:1440px; margin:0 auto; padding:60px 40px; }
+  .section-eyebrow { font-family:var(--mono); font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--amber); margin-bottom:18px; }
+  .section-title { font-family:var(--display); font-weight:900; font-size:clamp(40px,5.5vw,72px); line-height:0.95; letter-spacing:-0.03em; margin:0 0 24px; }
+  .section-title em { font-style:italic; color:var(--violet); font-weight:500; }
+
+  /* Specs table */
+  .specs { display:grid; grid-template-columns:repeat(4,1fr); gap:0; border:1px solid rgba(94,234,212,0.18); }
+  .spec { padding:32px 24px; border-right:1px solid rgba(94,234,212,0.18); }
+  .spec:last-child { border-right:0; }
+  .spec .l { font-family:var(--mono); font-size:11px; color:var(--cyan); letter-spacing:0.18em; text-transform:uppercase; }
+  .spec .v { font-family:var(--display); font-weight:900; font-size:36px; color:var(--ink); margin-top:14px; }
+  .spec .v sup { font-size:14px; color:var(--amber); vertical-align:super; }
+  .spec .n { font-family:var(--mono); font-size:11px; color:var(--ink-dim); margin-top:10px; letter-spacing:0.14em; }
+
+  /* Use cases */
+  .use { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .use .card { background:var(--bg-soft); border:1px solid rgba(167,139,250,0.20); padding:28px; }
+  .use .icon { font-size:28px; margin-bottom:14px; }
+  .use h3 { font-family:var(--display); font-weight:700; font-size:24px; margin:0 0 8px; }
+  .use p { color:var(--ink-mid); font-size:14px; line-height:1.55; margin:0 0 14px; }
+  .use .meta { font-family:var(--mono); font-size:10px; color:var(--violet); letter-spacing:0.18em; text-transform:uppercase; padding-top:14px; border-top:1px dashed rgba(167,139,250,0.20); }
+
+  /* Architecture diagram */
+  .arch { background:var(--bg-soft); border:1px solid rgba(94,234,212,0.18); padding:32px; }
+  .arch .row { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:14px; }
+  .arch .box { border:1px solid rgba(94,234,212,0.30); padding:14px; font-family:var(--mono); font-size:11px; color:var(--ink-mid); letter-spacing:0.10em; }
+  .arch .box .name { color:var(--cyan); font-weight:700; display:block; margin-bottom:4px; }
+  .arch .arrow { text-align:center; color:var(--violet); font-size:20px; padding:4px 0; }
+
+  /* Pricing */
+  .pricing { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+  .price { background:var(--bg-soft); border:1px solid rgba(244,184,96,0.20); padding:32px; }
+  .price .name { font-family:var(--mono); font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--amber); }
+  .price .amt { font-family:var(--display); font-weight:900; font-size:48px; line-height:1; margin:14px 0 4px; }
+  .price .per { color:var(--ink-dim); font-size:13px; margin-bottom:18px; }
+  .price ul { list-style:none; padding:0; margin:0; }
+  .price li { padding:8px 0; border-bottom:1px dashed rgba(167,139,250,0.20); font-size:14px; color:var(--ink-mid); }
+  .price li::before { content:"✦ "; color:var(--cyan); }
+
+  footer { border-top:1px solid rgba(94,234,212,0.18); padding:40px; background:var(--bg-mid); font-family:var(--mono); font-size:11px; color:var(--ink-dim); letter-spacing:0.14em; display:flex; justify-content:space-between; max-width:1440px; margin:40px auto 0; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="logo"><span class="dot"></span> Celestial Tech</div>
+  <ul><li><a href="#">Services</a></li><li><a href="#">Hermes</a></li><li><a href="#" style="color:var(--cyan);">OpenClaw</a></li><li><a href="#">Blog</a></li><li><a href="#">Contact</a></li></ul>
+  <a href="#" class="cta">Get started →</a>
+</nav>
+
+<header class="hero">
+  <div>
+    <div class="eyebrow">// OPENCLAW — SELF-HOSTED BROWSER AUTOMATION</div>
+    <h1>Browser agents, on <em>your</em> infra.</h1>
+    <p class="lede">OpenClaw is our hosted deployment of the open-source browser-automation framework. We run it on HK VPS, you get a clean API and an audit log. No model data leaves the territory.</p>
+  </div>
+  <div class="term">
+    <div class="hd"><span></span><span></span><span></span></div>
+    <div class="ln"><span class="prompt">$</span> <span class="cmd">openclaw deploy --channel contracts</span></div>
+    <div class="ln"><span class="ok">✓</span> pull image <span class="dim">openclaw:1.4.2 (sha256:9e2f…)</span></div>
+    <div class="ln"><span class="ok">✓</span> create vpc <span class="dim">hk-vpc-7 (3 nodes)</span></div>
+    <div class="ln"><span class="ok">✓</span> load config <span class="dim">contracts.yaml</span></div>
+    <div class="ln"><span class="ok">✓</span> start agents <span class="dim">(parallel: 4)</span></div>
+    <div class="ln"><span class="warn">!</span> audit stream <span class="dim">→ wss://audit.celestial-tech.com</span></div>
+    <div class="ln"><span class="ok">✓</span> ready in <span class="dim">38s · 0 data egress</span></div>
+    <div class="ln"><span class="prompt">$</span> <span class="cmd">_</span></div>
+  </div>
+</header>
+
+<section>
+  <div class="section-eyebrow">// 01 — Specifications</div>
+  <div class="section-title">The numbers that <em>matter</em>.</div>
+  <div class="specs">
+    <div class="spec"><div class="l">DEPLOY</div><div class="v">5<sup>min</sup></div><div class="n">From zero to running agent</div></div>
+    <div class="spec"><div class="l">CONCURRENCY</div><div class="v">200<sup>+</sup></div><div class="n">Parallel browser sessions per node</div></div>
+    <div class="spec"><div class="l">DATA EGRESS</div><div class="v">0<sup>bytes</sup></div><div class="n">Zero data leaves HK infrastructure</div></div>
+    <div class="spec"><div class="l">UPTIME · 90D</div><div class="v">99.94<sup>%</sup></div><div class="n">Across 14 deployments in production</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">// 02 — Architecture</div>
+  <div class="section-title">How it <em>stacks</em>.</div>
+  <div class="arch">
+    <div class="row">
+      <div class="box"><span class="name">YOUR APP</span>Internal tooling · CRM · Custom integrations</div>
+      <div class="box"><span class="name">OPENCLAW API</span>REST + WebSocket · Audit hooks</div>
+      <div class="box"><span class="name">AGENT RUNTIME</span>Headless browser · Context store</div>
+      <div class="box"><span class="name">YOUR DATA</span>HK-resident · VPC-isolated</div>
+    </div>
+    <div class="arrow">↓ ↓ ↓ ↓</div>
+    <div class="row">
+      <div class="box"><span class="name">AUDIT LOG</span>Append-only · Signed</div>
+      <div class="box"><span class="name">MODEL LAYER</span>Qwen 2.5 · Llama 3.3 · Mistral</div>
+      <div class="box"><span class="name">HARDWARE</span>HK VPS · AMD EPYC · NVMe</div>
+      <div class="box"><span class="name">OPERATIONS</span>24/7 on-call · 4h SLA</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">// 03 — Use cases</div>
+  <div class="section-title">Three teams, <em>three jobs</em>.</div>
+  <div class="use">
+    <div class="card"><div class="icon">⚖️</div><h3>Contract review</h3><p>Surface relevant precedents from your matter library. Partners still sign off; review time drops 60%.</p><div class="meta">LAW · 6 PARTNERS · CENTRAL</div></div>
+    <div class="card"><div class="icon">📊</div><h3>Compliance monitoring</h3><p>Watch regulatory feeds (HKMA, SFC), summarise deltas, route to the right partner. No more Sunday-night inbox triage.</p><div class="meta">FINANCE · BOUTIQUE WEALTH ADVISOR</div></div>
+    <div class="card"><div class="icon">🛒</div><h3>Supplier negotiation</h3><p>Pull pricing across 12 supplier portals, flag anomalies, draft counter-offers. Stays in your email thread.</p><div class="meta">RETAIL · INDEPENDENT GROCER · 4 STORES</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">// 04 — Pricing</div>
+  <div class="section-title">Two ways to <em>pay</em>.</div>
+  <div class="pricing">
+    <div class="price"><div class="name">SELF-SERVE</div><div class="amt">HK$4,800 / mo</div><div class="per">+ HK$0.30 per browser-session hour</div><ul><li>Up to 5 concurrent agents</li><li>Shared HK VPS infrastructure</li><li>Standard audit log retention (90 days)</li><li>Email support, 24h SLA</li><li>Best for: solo practices, single-team deployments</li></ul></div>
+    <div class="price"><div class="name">DEDICATED</div><div class="amt">Custom</div><div class="per">From HK$18k / mo</div><ul><li>Unlimited agents, dedicated VPC</li><li>Your own HK hardware (or shared)</li><li>Configurable audit retention (up to 7 years)</li><li>24/7 on-call, 1h SLA</li><li>Bespoke integrations & quarterly review</li></ul></div>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 CELESTIAL TECH LTD · HK · 14F, 18 BONHAM STRAND</div>
+  <div>v 4.0 · BUILD 2026.08.24 · MADE IN SHEUNG WAN</div>
+</footer>
+
+</body>
+</html>

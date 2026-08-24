@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Journal — Celestial Tech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg:#070A14; --bg-mid:#0E1322; --bg-soft:#161C30; --ink:#F4F6FB; --ink-mid:#CBD5E1; --ink-dim:#94A3B8; --cyan:#5EEAD4; --violet:#A78BFA; --amber:#F4B860; --display:"Fraunces",Georgia,serif; --sans:"Manrope",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); }
+  a { color:var(--cyan); text-decoration:none; }
+  .nav { position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:22px 40px; background:rgba(7,10,20,0.78); backdrop-filter:blur(14px); border-bottom:1px solid rgba(94,234,212,0.10); }
+  .nav .logo { font-family:var(--display); font-weight:900; font-size:22px; letter-spacing:-0.02em; color:var(--ink); display:flex; align-items:center; gap:10px; }
+  .nav .logo .dot { width:10px; height:10px; border-radius:50%; background:var(--cyan); box-shadow:0 0 18px var(--cyan); }
+  .nav ul { display:flex; gap:28px; list-style:none; padding:0; margin:0; }
+  .nav ul a { color:var(--ink); font-weight:500; font-size:14px; text-transform:uppercase; letter-spacing:0.08em; }
+  .nav .cta { padding:10px 18px; border:1px solid var(--cyan); border-radius:999px; color:var(--cyan); font-size:13px; text-transform:uppercase; letter-spacing:0.08em; }
+
+  .hero { padding:80px 40px 40px; max-width:1440px; margin:0 auto; }
+  .eyebrow { font-family:var(--mono); font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--cyan); margin-bottom:24px; }
+  .hero h1 { font-family:var(--display); font-weight:900; font-size:clamp(56px,8vw,128px); line-height:0.92; letter-spacing:-0.04em; margin:0 0 24px; }
+  .hero h1 em { font-style:italic; color:var(--amber); font-weight:500; }
+  .hero .lede { font-family:var(--display); font-style:italic; font-size:22px; color:var(--ink-mid); max-width:720px; line-height:1.5; }
+
+  section { max-width:1440px; margin:0 auto; padding:60px 40px; }
+  .filters { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:40px; padding-bottom:24px; border-bottom:1px solid rgba(94,234,212,0.18); }
+  .filters .f { padding:8px 18px; border:1px solid rgba(94,234,212,0.30); border-radius:999px; font-family:var(--mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-mid); cursor:pointer; }
+  .filters .f.on { background:var(--cyan); color:var(--bg); border-color:var(--cyan); }
+
+  /* Featured post */
+  .featured { display:grid; grid-template-columns:1.2fr 1fr; gap:48px; padding:36px; background:var(--bg-soft); border:1px solid rgba(244,184,96,0.20); margin-bottom:36px; }
+  .featured .meta { font-family:var(--mono); font-size:11px; color:var(--amber); letter-spacing:0.18em; }
+  .featured h2 { font-family:var(--display); font-weight:900; font-size:48px; line-height:1.0; letter-spacing:-0.02em; margin:14px 0 18px; }
+  .featured h2 em { font-style:italic; color:var(--cyan); font-weight:500; }
+  .featured p { color:var(--ink-mid); font-size:16px; line-height:1.6; }
+  .featured .author { font-family:var(--display); font-style:italic; color:var(--ink-dim); margin-top:18px; font-size:14px; }
+  .featured .visual { aspect-ratio:5/4; background:radial-gradient(circle at 30% 40%, rgba(94,234,212,0.30), transparent 60%), radial-gradient(circle at 70% 60%, rgba(167,139,250,0.30), transparent 60%), radial-gradient(circle at 50% 50%, rgba(244,184,96,0.20), transparent 70%); border:1px solid rgba(94,234,212,0.20); }
+
+  /* Post grid */
+  .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .post { background:var(--bg-mid); border:1px solid rgba(94,234,212,0.18); padding:28px; }
+  .post .meta { font-family:var(--mono); font-size:11px; color:var(--cyan); letter-spacing:0.18em; }
+  .post h3 { font-family:var(--display); font-weight:700; font-size:24px; line-height:1.15; margin:14px 0 10px; }
+  .post h3 em { font-style:italic; color:var(--amber); font-weight:500; }
+  .post p { color:var(--ink-mid); font-size:14px; line-height:1.55; margin:0 0 16px; }
+  .post .read { font-family:var(--mono); font-size:11px; color:var(--violet); letter-spacing:0.18em; text-transform:uppercase; }
+
+  /* Subscribe */
+  .sub { margin-top:60px; padding:48px; background:linear-gradient(135deg,var(--bg-soft),var(--bg-mid)); border:1px solid rgba(94,234,212,0.30); display:grid; grid-template-columns:1.4fr 1fr; gap:40px; align-items:center; }
+  .sub h3 { font-family:var(--display); font-weight:900; font-size:48px; line-height:0.95; margin:0 0 12px; }
+  .sub h3 em { font-style:italic; color:var(--amber); }
+  .sub p { color:var(--ink-mid); font-size:16px; line-height:1.55; }
+  .sub form { display:flex; gap:8px; }
+  .sub input { flex:1; padding:14px 18px; background:var(--bg); color:var(--ink); border:1px solid rgba(94,234,212,0.30); border-radius:999px; font-size:14px; }
+  .sub button { padding:14px 24px; background:var(--cyan); color:var(--bg); border:0; border-radius:999px; font-weight:700; font-size:13px; letter-spacing:0.10em; text-transform:uppercase; cursor:pointer; }
+
+  footer { border-top:1px solid rgba(94,234,212,0.18); padding:40px; background:var(--bg-mid); font-family:var(--mono); font-size:11px; color:var(--ink-dim); letter-spacing:0.14em; display:flex; justify-content:space-between; max-width:1440px; margin:40px auto 0; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="logo"><span class="dot"></span> Celestial Tech</div>
+  <ul><li><a href="#">Services</a></li><li><a href="#">Hermes</a></li><li><a href="#">OpenClaw</a></li><li><a href="#" style="color:var(--cyan);">Journal</a></li><li><a href="#">Contact</a></li></ul>
+  <a href="#" class="cta">Subscribe →</a>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">// THE CELESTIAL JOURNAL — VOL. 04</div>
+  <h1>Notes from <em>deployment</em>.</h1>
+  <p class="lede">Field notes, engineering deep-dives, and policy commentary on running private AI in production. Updated weekly, no email list signup required to read.</p>
+</header>
+
+<section>
+  <div class="filters">
+    <div class="f on">ALL · 28</div>
+    <div class="f">FIELD NOTES · 11</div>
+    <div class="f">ENGINEERING · 9</div>
+    <div class="f">POLICY · 5</div>
+    <div class="f">CASE STUDIES · 3</div>
+  </div>
+
+  <div class="featured">
+    <div>
+      <div class="meta">FIELD NOTES · 2026·08·21 · 12 MIN READ</div>
+      <h2>What we learned deploying <em>Hermes</em> in a 12-seat noodle shop.</h2>
+      <p>The hardest prompt to write isn't for the model. It's for the human who has to trust it. Six months in, here's the operating manual we wish we'd had.</p>
+      <div class="author">— by Eric Leung, founder</div>
+    </div>
+    <div class="visual"></div>
+  </div>
+
+  <div class="grid">
+    <div class="post"><div class="meta">ENGINEERING · 2026·07·30</div><h3>On hosting <em>OpenClaw</em> without owning a rack</h3><p>How we got to 99.9% uptime on commodity HK VPS providers, without compromising on data residency.</p><div class="read">Read →</div></div>
+    <div class="post"><div class="meta">POLICY · 2026·07·12</div><h3>HK PDPO, in <em>plain English</em></h3><p>A non-lawyer's guide to the Personal Data (Privacy) Ordinance, with a checklist you can actually use.</p><div class="read">Read →</div></div>
+    <div class="post"><div class="meta">FIELD NOTES · 2026·06·28</div><h3>The first time an AI agent <em>apologised</em></h3><p>Our agent at a Kowloon beauty salon handled a wrong-order complaint. What it said next surprised everyone, including us.</p><div class="read">Read →</div></div>
+    <div class="post"><div class="meta">CASE STUDY · 2026·06·15</div><h3>A 6-partner law firm and a <em>62%</em> drop in review time</h3><p>How Halcyon Partners replaced first-pass contract review with a Hermes-tuned agent — without losing partners' sign-off authority.</p><div class="read">Read →</div></div>
+    <div class="post"><div class="meta">ENGINEERING · 2026·05·29</div><h3>Building a Cantonese LLM <em>eval</em> from scratch</h3><p>We couldn't find one, so we wrote one. Here's what's in it, what's missing, and why you should write your own.</p><div class="read">Read →</div></div>
+    <div class="post"><div class="meta">FIELD NOTES · 2026·05·14</div><h3>Why we <em>don't</em> use a chatbot widget on our site</h3><p>Everyone else has one. We've been deliberately not adding one for two years. Here's the data and the reasoning.</p><div class="read">Read →</div></div>
+  </div>
+
+  <div class="sub">
+    <div>
+      <h3>Get the <em>weekly</em> note.</h3>
+      <p>One short email on Thursdays. What we shipped, what we read, what we're arguing about internally. No tracking pixels, no marketing automation.</p>
+    </div>
+    <form onsubmit="event.preventDefault();">
+      <input type="email" placeholder="you@firm.com" />
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 CELESTIAL TECH LTD · HK · 14F, 18 BONHAM STRAND</div>
+  <div>v 4.0 · BUILD 2026.08.24 · MADE IN SHEUNG WAN</div>
+</footer>
+
+</body>
+</html>

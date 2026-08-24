@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Privacy Policy — Celestial Tech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg:#070A14; --bg-mid:#0E1322; --bg-soft:#161C30; --ink:#F4F6FB; --ink-mid:#CBD5E1; --ink-dim:#94A3B8; --cyan:#5EEAD4; --violet:#A78BFA; --amber:#F4B860; --display:"Fraunces",Georgia,serif; --sans:"Manrope",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); }
+  a { color:var(--cyan); text-decoration:none; }
+  .nav { position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:22px 40px; background:rgba(7,10,20,0.78); backdrop-filter:blur(14px); border-bottom:1px solid rgba(94,234,212,0.10); }
+  .nav .logo { font-family:var(--display); font-weight:900; font-size:22px; letter-spacing:-0.02em; color:var(--ink); display:flex; align-items:center; gap:10px; }
+  .nav .logo .dot { width:10px; height:10px; border-radius:50%; background:var(--cyan); box-shadow:0 0 18px var(--cyan); }
+  .nav ul { display:flex; gap:28px; list-style:none; padding:0; margin:0; }
+  .nav ul a { color:var(--ink); font-weight:500; font-size:14px; text-transform:uppercase; letter-spacing:0.08em; }
+  .nav .cta { padding:10px 18px; border:1px solid var(--cyan); border-radius:999px; color:var(--cyan); font-size:13px; text-transform:uppercase; letter-spacing:0.08em; }
+
+  .header { max-width:880px; margin:0 auto; padding:80px 40px 32px; }
+  .header .eyebrow { font-family:var(--mono); font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--cyan); margin-bottom:24px; }
+  .header h1 { font-family:var(--display); font-weight:900; font-size:clamp(48px,6vw,84px); line-height:0.95; letter-spacing:-0.03em; margin:0 0 20px; }
+  .header h1 em { font-style:italic; color:var(--amber); font-weight:500; }
+  .header .lede { font-family:var(--display); font-style:italic; font-size:20px; color:var(--ink-mid); line-height:1.55; max-width:680px; margin:0 0 24px; }
+  .header .meta { font-family:var(--mono); font-size:12px; color:var(--ink-dim); letter-spacing:0.14em; }
+
+  .layout { max-width:1440px; margin:0 auto; padding:40px 40px 60px; display:grid; grid-template-columns:240px 880px; gap:48px; }
+  aside.toc { position:sticky; top:80px; align-self:start; padding:24px; background:var(--bg-soft); border:1px solid rgba(94,234,212,0.18); }
+  aside.toc .l { font-family:var(--mono); font-size:11px; color:var(--amber); letter-spacing:0.18em; text-transform:uppercase; margin-bottom:18px; }
+  aside.toc ol { list-style:none; padding:0; margin:0; counter-reset:s; }
+  aside.toc li { counter-increment:s; padding:6px 0; font-size:13px; color:var(--ink-mid); }
+  aside.toc li::before { content:"§ " counter(s); font-family:var(--mono); color:var(--cyan); margin-right:6px; font-size:11px; }
+  aside.toc li a { color:inherit; }
+
+  article { max-width:760px; }
+  article h2 { font-family:var(--display); font-weight:900; font-size:30px; line-height:1.05; margin:48px 0 18px; letter-spacing:-0.02em; }
+  article h2:first-of-type { margin-top:0; }
+  article h2 em { font-style:italic; color:var(--violet); font-weight:500; }
+  article p { font-size:16px; line-height:1.7; color:var(--ink-mid); margin:0 0 18px; }
+  article ul { font-size:16px; line-height:1.7; color:var(--ink-mid); padding-left:24px; }
+  article ul li { margin-bottom:8px; }
+  article .callout { background:var(--bg-soft); border-left:3px solid var(--cyan); padding:20px 24px; margin:24px 0; font-family:var(--display); font-style:italic; font-size:17px; color:var(--ink); }
+  article .updated { font-family:var(--mono); font-size:11px; color:var(--ink-dim); letter-spacing:0.14em; padding-top:32px; border-top:1px dashed rgba(94,234,212,0.20); margin-top:48px; }
+
+  footer { border-top:1px solid rgba(94,234,212,0.18); padding:40px; background:var(--bg-mid); font-family:var(--mono); font-size:11px; color:var(--ink-dim); letter-spacing:0.14em; display:flex; justify-content:space-between; max-width:1440px; margin:40px auto 0; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="logo"><span class="dot"></span> Celestial Tech</div>
+  <ul><li><a href="#">Services</a></li><li><a href="#">Hermes</a></li><li><a href="#">OpenClaw</a></li><li><a href="#">Journal</a></li><li><a href="#">Contact</a></li></ul>
+  <a href="#" class="cta">Get started →</a>
+</nav>
+
+<header class="header">
+  <div class="eyebrow">// LEGAL · PRIVACY POLICY · DOCUMENT 01 OF 02</div>
+  <h1>Privacy <em>Policy</em>.</h1>
+  <p class="lede">In plain English: what we collect, what we don't, where it lives, and how you can have it removed. Aligned with HK PDPO. Updated 2026-08-01.</p>
+  <div class="meta">v 4.2 · LAST REVISED 2026-08-01 · PREVIOUS v 4.1 (2026-04-12)</div>
+</header>
+
+<div class="layout">
+  <aside class="toc">
+    <div class="l">CONTENTS</div>
+    <ol>
+      <li><a href="#">Who we are</a></li>
+      <li><a href="#">What we collect</a></li>
+      <li><a href="#">Why we collect it</a></li>
+      <li><a href="#">Where it lives</a></li>
+      <li><a href="#">Who we share with</a></li>
+      <li><a href="#">How long we keep it</a></li>
+      <li><a href="#">Your rights</a></li>
+      <li><a href="#">Cookies & tracking</a></li>
+      <li><a href="#">Minors</a></li>
+      <li><a href="#">Changes to this policy</a></li>
+      <li><a href="#">Contact us</a></li>
+    </ol>
+  </aside>
+
+  <article>
+    <h2>01 · Who we <em>are</em>.</h2>
+    <p>Celestial Tech Limited ("we", "us", "our") is a private company incorporated in Hong Kong (CR No. 3124-582). Our registered office is at 14/F, 18 Bonham Strand, Sheung Wan, Hong Kong. We are the data controller for any personal data collected through our services.</p>
+
+    <h2>02 · What we <em>collect</em>.</h2>
+    <p>It depends on which service you use. Generally, we collect only the minimum necessary:</p>
+    <ul>
+      <li><strong>Account data.</strong> Name, work email, phone number, business name, billing details.</li>
+      <li><strong>Service data.</strong> Conversations between your customers and the deployed agent, system logs, performance metrics.</li>
+      <li><strong>Website data.</strong> Server logs (IP address, user agent, requested URL) for 30 days, then aggregated and discarded.</li>
+    </ul>
+    <p>We do not collect biometric data, location data beyond what's required for service delivery, or any special-category data under PDPO.</p>
+
+    <div class="callout">We don't sell personal data. We don't share it with advertisers. We don't use it to train models that other customers will use.</div>
+
+    <h2>03 · Why we collect <em>it</em>.</h2>
+    <p>To provide the service you've contracted us for, to bill you, to comply with our legal obligations, and to detect abuse. We rely on the lawful bases of contract performance, legal obligation, and legitimate interest under PDPO.</p>
+
+    <h2>04 · Where it <em>lives</em>.</h2>
+    <p>All customer service data is stored on infrastructure physically located in Hong Kong, operated by HK-based providers. Backups are encrypted at rest and held within HK. We do not transfer personal data outside Hong Kong unless required by law (e.g. a valid HK court order).</p>
+
+    <h2>05 · Who we share <em>with</em>.</h2>
+    <ul>
+      <li><strong>Our staff.</strong> Only those with a need to know, and only with documented access controls.</li>
+      <li><strong>Sub-processors.</strong> Listed below. We notify you of changes at least 30 days in advance.</li>
+      <li><strong>Regulators.</strong> When required by HK law, nothing more.</li>
+    </ul>
+
+    <h2>06 · How long we keep <em>it</em>.</h2>
+    <p>By default, conversation transcripts are retained for 90 days, then deleted. You may configure shorter or longer retention (up to 7 years) on the FIRM plan. Account data is retained for the duration of the contract plus 7 years for tax purposes.</p>
+
+    <h2>07 · Your <em>rights</em>.</h2>
+    <p>Under PDPO, you have the right to: access, correct, delete, and restrict processing of personal data we hold about you. We will respond within 30 days, free of charge.</p>
+    <p>To exercise any of these rights, write to <a href="mailto:privacy@celestial-tech.com">privacy@celestial-tech.com</a>. We will acknowledge within 5 business days.</p>
+
+    <h2>08 · Cookies & <em>tracking</em>.</h2>
+    <p>We do not use third-party tracking cookies. We do not use Google Analytics, Facebook Pixel, or similar. We use one self-hosted analytics tool (Plausible, EU instance) that records only aggregated, anonymised page views.</p>
+
+    <h2>09 · <em>Minors</em>.</h2>
+    <p>Our services are intended for business customers (B2B). We do not knowingly collect data from minors.</p>
+
+    <h2>10 · Changes to this <em>policy</em>.</h2>
+    <p>We will notify you by email at least 30 days before any material change takes effect. The "last revised" date at the top of this page is authoritative.</p>
+
+    <h2>11 · Contact <em>us</em>.</h2>
+    <p>Celestial Tech Limited · 14/F, 18 Bonham Strand · Sheung Wan · Hong Kong<br>Email: <a href="mailto:privacy@celestial-tech.com">privacy@celestial-tech.com</a> · Phone: +852 5123 4567<br>Data Protection Officer: Wing Cheng, <a href="mailto:dpo@celestial-tech.com">dpo@celestial-tech.com</a></p>
+
+    <div class="updated">DOCUMENT v 4.2 · EFFECTIVE 2026-08-01 · NEXT REVIEW 2026-11-01</div>
+  </article>
+</div>
+
+<footer>
+  <div>© 2026 CELESTIAL TECH LTD · HK · 14F, 18 BONHAM STRAND</div>
+  <div>v 4.0 · BUILD 2026.08.24 · MADE IN SHEUNG WAN</div>
+</footer>
+
+</body>
+</html>

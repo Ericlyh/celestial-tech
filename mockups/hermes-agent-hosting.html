@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Hermes Agent Hosting — Celestial Tech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg:#070A14; --bg-mid:#0E1322; --bg-soft:#161C30; --ink:#F4F6FB; --ink-mid:#CBD5E1; --ink-dim:#94A3B8; --cyan:#5EEAD4; --violet:#A78BFA; --amber:#F4B860; --display:"Fraunces",Georgia,serif; --sans:"Manrope",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); }
+  a { color:var(--cyan); text-decoration:none; }
+  .nav { position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:22px 40px; background:rgba(7,10,20,0.78); backdrop-filter:blur(14px); border-bottom:1px solid rgba(94,234,212,0.10); }
+  .nav .logo { font-family:var(--display); font-weight:900; font-size:22px; letter-spacing:-0.02em; color:var(--ink); display:flex; align-items:center; gap:10px; }
+  .nav .logo .dot { width:10px; height:10px; border-radius:50%; background:var(--cyan); box-shadow:0 0 18px var(--cyan); }
+  .nav ul { display:flex; gap:28px; list-style:none; padding:0; margin:0; }
+  .nav ul a { color:var(--ink); font-weight:500; font-size:14px; text-transform:uppercase; letter-spacing:0.08em; }
+  .nav .cta { padding:10px 18px; border:1px solid var(--cyan); border-radius:999px; color:var(--cyan); font-size:13px; text-transform:uppercase; letter-spacing:0.08em; }
+
+  .hero { padding:80px 40px 40px; max-width:1440px; margin:0 auto; }
+  .eyebrow { font-family:var(--mono); font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--cyan); margin-bottom:24px; }
+  .hero h1 { font-family:var(--display); font-weight:900; font-size:clamp(56px,8.5vw,140px); line-height:0.92; letter-spacing:-0.04em; margin:0 0 24px; }
+  .hero h1 em { font-style:italic; color:var(--cyan); font-weight:500; }
+  .hero .lede { font-family:var(--display); font-style:italic; font-size:22px; color:var(--ink-mid); max-width:680px; line-height:1.5; margin-bottom:32px; }
+
+  section { max-width:1440px; margin:0 auto; padding:60px 40px; }
+  .section-eyebrow { font-family:var(--mono); font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--amber); margin-bottom:18px; }
+  .section-title { font-family:var(--display); font-weight:900; font-size:clamp(40px,5.5vw,72px); line-height:0.95; letter-spacing:-0.03em; margin:0 0 24px; }
+  .section-title em { font-style:italic; color:var(--violet); font-weight:500; }
+
+  /* Chat demo */
+  .chat-demo { display:grid; grid-template-columns:1fr 1.4fr; gap:40px; align-items:start; }
+  .chat-mock { background:var(--bg-soft); border:1px solid rgba(94,234,212,0.25); border-radius:18px; padding:24px; font-size:14px; }
+  .chat-head { display:flex; align-items:center; gap:10px; padding-bottom:14px; border-bottom:1px solid rgba(94,234,212,0.15); margin-bottom:14px; }
+  .chat-head .av { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,var(--cyan),var(--violet)); }
+  .chat-head .name { font-weight:700; }
+  .chat-head .online { font-family:var(--mono); font-size:10px; color:var(--cyan); letter-spacing:0.16em; }
+  .msg { padding:10px 14px; border-radius:14px; max-width:80%; margin-bottom:8px; line-height:1.45; }
+  .msg.them { background:#2A3447; color:var(--ink); border-bottom-left-radius:4px; }
+  .msg.us { background:var(--cyan); color:var(--bg); margin-left:auto; border-bottom-right-radius:4px; }
+  .msg .ts { display:block; font-family:var(--mono); font-size:9px; opacity:0.6; margin-top:4px; letter-spacing:0.12em; }
+
+  /* Features grid */
+  .features { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .feature { background:var(--bg-soft); border:1px solid rgba(94,234,212,0.18); padding:28px; position:relative; overflow:hidden; }
+  .feature .ico { font-size:28px; margin-bottom:12px; }
+  .feature h3 { font-family:var(--display); font-weight:700; font-size:22px; margin:0 0 8px; color:var(--ink); }
+  .feature .en { font-family:var(--mono); font-size:11px; color:var(--cyan); letter-spacing:0.16em; text-transform:uppercase; margin-bottom:6px; }
+  .feature p { color:var(--ink-mid); font-size:14px; line-height:1.55; margin:0; }
+
+  /* Pricing */
+  .pricing { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .price { background:var(--bg-soft); border:1px solid rgba(244,184,96,0.20); padding:32px; }
+  .price.featured { border-color:var(--cyan); box-shadow:0 0 30px rgba(94,234,212,0.20); }
+  .price .name { font-family:var(--mono); font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--amber); }
+  .price .amt { font-family:var(--display); font-weight:900; font-size:56px; line-height:1; margin:14px 0 4px; color:var(--ink); }
+  .price .amt sup { font-size:18px; vertical-align:super; color:var(--cyan); }
+  .price .per { color:var(--ink-dim); font-size:13px; margin-bottom:18px; }
+  .price ul { list-style:none; padding:0; margin:0 0 24px; }
+  .price li { padding:8px 0; border-bottom:1px dashed rgba(167,139,250,0.20); font-size:14px; color:var(--ink-mid); }
+  .price li::before { content:"✦ "; color:var(--cyan); }
+  .price .btn { display:block; text-align:center; padding:14px; border:1px solid var(--cyan); border-radius:999px; color:var(--cyan); font-family:var(--mono); font-size:12px; letter-spacing:0.16em; text-transform:uppercase; }
+  .price.featured .btn { background:var(--cyan); color:var(--bg); }
+
+  /* Testimonials */
+  .testimonials { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .testimonial { background:var(--bg-soft); border:1px solid rgba(167,139,250,0.20); padding:28px; }
+  .testimonial blockquote { font-family:var(--display); font-style:italic; font-size:17px; line-height:1.5; color:var(--ink); margin:0 0 18px; }
+  .testimonial .who { font-family:var(--mono); font-size:11px; color:var(--cyan); letter-spacing:0.14em; }
+
+  /* FAQ */
+  .faq { display:grid; gap:16px; }
+  .faq details { background:var(--bg-soft); border:1px solid rgba(94,234,212,0.18); padding:24px 28px; }
+  .faq summary { font-family:var(--display); font-weight:700; font-size:20px; cursor:pointer; color:var(--ink); display:flex; justify-content:space-between; }
+  .faq summary::after { content:"+"; color:var(--cyan); font-family:var(--mono); }
+  .faq details[open] summary::after { content:"−"; }
+  .faq p { color:var(--ink-mid); margin:14px 0 0; line-height:1.55; }
+
+  /* CTA */
+  .cta-strip { background:linear-gradient(135deg,var(--bg-soft),var(--bg-mid)); border:1px solid rgba(94,234,212,0.30); padding:60px 40px; text-align:center; margin:40px; }
+  .cta-strip h3 { font-family:var(--display); font-weight:900; font-size:56px; line-height:0.95; margin:0 0 18px; }
+  .cta-strip h3 em { font-style:italic; color:var(--amber); }
+  .cta-strip p { color:var(--ink-mid); font-size:17px; margin:0 0 24px; }
+  .cta-strip .btn { display:inline-block; padding:14px 28px; background:var(--cyan); color:var(--bg); border-radius:999px; font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; }
+
+  footer { border-top:1px solid rgba(94,234,212,0.18); padding:40px; background:var(--bg-mid); font-family:var(--mono); font-size:11px; color:var(--ink-dim); letter-spacing:0.14em; display:flex; justify-content:space-between; max-width:1440px; margin:40px auto 0; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="logo"><span class="dot"></span> Celestial Tech</div>
+  <ul><li><a href="#">Services</a></li><li><a href="#" style="color:var(--cyan);">Hermes</a></li><li><a href="#">OpenClaw</a></li><li><a href="#">Blog</a></li><li><a href="#">Contact</a></li></ul>
+  <a href="#" class="cta">Start trial →</a>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">// HERMES AGENT HOSTING — DEPLOYED IN HK</div>
+  <h1>A Cantonese-speaking agent for your <em>WhatsApp</em>.</h1>
+  <p class="lede">Hermes is our flagship product: a private, persona-tuned AI agent that lives on your existing Telegram or WhatsApp business account. Set up in 5 minutes. Bilingual. Auditable. PDPO-aligned.</p>
+</header>
+
+<section class="chat-demo">
+  <div>
+    <div class="section-eyebrow">// 01 — Live demo</div>
+    <div class="section-title" style="font-size:48px;">See it <em>talk</em>.</div>
+    <p style="color:var(--ink-mid);font-size:16px;line-height:1.6;">A real conversation, between a customer and the Hermes agent for Mama Kee's Kitchen — 24 seats, Whampoa.</p>
+  </div>
+  <div class="chat-mock">
+    <div class="chat-head"><div class="av"></div><div><div class="name">Mama Kee's Hermes</div><div class="online">● ONLINE · CANTONESE</div></div></div>
+    <div class="msg them">你好，想問下外賣自取幾點開始？<span class="ts">19:42</span></div>
+    <div class="msg us">您好媽媽！外賣自取由 5:30pm 開始至 10:00pm，請問您想幾時攞？想順便落單都可以呀 😊<span class="ts">19:42</span></div>
+    <div class="msg them">7:30 拎，一個星洲炒米，一個凍檸茶走甜<span class="ts">19:43</span></div>
+    <div class="msg us">收到！星洲炒米 $78、凍檸茶走甜 $22，合共 $100。我 send FPS 收款 link 俾您，付款後我會喺 7:25pm 將外賣包好等您🙏<span class="ts">19:43</span></div>
+    <div class="msg them">收到，即刻過數<span class="ts">19:44</span></div>
+    <div class="msg us">收到 100蚊嘅 FPS，thank you！到時見👋<span class="ts">19:44</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">// 02 — Features</div>
+  <div class="section-title">Six things <em>only Hermes</em> does.</div>
+  <div class="features">
+    <div class="feature"><div class="ico">🗣️</div><div class="en">Cantonese native</div><h3>識聽廣東話</h3><p>AI 以地道廣東話即時回應，無需再依賴英文。客戶清晰理解，店主安心使用。</p></div>
+    <div class="feature"><div class="ico">💬</div><div class="en">One-click deploy</div><h3>Telegram 連接</h3><p>連接您現有的 Telegram Bot，5 分鐘完成。我們代您設定，無需編寫程式碼。</p></div>
+    <div class="feature"><div class="ico">💳</div><div class="en">FPS payment ready</div><h3>FPS 收款</h3><p>直接在對話中發送 FPS 收款連結，客戶確認付款後即時通知您。</p></div>
+    <div class="feature"><div class="ico">🤖</div><div class="en">HK templates</div><h3>預設商業技能</h3><p>餐廳助理、接待處、網店助手 — 選擇後即時啟用，無需訓練。</p></div>
+    <div class="feature"><div class="ico">📱</div><div class="en">WhatsApp + Telegram</div><h3>雙支援</h3><p>您的客戶習慣使用甚麼，我們就支援甚麼。毋需要求任何人下載新應用程式。</p></div>
+    <div class="feature"><div class="ico">🔒</div><div class="en">Data in HK</div><h3>數據本地存放</h3><p>所有數據存放於香港伺服器，私隱有保障。符合香港個人資料（私隱）條例。</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">// 03 — Pricing</div>
+  <div class="section-title">Three tiers. <em>One principle.</em></div>
+  <div class="pricing">
+    <div class="price"><div class="name">STARTER</div><div class="amt">HK$1,800<sup>/mo</sup></div><div class="per">+ HK$0.60 per conversation</div><ul><li>1 channel (Telegram or WhatsApp)</li><li>2,000 conversations / month</li><li>1 template persona</li><li>HK data residency</li><li>Email support, 24h SLA</li></ul><a href="#" class="btn">Start trial →</a></div>
+    <div class="price featured"><div class="name">PRACTITIONER · MOST PICKED</div><div class="amt">HK$3,800<sup>/mo</sup></div><div class="per">+ HK$0.45 per conversation</div><ul><li>2 channels (WhatsApp + Telegram)</li><li>10,000 conversations / month</li><li>3 template personas</li><li>Custom persona tuning (one-off)</li><li>Audit log export</li><li>WhatsApp support, 4h SLA</li></ul><a href="#" class="btn">Start trial →</a></div>
+    <div class="price"><div class="name">FIRM</div><div class="amt">Custom</div><div class="per">From HK$12k / mo</div><ul><li>Unlimited channels</li><li>Unlimited conversations</li><li>Unlimited personas</li><li>Dedicated HK infra (your VPC)</li><li>Bespoke integrations (POS, CRM)</li><li>Quarterly review of model behaviour</li></ul><a href="#" class="btn">Talk to us →</a></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">// 04 — Testimonials</div>
+  <div class="section-title">In <em>their words</em>.</div>
+  <div class="testimonials">
+    <div class="testimonial"><blockquote>使用兩週，餐廳外賣預訂全面自動化，員工工作量大減，我亦無需再為此煩惱。</blockquote><div class="who">— WING, MAMA KEE'S KITCHEN · WHAMPOA</div></div>
+    <div class="testimonial"><blockquote>Hermes 識聽我哋嘅廣東話仲識打 FPS link，客人以為係真人同事。</blockquote><div class="who">— SAM, GOLDEN DRAGON TAKEOUT · TSUEN WAN</div></div>
+    <div class="testimonial"><blockquote>原本請多個 part-time 接電話要 $8000 蚊，依家 Hermes 兩千蚊搞掂，仲唔會請假。</blockquote><div class="who">— LISA, SAI YING PUN BOUTIQUE</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-eyebrow">// 05 — FAQ</div>
+  <div class="section-title">Questions we get <em>most</em>.</div>
+  <div class="faq">
+    <details open><summary>How long does it take to deploy Hermes?</summary><p>About 5 minutes to connect your existing Telegram Bot. 2-4 weeks if you want a fully custom persona tuned on your existing conversation transcripts.</p></details>
+    <details><summary>Is my customer data sent to OpenAI / Anthropic?</summary><p>By default, no. We host open-weight models (Qwen, Llama, Mistral) on HK infrastructure. If you want a hosted model, we offer a fully-logged, zero-retention agreement with the upstream provider.</p></details>
+    <details><summary>What happens if the agent doesn't know an answer?</summary><p>It hands off to a human, with full context. No hallucinations pushed to your customer. You decide the handoff triggers.</p></details>
+    <details><summary>Does Hermes support Mandarin / English too?</summary><p>Yes — trilingual by default, including code-switching between Cantonese and English in a single conversation.</p></details>
+  </div>
+</section>
+
+<div class="cta-strip">
+  <h3>Start a <em>two-week</em> pilot.</h3>
+  <p>One channel, two users, no charge until you're satisfied with the persona.</p>
+  <a href="#" class="btn">Book a 90-minute discovery call →</a>
+</div>
+
+<footer>
+  <div>© 2026 CELESTIAL TECH LTD · HK · 14F, 18 BONHAM STRAND</div>
+  <div>v 4.0 · BUILD 2026.08.24 · MADE IN SHEUNG WAN</div>
+</footer>
+
+</body>
+</html>

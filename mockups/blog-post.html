@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>What we learned deploying Hermes in a 12-seat noodle shop — Celestial Tech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg:#070A14; --bg-mid:#0E1322; --bg-soft:#161C30; --ink:#F4F6FB; --ink-mid:#CBD5E1; --ink-dim:#94A3B8; --cyan:#5EEAD4; --violet:#A78BFA; --amber:#F4B860; --display:"Fraunces",Georgia,serif; --sans:"Manrope",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); }
+  a { color:var(--cyan); text-decoration:none; }
+  .nav { position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:22px 40px; background:rgba(7,10,20,0.78); backdrop-filter:blur(14px); border-bottom:1px solid rgba(94,234,212,0.10); }
+  .nav .logo { font-family:var(--display); font-weight:900; font-size:22px; letter-spacing:-0.02em; color:var(--ink); display:flex; align-items:center; gap:10px; }
+  .nav .logo .dot { width:10px; height:10px; border-radius:50%; background:var(--cyan); box-shadow:0 0 18px var(--cyan); }
+  .nav ul { display:flex; gap:28px; list-style:none; padding:0; margin:0; }
+  .nav ul a { color:var(--ink); font-weight:500; font-size:14px; text-transform:uppercase; letter-spacing:0.08em; }
+  .nav .cta { padding:10px 18px; border:1px solid var(--cyan); border-radius:999px; color:var(--cyan); font-size:13px; text-transform:uppercase; letter-spacing:0.08em; }
+
+  /* Reading progress */
+  .progress { position:fixed; top:0; left:0; height:3px; background:var(--cyan); width:62%; z-index:100; box-shadow:0 0 8px var(--cyan); }
+
+  .post-header { max-width:880px; margin:0 auto; padding:80px 40px 40px; text-align:center; }
+  .post-header .eyebrow { font-family:var(--mono); font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--cyan); margin-bottom:24px; }
+  .post-header h1 { font-family:var(--display); font-weight:900; font-size:clamp(40px,5vw,72px); line-height:0.95; letter-spacing:-0.03em; margin:0 0 28px; }
+  .post-header h1 em { font-style:italic; color:var(--amber); font-weight:500; }
+  .post-header .lede { font-family:var(--display); font-style:italic; font-size:22px; color:var(--ink-mid); line-height:1.5; max-width:680px; margin:0 auto 28px; }
+  .post-header .meta { font-family:var(--mono); font-size:12px; color:var(--ink-dim); letter-spacing:0.14em; }
+  .post-header .hero-img { aspect-ratio:16/9; margin-top:40px; background:radial-gradient(circle at 30% 30%, rgba(94,234,212,0.40), transparent 50%), radial-gradient(circle at 70% 70%, rgba(167,139,250,0.40), transparent 50%), radial-gradient(circle at 50% 50%, rgba(244,184,96,0.20), transparent 60%); border:1px solid rgba(94,234,212,0.20); }
+
+  /* Article layout */
+  .layout { max-width:1440px; margin:0 auto; padding:60px 40px; display:grid; grid-template-columns:240px 720px 1fr; gap:48px; }
+  aside.toc { position:sticky; top:80px; align-self:start; }
+  aside.toc .l { font-family:var(--mono); font-size:11px; color:var(--amber); letter-spacing:0.18em; text-transform:uppercase; margin-bottom:18px; }
+  aside.toc ol { list-style:none; padding:0; margin:0; counter-reset:s; }
+  aside.toc li { counter-increment:s; padding:8px 0; border-left:1px solid rgba(94,234,212,0.20); padding-left:14px; font-size:14px; color:var(--ink-mid); }
+  aside.toc li::before { content:"§ " counter(s); font-family:var(--mono); color:var(--cyan); margin-right:8px; font-size:12px; }
+  aside.toc li.active { color:var(--ink); border-left-color:var(--cyan); }
+  aside.toc li a { color:inherit; }
+
+  article { max-width:720px; }
+  article p { font-family:var(--display); font-size:19px; line-height:1.65; color:var(--ink); margin:0 0 24px; }
+  article p.lede { font-family:var(--display); font-style:italic; font-size:24px; line-height:1.45; color:var(--ink-mid); border-left:3px solid var(--cyan); padding-left:24px; margin:0 0 32px; }
+  article h2 { font-family:var(--display); font-weight:900; font-size:36px; line-height:1.05; letter-spacing:-0.02em; margin:48px 0 20px; }
+  article h2 em { font-style:italic; color:var(--violet); font-weight:500; }
+  article h3 { font-family:var(--display); font-weight:700; font-size:24px; margin:36px 0 14px; color:var(--amber); }
+  article blockquote { font-family:var(--display); font-style:italic; font-size:22px; line-height:1.5; color:var(--ink-mid); border-left:3px solid var(--violet); padding:0 0 0 24px; margin:32px 0; }
+  article ul { font-size:17px; line-height:1.65; color:var(--ink); }
+  article ul li { margin-bottom:10px; }
+  article code { font-family:var(--mono); font-size:0.85em; background:var(--bg-soft); padding:2px 8px; border-radius:3px; color:var(--cyan); }
+
+  /* Share bar */
+  aside.share { position:sticky; top:80px; align-self:start; padding:24px; background:var(--bg-soft); border:1px solid rgba(167,139,250,0.20); }
+  aside.share .l { font-family:var(--mono); font-size:11px; color:var(--violet); letter-spacing:0.18em; text-transform:uppercase; margin-bottom:14px; }
+  aside.share a { display:block; padding:10px 0; border-bottom:1px dashed rgba(167,139,250,0.20); color:var(--ink-mid); font-family:var(--mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; }
+  aside.share a:last-child { border-bottom:0; }
+
+  /* Author footer */
+  .author-card { background:var(--bg-soft); border:1px solid rgba(94,234,212,0.18); padding:32px; display:grid; grid-template-columns:80px 1fr; gap:24px; align-items:center; margin-top:60px; }
+  .author-card .av { width:80px; height:80px; border-radius:50%; background:linear-gradient(135deg,var(--cyan),var(--violet)); }
+  .author-card h4 { font-family:var(--display); font-weight:700; font-size:22px; margin:0 0 6px; }
+  .author-card p { color:var(--ink-mid); font-size:14px; margin:0; line-height:1.5; }
+
+  .next-up { max-width:1440px; margin:60px auto 0; padding:36px 40px; background:var(--bg-mid); border:1px solid rgba(94,234,212,0.18); display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .next-up .l { font-family:var(--mono); font-size:11px; color:var(--amber); letter-spacing:0.18em; text-transform:uppercase; }
+  .next-up h3 { font-family:var(--display); font-weight:700; font-size:24px; margin:8px 0 0; }
+
+  footer { border-top:1px solid rgba(94,234,212,0.18); padding:40px; background:var(--bg-mid); font-family:var(--mono); font-size:11px; color:var(--ink-dim); letter-spacing:0.14em; display:flex; justify-content:space-between; max-width:1440px; margin:40px auto 0; }
+</style>
+</head>
+<body>
+
+<div class="progress"></div>
+
+<nav class="nav">
+  <div class="logo"><span class="dot"></span> Celestial Tech</div>
+  <ul><li><a href="#">Services</a></li><li><a href="#">Hermes</a></li><li><a href="#">OpenClaw</a></li><li><a href="#" style="color:var(--cyan);">Journal</a></li><li><a href="#">Contact</a></li></ul>
+  <a href="#" class="cta">Subscribe →</a>
+</nav>
+
+<header class="post-header">
+  <div class="eyebrow">// FIELD NOTES · 2026·08·21</div>
+  <h1>What we learned deploying <em>Hermes</em> in a 12-seat noodle shop.</h1>
+  <p class="lede">Six months in, here's the operating manual we wish we'd had — including the embarrassing parts.</p>
+  <div class="meta">By Eric Leung · 12 min read · Filed under FIELD NOTES</div>
+  <div class="hero-img"></div>
+</header>
+
+<div class="layout">
+  <aside class="toc">
+    <div class="l">CONTENTS</div>
+    <ol>
+      <li class="active"><a href="#">The brief</a></li>
+      <li><a href="#">Week one</a></li>
+      <li><a href="#">The incident</a></li>
+      <li><a href="#">What worked</a></li>
+      <li><a href="#">Operating manual</a></li>
+      <li><a href="#">What we'd do differently</a></li>
+    </ol>
+  </aside>
+
+  <article>
+    <p class="lede">Mama Kee's Kitchen, Whampoa. Twelve seats, a stainless-steel counter, and a WhatsApp business account. We'd been hired to deploy a Cantonese-speaking agent for take-away orders. Here's how it actually went.</p>
+
+    <h2>01 · The <em>brief</em>.</h2>
+    <p>Wing, the owner, was losing two hours a day to phone orders. She'd tried a chatbot widget from a SaaS company six months earlier. It spoke English only, didn't understand Cantonese addresses, and the demo promised things it couldn't deliver. When it broke, the support line didn't answer.</p>
+    <p>Our brief: replace phone orders during peak (5:30pm–10pm), answer FAQs in Cantonese, send an FPS payment link, hand off to a human for anything outside the menu. Nothing more.</p>
+
+    <h2>02 · Week <em>one</em>.</h2>
+    <p>Day one, we connected the existing Telegram Bot. Day two, we built a small menu JSON. Day three, we ran the first 50 conversations in shadow mode (Hermes suggested; Wing confirmed). Day four, Wing sent Hermes live, on her own phone, with me on the other end of a WeChat thread.</p>
+    <p>The first 30 conversations went fine. The 31st was a customer asking if the shrimp dumpling contained peanut oil. The model said "I'm not sure." Wing typed back "yes it does." That's where it sat, for two weeks.</p>
+
+    <blockquote>"I don't need an AI that knows everything. I need an AI that knows what it doesn't know, and asks me."</blockquote>
+
+    <h2>03 · The <em>incident</em>.</h2>
+    <p>Three weeks in, a customer ordered 4 portions of star-fried rice at 9:47pm. Kitchen had already closed at 9:30. Hermes said "Sure, will be ready in 20 minutes." The customer arrived at 10:15pm. Wing had to comp the meal.</p>
+    <p>We added a hard check: between 9:30pm and 5:30pm, Hermes responds "Kitchen closed — opening again tomorrow at 5:30pm." Embarrassing. Obvious. Necessary.</p>
+
+    <h3>The fix</h3>
+    <p>Two lines of prompt, a single cron-style time check, and a "kitchen closed" template. Now whenever anyone asks for an order outside hours, Hermes responds correctly, every time. We've shipped this pattern to every deployment since.</p>
+
+    <h2>04 · What <em>worked</em>.</h2>
+    <ul>
+      <li><strong>Handoff triggers.</strong> Hermes never tries to handle a refund, a complaint, or an allergy question. It forwards, with full context.</li>
+      <li><strong>Daily review.</strong> Wing spends 5 minutes each morning reading the previous night's transcripts. We get a Slack digest of any flagged conversation.</li>
+      <li><strong>Menu as code.</strong> When Wing changes prices, she edits a Google Sheet. We sync it every 15 minutes. No deploy.</li>
+      <li><strong>FPS links, not Stripe.</strong> HK customers pay by FPS or PayMe; Hermes sends an FPS deep link. 80% conversion vs ~20% with Stripe links.</li>
+    </ul>
+
+    <h2>05 · The <em>operating manual</em>.</h2>
+    <p>After six months, here's what we tell every restaurant owner we onboard:</p>
+    <ol style="font-size:17px;line-height:1.65;color:var(--ink);">
+      <li>Don't promise the agent can do things it can't. Customers remember.</li>
+      <li>The handoff threshold is more important than the prompt. Get that wrong, and the agent becomes a liability.</li>
+      <li>Read the transcripts every day for the first month. After that, weekly. Build the habit.</li>
+      <li>Have a clear escalation channel to a human. SMS, WhatsApp, phone — whatever the owner actually answers.</li>
+      <li>Review the menu with the model every time you change the menu. The model doesn't <code>know</code> anything; it <em>reads</em>.</li>
+    </ol>
+
+    <h2>06 · What we'd <em>do differently</em>.</h2>
+    <p>Start with a smaller menu. We tried to onboard all 47 dishes at once. It would have been better to start with the 12 most-ordered items, get comfortable, then expand.</p>
+    <p>Skip Telegram initially. WhatsApp-only would have been simpler for Wing's customer base.</p>
+    <p>Have a printed PDF of the operating manual for the owner, not just a Google Doc. Wing prints things. We now print things.</p>
+
+    <div class="author-card">
+      <div class="av"></div>
+      <div>
+        <h4>Eric Leung</h4>
+        <p>Founder of Celestial Tech. Built the first version of Hermes for his mother's cake shop in Sai Ying Pun. Now runs a small studio out of Sheung Wan.</p>
+      </div>
+    </div>
+  </article>
+
+  <aside class="share">
+    <div class="l">SHARE</div>
+    <a href="#">Copy link</a>
+    <a href="#">Share to LinkedIn</a>
+    <a href="#">Share to Twitter / X</a>
+    <a href="#">Email a friend</a>
+    <a href="#">Print</a>
+  </aside>
+</div>
+
+<div class="next-up">
+  <div>
+    <div class="l">← PREVIOUS POST</div>
+    <h3>The first time an AI agent apologised</h3>
+  </div>
+  <div>
+    <div class="l">NEXT POST →</div>
+    <h3>On hosting OpenClaw without owning a rack</h3>
+  </div>
+</div>
+
+<footer>
+  <div>© 2026 CELESTIAL TECH LTD · HK · 14F, 18 BONHAM STRAND</div>
+  <div>v 4.0 · BUILD 2026.08.24 · MADE IN SHEUNG WAN</div>
+</footer>
+
+</body>
+</html>
