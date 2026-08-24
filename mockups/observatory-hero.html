@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Celestial Tech — Direction D: Observatory (hero mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --obs-bg:#1A1814;
+    --obs-paper:#EEEAE0;
+    --obs-cream:#E2DCC8;
+    --obs-ink:#1A1A1A;
+    --obs-frame:#2A2520;
+    --obs-amber:#E89B2A;
+    --obs-green:#7B9A4E;
+    --obs-red:#B83A2A;
+    --obs-cyan:#4A8A95;
+    --obs-rule:rgba(255,255,255,.18);
+    --obs-rule-soft:rgba(255,255,255,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{
+    background:var(--obs-bg);
+    color:var(--obs-paper);
+    font-family:'IBM Plex Mono',ui-monospace,monospace;
+    font-size:15px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  /* Selectric paper-crease — subtle horizontal banding */
+  body{
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 3px, rgba(232,155,42,.014) 3px 4px),
+      radial-gradient(circle at 80% 20%, rgba(232,155,42,.05) 0, transparent 40%);
+  }
+  /* Top rule + mission-control alpha header */
+  .alpha-bar{
+    position:relative;display:flex;justify-content:space-between;align-items:center;
+    padding:6px 64px;border-bottom:1px solid var(--obs-rule);
+    font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(238,234,224,.45);
+  }
+  .alpha-bar .left, .alpha-bar .right{display:flex;gap:24px;align-items:center}
+  .alpha-bar .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--obs-green);box-shadow:0 0 6px rgba(123,154,78,.6);margin-right:6px;vertical-align:middle}
+  /* NAV */
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:24px 64px;border-bottom:1px solid var(--obs-rule);
+    background:var(--obs-bg);
+  }
+  .brand{display:flex;align-items:center;gap:14px}
+  .brand-mark{
+    width:30px;height:30px;border:1.5px solid var(--obs-paper);
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;color:var(--obs-amber);
+  }
+  .brand-text{font-weight:600;font-size:13px;letter-spacing:.22em;text-transform:uppercase}
+  .brand-text .bracket{color:var(--obs-amber);font-weight:400}
+  .nav-links{display:flex;gap:32px;font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+  .nav-links a{color:rgba(238,234,224,.55);transition:color .15s}
+  .nav-links a:hover{color:var(--obs-paper)}
+  .nav-cta{
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    padding:10px 16px;border:1.5px solid var(--obs-paper);
+    color:var(--obs-paper);
+    position:relative;
+  }
+  .nav-cta:hover{background:var(--obs-paper);color:var(--obs-ink)}
+  .nav-cta::after{content:"█";margin-left:6px;color:var(--obs-amber);animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  /* HERO */
+  .hero{
+    display:grid;grid-template-columns:1.15fr 1fr;gap:64px;
+    padding:80px 64px 96px;
+    border-bottom:1px solid var(--obs-rule);
+    position:relative;
+  }
+  .hero-eyebrow{
+    display:flex;align-items:center;gap:14px;
+    font-size:10px;letter-spacing:.32em;text-transform:uppercase;
+    color:rgba(238,234,224,.55);
+    margin-bottom:32px;
+  }
+  .hero-eyebrow .pill{
+    border:1px solid var(--obs-rule);padding:4px 10px;color:var(--obs-amber);
+  }
+  h1.hero-title{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    font-size:clamp(38px, 4.4vw, 56px);
+    line-height:1.12;
+    letter-spacing:-.01em;
+    margin-bottom:28px;
+    color:var(--obs-paper);
+  }
+  h1.hero-title .ampersand{
+    font-family:'IBM Plex Serif',serif;
+    font-style:italic;
+    color:var(--obs-amber);
+    font-weight:500;
+  }
+  h1.hero-title .digit{
+    color:var(--obs-amber);
+    font-weight:700;
+  }
+  .hero-sub{
+    font-family:'IBM Plex Serif',serif;
+    font-size:18px;line-height:1.55;
+    color:rgba(238,234,224,.72);
+    max-width:480px;margin-bottom:40px;
+  }
+  .hero-sub .lead{
+    color:var(--obs-paper);
+  }
+  .hero-ctas{display:flex;gap:14px;align-items:center}
+  .btn-primary{
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    padding:14px 22px;background:var(--obs-amber);color:var(--obs-ink);
+    border:0;font-weight:600;cursor:pointer;
+    position:relative;
+  }
+  .btn-primary::after{content:" →";margin-left:4px}
+  .btn-ghost{
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    padding:14px 22px;background:transparent;border:1.5px solid var(--obs-rule);color:var(--obs-paper);
+    cursor:pointer;
+  }
+  .btn-ghost::before{content:"[ ";color:var(--obs-amber)}
+  .btn-ghost::after{content:" ]";color:var(--obs-amber)}
+
+  /* HERO RIGHT — segmented-digit counter + status panel */
+  .panel{
+    border:1.5px solid var(--obs-rule);
+    padding:28px 32px;
+    background:rgba(255,255,255,.012);
+  }
+  .panel-header{
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:10px;letter-spacing:.26em;text-transform:uppercase;
+    color:rgba(238,234,224,.45);
+    margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--obs-rule-soft);
+  }
+  .panel-header .id{color:var(--obs-amber)}
+
+  .counter{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:700;
+    font-size:clamp(54px, 7.5vw, 92px);
+    letter-spacing:.04em;
+    color:var(--obs-amber);
+    line-height:1;
+    text-shadow:0 0 22px rgba(232,155,42,.25);
+    margin-bottom:6px;
+    font-variant-numeric:tabular-nums;
+    /* faux segmented-digit effect via skew + shadow inset on each char */
+  }
+  .counter .seg{
+    display:inline-block;
+    position:relative;
+    transform:skewX(-6deg);
+    margin-right:4px;
+  }
+  .counter-label{
+    font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+    color:rgba(238,234,224,.5);
+    margin-bottom:30px;
+  }
+
+  .status-grid{
+    display:grid;grid-template-columns:repeat(2, 1fr);gap:14px;
+    margin-top:24px;
+  }
+  .status-cell{
+    border:1px solid var(--obs-rule-soft);
+    padding:12px 14px;
+    font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(238,234,224,.55);
+  }
+  .status-cell .val{color:var(--obs-paper);font-weight:600}
+  .status-cell .val.go{color:var(--obs-green)}
+  .status-cell .val.amber{color:var(--obs-amber)}
+
+  /* Telemetry strip — bottom of page */
+  .telemetry{
+    position:fixed;left:24px;bottom:24px;
+    border:1px solid var(--obs-rule);
+    background:rgba(26,24,20,.92);
+    padding:8px 14px;
+    font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(238,234,224,.55);
+    display:flex;gap:18px;align-items:center;
+  }
+  .telemetry b{color:var(--obs-paper);font-weight:600}
+  .telemetry .live{
+    display:inline-block;width:7px;height:7px;border-radius:50%;
+    background:var(--obs-red);box-shadow:0 0 6px rgba(184,58,42,.6);
+    margin-right:6px;animation:blink 1.4s steps(1) infinite;
+    vertical-align:middle;
+  }
+
+  /* bottom-edge tape rule + mission-control footer */
+  .bottom-rule{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    padding:20px 64px;border-top:1px solid var(--obs-rule);
+    font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+    color:rgba(238,234,224,.45);
+  }
+  .bottom-rule b{color:var(--obs-paper);font-weight:600;display:block;margin-bottom:4px;letter-spacing:.3em;color:rgba(238,234,224,.35)}
+
+  @media (max-width: 820px){
+    .hero{grid-template-columns:1fr;padding:48px 24px}
+    nav{padding:18px 24px}
+    .nav-links{display:none}
+    .alpha-bar{padding:6px 24px;font-size:9px}
+    .bottom-rule{grid-template-columns:1fr 1fr;padding:20px 24px;gap:14px}
+  }
+</style>
+</head>
+<body>
+
+<!-- Mission control alpha bar -->
+<div class="alpha-bar">
+  <div class="left">
+    <span><span class="dot"></span>OPS · NOMINAL</span>
+    <span>STATION · HONG KONG 22.2855°N 114.1577°E</span>
+  </div>
+  <div class="right">
+    <span>REV · 2026.Q3.A2</span>
+    <span>UTC · <b id="utc">--:--:--</b></span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="brand">
+    <div class="brand-mark">✦</div>
+    <div class="brand-text"><span class="bracket">[</span>CELESTIAL TECH<span class="bracket">]</span></div>
+  </div>
+  <div class="nav-links">
+    <a href="#">SERVICES</a>
+    <a href="#">HERMES</a>
+    <a href="#">CASES</a>
+    <a href="#">INSIGHTS</a>
+    <a href="#">ABOUT</a>
+    <a href="#">CONTACT</a>
+  </div>
+  <a href="#" class="nav-cta">BOOK BRIEFING</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">
+      <span class="pill">DIRECTION D · OBSERVATORY</span>
+      <span>EST. 2018 · CYBER + AI OPERATIONS</span>
+    </div>
+    <h1 class="hero-title">
+      We run your night shift <span class="ampersand">&amp;</span><br/>
+      day shift, continuously,<br/>
+      for <span class="digit">1,827</span> days straight.
+    </h1>
+    <p class="hero-sub">
+      <span class="lead">Celestial Tech is a Hong Kong–based security &amp; AI
+      operations house.</span> We instrument, monitor, and operate systems
+      the way NASA instruments missions — with teletype discipline,
+      seven-segment clockwork, and decisions a room full of engineers can
+      audit in the morning.
+    </p>
+    <div class="hero-ctas">
+      <button class="btn-primary">OPEN A MISSION</button>
+      <button class="btn-ghost">READ POSTMORTEM</button>
+    </div>
+  </div>
+
+  <div>
+    <div class="panel">
+      <div class="panel-header">
+        <span>TELEMETRY · LIVE</span>
+        <span class="id">PANEL 01/12</span>
+      </div>
+
+      <div class="counter" id="counter">
+        <span class="seg">0</span><span class="seg">5</span><span class="seg">:</span><span class="seg">2</span><span class="seg">4</span><span class="seg">:</span><span class="seg">1</span><span class="seg">7</span>
+      </div>
+      <div class="counter-label">MISSION ELAPSED · UTC · HH:MM:SS</div>
+
+      <div class="status-grid">
+        <div class="status-cell">DETECT <span class="val go">GO</span></div>
+        <div class="status-cell">RESPOND <span class="val go">GO</span></div>
+        <div class="status-cell">SOC-2 <span class="val amber">REVIEW</span></div>
+        <div class="status-cell">DR-RUN <span class="val go">GO</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- bottom rule title block -->
+<div class="bottom-rule">
+  <div><b>SHEET</b>03/12</div>
+  <div><b>SCALE</b>1 : 1</div>
+  <div><b>REV</b>A · 2026.Q3</div>
+  <div><b>STATUS</b>FOR REVIEW · ▲</div>
+</div>
+
+<!-- telemetry strip -->
+<div class="telemetry">
+  <span><span class="live"></span>LIVE</span>
+  <span>SCROLL <b id="scroll">00%</b></span>
+  <span>SECTION <b>HERO</b></span>
+  <span>DURATION <b id="dur">00:00</b></span>
+</div>
+
+<script>
+  // Live UTC clock for the alpha bar
+  const pad = (n) => String(n).padStart(2, '0');
+  function tick(){
+    const d = new Date();
+    document.getElementById('utc').textContent =
+      pad(d.getUTCHours()) + ':' + pad(d.getUTCMinutes()) + ':' + pad(d.getUTCSeconds());
+    // Hero counter — start at a fixed mission elapsed, increment every second
+    const baseSec = 5*3600 + 24*60 + 17;
+    const elapsed = baseSec + Math.floor(performance.now()/1000);
+    const h = Math.floor(elapsed/3600), m = Math.floor((elapsed%3600)/60), s = elapsed%60;
+    const cc = document.getElementById('counter');
+    cc.innerHTML = `<span class="seg">${pad(h)}</span><span class="seg">${pad(m)}</span><span class="seg">:</span><span class="seg">${pad(s)}</span>`;
+  }
+  setInterval(tick, 1000); tick();
+
+  // Scroll depth telemetry
+  function updateScroll(){
+    const sc = window.scrollY;
+    const max = document.body.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? Math.min(100, Math.round((sc/max)*100)) : 0;
+    document.getElementById('scroll').textContent = String(pct).padStart(2,'0') + '%';
+  }
+  window.addEventListener('scroll', updateScroll); updateScroll();
+
+  // Session duration
+  const t0 = Date.now();
+  setInterval(() => {
+    const sec = Math.floor((Date.now() - t0)/1000);
+    document.getElementById('dur').textContent =
+      pad(Math.floor(sec/60)) + ':' + pad(sec%60);
+  }, 1000);
+</script>
+
+</body>
+</html>
