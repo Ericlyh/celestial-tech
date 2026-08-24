@@ -1,35 +1,5 @@
-'use client'
-
-import Navbar from '@/components/Navbar'
-import Hero from '@/components/Hero'
-import About from '@/components/About'
-import StatsBanner from '@/components/StatsBanner'
-import Services from '@/components/Services'
-import WhyUs from '@/components/WhyUs'
-import CaseStudies from '@/components/CaseStudies'
-import Founder from '@/components/Founder'
-import Testimonials from '@/components/Testimonials'
-import Contact from '@/components/Contact'
-import Footer from '@/components/Footer'
-import HowItWorks from '@/components/HowItWorks'
-import InsightsTeaser from '@/components/InsightsTeaser'
+import HomeA2 from '@/components/HomeA2'
 
 export default function Home() {
-  return (
-    <main className="relative min-h-screen bg-deep-space overflow-x-hidden">
-      <Navbar />
-      <Hero />
-      <About />
-      <StatsBanner />
-      <Services />
-      <WhyUs />
-      <HowItWorks />
-      <CaseStudies />
-      <InsightsTeaser />
-      <Founder />
-      <Testimonials />
-      <Contact />
-      <Footer />
-    </main>
-  )
+  return <HomeA2 />
 }
