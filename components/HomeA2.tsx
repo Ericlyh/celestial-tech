@@ -1,6 +1,6 @@
 'use client'
 
-// HomeA2 — Direction A2 ("Stellar Cartography") for the home page only.
+// HomeA2 — Direction A2 ("Threat Atlas" — was "Stellar Cartography" pre-OOP-4066 round 6) for the home page only.
 // Self-contained: does NOT touch Navbar/Footer/Contact used by other pages.
 // Other 6 pages keep their existing treatment; user can roll A2 across after
 // accepting the home.
@@ -70,15 +70,15 @@ function A2Hero() {
     <header id="home" className="px-5 sm:px-10 lg:px-10 pt-16 sm:pt-24 pb-12 max-w-[1440px] mx-auto grid lg:grid-cols-[1.5fr_1fr] gap-10 lg:gap-16 items-center">
       <div>
         <div className="font-mono text-[11px] sm:text-[12px] tracking-[0.18em] uppercase text-stellar-cyan mb-6">
-          // Stellar Cartography, Vol. 04 — 2026
+          // Threat Atlas, Vol. 04 — 2026
         </div>
         <h1 className="font-display font-light italic text-[64px] sm:text-[88px] lg:text-[120px] xl:text-[160px] leading-[0.92] tracking-[-0.035em] mb-8 bg-gradient-to-br from-white via-white to-ink-200 bg-clip-text text-transparent">
-          Stellar<br />
-          Cartography<sup className="font-display not-italic font-light text-[0.35em] text-cosmic-violet align-super">*</sup><br />
+          Threat<br />
+          Atlas<sup className="font-display not-italic font-light text-[0.35em] text-cosmic-violet align-super">*</sup><br />
           <span className="not-italic text-stellar-cyan">for the AI era.</span>
         </h1>
         <p className="font-display font-light italic text-lg sm:text-xl lg:text-2xl text-ink-200 leading-relaxed max-w-[540px] mb-9">
-          We map the territory where private AI lives — and build the road, the bridge, and the gate so your models stay <em className="text-nova-amber">yours</em>.
+          We build the cybersecurity layer for SMEs and individuals adopting AI — so your data stays inside your firewall, your agents stay accountable, and your regulator can audit the logs.
         </p>
         <div className="flex flex-wrap gap-4">
           <a
@@ -118,7 +118,7 @@ function A2Hero() {
 }
 
 function A2Marquee() {
-  const items = ['private', 'sovereign', 'yours']
+  const items = ['private', 'protected', 'audited']
   return (
     <div className="border-y border-stellar-cyan/20 bg-gradient-to-r from-space-mid via-space-soft to-space-mid overflow-hidden py-5 my-12 sm:my-16">
       <div className="a2-marquee-track inline-flex gap-14 items-center font-display italic font-medium text-3xl sm:text-4xl text-stellar-cyan whitespace-nowrap">
@@ -146,14 +146,14 @@ function A2About() {
     <section className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24 grid lg:grid-cols-2 gap-10 lg:gap-16">
       <div>
         <Eyebrow>// 01 — About</Eyebrow>
-        <SectionTitle accent="unmapped">A field guide to the</SectionTitle>
+        <SectionTitle accent="unsecured AI frontier">A field guide to the</SectionTitle>
       </div>
       <div className="space-y-5 text-base sm:text-lg text-ink-200 leading-relaxed">
         <p>
-          Celestial Tech is a small studio in Hong Kong building infrastructure for organisations that need AI to behave like a member of staff — not like a magic trick that occasionally works. We host Hermes agents and OpenClaw deployments for restaurants, law firms, clinics, and family offices that can't afford to send their data through someone else's API.
+          Celestial Tech is a Hong Kong cybersecurity company that builds AI infrastructure for SMEs and individuals. Restaurants, law firms, clinics, and family offices — the people who can't afford to send their data through someone else's API, but also can't afford a full security team. We host Hermes agents and OpenClaw deployments behind your firewall: private, auditable, accountable.
         </p>
         <p>
-          Our work is the inverse of the usual AI pitch: we sell less capability, more accountability. Every model we deploy has a name, a passport, and a paper trail.
+          Our work is the inverse of the usual AI pitch — we sell less capability, more cybersecurity. Every model we deploy has a name, a passport, and a paper trail.
         </p>
       </div>
     </section>
@@ -186,15 +186,15 @@ function A2Stats() {
 
 function A2Services() {
   const services = [
-    { num: '01', title: 'Hermes Agent Hosting', desc: 'Cantonese-speaking AI on Telegram & WhatsApp. Restaurant, reception, retail templates ready to deploy.' },
-    { num: '02', title: 'OpenClaw Hosting', desc: 'Self-hosted browser automation. Run your own agents on your own infra, with our operators on call.' },
-    { num: '03', title: 'Compliance & Privacy', desc: 'HK PDPO-aligned audit, data residency in Hong Kong, opt-in / opt-out workflows built in.' },
-    { num: '04', title: 'Bespoke Builds', desc: 'Custom agents for law, medicine, finance. We sign NDAs that mean something.' },
+    { num: '01', title: 'Hermes Agent Hosting', desc: 'Cantonese-speaking AI agents on Telegram & WhatsApp, deployed behind your firewall. Restaurant, reception, and retail templates — hardened against prompt injection and data exfiltration by default.' },
+    { num: '02', title: 'OpenClaw Hosting', desc: 'Self-hosted browser automation on your own infrastructure, with our security operators on call. Every action logged, every session replayable for your auditor.' },
+    { num: '03', title: 'Compliance & Privacy', desc: 'Cybersecurity audit and HK PDPO-aligned privacy compliance. Data residency in Hong Kong. Opt-in/opt-out workflows, encryption-at-rest, and quarterly penetration tests by default.' },
+    { num: '04', title: 'Bespoke Builds', desc: 'Custom AI agents for law, medicine, and finance — with cybersecurity as a feature, not an add-on. NDAs that mean something; threat-modelled before the first line of code.' },
   ]
   return (
     <section id="services" className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24">
       <Eyebrow color="amber">// 02 — Services</Eyebrow>
-      <SectionTitle accent="highway">Four lanes on the</SectionTitle>
+      <SectionTitle accent="cyber stack">Four services on the</SectionTitle>
       <p className="font-display italic font-light text-lg sm:text-xl text-ink-200 max-w-[720px] leading-relaxed mb-10 sm:mb-12">
         Each lane is a turnkey deployment. Pick one, or have us build a custom route.
       </p>
@@ -215,7 +215,7 @@ function A2Services() {
 function A2WhyUs() {
   const items = [
     { h: 'Local presence.', hAccent: 'presence', b: 'You meet the team. You have their numbers. You can show up at our office in Sheung Wan.' },
-    { h: 'No black boxes.', hAccent: 'black boxes', b: 'Every model, every prompt, every retrieval step is logged and explainable to you, your auditor, or your regulator.' },
+    { h: 'Auditable by design.', hAccent: 'Auditable', b: 'Every model, every prompt, every retrieval step is logged and explainable to you, your auditor, or your regulator.' },
     { h: 'Pay for outcomes.', hAccent: 'outcomes', b: 'Monthly retainer plus a per-conversation meter. If our agent doesn\'t save you hours, you don\'t pay the meter.' },
     { h: 'Bilingual native.', hAccent: 'native', b: 'Cantonese, Mandarin, English — all three at native fluency, including code-switching between them.' },
   ]
@@ -224,7 +224,7 @@ function A2WhyUs() {
       <div>
         <Eyebrow color="violet">// 03 — Why us</Eyebrow>
         <h2 className="font-display font-light text-4xl sm:text-5xl lg:text-[56px] leading-[0.98] tracking-[-0.02em] mt-4">
-          Why a constellation, not a galaxy?
+          Why us, not a global cloud?
         </h2>
       </div>
       <ul className="list-none p-0 m-0 grid gap-6 sm:gap-7">
@@ -336,7 +336,7 @@ function A2Founder() {
           Eric <em className="italic text-stellar-cyan font-normal">Leung</em>, founder.
         </h2>
         <p className="text-base sm:text-lg text-ink-200 leading-relaxed">
-          I built the first version of Hermes for my mother's cake shop in Sai Ying Pun. She'd been losing two hours a day to phone orders. The first deployment took 200 conversations before it stopped hallucinating the address. We now deploy across 14 sectors — but the design constraint is the same: a small business owner has to be able to trust this thing with their livelihood.
+          I built the first version of Hermes for my mother's cake shop in Sai Ying Pun. She'd been losing two hours a day to phone orders — and I couldn't find any AI product that let her keep her customer data inside the shop. The first deployment took 200 conversations before it stopped hallucinating the address. We now deploy across 14 sectors — but the constraint is the same: a small business owner (or an individual) has to be able to trust this thing with their livelihood, and trust starts with cybersecurity.
         </p>
         <div className="font-display italic text-nova-amber text-lg sm:text-xl mt-6">— Eric Leung, 2026</div>
       </div>
@@ -484,7 +484,7 @@ function A2Footer() {
       <div className="max-w-[1440px] mx-auto grid grid-cols-2 md:grid-cols-5 gap-8 sm:gap-10">
         <div className="col-span-2 md:col-span-1">
           <div className="font-display font-black text-2xl sm:text-3xl text-ink-50 mb-2">Celestial Tech</div>
-          <div className="font-display italic text-ink-300 text-base">Stellar Cartography for the AI era.</div>
+          <div className="font-display italic text-ink-300 text-base">Threat Atlas for the AI era.</div>
         </div>
         <div>
           <h5 className="font-mono text-[11px] tracking-[0.2em] uppercase text-stellar-cyan m-0 mb-4">Services</h5>
