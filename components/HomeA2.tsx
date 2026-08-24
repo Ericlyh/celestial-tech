@@ -6,6 +6,7 @@
 // accepting the home.
 
 import { FormEvent, useState } from 'react'
+import { useTranslation } from '@/i18n'
 
 function Eyebrow({ children, color = 'cyan' }: { children: React.ReactNode; color?: 'cyan' | 'amber' | 'violet' }) {
   const cls =
@@ -30,6 +31,7 @@ function SectionTitle({ children, accent }: { children: React.ReactNode; accent?
 }
 
 function A2Nav() {
+  const { locale, toggleLocale } = useTranslation()
   const links = [
     { label: 'Services', href: '#services' },
     { label: 'Hosting', href: '/hermes-agent-hosting' },
@@ -55,12 +57,21 @@ function A2Nav() {
           </li>
         ))}
       </ul>
-      <a
-        href="#contact"
-        className="hidden md:inline-block px-4 py-2 border border-stellar-cyan rounded-full text-stellar-cyan text-[12px] uppercase tracking-[0.1em] hover:bg-stellar-cyan/10 transition-colors"
-      >
-        Get started →
-      </a>
+      <div className="flex items-center gap-3">
+        <button
+          onClick={toggleLocale}
+          aria-label="Toggle language"
+          className="px-2.5 py-1 text-[10px] font-mono uppercase tracking-[0.1em] rounded border border-white/[0.1] text-ink-300 hover:text-stellar-cyan hover:border-stellar-cyan/40 transition-colors"
+        >
+          {locale === 'en' ? '繁中' : 'EN'}
+        </button>
+        <a
+          href="#contact"
+          className="hidden md:inline-block px-4 py-2 border border-stellar-cyan rounded-full text-stellar-cyan text-[12px] uppercase tracking-[0.1em] hover:bg-stellar-cyan/10 transition-colors"
+        >
+          Get started →
+        </a>
+      </div>
     </nav>
   )
 }
@@ -162,10 +173,10 @@ function A2About() {
 
 function A2Stats() {
   const stats = [
-    { n: '98', sup: '%', l: 'Uptime · last 90' },
-    { n: '14', sup: '+', l: 'Sectors deployed' },
-    { n: '42', sup: 'k', l: 'Conversations / mo' },
+    { n: '100', sup: '%', l: 'Threat-modelled before deploy' },
+    { n: '4', sup: '×', l: 'Quarterly pen-tests / year' },
     { n: '0', sup: '·', l: 'Data leaves HK' },
+    { n: '<2', sup: 'min', l: 'Mean time to alert' },
   ]
   return (
     <section className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 max-w-[1440px] mx-auto px-5 sm:px-10 py-10 sm:py-14 border-y border-cosmic-violet/25">
@@ -185,28 +196,63 @@ function A2Stats() {
 }
 
 function A2Services() {
-  const services = [
-    { num: '01', title: 'Hermes Agent Hosting', desc: 'Cantonese-speaking AI agents on Telegram & WhatsApp, deployed behind your firewall. Restaurant, reception, and retail templates — hardened against prompt injection and data exfiltration by default.' },
-    { num: '02', title: 'OpenClaw Hosting', desc: 'Self-hosted browser automation on your own infrastructure, with our security operators on call. Every action logged, every session replayable for your auditor.' },
-    { num: '03', title: 'Compliance & Privacy', desc: 'Cybersecurity audit and HK PDPO-aligned privacy compliance. Data residency in Hong Kong. Opt-in/opt-out workflows, encryption-at-rest, and quarterly penetration tests by default.' },
-    { num: '04', title: 'Bespoke Builds', desc: 'Custom AI agents for law, medicine, and finance — with cybersecurity as a feature, not an add-on. NDAs that mean something; threat-modelled before the first line of code.' },
-  ]
   return (
     <section id="services" className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24">
       <Eyebrow color="amber">// 02 — Services</Eyebrow>
-      <SectionTitle accent="cyber stack">Four services on the</SectionTitle>
+      <SectionTitle accent="three lanes">Three lanes on the</SectionTitle>
       <p className="font-display italic font-light text-lg sm:text-xl text-ink-200 max-w-[720px] leading-relaxed mb-10 sm:mb-12">
-        Each lane is a turnkey deployment. Pick one, or have us build a custom route.
+        One stack for empowerment, one for businesses, one for you at home. Each lane ships behind your firewall, audited by default.
       </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-        {services.map((s) => (
-          <div key={s.num} className="relative bg-space-soft border border-stellar-cyan/20 rounded p-6 sm:p-7 min-h-[260px] sm:min-h-[280px] overflow-hidden">
-            <span className="absolute top-4 right-5 w-3 h-3 border-t border-r border-nova-amber" />
-            <div className="font-mono text-[11px] tracking-[0.18em] text-stellar-cyan mb-5">{s.num}</div>
-            <h3 className="font-display font-normal text-2xl sm:text-[28px] leading-tight text-ink-50 mb-3">{s.title}</h3>
-            <p className="text-sm text-ink-200 leading-relaxed">{s.desc}</p>
-          </div>
-        ))}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
+        {/* AI Empowerment — combines Hermes + OpenClaw + Bespoke */}
+        <div className="relative bg-space-soft border border-stellar-cyan/20 rounded p-6 sm:p-7 min-h-[320px] overflow-hidden">
+          <span className="absolute top-4 right-5 w-3 h-3 border-t border-r border-nova-amber" />
+          <div className="font-mono text-[11px] tracking-[0.18em] text-stellar-cyan mb-5">01</div>
+          <h3 className="font-display font-normal text-2xl sm:text-[28px] leading-tight text-ink-50 mb-3">
+            AI <em className="italic text-cosmic-violet font-normal">Empowerment</em>
+          </h3>
+          <p className="text-sm text-ink-200 leading-relaxed mb-5">
+            AI agents and automations deployed behind your firewall — trained on your data, hardened against prompt injection, accountable to your auditor.
+          </p>
+          <ul className="list-none p-0 m-0 space-y-3 border-t border-dashed border-stellar-cyan/20 pt-4">
+            <li>
+              <div className="font-mono text-[10px] tracking-[0.18em] uppercase text-nova-amber">Hermes</div>
+              <div className="text-sm text-ink-50 mt-1">Cantonese-speaking agents on WhatsApp & Telegram. Restaurant, reception, retail templates.</div>
+            </li>
+            <li>
+              <div className="font-mono text-[10px] tracking-[0.18em] uppercase text-nova-amber">OpenClaw</div>
+              <div className="text-sm text-ink-50 mt-1">Self-hosted browser automation on your own infrastructure, with our security operators on call.</div>
+            </li>
+            <li>
+              <div className="font-mono text-[10px] tracking-[0.18em] uppercase text-nova-amber">Bespoke Builds</div>
+              <div className="text-sm text-ink-50 mt-1">Custom agents for law, medicine, finance — threat-modelled before the first line of code.</div>
+            </li>
+          </ul>
+        </div>
+
+        {/* Cybersecurity for Business */}
+        <div className="relative bg-space-soft border border-stellar-cyan/20 rounded p-6 sm:p-7 min-h-[320px] overflow-hidden">
+          <span className="absolute top-4 right-5 w-3 h-3 border-t border-r border-nova-amber" />
+          <div className="font-mono text-[11px] tracking-[0.18em] text-stellar-cyan mb-5">02</div>
+          <h3 className="font-display font-normal text-2xl sm:text-[28px] leading-tight text-ink-50 mb-3">
+            Cybersecurity for <em className="italic text-cosmic-violet font-normal">Business</em>
+          </h3>
+          <p className="text-sm text-ink-200 leading-relaxed">
+            Cybersecurity audit, HK PDPO-aligned privacy compliance, and incident response for SMEs that can&apos;t staff a full security team. Data residency in Hong Kong. Encryption-at-rest, quarterly penetration tests, opt-in/opt-out workflows, and a runbook your auditor can read.
+          </p>
+        </div>
+
+        {/* Personal Cybersecurity */}
+        <div className="relative bg-space-soft border border-stellar-cyan/20 rounded p-6 sm:p-7 min-h-[320px] overflow-hidden">
+          <span className="absolute top-4 right-5 w-3 h-3 border-t border-r border-nova-amber" />
+          <div className="font-mono text-[11px] tracking-[0.18em] text-stellar-cyan mb-5">03</div>
+          <h3 className="font-display font-normal text-2xl sm:text-[28px] leading-tight text-ink-50 mb-3">
+            Personal <em className="italic text-cosmic-violet font-normal">Cybersecurity</em>
+          </h3>
+          <p className="text-sm text-ink-200 leading-relaxed">
+            Cybersecurity for individuals and households. Device hardening, identity-protection, scam-watch, and a private channel to a human security operator when something looks wrong — without sending your data to a global cloud to do it.
+          </p>
+        </div>
       </div>
     </section>
   )
@@ -214,10 +260,10 @@ function A2Services() {
 
 function A2WhyUs() {
   const items = [
-    { h: 'Local presence.', hAccent: 'presence', b: 'You meet the team. You have their numbers. You can show up at our office in Sheung Wan.' },
-    { h: 'Auditable by design.', hAccent: 'Auditable', b: 'Every model, every prompt, every retrieval step is logged and explainable to you, your auditor, or your regulator.' },
-    { h: 'Pay for outcomes.', hAccent: 'outcomes', b: 'Monthly retainer plus a per-conversation meter. If our agent doesn\'t save you hours, you don\'t pay the meter.' },
-    { h: 'Bilingual native.', hAccent: 'native', b: 'Cantonese, Mandarin, English — all three at native fluency, including code-switching between them.' },
+    { h: 'Threat-modelled first, shipped second.', hAccent: 'Threat-modelled', b: 'Every deployment starts with an adversary profile — not a sales deck. We name the attacker, the asset, the path. Then we ship.' },
+    { h: 'Auditable to your auditor, not to us.', hAccent: 'Auditable', b: 'Logs you can hand to your compliance team without a redaction pass. Models that answer what they said, when, and why.' },
+    { h: 'Hong Kong, behind your firewall.', hAccent: 'behind your firewall', b: 'Data residency isn\'t a setting — it\'s the architecture. No exit to a foreign cloud, no third-party processor you didn\'t choose.' },
+    { h: 'Outcome-metered, never seat-metered.', hAccent: 'Outcome-metered', b: 'You pay for hours saved, not seats filled. If the agent doesn\'t deliver, the meter doesn\'t run.' },
   ]
   return (
     <section id="why-us" className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24 grid lg:grid-cols-[1fr_2fr] gap-10 lg:gap-16 items-start">
@@ -268,6 +314,9 @@ function A2HowItWorks() {
 
 function A2CaseStudies() {
   const cases = [
+    { tag: 'CYBER · KWUN TONG', title: 'BEC Attempt, Contained in 48 Hours', body: 'A 40-person logistics firm forwarded what looked like a CEO wire instruction. Our incident line caught the domain-spoof within 14 minutes, isolated the mailbox, walked HR through a staff-wide reset, and sat with their auditor through the post-mortem.', metric: '0', metricLabel: 'dollars lost' },
+    { tag: 'CYBER · SHEUNG WAN', title: 'Phishing Drill for a Family Office', body: 'A single-family office with nine staff ran a quarterly phishing drill. First round: two clicked. After our targeted training and DMARC hardening: a second round the next quarter, zero clicks, zero reports to the insurer.', metric: '100%', metricLabel: 'click-rate, round 2' },
+    { tag: 'CYBER · QUARRY BAY', title: 'Fintech Sandbox, Audit-Passed', body: 'A Series-A fintech needed to clear an HKMA sandbox cybersecurity review in six weeks. We threat-modelled the four new endpoints, shipped the runbook, sat in on the review. They passed on the second pass, no rework.', metric: '6 wks', metricLabel: 'from kickoff to signed' },
     { tag: 'RESTAURANT · WHAMPOA', title: 'Take-Away Orders, Fully Automated', body: 'A 24-seat Cantonese restaurant in Whampoa replaced its phone-ordering workflow with a Hermes agent on WhatsApp. The agent takes orders in Cantonese, sends an FPS payment link, and pings the kitchen.', metric: '+38%', metricLabel: 'orders / week' },
     { tag: 'LAW · CENTRAL', title: 'First-Pass Contract Review', body: 'A 6-partner commercial law firm uses OpenClaw to surface relevant clauses from their precedent library. Review time per contract dropped from 4 hours to 90 minutes; partners still sign off.', metric: '−62%', metricLabel: 'review time' },
     { tag: 'CLINIC · TST', title: 'Multilingual Front Desk', body: 'A dermatology clinic with patients from six language backgrounds replaced a human receptionist with a Hermes agent that hands off to a nurse when clinical questions come up.', metric: '9/10', metricLabel: 'patient CSAT' },
@@ -319,30 +368,8 @@ function A2Insights() {
   )
 }
 
-function A2Founder() {
-  return (
-    <section id="founder" className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24 grid lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-16 items-center">
-      <div
-        className="aspect-[4/5] rounded border border-stellar-cyan/25"
-        aria-label="Founder portrait"
-        style={{
-          background:
-            'linear-gradient(135deg, rgba(94,234,212,0.30), rgba(167,139,250,0.30)), radial-gradient(circle at 50% 30%, rgba(244,184,96,0.30), transparent 60%)',
-        }}
-      />
-      <div>
-        <Eyebrow>// 07 — Founder</Eyebrow>
-        <h2 className="font-display font-light text-4xl sm:text-5xl lg:text-[56px] leading-[0.98] mb-5">
-          Eric <em className="italic text-stellar-cyan font-normal">Leung</em>, founder.
-        </h2>
-        <p className="text-base sm:text-lg text-ink-200 leading-relaxed">
-          I built the first version of Hermes for my mother's cake shop in Sai Ying Pun. She'd been losing two hours a day to phone orders — and I couldn't find any AI product that let her keep her customer data inside the shop. The first deployment took 200 conversations before it stopped hallucinating the address. We now deploy across 14 sectors — but the constraint is the same: a small business owner (or an individual) has to be able to trust this thing with their livelihood, and trust starts with cybersecurity.
-        </p>
-        <div className="font-display italic text-nova-amber text-lg sm:text-xl mt-6">— Eric Leung, 2026</div>
-      </div>
-    </section>
-  )
-}
+// Founder section removed per user edit (OOP-4066, 2026-08-24).
+// Was A2Founder(); dropped to keep the home page focused on the cybersecurity + AI story.
 
 function A2Testimonials() {
   const items = [
@@ -423,8 +450,8 @@ function A2Contact() {
           · WhatsApp{' '}
           <a href="#" className="text-stellar-cyan underline-offset-4 hover:underline">
             +852 5123 4567
-          </a>{' '}
-          · 8/F, 18 Bonham Strand, Sheung Wan, Hong Kong.
+          </a>
+          .
         </p>
       </div>
       <form onSubmit={handleSubmit} className="bg-space-soft border border-stellar-cyan/20 rounded p-6 sm:p-8">
@@ -491,15 +518,14 @@ function A2Footer() {
           <ul className="list-none p-0 m-0">
             <li className="mb-2"><a href="/hermes-agent-hosting" className="text-ink-200 text-sm hover:text-stellar-cyan">Hermes Agent Hosting</a></li>
             <li className="mb-2"><a href="/openclaw-hosting" className="text-ink-200 text-sm hover:text-stellar-cyan">OpenClaw Hosting</a></li>
-            <li className="mb-2"><a href="#services" className="text-ink-200 text-sm hover:text-stellar-cyan">Compliance & Privacy</a></li>
-            <li className="mb-2"><a href="#contact" className="text-ink-200 text-sm hover:text-stellar-cyan">Bespoke Builds</a></li>
+            <li className="mb-2"><a href="#services" className="text-ink-200 text-sm hover:text-stellar-cyan">Cybersecurity for Business</a></li>
+            <li className="mb-2"><a href="#services" className="text-ink-200 text-sm hover:text-stellar-cyan">Personal Cybersecurity</a></li>
           </ul>
         </div>
         <div>
           <h5 className="font-mono text-[11px] tracking-[0.2em] uppercase text-stellar-cyan m-0 mb-4">Company</h5>
           <ul className="list-none p-0 m-0">
             <li className="mb-2"><a href="#about" className="text-ink-200 text-sm hover:text-stellar-cyan">About</a></li>
-            <li className="mb-2"><a href="#founder" className="text-ink-200 text-sm hover:text-stellar-cyan">Founder</a></li>
             <li className="mb-2"><a href="#case-studies" className="text-ink-200 text-sm hover:text-stellar-cyan">Case Studies</a></li>
             <li className="mb-2"><a href="#contact" className="text-ink-200 text-sm hover:text-stellar-cyan">Contact</a></li>
           </ul>
@@ -522,8 +548,8 @@ function A2Footer() {
         </div>
       </div>
       <div className="max-w-[1440px] mx-auto mt-10 pt-7 border-t border-stellar-cyan/10 flex flex-col sm:flex-row justify-between gap-3 font-mono text-[10px] sm:text-[11px] text-ink-300 tracking-[0.14em]">
-        <div>© 2026 CELESTIAL TECH LTD · HK · 8/F, 18 BONHAM STRAND</div>
-        <div>v 5.0 · BUILD 2026.08.24 · MADE IN SHEUNG WAN</div>
+        <div>© 2026 CELESTIAL TECH LTD · HK</div>
+        <div>v 6.0 · BUILD 2026.08.24 · MADE IN HONG KONG</div>
       </div>
     </footer>
   )
@@ -542,7 +568,6 @@ export default function HomeA2() {
       <A2HowItWorks />
       <A2CaseStudies />
       <A2Insights />
-      <A2Founder />
       <A2Testimonials />
       <A2Contact />
       <A2Footer />
