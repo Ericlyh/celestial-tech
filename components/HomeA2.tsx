@@ -4,6 +4,10 @@
 // Self-contained: does NOT touch Navbar/Footer/Contact used by other pages.
 // Other 6 pages keep their existing treatment; user can roll A2 across after
 // accepting the home.
+// Round 9 (2026-08-25): wired useTranslation() across every section so the home
+// page honours the language toggle. Adds ~95 locale keys under the `a2_` prefix
+// (en.ts / zh-Hant.ts). Heading simplified to "Why us?" per user feedback — the
+// "not a global cloud" framing read as comparing to a competitor.
 
 import { FormEvent, useState } from 'react'
 import { useTranslation } from '@/i18n'
@@ -31,13 +35,13 @@ function SectionTitle({ children, accent }: { children: React.ReactNode; accent?
 }
 
 function A2Nav() {
-  const { locale, toggleLocale } = useTranslation()
+  const { locale, toggleLocale, t } = useTranslation()
   const links = [
-    { label: 'Services', href: '#services' },
-    { label: 'Hosting', href: '/hermes-agent-hosting' },
-    { label: 'Why us', href: '#why-us' },
-    { label: 'Blog', href: '/blog' },
-    { label: 'Contact', href: '#contact' },
+    { label: t('a2_nav_services' as any), href: '#services' },
+    { label: t('a2_nav_hosting' as any), href: '/hermes-agent-hosting' },
+    { label: t('a2_nav_whyUs' as any), href: '#why-us' },
+    { label: t('a2_nav_blog' as any), href: '/blog' },
+    { label: t('a2_nav_contact' as any), href: '#contact' },
   ]
   return (
     <nav className="sticky top-0 z-50 flex items-center justify-between px-5 sm:px-10 py-5 bg-deep-space/80 backdrop-blur-xl border-b border-stellar-cyan/10">
@@ -69,7 +73,7 @@ function A2Nav() {
           href="#contact"
           className="hidden md:inline-block px-4 py-2 border border-stellar-cyan rounded-full text-stellar-cyan text-[12px] uppercase tracking-[0.1em] hover:bg-stellar-cyan/10 transition-colors"
         >
-          Get started →
+          {t('a2_nav_cta' as any)} →
         </a>
       </div>
     </nav>
@@ -77,32 +81,33 @@ function A2Nav() {
 }
 
 function A2Hero() {
+  const { t } = useTranslation()
   return (
     <header id="home" className="px-5 sm:px-10 lg:px-10 pt-16 sm:pt-24 pb-12 max-w-[1440px] mx-auto grid lg:grid-cols-[1.5fr_1fr] gap-10 lg:gap-16 items-center">
       <div>
         <div className="font-mono text-[11px] sm:text-[12px] tracking-[0.18em] uppercase text-stellar-cyan mb-6">
-          // Threat Atlas, Vol. 04 — 2026
+          {t('a2_hero_eyebrow' as any)}
         </div>
         <h1 className="font-display font-light italic text-[64px] sm:text-[88px] lg:text-[120px] xl:text-[160px] leading-[0.92] tracking-[-0.035em] mb-8 bg-gradient-to-br from-white via-white to-ink-200 bg-clip-text text-transparent">
-          Threat<br />
-          Atlas<sup className="font-display not-italic font-light text-[0.35em] text-cosmic-violet align-super">*</sup><br />
-          <span className="not-italic text-stellar-cyan">for the AI era.</span>
+          {t('a2_hero_title_1' as any)}<br />
+          {t('a2_hero_title_2' as any)}<sup className="font-display not-italic font-light text-[0.35em] text-cosmic-violet align-super">*</sup><br />
+          <span className="not-italic text-stellar-cyan">{t('a2_hero_title_3' as any)}</span>
         </h1>
         <p className="font-display font-light italic text-lg sm:text-xl lg:text-2xl text-ink-200 leading-relaxed max-w-[540px] mb-9">
-          We build the cybersecurity layer for SMEs and individuals adopting AI — so your data stays inside your firewall, your agents stay accountable, and your regulator can audit the logs.
+          {t('a2_hero_sub' as any)}
         </p>
         <div className="flex flex-wrap gap-4">
           <a
             href="#contact"
             className="px-7 py-4 bg-stellar-cyan text-deep-space rounded-full font-bold text-[13px] uppercase tracking-[0.1em] hover:bg-stellar-cyan-soft transition-colors"
           >
-            Deploy a private agent →
+            {t('a2_hero_cta_primary' as any)}
           </a>
           <a
             href="/hermes-agent-hosting"
             className="px-7 py-4 border border-ink-200 text-ink-50 rounded-full text-[13px] uppercase tracking-[0.1em] hover:border-stellar-cyan hover:text-stellar-cyan transition-colors"
           >
-            Watch the demo
+            {t('a2_hero_cta_secondary' as any)}
           </a>
         </div>
       </div>
@@ -129,7 +134,8 @@ function A2Hero() {
 }
 
 function A2Marquee() {
-  const items = ['private', 'protected', 'audited']
+  const { t } = useTranslation()
+  const items = [t('a2_marquee_private' as any), t('a2_marquee_protected' as any), t('a2_marquee_audited' as any)]
   return (
     <div className="border-y border-stellar-cyan/20 bg-gradient-to-r from-space-mid via-space-soft to-space-mid overflow-hidden py-5 my-12 sm:my-16">
       <div className="a2-marquee-track inline-flex gap-14 items-center font-display italic font-medium text-3xl sm:text-4xl text-stellar-cyan whitespace-nowrap">
@@ -153,30 +159,28 @@ function A2Marquee() {
 }
 
 function A2About() {
+  const { t } = useTranslation()
   return (
     <section id="about" className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24 grid lg:grid-cols-2 gap-10 lg:gap-16">
       <div>
-        <Eyebrow>// 01 — About</Eyebrow>
-        <SectionTitle accent="unsecured AI frontier">A field guide to the</SectionTitle>
+        <Eyebrow>{t('a2_about_eyebrow' as any)}</Eyebrow>
+        <SectionTitle accent={t('a2_about_title_accent' as any)}>{t('a2_about_title' as any)}</SectionTitle>
       </div>
       <div className="space-y-5 text-base sm:text-lg text-ink-200 leading-relaxed">
-        <p>
-          Celestial Tech is a Hong Kong cybersecurity company that builds AI infrastructure for SMEs and individuals. Restaurants, law firms, clinics, and family offices — the people who can't afford to send their data through someone else's API, but also can't afford a full security team. We host Hermes agents and OpenClaw deployments behind your firewall: private, auditable, accountable.
-        </p>
-        <p>
-          Our work is the inverse of the usual AI pitch — we sell less capability, more cybersecurity. Every model we deploy has a name, a passport, and a paper trail.
-        </p>
+        <p>{t('a2_about_p1' as any)}</p>
+        <p>{t('a2_about_p2' as any)}</p>
       </div>
     </section>
   )
 }
 
 function A2Stats() {
+  const { t } = useTranslation()
   const stats = [
-    { n: '100', sup: '%', l: 'Threat-modelled before deploy' },
-    { n: '4', sup: '×', l: 'Quarterly pen-tests / year' },
-    { n: '0', sup: '·', l: 'Data leaves HK' },
-    { n: '<2', sup: 'min', l: 'Mean time to alert' },
+    { n: '100', sup: '%', l: t('a2_stats_1_label' as any) },
+    { n: '4', sup: '×', l: t('a2_stats_2_label' as any) },
+    { n: '0', sup: '·', l: t('a2_stats_3_label' as any) },
+    { n: '<2', sup: 'min', l: t('a2_stats_4_label' as any) },
   ]
   return (
     <section className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 max-w-[1440px] mx-auto px-5 sm:px-10 py-10 sm:py-14 border-y border-cosmic-violet/25">
@@ -196,12 +200,13 @@ function A2Stats() {
 }
 
 function A2Services() {
+  const { t } = useTranslation()
   return (
     <section id="services" className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24">
-      <Eyebrow color="amber">// 02 — Services</Eyebrow>
-      <SectionTitle accent="three lanes">Three lanes on the</SectionTitle>
+      <Eyebrow color="amber">{t('a2_services_eyebrow' as any)}</Eyebrow>
+      <SectionTitle accent={t('a2_services_title_accent' as any)}>{t('a2_services_title' as any)}</SectionTitle>
       <p className="font-display italic font-light text-lg sm:text-xl text-ink-200 max-w-[720px] leading-relaxed mb-10 sm:mb-12">
-        One stack for empowerment, one for businesses, one for you at home. Each lane ships behind your firewall, audited by default.
+        {t('a2_services_subtitle' as any)}
       </p>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
         {/* Cybersecurity for Business — primary lane */}
@@ -209,13 +214,13 @@ function A2Services() {
           <span className="absolute top-4 right-5 w-3 h-3 border-t border-r border-nova-amber" />
           <div className="font-mono text-[11px] tracking-[0.18em] text-stellar-cyan mb-5">01</div>
           <h3 className="font-display font-normal text-2xl sm:text-[28px] leading-tight text-ink-50 mb-3">
-            Cybersecurity for <em className="italic text-cosmic-violet font-normal">Business</em>
+            {t('a2_services_1_title_1' as any)} <em className="italic text-cosmic-violet font-normal">{t('a2_services_1_title_2' as any)}</em>
           </h3>
           <p className="text-sm text-ink-200 leading-relaxed mb-5">
-            Cybersecurity audit, HK PDPO-aligned privacy compliance, and incident response for SMEs that can&apos;t staff a full security team. Data residency in Hong Kong. Encryption-at-rest, quarterly penetration tests, opt-in/opt-out workflows, and a runbook your auditor can read.
+            {t('a2_services_1_desc' as any)}
           </p>
           <a href="/cybersecurity/sme" className="inline-block text-stellar-cyan font-mono text-[12px] tracking-[0.14em] uppercase mt-2 hover:text-stellar-cyan-soft">
-            See full SME service menu →
+            {t('a2_services_1_cta' as any)}
           </a>
         </div>
 
@@ -224,13 +229,13 @@ function A2Services() {
           <span className="absolute top-4 right-5 w-3 h-3 border-t border-r border-nova-amber" />
           <div className="font-mono text-[11px] tracking-[0.18em] text-stellar-cyan mb-5">02</div>
           <h3 className="font-display font-normal text-2xl sm:text-[28px] leading-tight text-ink-50 mb-3">
-            Personal <em className="italic text-cosmic-violet font-normal">Cybersecurity</em>
+            {t('a2_services_2_title_1' as any)} <em className="italic text-cosmic-violet font-normal">{t('a2_services_2_title_2' as any)}</em>
           </h3>
           <p className="text-sm text-ink-200 leading-relaxed mb-5">
-            Cybersecurity for individuals and households. Device hardening, identity-protection, scam-watch, and a private channel to a human security operator when something looks wrong — without sending your data to a global cloud to do it.
+            {t('a2_services_2_desc' as any)}
           </p>
           <a href="/cybersecurity/personal" className="inline-block text-stellar-cyan font-mono text-[12px] tracking-[0.14em] uppercase mt-2 hover:text-stellar-cyan-soft">
-            See full Personal service menu →
+            {t('a2_services_2_cta' as any)}
           </a>
         </div>
 
@@ -239,19 +244,19 @@ function A2Services() {
           <span className="absolute top-4 right-5 w-3 h-3 border-t border-r border-nova-amber" />
           <div className="font-mono text-[11px] tracking-[0.18em] text-stellar-cyan mb-5">03</div>
           <h3 className="font-display font-normal text-2xl sm:text-[28px] leading-tight text-ink-50 mb-3">
-            AI <em className="italic text-cosmic-violet font-normal">Empowerment</em>
+            {t('a2_services_3_title_1' as any)} <em className="italic text-cosmic-violet font-normal">{t('a2_services_3_title_2' as any)}</em>
           </h3>
           <p className="text-sm text-ink-200 leading-relaxed mb-5">
-            AI agents and automations deployed behind your firewall — trained on your data, hardened against prompt injection, accountable to your auditor.
+            {t('a2_services_3_desc' as any)}
           </p>
           <ul className="list-none p-0 m-0 space-y-3 border-t border-dashed border-stellar-cyan/20 pt-4">
             <li>
-              <div className="font-mono text-[10px] tracking-[0.18em] uppercase text-nova-amber">Hermes</div>
-              <div className="text-sm text-ink-50 mt-1">Cantonese-speaking agents on WhatsApp & Telegram. Restaurant, reception, retail templates.</div>
+              <div className="font-mono text-[10px] tracking-[0.18em] uppercase text-nova-amber">{t('a2_services_3_hermes_label' as any)}</div>
+              <div className="text-sm text-ink-50 mt-1">{t('a2_services_3_hermes_desc' as any)}</div>
             </li>
             <li>
-              <div className="font-mono text-[10px] tracking-[0.18em] uppercase text-nova-amber">Bespoke Builds</div>
-              <div className="text-sm text-ink-50 mt-1">Custom agents for law, medicine, finance — threat-modelled before the first line of code.</div>
+              <div className="font-mono text-[10px] tracking-[0.18em] uppercase text-nova-amber">{t('a2_services_3_bespoke_label' as any)}</div>
+              <div className="text-sm text-ink-50 mt-1">{t('a2_services_3_bespoke_desc' as any)}</div>
             </li>
           </ul>
         </div>
@@ -261,27 +266,48 @@ function A2Services() {
 }
 
 function A2WhyUs() {
+  const { t } = useTranslation()
   const items = [
-    { h: 'Threat-modelled first, shipped second.', hAccent: 'Threat-modelled', b: 'Every deployment starts with an adversary profile — not a sales deck. We name the attacker, the asset, the path. Then we ship.' },
-    { h: 'Auditable to your auditor, not to us.', hAccent: 'Auditable', b: 'Logs you can hand to your compliance team without a redaction pass. Models that answer what they said, when, and why.' },
-    { h: 'Hong Kong, behind your firewall.', hAccent: 'behind your firewall', b: 'Data residency isn\'t a setting — it\'s the architecture. No exit to a foreign cloud, no third-party processor you didn\'t choose.' },
-    { h: 'Outcome-metered, never seat-metered.', hAccent: 'Outcome-metered', b: 'You pay for hours saved, not seats filled. If the agent doesn\'t deliver, the meter doesn\'t run.' },
+    {
+      pre: t('a2_whyUs_1_pre' as any),
+      accent: t('a2_whyUs_1_accent' as any),
+      post: t('a2_whyUs_1_post' as any),
+      b: t('a2_whyUs_1_b' as any),
+    },
+    {
+      pre: t('a2_whyUs_2_pre' as any),
+      accent: t('a2_whyUs_2_accent' as any),
+      post: t('a2_whyUs_2_post' as any),
+      b: t('a2_whyUs_2_b' as any),
+    },
+    {
+      pre: t('a2_whyUs_3_pre' as any),
+      accent: t('a2_whyUs_3_accent' as any),
+      post: t('a2_whyUs_3_post' as any),
+      b: t('a2_whyUs_3_b' as any),
+    },
+    {
+      pre: t('a2_whyUs_4_pre' as any),
+      accent: t('a2_whyUs_4_accent' as any),
+      post: t('a2_whyUs_4_post' as any),
+      b: t('a2_whyUs_4_b' as any),
+    },
   ]
   return (
     <section id="why-us" className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24 grid lg:grid-cols-[1fr_2fr] gap-10 lg:gap-16 items-start">
       <div>
-        <Eyebrow color="violet">// 03 — Why us</Eyebrow>
+        <Eyebrow color="violet">{t('a2_whyUs_eyebrow' as any)}</Eyebrow>
         <h2 className="font-display font-light text-4xl sm:text-5xl lg:text-[56px] leading-[0.98] tracking-[-0.02em] mt-4">
-          Why us, not a global cloud?
+          {t('a2_whyUs_title' as any)}
         </h2>
       </div>
       <ul className="list-none p-0 m-0 grid gap-6 sm:gap-7">
-        {items.map((it) => (
-          <li key={it.h} className="pb-6 sm:pb-7 border-b border-dashed border-cosmic-violet/30 last:border-b-0">
+        {items.map((it, idx) => (
+          <li key={idx} className="pb-6 sm:pb-7 border-b border-dashed border-cosmic-violet/30 last:border-b-0">
             <div className="font-display font-normal text-xl sm:text-2xl text-ink-50 mb-2">
-              {it.h.split(it.hAccent)[0]}
-              <em className="italic text-nova-amber">{it.hAccent}</em>
-              {it.h.split(it.hAccent)[1]}
+              {it.pre}
+              <em className="italic text-nova-amber">{it.accent}</em>
+              {it.post}
             </div>
             <div className="text-sm sm:text-base text-ink-200 leading-relaxed">{it.b}</div>
           </li>
@@ -292,15 +318,16 @@ function A2WhyUs() {
 }
 
 function A2HowItWorks() {
+  const { t } = useTranslation()
   const steps = [
-    { n: '→ STEP 01', title: 'Discovery', desc: 'A 90-minute call. We learn your workflow, your data, your risk tolerance. Output: a one-page brief you can share with your board.' },
-    { n: '→ STEP 02', title: 'Pilot', desc: 'Two weeks, two users, one channel. Live conversation logs, weekly review. No charge until you\'re satisfied with the persona.' },
-    { n: '→ STEP 03', title: 'Launch', desc: 'Full deployment on HK infrastructure, with monitoring, alerting, and a quarterly review of guardrails.' },
+    { n: t('a2_how_step_1_n' as any), title: t('a2_how_step_1_title' as any), desc: t('a2_how_step_1_desc' as any) },
+    { n: t('a2_how_step_2_n' as any), title: t('a2_how_step_2_title' as any), desc: t('a2_how_step_2_desc' as any) },
+    { n: t('a2_how_step_3_n' as any), title: t('a2_how_step_3_title' as any), desc: t('a2_how_step_3_desc' as any) },
   ]
   return (
     <section className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24">
-      <Eyebrow>// 04 — How it works</Eyebrow>
-      <SectionTitle accent="checkpoints">Three weeks, three</SectionTitle>
+      <Eyebrow>{t('a2_how_eyebrow' as any)}</Eyebrow>
+      <SectionTitle accent={t('a2_how_title_accent' as any)}>{t('a2_how_title' as any)}</SectionTitle>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-7">
         {steps.map((s) => (
           <div key={s.title} className="bg-space-mid border-l-[3px] border-stellar-cyan p-6 sm:p-7">
@@ -315,18 +342,19 @@ function A2HowItWorks() {
 }
 
 function A2CaseStudies() {
+  const { t } = useTranslation()
   const cases = [
-    { tag: 'CYBER · KWUN TONG', title: 'BEC Attempt, Contained in 48 Hours', body: 'A 40-person logistics firm forwarded what looked like a CEO wire instruction. Our incident line caught the domain-spoof within 14 minutes, isolated the mailbox, walked HR through a staff-wide reset, and sat with their auditor through the post-mortem.', metric: '0', metricLabel: 'dollars lost' },
-    { tag: 'CYBER · SHEUNG WAN', title: 'Phishing Drill for a Family Office', body: 'A single-family office with nine staff ran a quarterly phishing drill. First round: two clicked. After our targeted training and DMARC hardening: a second round the next quarter, zero clicks, zero reports to the insurer.', metric: '100%', metricLabel: 'click-rate, round 2' },
-    { tag: 'CYBER · QUARRY BAY', title: 'Fintech Sandbox, Audit-Passed', body: 'A Series-A fintech needed to clear an HKMA sandbox cybersecurity review in six weeks. We threat-modelled the four new endpoints, shipped the runbook, sat in on the review. They passed on the second pass, no rework.', metric: '6 wks', metricLabel: 'from kickoff to signed' },
-    { tag: 'RESTAURANT · WHAMPOA', title: 'Take-Away Orders, Fully Automated', body: 'A 24-seat Cantonese restaurant in Whampoa replaced its phone-ordering workflow with a Hermes agent on WhatsApp. The agent takes orders in Cantonese, sends an FPS payment link, and pings the kitchen.', metric: '+38%', metricLabel: 'orders / week' },
-    { tag: 'CLINIC · TST', title: 'Multilingual Front Desk', body: 'A dermatology clinic with patients from six language backgrounds replaced a human receptionist with a Hermes agent that hands off to a nurse when clinical questions come up.', metric: '9/10', metricLabel: 'patient CSAT' },
-    { tag: 'AI · CENTRAL', title: 'First-Pass Contract Review', body: 'A 6-partner commercial law firm uses our hosted agents to surface relevant clauses from their precedent library. Review time per contract dropped from 4 hours to 90 minutes; partners still sign off.', metric: '−62%', metricLabel: 'review time' },
+    { tag: t('a2_case_1_tag' as any), title: t('a2_case_1_title' as any), body: t('a2_case_1_body' as any), metric: t('a2_case_1_metric' as any), metricLabel: t('a2_case_1_metric_label' as any) },
+    { tag: t('a2_case_2_tag' as any), title: t('a2_case_2_title' as any), body: t('a2_case_2_body' as any), metric: t('a2_case_2_metric' as any), metricLabel: t('a2_case_2_metric_label' as any) },
+    { tag: t('a2_case_3_tag' as any), title: t('a2_case_3_title' as any), body: t('a2_case_3_body' as any), metric: t('a2_case_3_metric' as any), metricLabel: t('a2_case_3_metric_label' as any) },
+    { tag: t('a2_case_4_tag' as any), title: t('a2_case_4_title' as any), body: t('a2_case_4_body' as any), metric: t('a2_case_4_metric' as any), metricLabel: t('a2_case_4_metric_label' as any) },
+    { tag: t('a2_case_5_tag' as any), title: t('a2_case_5_title' as any), body: t('a2_case_5_body' as any), metric: t('a2_case_5_metric' as any), metricLabel: t('a2_case_5_metric_label' as any) },
+    { tag: t('a2_case_6_tag' as any), title: t('a2_case_6_title' as any), body: t('a2_case_6_body' as any), metric: t('a2_case_6_metric' as any), metricLabel: t('a2_case_6_metric_label' as any) },
   ]
   return (
     <section id="case-studies" className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24">
-      <Eyebrow>// 05 — Case studies</Eyebrow>
-      <SectionTitle accent="field">Receipts from the</SectionTitle>
+      <Eyebrow>{t('a2_cases_eyebrow' as any)}</Eyebrow>
+      <SectionTitle accent={t('a2_cases_title_accent' as any)}>{t('a2_cases_title' as any)}</SectionTitle>
       <div className="grid gap-4 sm:gap-5">
         {cases.map((c) => (
           <div key={c.title} className="grid grid-cols-1 lg:grid-cols-[220px_1fr_200px] gap-6 lg:gap-8 p-6 sm:p-8 bg-space-soft border border-nova-amber/15 rounded items-center">
@@ -347,22 +375,23 @@ function A2CaseStudies() {
 }
 
 function A2Insights() {
+  const { t } = useTranslation()
   const items = [
-    { date: '2026·08·14', cat: 'FIELD NOTES', title: 'What we learned deploying Hermes in a 12-seat noodle shop', desc: 'The hardest prompt to write isn\'t for the model. It\'s for the human who has to trust it.' },
-    { date: '2026·07·30', cat: 'ENGINEERING', title: 'On hosting OpenClaw without owning a rack', desc: 'How we got to 99.9% uptime on commodity HK VPS providers, without compromising on data residency.' },
-    { date: '2026·07·12', cat: 'POLICY', title: 'HK PDPO, in plain English', desc: 'A non-lawyer\'s guide to the Personal Data (Privacy) Ordinance, with a checklist you can actually use.' },
+    { date: t('a2_insight_1_date' as any), cat: t('a2_insight_1_cat' as any), title: t('a2_insight_1_title' as any), desc: t('a2_insight_1_desc' as any) },
+    { date: t('a2_insight_2_date' as any), cat: t('a2_insight_2_cat' as any), title: t('a2_insight_2_title' as any), desc: t('a2_insight_2_desc' as any) },
+    { date: t('a2_insight_3_date' as any), cat: t('a2_insight_3_cat' as any), title: t('a2_insight_3_title' as any), desc: t('a2_insight_3_desc' as any) },
   ]
   return (
     <section className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24">
-      <Eyebrow>// 06 — Insights</Eyebrow>
-      <SectionTitle accent="journal">From the</SectionTitle>
+      <Eyebrow>{t('a2_insights_eyebrow' as any)}</Eyebrow>
+      <SectionTitle accent={t('a2_insights_title_accent' as any)}>{t('a2_insights_title' as any)}</SectionTitle>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
         {items.map((i) => (
           <a key={i.title} href="/blog" className="block bg-space-mid border border-stellar-cyan/20 p-6 hover:border-stellar-cyan/50 transition-colors">
             <div className="font-mono text-[11px] text-ink-300 tracking-[0.16em]">{i.date} — {i.cat}</div>
             <h4 className="font-display font-normal text-xl sm:text-[22px] leading-snug mt-3 mb-3 text-ink-50">{i.title}</h4>
             <p className="text-sm text-ink-200 leading-relaxed">{i.desc}</p>
-            <div className="text-stellar-cyan font-mono text-[13px] mt-4">Read →</div>
+            <div className="text-stellar-cyan font-mono text-[13px] mt-4">{t('a2_insights_cta' as any)}</div>
           </a>
         ))}
       </div>
@@ -374,23 +403,24 @@ function A2Insights() {
 // Was A2Founder(); dropped to keep the home page focused on the cybersecurity + AI story.
 
 function A2Testimonials() {
+  const { t } = useTranslation()
   const items = [
-    { q: 'We were sceptical. Two months in, the agent handles 60% of our WhatsApp enquiries. The other 40% it forwards to a human. We sleep on Sundays now.', who: '— WING, MAMA KEE\'S KITCHEN' },
-    { q: 'The audit log is the feature. Our compliance team wanted to know what the model said, when, and why. With Hermes, we can show them — every time.', who: '— JAMES, HALCYON PARTNERS' },
-    { q: 'It\'s the first AI product I\'ve used that doesn\'t make me feel like I\'m training it.', who: '— DR. CHEN, TST DERMATOLOGY' },
+    { q: t('a2_test_1_q' as any), who: t('a2_test_1_who' as any) },
+    { q: t('a2_test_2_q' as any), who: t('a2_test_2_who' as any) },
+    { q: t('a2_test_3_q' as any), who: t('a2_test_3_who' as any) },
   ]
   return (
     <section className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24">
-      <Eyebrow>// 08 — Testimonials</Eyebrow>
-      <SectionTitle accent="actually">What clients</SectionTitle>
+      <Eyebrow>{t('a2_test_eyebrow' as any)}</Eyebrow>
+      <SectionTitle accent={t('a2_test_title_accent' as any)}>{t('a2_test_title' as any)}</SectionTitle>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
-        {items.map((t, idx) => (
+        {items.map((tt, idx) => (
           <div key={idx} className="bg-space-soft border border-cosmic-violet/20 p-6 sm:p-7">
             <blockquote className="font-display italic font-light text-base sm:text-lg leading-relaxed text-ink-50 m-0 mb-5">
               <span className="text-cosmic-violet text-3xl align-[-6px] mr-1">“</span>
-              {t.q}
+              {tt.q}
             </blockquote>
-            <div className="font-mono text-[11px] sm:text-[12px] text-stellar-cyan tracking-[0.14em]">{t.who}</div>
+            <div className="font-mono text-[11px] sm:text-[12px] text-stellar-cyan tracking-[0.14em]">{tt.who}</div>
           </div>
         ))}
       </div>
@@ -399,6 +429,7 @@ function A2Testimonials() {
 }
 
 function A2Contact() {
+  const { t } = useTranslation()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [msg, setMsg] = useState('')
@@ -437,33 +468,33 @@ function A2Contact() {
   return (
     <section id="contact" className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24 grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
       <div>
-        <Eyebrow>// 09 — Contact</Eyebrow>
+        <Eyebrow>{t('a2_contact_eyebrow' as any)}</Eyebrow>
         <h2 className="font-display font-light text-5xl sm:text-6xl lg:text-7xl leading-[0.95] tracking-[-0.025em] mb-6">
-          Let&apos;s <em className="italic text-nova-amber font-normal">talk</em>.
+          {t('a2_contact_title_1' as any)} <em className="italic text-nova-amber font-normal">{t('a2_contact_title_2' as any)}</em>.
         </h2>
         <p className="text-base sm:text-lg text-ink-200 leading-relaxed mb-5">
-          Tell us about your workflow and we&apos;ll send back a one-page brief within 48 hours. No forms on our side, no demo calls before we know what you need.
+          {t('a2_contact_p1' as any)}
         </p>
         <p className="text-base sm:text-lg text-ink-200 leading-relaxed">
-          Or write to us directly at{' '}
+          {t('a2_contact_p2_pre' as any)}
           <a href="mailto:hello@celestial-tech.com" className="text-stellar-cyan underline-offset-4 hover:underline">
             hello@celestial-tech.com
-          </a>{' '}
-          · WhatsApp{' '}
+          </a>
+          {t('a2_contact_p2_post' as any)}
           <a href="#" className="text-stellar-cyan underline-offset-4 hover:underline">
             +852 5123 4567
           </a>
-          .
+          {t('a2_contact_p2_dot' as any)}
         </p>
       </div>
       <form onSubmit={handleSubmit} className="bg-space-soft border border-stellar-cyan/20 rounded p-6 sm:p-8">
         {submitted ? (
           <div className="font-display italic text-2xl text-stellar-cyan py-10 text-center">
-            Brief received. We&apos;ll be in touch within 48 hours.
+            {t('a2_contact_success' as any)}
           </div>
         ) : (
           <>
-            <label className="block font-mono text-[11px] tracking-[0.18em] uppercase text-ink-300 mb-2 mt-0">Your name</label>
+            <label className="block font-mono text-[11px] tracking-[0.18em] uppercase text-ink-300 mb-2 mt-0">{t('a2_contact_label_name' as any)}</label>
             <input
               type="text"
               required
@@ -472,7 +503,7 @@ function A2Contact() {
               placeholder="Wing Chan"
               className="w-full bg-deep-space text-ink-50 border border-stellar-cyan/20 p-3 font-sans text-base rounded focus:border-stellar-cyan outline-none"
             />
-            <label className="block font-mono text-[11px] tracking-[0.18em] uppercase text-ink-300 mb-2 mt-5">Email</label>
+            <label className="block font-mono text-[11px] tracking-[0.18em] uppercase text-ink-300 mb-2 mt-5">{t('a2_contact_label_email' as any)}</label>
             <input
               type="email"
               required
@@ -481,7 +512,7 @@ function A2Contact() {
               placeholder="wing@mamakees.hk"
               className="w-full bg-deep-space text-ink-50 border border-stellar-cyan/20 p-3 font-sans text-base rounded focus:border-stellar-cyan outline-none"
             />
-            <label className="block font-mono text-[11px] tracking-[0.18em] uppercase text-ink-300 mb-2 mt-5">What does your day look like?</label>
+            <label className="block font-mono text-[11px] tracking-[0.18em] uppercase text-ink-300 mb-2 mt-5">{t('a2_contact_label_msg' as any)}</label>
             <textarea
               required
               value={msg}
@@ -495,7 +526,7 @@ function A2Contact() {
               disabled={submitting}
               className="mt-6 px-7 py-3 bg-stellar-cyan text-deep-space rounded-full font-bold text-[13px] uppercase tracking-[0.12em] hover:bg-stellar-cyan-soft transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {submitting ? 'Sending…' : 'Send brief →'}
+              {submitting ? t('a2_contact_cta_sending' as any) : t('a2_contact_cta_send' as any)}
             </button>
             {error && (
               <div className="mt-4 text-sm text-nova-amber font-mono">Error: {error}</div>
@@ -508,49 +539,50 @@ function A2Contact() {
 }
 
 function A2Footer() {
+  const { t } = useTranslation()
   return (
     <footer className="border-t border-stellar-cyan/20 px-5 sm:px-10 py-12 sm:py-16 bg-space-mid mt-10">
       <div className="max-w-[1440px] mx-auto grid grid-cols-2 md:grid-cols-5 gap-8 sm:gap-10">
         <div className="col-span-2 md:col-span-1">
-          <div className="font-display font-black text-2xl sm:text-3xl text-ink-50 mb-2">Celestial Tech</div>
-          <div className="font-display italic text-ink-300 text-base">Threat Atlas for the AI era.</div>
+          <div className="font-display font-black text-2xl sm:text-3xl text-ink-50 mb-2">{t('a2_footer_brand' as any)}</div>
+          <div className="font-display italic text-ink-300 text-base">{t('a2_footer_tagline' as any)}</div>
         </div>
         <div>
-          <h5 className="font-mono text-[11px] tracking-[0.2em] uppercase text-stellar-cyan m-0 mb-4">Services</h5>
+          <h5 className="font-mono text-[11px] tracking-[0.2em] uppercase text-stellar-cyan m-0 mb-4">{t('a2_footer_col_services' as any)}</h5>
           <ul className="list-none p-0 m-0">
-            <li className="mb-2"><a href="/hermes-agent-hosting" className="text-ink-200 text-sm hover:text-stellar-cyan">Hermes Agent Hosting</a></li>
-            <li className="mb-2"><a href="/cybersecurity/sme" className="text-ink-200 text-sm hover:text-stellar-cyan">Cybersecurity for Business</a></li>
-            <li className="mb-2"><a href="/cybersecurity/personal" className="text-ink-200 text-sm hover:text-stellar-cyan">Personal Cybersecurity</a></li>
+            <li className="mb-2"><a href="/hermes-agent-hosting" className="text-ink-200 text-sm hover:text-stellar-cyan">{t('a2_footer_link_hermes' as any)}</a></li>
+            <li className="mb-2"><a href="/cybersecurity/sme" className="text-ink-200 text-sm hover:text-stellar-cyan">{t('a2_footer_link_sme' as any)}</a></li>
+            <li className="mb-2"><a href="/cybersecurity/personal" className="text-ink-200 text-sm hover:text-stellar-cyan">{t('a2_footer_link_personal' as any)}</a></li>
           </ul>
         </div>
         <div>
-          <h5 className="font-mono text-[11px] tracking-[0.2em] uppercase text-stellar-cyan m-0 mb-4">Company</h5>
+          <h5 className="font-mono text-[11px] tracking-[0.2em] uppercase text-stellar-cyan m-0 mb-4">{t('a2_footer_col_company' as any)}</h5>
           <ul className="list-none p-0 m-0">
-            <li className="mb-2"><a href="#about" className="text-ink-200 text-sm hover:text-stellar-cyan">About</a></li>
-            <li className="mb-2"><a href="#case-studies" className="text-ink-200 text-sm hover:text-stellar-cyan">Case Studies</a></li>
-            <li className="mb-2"><a href="#contact" className="text-ink-200 text-sm hover:text-stellar-cyan">Contact</a></li>
+            <li className="mb-2"><a href="#about" className="text-ink-200 text-sm hover:text-stellar-cyan">{t('a2_footer_link_about' as any)}</a></li>
+            <li className="mb-2"><a href="#case-studies" className="text-ink-200 text-sm hover:text-stellar-cyan">{t('a2_footer_link_cases' as any)}</a></li>
+            <li className="mb-2"><a href="#contact" className="text-ink-200 text-sm hover:text-stellar-cyan">{t('a2_footer_link_contact' as any)}</a></li>
           </ul>
         </div>
         <div>
-          <h5 className="font-mono text-[11px] tracking-[0.2em] uppercase text-stellar-cyan m-0 mb-4">Journal</h5>
+          <h5 className="font-mono text-[11px] tracking-[0.2em] uppercase text-stellar-cyan m-0 mb-4">{t('a2_footer_col_journal' as any)}</h5>
           <ul className="list-none p-0 m-0">
-            <li className="mb-2"><a href="/blog" className="text-ink-200 text-sm hover:text-stellar-cyan">All posts</a></li>
-            <li className="mb-2"><a href="/blog" className="text-ink-200 text-sm hover:text-stellar-cyan">Field Notes</a></li>
-            <li className="mb-2"><a href="/blog" className="text-ink-200 text-sm hover:text-stellar-cyan">Engineering</a></li>
-            <li className="mb-2"><a href="/blog" className="text-ink-200 text-sm hover:text-stellar-cyan">Policy</a></li>
+            <li className="mb-2"><a href="/blog" className="text-ink-200 text-sm hover:text-stellar-cyan">{t('a2_footer_link_all' as any)}</a></li>
+            <li className="mb-2"><a href="/blog" className="text-ink-200 text-sm hover:text-stellar-cyan">{t('a2_footer_link_field' as any)}</a></li>
+            <li className="mb-2"><a href="/blog" className="text-ink-200 text-sm hover:text-stellar-cyan">{t('a2_footer_link_eng' as any)}</a></li>
+            <li className="mb-2"><a href="/blog" className="text-ink-200 text-sm hover:text-stellar-cyan">{t('a2_footer_link_policy' as any)}</a></li>
           </ul>
         </div>
         <div>
-          <h5 className="font-mono text-[11px] tracking-[0.2em] uppercase text-stellar-cyan m-0 mb-4">Legal</h5>
+          <h5 className="font-mono text-[11px] tracking-[0.2em] uppercase text-stellar-cyan m-0 mb-4">{t('a2_footer_col_legal' as any)}</h5>
           <ul className="list-none p-0 m-0">
-            <li className="mb-2"><a href="/privacy-policy" className="text-ink-200 text-sm hover:text-stellar-cyan">Privacy Policy</a></li>
-            <li className="mb-2"><a href="/terms-of-service" className="text-ink-200 text-sm hover:text-stellar-cyan">Terms of Service</a></li>
+            <li className="mb-2"><a href="/privacy-policy" className="text-ink-200 text-sm hover:text-stellar-cyan">{t('a2_footer_link_privacy' as any)}</a></li>
+            <li className="mb-2"><a href="/terms-of-service" className="text-ink-200 text-sm hover:text-stellar-cyan">{t('a2_footer_link_terms' as any)}</a></li>
           </ul>
         </div>
       </div>
       <div className="max-w-[1440px] mx-auto mt-10 pt-7 border-t border-stellar-cyan/10 flex flex-col sm:flex-row justify-between gap-3 font-mono text-[10px] sm:text-[11px] text-ink-300 tracking-[0.14em]">
-        <div>© 2026 CELESTIAL TECH LTD · HK</div>
-        <div>v 6.0 · BUILD 2026.08.24 · MADE IN HONG KONG</div>
+        <div>{t('a2_footer_copyright' as any)}</div>
+        <div>{t('a2_footer_version' as any)}</div>
       </div>
     </footer>
   )
