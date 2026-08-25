@@ -154,7 +154,7 @@ function A2Marquee() {
 
 function A2About() {
   return (
-    <section className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24 grid lg:grid-cols-2 gap-10 lg:gap-16">
+    <section id="about" className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24 grid lg:grid-cols-2 gap-10 lg:gap-16">
       <div>
         <Eyebrow>// 01 — About</Eyebrow>
         <SectionTitle accent="unsecured AI frontier">A field guide to the</SectionTitle>
@@ -204,10 +204,40 @@ function A2Services() {
         One stack for empowerment, one for businesses, one for you at home. Each lane ships behind your firewall, audited by default.
       </p>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
+        {/* Cybersecurity for Business — primary lane */}
+        <div className="relative bg-space-soft border border-stellar-cyan/30 rounded p-6 sm:p-7 min-h-[320px] overflow-hidden">
+          <span className="absolute top-4 right-5 w-3 h-3 border-t border-r border-nova-amber" />
+          <div className="font-mono text-[11px] tracking-[0.18em] text-stellar-cyan mb-5">01</div>
+          <h3 className="font-display font-normal text-2xl sm:text-[28px] leading-tight text-ink-50 mb-3">
+            Cybersecurity for <em className="italic text-cosmic-violet font-normal">Business</em>
+          </h3>
+          <p className="text-sm text-ink-200 leading-relaxed mb-5">
+            Cybersecurity audit, HK PDPO-aligned privacy compliance, and incident response for SMEs that can&apos;t staff a full security team. Data residency in Hong Kong. Encryption-at-rest, quarterly penetration tests, opt-in/opt-out workflows, and a runbook your auditor can read.
+          </p>
+          <a href="/cybersecurity/sme" className="inline-block text-stellar-cyan font-mono text-[12px] tracking-[0.14em] uppercase mt-2 hover:text-stellar-cyan-soft">
+            See full SME service menu →
+          </a>
+        </div>
+
+        {/* Personal Cybersecurity — primary lane */}
+        <div className="relative bg-space-soft border border-stellar-cyan/30 rounded p-6 sm:p-7 min-h-[320px] overflow-hidden">
+          <span className="absolute top-4 right-5 w-3 h-3 border-t border-r border-nova-amber" />
+          <div className="font-mono text-[11px] tracking-[0.18em] text-stellar-cyan mb-5">02</div>
+          <h3 className="font-display font-normal text-2xl sm:text-[28px] leading-tight text-ink-50 mb-3">
+            Personal <em className="italic text-cosmic-violet font-normal">Cybersecurity</em>
+          </h3>
+          <p className="text-sm text-ink-200 leading-relaxed mb-5">
+            Cybersecurity for individuals and households. Device hardening, identity-protection, scam-watch, and a private channel to a human security operator when something looks wrong — without sending your data to a global cloud to do it.
+          </p>
+          <a href="/cybersecurity/personal" className="inline-block text-stellar-cyan font-mono text-[12px] tracking-[0.14em] uppercase mt-2 hover:text-stellar-cyan-soft">
+            See full Personal service menu →
+          </a>
+        </div>
+
         {/* AI Empowerment — combines Hermes + OpenClaw + Bespoke */}
         <div className="relative bg-space-soft border border-stellar-cyan/20 rounded p-6 sm:p-7 min-h-[320px] overflow-hidden">
           <span className="absolute top-4 right-5 w-3 h-3 border-t border-r border-nova-amber" />
-          <div className="font-mono text-[11px] tracking-[0.18em] text-stellar-cyan mb-5">01</div>
+          <div className="font-mono text-[11px] tracking-[0.18em] text-stellar-cyan mb-5">03</div>
           <h3 className="font-display font-normal text-2xl sm:text-[28px] leading-tight text-ink-50 mb-3">
             AI <em className="italic text-cosmic-violet font-normal">Empowerment</em>
           </h3>
@@ -220,38 +250,10 @@ function A2Services() {
               <div className="text-sm text-ink-50 mt-1">Cantonese-speaking agents on WhatsApp & Telegram. Restaurant, reception, retail templates.</div>
             </li>
             <li>
-              <div className="font-mono text-[10px] tracking-[0.18em] uppercase text-nova-amber">OpenClaw</div>
-              <div className="text-sm text-ink-50 mt-1">Self-hosted browser automation on your own infrastructure, with our security operators on call.</div>
-            </li>
-            <li>
               <div className="font-mono text-[10px] tracking-[0.18em] uppercase text-nova-amber">Bespoke Builds</div>
               <div className="text-sm text-ink-50 mt-1">Custom agents for law, medicine, finance — threat-modelled before the first line of code.</div>
             </li>
           </ul>
-        </div>
-
-        {/* Cybersecurity for Business */}
-        <div className="relative bg-space-soft border border-stellar-cyan/20 rounded p-6 sm:p-7 min-h-[320px] overflow-hidden">
-          <span className="absolute top-4 right-5 w-3 h-3 border-t border-r border-nova-amber" />
-          <div className="font-mono text-[11px] tracking-[0.18em] text-stellar-cyan mb-5">02</div>
-          <h3 className="font-display font-normal text-2xl sm:text-[28px] leading-tight text-ink-50 mb-3">
-            Cybersecurity for <em className="italic text-cosmic-violet font-normal">Business</em>
-          </h3>
-          <p className="text-sm text-ink-200 leading-relaxed">
-            Cybersecurity audit, HK PDPO-aligned privacy compliance, and incident response for SMEs that can&apos;t staff a full security team. Data residency in Hong Kong. Encryption-at-rest, quarterly penetration tests, opt-in/opt-out workflows, and a runbook your auditor can read.
-          </p>
-        </div>
-
-        {/* Personal Cybersecurity */}
-        <div className="relative bg-space-soft border border-stellar-cyan/20 rounded p-6 sm:p-7 min-h-[320px] overflow-hidden">
-          <span className="absolute top-4 right-5 w-3 h-3 border-t border-r border-nova-amber" />
-          <div className="font-mono text-[11px] tracking-[0.18em] text-stellar-cyan mb-5">03</div>
-          <h3 className="font-display font-normal text-2xl sm:text-[28px] leading-tight text-ink-50 mb-3">
-            Personal <em className="italic text-cosmic-violet font-normal">Cybersecurity</em>
-          </h3>
-          <p className="text-sm text-ink-200 leading-relaxed">
-            Cybersecurity for individuals and households. Device hardening, identity-protection, scam-watch, and a private channel to a human security operator when something looks wrong — without sending your data to a global cloud to do it.
-          </p>
         </div>
       </div>
     </section>
@@ -318,8 +320,8 @@ function A2CaseStudies() {
     { tag: 'CYBER · SHEUNG WAN', title: 'Phishing Drill for a Family Office', body: 'A single-family office with nine staff ran a quarterly phishing drill. First round: two clicked. After our targeted training and DMARC hardening: a second round the next quarter, zero clicks, zero reports to the insurer.', metric: '100%', metricLabel: 'click-rate, round 2' },
     { tag: 'CYBER · QUARRY BAY', title: 'Fintech Sandbox, Audit-Passed', body: 'A Series-A fintech needed to clear an HKMA sandbox cybersecurity review in six weeks. We threat-modelled the four new endpoints, shipped the runbook, sat in on the review. They passed on the second pass, no rework.', metric: '6 wks', metricLabel: 'from kickoff to signed' },
     { tag: 'RESTAURANT · WHAMPOA', title: 'Take-Away Orders, Fully Automated', body: 'A 24-seat Cantonese restaurant in Whampoa replaced its phone-ordering workflow with a Hermes agent on WhatsApp. The agent takes orders in Cantonese, sends an FPS payment link, and pings the kitchen.', metric: '+38%', metricLabel: 'orders / week' },
-    { tag: 'LAW · CENTRAL', title: 'First-Pass Contract Review', body: 'A 6-partner commercial law firm uses OpenClaw to surface relevant clauses from their precedent library. Review time per contract dropped from 4 hours to 90 minutes; partners still sign off.', metric: '−62%', metricLabel: 'review time' },
     { tag: 'CLINIC · TST', title: 'Multilingual Front Desk', body: 'A dermatology clinic with patients from six language backgrounds replaced a human receptionist with a Hermes agent that hands off to a nurse when clinical questions come up.', metric: '9/10', metricLabel: 'patient CSAT' },
+    { tag: 'AI · CENTRAL', title: 'First-Pass Contract Review', body: 'A 6-partner commercial law firm uses our hosted agents to surface relevant clauses from their precedent library. Review time per contract dropped from 4 hours to 90 minutes; partners still sign off.', metric: '−62%', metricLabel: 'review time' },
   ]
   return (
     <section id="case-studies" className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24">
@@ -517,9 +519,8 @@ function A2Footer() {
           <h5 className="font-mono text-[11px] tracking-[0.2em] uppercase text-stellar-cyan m-0 mb-4">Services</h5>
           <ul className="list-none p-0 m-0">
             <li className="mb-2"><a href="/hermes-agent-hosting" className="text-ink-200 text-sm hover:text-stellar-cyan">Hermes Agent Hosting</a></li>
-            <li className="mb-2"><a href="/openclaw-hosting" className="text-ink-200 text-sm hover:text-stellar-cyan">OpenClaw Hosting</a></li>
-            <li className="mb-2"><a href="#services" className="text-ink-200 text-sm hover:text-stellar-cyan">Cybersecurity for Business</a></li>
-            <li className="mb-2"><a href="#services" className="text-ink-200 text-sm hover:text-stellar-cyan">Personal Cybersecurity</a></li>
+            <li className="mb-2"><a href="/cybersecurity/sme" className="text-ink-200 text-sm hover:text-stellar-cyan">Cybersecurity for Business</a></li>
+            <li className="mb-2"><a href="/cybersecurity/personal" className="text-ink-200 text-sm hover:text-stellar-cyan">Personal Cybersecurity</a></li>
           </ul>
         </div>
         <div>
