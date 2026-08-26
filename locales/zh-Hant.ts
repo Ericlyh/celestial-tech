@@ -12,7 +12,6 @@ export const zhHant: Record<LocaleKey, string> = {
   nav_blog: '部落格',
   nav_openMenu: '打開選單',
   nav_closeMenu: '關閉選單',
-  nav_openclaw: 'Hermes Agent 托管服務',
   nav_services_sme: '企業網絡安全',
   nav_services_personal: '個人網絡安全',
   nav_services_cyber: '網絡安全',

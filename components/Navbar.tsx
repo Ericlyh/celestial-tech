@@ -37,7 +37,6 @@ const navLinks: NavLink[] = [
   },
   { key: 'nav_whyUs', href: '#about' },
   { key: 'nav_caseStudies', href: '#case-studies' },
-  { key: 'nav_openclaw', href: '/hermes-agent-hosting' },
   { key: 'nav_blog', href: '/blog' },
   { key: 'nav_contact', href: '#contact' },
 ]
@@ -152,8 +151,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-7 lg:gap-9">
             {navLinks.map((link) => {
               const isActive =
-                (link.href === '/blog' && pathname?.startsWith('/blog')) ||
-                (link.href === '/hermes-agent-hosting' && pathname?.startsWith('/hermes-agent-hosting'))
+                link.href === '/blog' && pathname?.startsWith('/blog')
 
               // Services — dropdown trigger
               if (link.children || link.groups) {

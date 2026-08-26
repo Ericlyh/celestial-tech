@@ -10,7 +10,6 @@ export const en = {
   nav_blog: 'Blog',
   nav_openMenu: 'Open menu',
   nav_closeMenu: 'Close menu',
-  nav_openclaw: 'Hermes Agent',
   nav_services_sme: 'SME Cybersecurity',
   nav_services_personal: 'Personal Cybersecurity',
   nav_services_cyber: 'Cybersecurity',
