@@ -7,66 +7,72 @@ import { Shield, Smartphone, KeyRound, ScanSearch, Users, Lock } from 'lucide-re
 import { useState, FormEvent } from 'react'
 import { useTranslation } from '@/i18n'
 
-const services = [
-  {
-    icon: Smartphone,
-    code: '01',
-    title: 'Device & Network Hardening',
-    headline: 'A laptop, a phone, a router — actually configured by someone who knows.',
-    body: 'On-site or remote session, two hours, your devices left in a state a professional attacker would find tedious. Disk encryption, screen-lock policy, browser hardening, DNS-level ad/tracker blocking, router firmware, Wi-Fi segmentation for guests. Includes a one-page brief you can re-apply when you buy a new device.',
-    deliverables: ['Disk encryption on every device', 'Browser + DNS hardening', 'One-page re-apply checklist'],
-  },
-  {
-    icon: KeyRound,
-    code: '02',
-    title: 'Identity & Account Protection',
-    headline: 'Password manager, MFA everywhere, dark-web monitoring.',
-    body: 'Migration to a managed password manager (1Password, Bitwarden — your choice), hardware MFA keys for the critical services (email, banking, social), and dark-web monitoring with monthly digest. We delete the accounts you forgot you had. We freeze what should be frozen.',
-    deliverables: ['Managed password manager', 'Hardware MFA keys', 'Monthly dark-web digest'],
-  },
-  {
-    icon: ScanSearch,
-    code: '03',
-    title: 'Scam Watch & Fraud Detection',
-    headline: 'A WhatsApp message from "HSBC" lands. We tell you if it\'s real.',
-    body: 'A standing arrangement with a human security operator on WhatsApp / Signal / email. Forward the suspicious message, get a verdict within 30 minutes during business hours, 4 hours overnight. Includes phone-number and email-address takedowns when you\'re being impersonated.',
-    deliverables: ['30-min response during business hours', 'Impersonation takedown', 'Phishing verdict with evidence'],
-  },
-  {
-    icon: Lock,
-    code: '04',
-    title: 'Account Recovery & Lockout Support',
-    headline: 'Locked out of your email at midnight. We pick up.',
-    body: 'A 24/7 line for the moment someone can\'t get back into their email, banking, or social. Senior operator on a call within 15 minutes; we work with the provider to restore access, secure the account, and audit what changed. Pre-emptively: we set up recovery keys while you can still log in.',
-    deliverables: ['24/7 lockout response', 'Provider liaison', 'Pre-emptive recovery keys'],
-  },
-  {
-    icon: Users,
-    code: '05',
-    title: 'Family & Household Coverage',
-    headline: 'Up to 5 devices, 5 humans, one plan.',
-    body: 'A household plan that covers the people and devices you actually live with — spouse, kids, parents, the family PC. Includes a quarterly check-in where we sit with the less-technical member of the household and walk through what changed. Designed for the "my mum clicked a link" case.',
-    deliverables: ['Up to 5 devices + humans', 'Quarterly check-in', 'Family-friendly phishing training'],
-  },
-  {
-    icon: Shield,
-    code: '06',
-    title: 'Privacy Audit & Footprint Reduction',
-    headline: 'Find out what the internet already knows about you. Then make it stop.',
-    body: 'A two-week audit: data-broker listings, social-media exposure, old accounts still leaking, leaked credentials from prior breaches. We submit opt-outs, scrub profiles, and set up ongoing monitoring. Output: a one-page "what the internet knows about you" report, redacted to your taste.',
-    deliverables: ['Data-broker opt-out submission', 'Social profile scrub', 'Ongoing monitoring'],
-  },
-]
-
-const whatMakes = [
-  { h: 'No data leaves Hong Kong.', b: 'Your device backups, your password vault, your monitoring data — all stored on HK infrastructure. No exit to a foreign cloud you didn\'t choose.' },
-  { h: 'A human picks up the phone.', b: 'No tier-1 chatbots, no tier-2 escalation, no "your call is important to us". A senior operator answers within 30 minutes.' },
-  { h: 'Plain-English explanations.', b: 'We tell you what the threat is, what we did, what you should do — in language your family can act on. No jargon, no upsell.' },
-  { h: 'Outcome-metered, never seat-metered.', b: 'You pay for the device we hardened, not the seats in a SaaS console. If the scam-watch catches nothing this month, the meter doesn\'t run for that.' },
-]
-
 export default function CybersecurityPersonalPage() {
-  const { locale } = useTranslation()
+  const { t, locale } = useTranslation()
+  const tagCls = locale === 'zh-Hant' ? 'font-sans tracking-normal normal-case' : 'font-mono tracking-[0.18em] uppercase'
+  const numCls = locale === 'zh-Hant' ? 'font-sans tracking-normal normal-case' : 'font-mono tracking-[0.18em]'
+  const btnCls = locale === 'zh-Hant' ? 'tracking-normal normal-case' : 'uppercase tracking-[0.1em]'
+
+  const services = [
+    {
+      icon: Smartphone,
+      code: '01',
+      title: t('cyber_personal_svc_1_title' as any),
+      headline: t('cyber_personal_svc_1_headline' as any),
+      body: t('cyber_personal_svc_1_body' as any),
+      deliverables: [t('cyber_personal_svc_1_d1' as any), t('cyber_personal_svc_1_d2' as any), t('cyber_personal_svc_1_d3' as any)],
+    },
+    {
+      icon: KeyRound,
+      code: '02',
+      title: t('cyber_personal_svc_2_title' as any),
+      headline: t('cyber_personal_svc_2_headline' as any),
+      body: t('cyber_personal_svc_2_body' as any),
+      deliverables: [t('cyber_personal_svc_2_d1' as any), t('cyber_personal_svc_2_d2' as any), t('cyber_personal_svc_2_d3' as any)],
+    },
+    {
+      icon: ScanSearch,
+      code: '03',
+      title: t('cyber_personal_svc_3_title' as any),
+      headline: t('cyber_personal_svc_3_headline' as any),
+      body: t('cyber_personal_svc_3_body' as any),
+      deliverables: [t('cyber_personal_svc_3_d1' as any), t('cyber_personal_svc_3_d2' as any), t('cyber_personal_svc_3_d3' as any)],
+    },
+    {
+      icon: Lock,
+      code: '04',
+      title: t('cyber_personal_svc_4_title' as any),
+      headline: t('cyber_personal_svc_4_headline' as any),
+      body: t('cyber_personal_svc_4_body' as any),
+      deliverables: [t('cyber_personal_svc_4_d1' as any), t('cyber_personal_svc_4_d2' as any), t('cyber_personal_svc_4_d3' as any)],
+    },
+    {
+      icon: Users,
+      code: '05',
+      title: t('cyber_personal_svc_5_title' as any),
+      headline: t('cyber_personal_svc_5_headline' as any),
+      body: t('cyber_personal_svc_5_body' as any),
+      deliverables: [t('cyber_personal_svc_5_d1' as any), t('cyber_personal_svc_5_d2' as any), t('cyber_personal_svc_5_d3' as any)],
+    },
+    {
+      icon: Shield,
+      code: '06',
+      title: t('cyber_personal_svc_6_title' as any),
+      headline: t('cyber_personal_svc_6_headline' as any),
+      body: t('cyber_personal_svc_6_body' as any),
+      deliverables: [t('cyber_personal_svc_6_d1' as any), t('cyber_personal_svc_6_d2' as any), t('cyber_personal_svc_6_d3' as any)],
+    },
+  ]
+
+  const whatMakes = [
+    { h: t('cyber_personal_why_1_h' as any), b: t('cyber_personal_why_1_b' as any) },
+    { h: t('cyber_personal_why_2_h' as any), b: t('cyber_personal_why_2_b' as any) },
+    { h: t('cyber_personal_why_3_h' as any), b: t('cyber_personal_why_3_b' as any) },
+    { h: t('cyber_personal_why_4_h' as any), b: t('cyber_personal_why_4_b' as any) },
+  ]
+
+  const marqueeWords = t('cyber_personal_marquee_words' as any).split('·').map((w: string) => w.trim()).filter(Boolean)
+
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [msg, setMsg] = useState('')
@@ -109,28 +115,28 @@ export default function CybersecurityPersonalPage() {
       {/* Hero */}
       <section className="max-w-[1440px] mx-auto px-5 sm:px-10 pt-16 sm:pt-24 pb-12 grid lg:grid-cols-[1.5fr_1fr] gap-10 lg:gap-16 items-center">
         <div>
-          <div className="font-mono text-[11px] sm:text-[12px] tracking-[0.18em] uppercase text-stellar-cyan mb-6">
-            // Personal Cybersecurity — Threat Atlas, Vol. 04 — 2026
+          <div className={`text-[11px] sm:text-[12px] ${tagCls} text-stellar-cyan mb-6`}>
+            {t('cyber_personal_eyebrow' as any)}
           </div>
           <h1 className="font-display font-light italic text-[56px] sm:text-[80px] lg:text-[110px] xl:text-[140px] leading-[0.92] tracking-[-0.035em] mb-8 bg-gradient-to-br from-white via-white to-ink-200 bg-clip-text text-transparent">
-            Cybersecurity<br />
-            <span className="not-italic text-stellar-cyan">for you.</span>
+            {t('cyber_personal_title_1' as any)}<br />
+            <span className="not-italic text-stellar-cyan">{t('cyber_personal_title_2_accent' as any)}</span>
           </h1>
           <p className="font-display font-light italic text-lg sm:text-xl lg:text-2xl text-ink-200 leading-relaxed max-w-[540px] mb-9">
-            Six services, one human on the other end of WhatsApp. Hardening, identity protection, scam watch, lockout support — for the people and devices you actually live with.
+            {t('cyber_personal_sub' as any)}
           </p>
           <div className="flex flex-wrap gap-4">
             <a
               href="#contact"
-              className="px-7 py-4 bg-stellar-cyan text-deep-space rounded-full font-bold text-[13px] uppercase tracking-[0.1em] hover:bg-stellar-cyan-soft transition-colors"
+              className={`px-7 py-4 bg-stellar-cyan text-deep-space rounded-full font-bold text-[13px] ${btnCls} hover:bg-stellar-cyan-soft transition-colors`}
             >
-              Book a hardening session →
+              {t('cyber_personal_cta_primary' as any)}
             </a>
             <a
               href="#services"
-              className="px-7 py-4 border border-ink-200 text-ink-50 rounded-full text-[13px] uppercase tracking-[0.1em] hover:border-stellar-cyan hover:text-stellar-cyan transition-colors"
+              className={`px-7 py-4 border border-ink-200 text-ink-50 rounded-full text-[13px] ${btnCls} hover:border-stellar-cyan hover:text-stellar-cyan transition-colors`}
             >
-              See the service menu
+              {t('cyber_personal_cta_secondary' as any)}
             </a>
           </div>
         </div>
@@ -156,10 +162,10 @@ export default function CybersecurityPersonalPage() {
 
       {/* Marquee */}
       <div className="border-y border-stellar-cyan/20 bg-gradient-to-r from-space-mid via-space-soft to-space-mid overflow-hidden py-5 my-12 sm:my-16">
-        <div className="inline-flex gap-14 items-center font-display italic font-medium text-3xl sm:text-4xl text-stellar-cyan whitespace-nowrap px-5">
+        <div className={`inline-flex gap-14 items-center text-stellar-cyan whitespace-nowrap px-5 ${locale === 'zh-Hant' ? 'font-display font-medium text-2xl sm:text-3xl not-italic' : 'font-display italic font-medium text-3xl sm:text-4xl'}`}>
           {[0, 1].map((dup) => (
             <span key={dup} className="inline-flex items-center gap-14">
-              {['private', 'protected', 'audited', 'humans on call'].map((word, i) => (
+              {marqueeWords.map((word: string, i: number) => (
                 <span key={`${dup}-${i}`} className="inline-flex items-center gap-14">
                   <span>{word}</span>
                   <em className="not-italic font-bold text-2xl text-cosmic-violet">·</em>
@@ -172,14 +178,14 @@ export default function CybersecurityPersonalPage() {
 
       {/* Services — six lanes */}
       <section id="services" className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24">
-        <div className="font-mono text-[11px] sm:text-[12px] tracking-[0.18em] uppercase text-nova-amber mb-4">
-          // 01 — Services
+        <div className={`text-[11px] sm:text-[12px] ${tagCls} text-nova-amber mb-4`}>
+          {t('cyber_personal_services_eyebrow' as any)}
         </div>
         <h2 className="font-display font-light text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[0.98] tracking-[-0.025em] mb-8">
-          Six services, <em className="italic text-cosmic-violet font-normal">one number.</em>
+          {t('cyber_personal_services_title_pre' as any)}<em className="italic text-cosmic-violet font-normal">{t('cyber_personal_services_title_accent' as any)}</em>
         </h2>
         <p className="font-display italic font-light text-lg sm:text-xl text-ink-200 max-w-[720px] leading-relaxed mb-10 sm:mb-12">
-          Hardening, identity, scam-watch, lockout, family, privacy. Buy one, buy the bundle — every service can be activated standalone. All delivered in plain English, in your timezone.
+          {t('cyber_personal_services_sub' as any)}
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
@@ -197,7 +203,7 @@ export default function CybersecurityPersonalPage() {
                 <div className="p-3 rounded-xl bg-stellar-cyan/10 text-stellar-cyan">
                   <s.icon className="w-6 h-6" />
                 </div>
-                <div className="font-mono text-[11px] tracking-[0.18em] text-stellar-cyan pt-3">{s.code}</div>
+                <div className={`text-[11px] ${numCls} text-stellar-cyan pt-3`}>{s.code}</div>
               </div>
               <h3 className="font-display font-normal text-xl sm:text-2xl leading-tight text-ink-50 mb-3">
                 {s.title}
@@ -224,11 +230,11 @@ export default function CybersecurityPersonalPage() {
       {/* Why us */}
       <section className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24 grid lg:grid-cols-[1fr_2fr] gap-10 lg:gap-16 items-start">
         <div>
-          <div className="font-mono text-[11px] sm:text-[12px] tracking-[0.18em] uppercase text-cosmic-violet mb-4">
-            // 02 — Why us
+          <div className={`text-[11px] sm:text-[12px] ${tagCls} text-cosmic-violet mb-4`}>
+            {t('cyber_personal_why_eyebrow' as any)}
           </div>
           <h2 className="font-display font-light text-4xl sm:text-5xl lg:text-[56px] leading-[0.98] tracking-[-0.02em] mt-4">
-            What makes this different.
+            {t('cyber_personal_why_title' as any)}
           </h2>
         </div>
         <ul className="list-none p-0 m-0 grid gap-6 sm:gap-7">
@@ -246,20 +252,20 @@ export default function CybersecurityPersonalPage() {
       {/* Pricing model */}
       <section className="max-w-[1440px] mx-auto px-5 sm:px-10 py-12 sm:py-16">
         <div className="bg-space-mid border border-stellar-cyan/20 rounded p-6 sm:p-10">
-          <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-stellar-cyan mb-3">
-            // 03 — Pricing
+          <div className={`text-[11px] ${numCls} text-stellar-cyan mb-3`}>
+            {t('cyber_personal_pricing_eyebrow' as any)}
           </div>
           <h3 className="font-display font-normal text-2xl sm:text-3xl text-ink-50 mb-4">
-            From a one-off hardening session to a household retainer.
+            {t('cyber_personal_pricing_title' as any)}
           </h3>
           <p className="text-sm sm:text-base text-ink-200 leading-relaxed max-w-[760px] mb-5">
-            One-off device hardening starts at HKD 2,400 for a single user, single device. Household plan — up to 5 devices and 5 humans, with the scam-watch line — HKD 1,800 / month, billed quarterly. Outcome-metered: you don&apos;t pay for &quot;alerts generated&quot; you didn&apos;t read.
+            {t('cyber_personal_pricing_body' as any)}
           </p>
           <a
             href="#contact"
-            className="inline-block px-6 py-3 border border-stellar-cyan rounded-full text-stellar-cyan text-[12px] uppercase tracking-[0.1em] hover:bg-stellar-cyan/10 transition-colors"
+            className={`inline-block px-6 py-3 border border-stellar-cyan rounded-full text-stellar-cyan text-[12px] ${btnCls} hover:bg-stellar-cyan/10 transition-colors`}
           >
-            Request a tailored plan →
+            {t('cyber_personal_pricing_cta' as any)}
           </a>
         </div>
       </section>
@@ -267,21 +273,21 @@ export default function CybersecurityPersonalPage() {
       {/* Contact */}
       <section id="contact" className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24 grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
         <div>
-          <div className="font-mono text-[11px] sm:text-[12px] tracking-[0.18em] uppercase text-stellar-cyan mb-4">
-            // 04 — Talk to us
+          <div className={`text-[11px] sm:text-[12px] ${tagCls} text-stellar-cyan mb-4`}>
+            {t('cyber_personal_contact_eyebrow' as any)}
           </div>
           <h2 className="font-display font-light text-5xl sm:text-6xl lg:text-7xl leading-[0.95] tracking-[-0.025em] mb-6">
-            Let&apos;s <em className="italic text-nova-amber font-normal">talk</em>.
+            {t('cyber_personal_contact_title_pre' as any)}<em className="italic text-nova-amber font-normal">{t('cyber_personal_contact_title_accent' as any)}</em>.
           </h2>
           <p className="text-base sm:text-lg text-ink-200 leading-relaxed mb-5">
-            Tell us about your setup and we&apos;ll send back a one-page brief within 48 hours. No forms on our side, no demo calls before we know what you need.
+            {t('cyber_personal_contact_p1' as any)}
           </p>
           <p className="text-base sm:text-lg text-ink-200 leading-relaxed">
-            Or message us directly on WhatsApp{' '}
+            {t('cyber_personal_contact_p2_pre' as any)}
             <a href="#" className="text-stellar-cyan underline-offset-4 hover:underline">
               +852 5123 4567
-            </a>{' '}
-            or email{' '}
+            </a>
+            {t('cyber_personal_contact_p2_email_pre' as any)}
             <a href="mailto:hello@celestial-tech.com" className="text-stellar-cyan underline-offset-4 hover:underline">
               hello@celestial-tech.com
             </a>
@@ -291,46 +297,46 @@ export default function CybersecurityPersonalPage() {
         <form onSubmit={handleSubmit} className="bg-space-soft border border-stellar-cyan/20 rounded p-6 sm:p-8">
           {submitted ? (
             <div className="font-display italic text-2xl text-stellar-cyan py-10 text-center">
-              Brief received. We&apos;ll be in touch within 48 hours.
+              {t('cyber_personal_form_success' as any)}
             </div>
           ) : (
             <>
-              <label className="block font-mono text-[11px] tracking-[0.18em] uppercase text-ink-300 mb-2">Your name</label>
+              <label className={`block text-[11px] ${tagCls} text-ink-300 mb-2`}>{t('cyber_personal_form_label_name' as any)}</label>
               <input
                 type="text"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Wing Chan"
+                placeholder={t('cyber_personal_form_placeholder_name' as any)}
                 className="w-full bg-deep-space text-ink-50 border border-stellar-cyan/20 p-3 font-sans text-base rounded focus:border-stellar-cyan outline-none"
               />
-              <label className="block font-mono text-[11px] tracking-[0.18em] uppercase text-ink-300 mb-2 mt-5">Email</label>
+              <label className={`block text-[11px] ${tagCls} text-ink-300 mb-2 mt-5`}>{t('cyber_personal_form_label_email' as any)}</label>
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="wing@example.com"
+                placeholder={t('cyber_personal_form_placeholder_email' as any)}
                 className="w-full bg-deep-space text-ink-50 border border-stellar-cyan/20 p-3 font-sans text-base rounded focus:border-stellar-cyan outline-none"
               />
-              <label className="block font-mono text-[11px] tracking-[0.18em] uppercase text-ink-300 mb-2 mt-5">What does your setup look like?</label>
+              <label className={`block text-[11px] ${tagCls} text-ink-300 mb-2 mt-5`}>{t('cyber_personal_form_label_msg' as any)}</label>
               <textarea
                 required
                 value={msg}
                 onChange={(e) => setMsg(e.target.value)}
-                placeholder="MacBook + iPhone, plus my parents' Windows laptops. Mum got a phishing text last week…"
+                placeholder={t('cyber_personal_form_placeholder_msg' as any)}
                 rows={5}
                 className="w-full bg-deep-space text-ink-50 border border-stellar-cyan/20 p-3 font-sans text-base rounded focus:border-stellar-cyan outline-none resize-y"
               />
               <button
                 type="submit"
                 disabled={submitting}
-                className="mt-6 px-7 py-3 bg-stellar-cyan text-deep-space rounded-full font-bold text-[13px] uppercase tracking-[0.12em] hover:bg-stellar-cyan-soft transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className={`mt-6 px-7 py-3 bg-stellar-cyan text-deep-space rounded-full font-bold text-[13px] ${btnCls} hover:bg-stellar-cyan-soft transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
               >
-                {submitting ? 'Sending…' : 'Send brief →'}
+                {submitting ? t('cyber_personal_form_sending' as any) : t('cyber_personal_form_cta' as any)}
               </button>
               {error && (
-                <div className="mt-4 text-sm text-nova-amber font-mono">Error: {error}</div>
+                <div className="mt-4 text-sm text-nova-amber font-mono">{t('cyber_personal_form_error_prefix' as any)}{error}</div>
               )}
             </>
           )}

@@ -7,66 +7,72 @@ import { Shield, Eye, Target, GraduationCap, FileCheck, AlertOctagon } from 'luc
 import { useState, FormEvent } from 'react'
 import { useTranslation } from '@/i18n'
 
-const services = [
-  {
-    icon: Shield,
-    code: '01',
-    title: 'Cybersecurity Audit & Posture Review',
-    headline: 'Threat-model before you spend another dollar on tools.',
-    body: 'A two-week engagement that maps your assets, your adversaries, and your actual exposure — not a 200-page compliance PDF. You walk away with a one-page brief your board can read, a ranked list of the five fixes that move the needle, and a remediation plan your IT vendor can quote against.',
-    deliverables: ['Adversary profile + asset map', 'Ranked remediation backlog', 'Executive brief for the board'],
-  },
-  {
-    icon: Eye,
-    code: '02',
-    title: '24/7 SOC Monitoring (HK-based)',
-    headline: 'Someone watching your logs who can read Cantonese in a phishing email.',
-    body: 'A managed Security Operations Centre sitting on your endpoints, email, identity, and cloud — staffed by operators in Hong Kong who know the local threat landscape. Mean-time-to-alert under 2 minutes, mean-time-to-isolate under 30. Quarterly review of guardrails, monthly tuning of detections.',
-    deliverables: ['24/7 alert triage', 'Monthly tuning session', 'Quarterly executive review'],
-  },
-  {
-    icon: Target,
-    code: '03',
-    title: 'Penetration Testing (4×/year)',
-    headline: 'Find the holes before an attacker does — quarterly, not annually.',
-    body: 'External, internal, and web-app penetration tests run by CREST-certified operators, four times a year. Every test ships with an exploit chain (not just a CVE list), a fix that your dev team can merge, and a re-test to confirm closure. Coverage: network, web, API, mobile, cloud.',
-    deliverables: ['Crest-aligned test report', 'Exploit chain + remediation PR', 'Free re-test after fix'],
-  },
-  {
-    icon: AlertOctagon,
-    code: '04',
-    title: 'Incident Response & Forensics',
-    headline: 'When the breach happens at 2am, you call us — not your insurance broker.',
-    body: 'A retainer that puts a senior incident commander on a phone call within 15 minutes, on call 24/7. We contain, preserve evidence, restore from clean backups, and write the post-mortem your auditor, your regulator, and your customers can read. Includes HK PDPO breach-notification drafting.',
-    deliverables: ['15-minute response SLA', 'Forensic evidence preservation', 'PDPO breach notice drafting'],
-  },
-  {
-    icon: FileCheck,
-    code: '05',
-    title: 'HK PDPO & HKMA Compliance',
-    headline: 'Get compliant without hiring a Big-4 firm.',
-    body: 'Privacy Ordinance (PDPO) gap analysis, HKMA sandbox cybersecurity reviews, and SFC Type 4/9 controls. We have sat in the room for each of these and know what regulators actually ask. You get a runbook, a control matrix, and an evidence pack — not a 90-page report nobody opens.',
-    deliverables: ['Control matrix mapping', 'Evidence pack for auditors', 'Runbook for ongoing ops'],
-  },
-  {
-    icon: GraduationCap,
-    code: '06',
-    title: 'Staff Training & Phishing Drills',
-    headline: 'Your people, hardened — the attacker\'s favourite target neutralised.',
-    body: 'Quarterly phishing simulations tuned to your industry (BEC for finance, invoice fraud for retail, callback scams for healthcare). Targeted training for the clickers, board-level briefing for the C-suite. Pre- and post-drill click-rate reports your insurer will accept for premium reduction.',
-    deliverables: ['Quarterly phishing drill', 'Targeted 1:1 training', 'Insurance-grade click-rate report'],
-  },
-]
-
-const whyUs = [
-  { h: 'Threat-modelled first, shipped second.', b: 'Every engagement starts with an adversary profile, not a sales deck. We name the attacker, the asset, the path. Then we ship.' },
-  { h: 'Auditable to your auditor, not to us.', b: 'Logs you can hand to your compliance team without a redaction pass. Reports you can show your regulator without a translator.' },
-  { h: 'Hong Kong, behind your firewall.', b: 'Data residency is the architecture, not a setting. No exit to a foreign cloud, no third-party processor you didn\'t choose.' },
-  { h: 'Outcome-metered, never seat-metered.', b: 'You pay for hours saved and breaches prevented, not seats filled. If the agent doesn\'t deliver, the meter doesn\'t run.' },
-]
-
 export default function CybersecuritySMEPage() {
-  const { locale } = useTranslation()
+  const { t, locale } = useTranslation()
+  const tagCls = locale === 'zh-Hant' ? 'font-sans tracking-normal normal-case' : 'font-mono tracking-[0.2em] uppercase'
+  const numCls = locale === 'zh-Hant' ? 'font-sans tracking-normal normal-case' : 'font-mono tracking-[0.18em]'
+  const btnCls = locale === 'zh-Hant' ? 'tracking-normal normal-case' : 'uppercase tracking-[0.1em]'
+
+  const services = [
+    {
+      icon: Shield,
+      code: '01',
+      title: t('cyber_sme_svc_1_title' as any),
+      headline: t('cyber_sme_svc_1_headline' as any),
+      body: t('cyber_sme_svc_1_body' as any),
+      deliverables: [t('cyber_sme_svc_1_d1' as any), t('cyber_sme_svc_1_d2' as any), t('cyber_sme_svc_1_d3' as any)],
+    },
+    {
+      icon: Eye,
+      code: '02',
+      title: t('cyber_sme_svc_2_title' as any),
+      headline: t('cyber_sme_svc_2_headline' as any),
+      body: t('cyber_sme_svc_2_body' as any),
+      deliverables: [t('cyber_sme_svc_2_d1' as any), t('cyber_sme_svc_2_d2' as any), t('cyber_sme_svc_2_d3' as any)],
+    },
+    {
+      icon: Target,
+      code: '03',
+      title: t('cyber_sme_svc_3_title' as any),
+      headline: t('cyber_sme_svc_3_headline' as any),
+      body: t('cyber_sme_svc_3_body' as any),
+      deliverables: [t('cyber_sme_svc_3_d1' as any), t('cyber_sme_svc_3_d2' as any), t('cyber_sme_svc_3_d3' as any)],
+    },
+    {
+      icon: AlertOctagon,
+      code: '04',
+      title: t('cyber_sme_svc_4_title' as any),
+      headline: t('cyber_sme_svc_4_headline' as any),
+      body: t('cyber_sme_svc_4_body' as any),
+      deliverables: [t('cyber_sme_svc_4_d1' as any), t('cyber_sme_svc_4_d2' as any), t('cyber_sme_svc_4_d3' as any)],
+    },
+    {
+      icon: FileCheck,
+      code: '05',
+      title: t('cyber_sme_svc_5_title' as any),
+      headline: t('cyber_sme_svc_5_headline' as any),
+      body: t('cyber_sme_svc_5_body' as any),
+      deliverables: [t('cyber_sme_svc_5_d1' as any), t('cyber_sme_svc_5_d2' as any), t('cyber_sme_svc_5_d3' as any)],
+    },
+    {
+      icon: GraduationCap,
+      code: '06',
+      title: t('cyber_sme_svc_6_title' as any),
+      headline: t('cyber_sme_svc_6_headline' as any),
+      body: t('cyber_sme_svc_6_body' as any),
+      deliverables: [t('cyber_sme_svc_6_d1' as any), t('cyber_sme_svc_6_d2' as any), t('cyber_sme_svc_6_d3' as any)],
+    },
+  ]
+
+  const whyUs = [
+    { h: t('cyber_sme_why_1_h' as any), b: t('cyber_sme_why_1_b' as any) },
+    { h: t('cyber_sme_why_2_h' as any), b: t('cyber_sme_why_2_b' as any) },
+    { h: t('cyber_sme_why_3_h' as any), b: t('cyber_sme_why_3_b' as any) },
+    { h: t('cyber_sme_why_4_h' as any), b: t('cyber_sme_why_4_b' as any) },
+  ]
+
+  const marqueeWords = t('cyber_sme_marquee_words' as any).split('·').map((w: string) => w.trim()).filter(Boolean)
+
   const [name, setName] = useState('')
   const [company, setCompany] = useState('')
   const [email, setEmail] = useState('')
@@ -110,28 +116,32 @@ export default function CybersecuritySMEPage() {
       {/* Hero */}
       <section className="max-w-[1440px] mx-auto px-5 sm:px-10 pt-16 sm:pt-24 pb-12 grid lg:grid-cols-[1.5fr_1fr] gap-10 lg:gap-16 items-center">
         <div>
-          <div className="font-mono text-[11px] sm:text-[12px] tracking-[0.18em] uppercase text-stellar-cyan mb-6">
-            // Cybersecurity for SMEs — Threat Atlas, Vol. 04 — 2026
+          <div className={`text-[11px] sm:text-[12px] ${tagCls} text-stellar-cyan mb-6`}>
+            {t('cyber_sme_eyebrow' as any)}
           </div>
           <h1 className="font-display font-light italic text-[56px] sm:text-[80px] lg:text-[110px] xl:text-[140px] leading-[0.92] tracking-[-0.035em] mb-8 bg-gradient-to-br from-white via-white to-ink-200 bg-clip-text text-transparent">
-            Cybersecurity<br />
-            for <span className="not-italic text-stellar-cyan">SMEs.</span>
+            {t('cyber_sme_title_1' as any)}<br />
+            {t('cyber_sme_title_2_accent' as any).startsWith('for') ? (
+              <>for <span className="not-italic text-stellar-cyan">{t('cyber_sme_title_2_accent' as any).slice(4)}</span></>
+            ) : (
+              <span className="not-italic text-stellar-cyan">{t('cyber_sme_title_2_accent' as any)}</span>
+            )}
           </h1>
           <p className="font-display font-light italic text-lg sm:text-xl lg:text-2xl text-ink-200 leading-relaxed max-w-[540px] mb-9">
-            Six services, one stack, behind your firewall. From the first audit to the 2 a.m. incident call — Hong Kong operators, HK data residency, runbooks your auditor can read.
+            {t('cyber_sme_sub' as any)}
           </p>
           <div className="flex flex-wrap gap-4">
             <a
               href="#contact"
-              className="px-7 py-4 bg-stellar-cyan text-deep-space rounded-full font-bold text-[13px] uppercase tracking-[0.1em] hover:bg-stellar-cyan-soft transition-colors"
+              className={`px-7 py-4 bg-stellar-cyan text-deep-space rounded-full font-bold text-[13px] ${btnCls} hover:bg-stellar-cyan-soft transition-colors`}
             >
-              Book a discovery call →
+              {t('cyber_sme_cta_primary' as any)}
             </a>
             <a
               href="#services"
-              className="px-7 py-4 border border-ink-200 text-ink-50 rounded-full text-[13px] uppercase tracking-[0.1em] hover:border-stellar-cyan hover:text-stellar-cyan transition-colors"
+              className={`px-7 py-4 border border-ink-200 text-ink-50 rounded-full text-[13px] ${btnCls} hover:border-stellar-cyan hover:text-stellar-cyan transition-colors`}
             >
-              See the service menu
+              {t('cyber_sme_cta_secondary' as any)}
             </a>
           </div>
         </div>
@@ -157,10 +167,10 @@ export default function CybersecuritySMEPage() {
 
       {/* Marquee */}
       <div className="border-y border-stellar-cyan/20 bg-gradient-to-r from-space-mid via-space-soft to-space-mid overflow-hidden py-5 my-12 sm:my-16">
-        <div className="inline-flex gap-14 items-center font-display italic font-medium text-3xl sm:text-4xl text-stellar-cyan whitespace-nowrap px-5">
+        <div className={`inline-flex gap-14 items-center text-stellar-cyan whitespace-nowrap px-5 ${locale === 'zh-Hant' ? 'font-display font-medium text-2xl sm:text-3xl not-italic' : 'font-display italic font-medium text-3xl sm:text-4xl'}`}>
           {[0, 1].map((dup) => (
             <span key={dup} className="inline-flex items-center gap-14">
-              {['private', 'protected', 'audited', 'incident-ready'].map((word, i) => (
+              {marqueeWords.map((word: string, i: number) => (
                 <span key={`${dup}-${i}`} className="inline-flex items-center gap-14">
                   <span>{word}</span>
                   <em className="not-italic font-bold text-2xl text-cosmic-violet">·</em>
@@ -173,14 +183,14 @@ export default function CybersecuritySMEPage() {
 
       {/* Services — six lanes */}
       <section id="services" className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24">
-        <div className="font-mono text-[11px] sm:text-[12px] tracking-[0.18em] uppercase text-nova-amber mb-4">
-          // 01 — Services
+        <div className={`text-[11px] sm:text-[12px] ${tagCls} text-nova-amber mb-4`}>
+          {t('cyber_sme_services_eyebrow' as any)}
         </div>
         <h2 className="font-display font-light text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[0.98] tracking-[-0.025em] mb-8">
-          Six services, <em className="italic text-cosmic-violet font-normal">one stack.</em>
+          {t('cyber_sme_services_title_pre' as any)}<em className="italic text-cosmic-violet font-normal">{t('cyber_sme_services_title_accent' as any)}</em>
         </h2>
         <p className="font-display italic font-light text-lg sm:text-xl text-ink-200 max-w-[720px] leading-relaxed mb-10 sm:mb-12">
-          Audit, monitor, test, respond, comply, train. Each lane can be deployed standalone or as part of a managed cybersecurity programme. All behind your firewall, audited by default.
+          {t('cyber_sme_services_sub' as any)}
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
@@ -198,7 +208,7 @@ export default function CybersecuritySMEPage() {
                 <div className="p-3 rounded-xl bg-stellar-cyan/10 text-stellar-cyan">
                   <s.icon className="w-6 h-6" />
                 </div>
-                <div className="font-mono text-[11px] tracking-[0.18em] text-stellar-cyan pt-3">{s.code}</div>
+                <div className={`text-[11px] ${numCls} text-stellar-cyan pt-3`}>{s.code}</div>
               </div>
               <h3 className="font-display font-normal text-xl sm:text-2xl leading-tight text-ink-50 mb-3">
                 {s.title}
@@ -225,11 +235,11 @@ export default function CybersecuritySMEPage() {
       {/* Why us */}
       <section className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24 grid lg:grid-cols-[1fr_2fr] gap-10 lg:gap-16 items-start">
         <div>
-          <div className="font-mono text-[11px] sm:text-[12px] tracking-[0.18em] uppercase text-cosmic-violet mb-4">
-            // 02 — Why us
+          <div className={`text-[11px] sm:text-[12px] ${tagCls} text-cosmic-violet mb-4`}>
+            {t('cyber_sme_why_eyebrow' as any)}
           </div>
           <h2 className="font-display font-light text-4xl sm:text-5xl lg:text-[56px] leading-[0.98] tracking-[-0.02em] mt-4">
-            Why us, not a global cloud?
+            {t('cyber_sme_why_title' as any)}
           </h2>
         </div>
         <ul className="list-none p-0 m-0 grid gap-6 sm:gap-7">
@@ -247,20 +257,20 @@ export default function CybersecuritySMEPage() {
       {/* Pricing model */}
       <section className="max-w-[1440px] mx-auto px-5 sm:px-10 py-12 sm:py-16">
         <div className="bg-space-mid border border-stellar-cyan/20 rounded p-6 sm:p-10">
-          <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-stellar-cyan mb-3">
-            // 03 — Pricing
+          <div className={`text-[11px] ${numCls} text-stellar-cyan mb-3`}>
+            {t('cyber_sme_pricing_eyebrow' as any)}
           </div>
           <h3 className="font-display font-normal text-2xl sm:text-3xl text-ink-50 mb-4">
-            Outcome-metered, never seat-metered.
+            {t('cyber_sme_pricing_title' as any)}
           </h3>
           <p className="text-sm sm:text-base text-ink-200 leading-relaxed max-w-[760px] mb-5">
-            Standalone engagements priced per project. Managed programmes priced as a monthly retainer with quarterly true-up — you pay for what we delivered, not for seats we provisioned. SOC monitoring starts at HKD 18,000 / month for a 50-person firm; incident response retainer at HKD 9,600 / quarter.
+            {t('cyber_sme_pricing_body' as any)}
           </p>
           <a
             href="#contact"
-            className="inline-block px-6 py-3 border border-stellar-cyan rounded-full text-stellar-cyan text-[12px] uppercase tracking-[0.1em] hover:bg-stellar-cyan/10 transition-colors"
+            className={`inline-block px-6 py-3 border border-stellar-cyan rounded-full text-stellar-cyan text-[12px] ${btnCls} hover:bg-stellar-cyan/10 transition-colors`}
           >
-            Request a tailored quote →
+            {t('cyber_sme_pricing_cta' as any)}
           </a>
         </div>
       </section>
@@ -268,17 +278,17 @@ export default function CybersecuritySMEPage() {
       {/* Contact */}
       <section id="contact" className="max-w-[1440px] mx-auto px-5 sm:px-10 py-16 sm:py-24 grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
         <div>
-          <div className="font-mono text-[11px] sm:text-[12px] tracking-[0.18em] uppercase text-stellar-cyan mb-4">
-            // 04 — Talk to us
+          <div className={`text-[11px] sm:text-[12px] ${tagCls} text-stellar-cyan mb-4`}>
+            {t('cyber_sme_contact_eyebrow' as any)}
           </div>
           <h2 className="font-display font-light text-5xl sm:text-6xl lg:text-7xl leading-[0.95] tracking-[-0.025em] mb-6">
-            Let&apos;s <em className="italic text-nova-amber font-normal">talk</em>.
+            {t('cyber_sme_contact_title_pre' as any)}<em className="italic text-nova-amber font-normal">{t('cyber_sme_contact_title_accent' as any)}</em>.
           </h2>
           <p className="text-base sm:text-lg text-ink-200 leading-relaxed mb-5">
-            Tell us about your business and we&apos;ll send back a one-page cybersecurity brief within 48 hours. No forms on our side, no demo calls before we know what you need.
+            {t('cyber_sme_contact_p1' as any)}
           </p>
           <p className="text-base sm:text-lg text-ink-200 leading-relaxed">
-            Or write to us directly at{' '}
+            {t('cyber_sme_contact_p2_pre' as any)}
             <a href="mailto:hello@celestial-tech.com" className="text-stellar-cyan underline-offset-4 hover:underline">
               hello@celestial-tech.com
             </a>
@@ -288,54 +298,54 @@ export default function CybersecuritySMEPage() {
         <form onSubmit={handleSubmit} className="bg-space-soft border border-stellar-cyan/20 rounded p-6 sm:p-8">
           {submitted ? (
             <div className="font-display italic text-2xl text-stellar-cyan py-10 text-center">
-              Brief received. We&apos;ll be in touch within 48 hours.
+              {t('cyber_sme_form_success' as any)}
             </div>
           ) : (
             <>
-              <label className="block font-mono text-[11px] tracking-[0.18em] uppercase text-ink-300 mb-2">Your name</label>
+              <label className={`block text-[11px] ${tagCls} text-ink-300 mb-2`}>{t('cyber_sme_form_label_name' as any)}</label>
               <input
                 type="text"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Wing Chan"
+                placeholder={t('cyber_sme_form_placeholder_name' as any)}
                 className="w-full bg-deep-space text-ink-50 border border-stellar-cyan/20 p-3 font-sans text-base rounded focus:border-stellar-cyan outline-none"
               />
-              <label className="block font-mono text-[11px] tracking-[0.18em] uppercase text-ink-300 mb-2 mt-5">Company</label>
+              <label className={`block text-[11px] ${tagCls} text-ink-300 mb-2 mt-5`}>{t('cyber_sme_form_label_company' as any)}</label>
               <input
                 type="text"
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
-                placeholder="Mama Kee's Kitchen"
+                placeholder={t('cyber_sme_form_placeholder_company' as any)}
                 className="w-full bg-deep-space text-ink-50 border border-stellar-cyan/20 p-3 font-sans text-base rounded focus:border-stellar-cyan outline-none"
               />
-              <label className="block font-mono text-[11px] tracking-[0.18em] uppercase text-ink-300 mb-2 mt-5">Email</label>
+              <label className={`block text-[11px] ${tagCls} text-ink-300 mb-2 mt-5`}>{t('cyber_sme_form_label_email' as any)}</label>
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="wing@mamakees.hk"
+                placeholder={t('cyber_sme_form_placeholder_email' as any)}
                 className="w-full bg-deep-space text-ink-50 border border-stellar-cyan/20 p-3 font-sans text-base rounded focus:border-stellar-cyan outline-none"
               />
-              <label className="block font-mono text-[11px] tracking-[0.18em] uppercase text-ink-300 mb-2 mt-5">What does your day look like?</label>
+              <label className={`block text-[11px] ${tagCls} text-ink-300 mb-2 mt-5`}>{t('cyber_sme_form_label_msg' as any)}</label>
               <textarea
                 required
                 value={msg}
                 onChange={(e) => setMsg(e.target.value)}
-                placeholder="24-person logistics company in Kwun Tong. Looking to harden email + get a SOC…"
+                placeholder={t('cyber_sme_form_placeholder_msg' as any)}
                 rows={5}
                 className="w-full bg-deep-space text-ink-50 border border-stellar-cyan/20 p-3 font-sans text-base rounded focus:border-stellar-cyan outline-none resize-y"
               />
               <button
                 type="submit"
                 disabled={submitting}
-                className="mt-6 px-7 py-3 bg-stellar-cyan text-deep-space rounded-full font-bold text-[13px] uppercase tracking-[0.12em] hover:bg-stellar-cyan-soft transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className={`mt-6 px-7 py-3 bg-stellar-cyan text-deep-space rounded-full font-bold text-[13px] ${btnCls} hover:bg-stellar-cyan-soft transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
               >
-                {submitting ? 'Sending…' : 'Send brief →'}
+                {submitting ? t('cyber_sme_form_sending' as any) : t('cyber_sme_form_cta' as any)}
               </button>
               {error && (
-                <div className="mt-4 text-sm text-nova-amber font-mono">Error: {error}</div>
+                <div className="mt-4 text-sm text-nova-amber font-mono">{t('cyber_sme_form_error_prefix' as any)}{error}</div>
               )}
             </>
           )}
