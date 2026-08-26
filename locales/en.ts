@@ -399,8 +399,8 @@ export const en = {
   a2_hero_title_2: 'Atlas',
   a2_hero_title_3: 'for the AI era.',
   a2_hero_sub: 'We build the cybersecurity layer for SMEs and individuals adopting AI — so your data stays inside your firewall, your agents stay accountable, and your regulator can audit the logs.',
-  a2_hero_cta_primary: 'Deploy a private agent →',
-  a2_hero_cta_secondary: 'Watch the demo',
+  a2_hero_cta_primary: 'Consult us →',
+  a2_hero_cta_secondary: 'Deploy a private AI agent',
 
   // A2 Home — Marquee
   a2_marquee_private: 'private',

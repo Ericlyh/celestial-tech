@@ -402,8 +402,8 @@ export const zhHant: Record<LocaleKey, string> = {
   a2_hero_title_2: '圖鑑',
   a2_hero_title_3: '為 AI 時代。',
   a2_hero_sub: '我們為採用 AI 的中小企及個人打造網絡安全防線——讓您的數據留在防火牆內，讓您的 AI 代理可問責，讓監管者可以審計日誌。',
-  a2_hero_cta_primary: '部署私有 AI 代理 →',
-  a2_hero_cta_secondary: '觀看示範',
+  a2_hero_cta_primary: '諮詢我們 →',
+  a2_hero_cta_secondary: '部署私有 AI 代理',
 
   // A2 Home — Marquee
   a2_marquee_private: '私有',
