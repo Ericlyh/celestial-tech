@@ -1,14 +1,27 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, ChevronDown } from 'lucide-react'
 import { useTranslation } from '@/i18n'
 import { usePathname } from 'next/navigation'
 
-const navLinks = [
+type NavLink = {
+  key: string
+  href: string
+  children?: { key: string; href: string }[]
+}
+
+const navLinks: NavLink[] = [
   { key: 'nav_home', href: '#home' },
-  { key: 'nav_services', href: '#services' },
+  {
+    key: 'nav_services',
+    href: '/cybersecurity/sme',
+    children: [
+      { key: 'nav_services_sme', href: '/cybersecurity/sme' },
+      { key: 'nav_services_personal', href: '/cybersecurity/personal' },
+    ],
+  },
   { key: 'nav_whyUs', href: '#about' },
   { key: 'nav_caseStudies', href: '#case-studies' },
   { key: 'nav_openclaw', href: '/hermes-agent-hosting' },
@@ -21,6 +34,9 @@ export default function Navbar() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [servicesOpen, setServicesOpen] = useState(false)
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
+  const servicesWrapRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     // Throttled with rAF — only check once per animation frame, and only
@@ -45,8 +61,32 @@ export default function Navbar() {
     }
   }, [])
 
+  // Close the desktop Services dropdown on outside click or Escape.
+  useEffect(() => {
+    if (!servicesOpen) return
+    const onClick = (e: MouseEvent) => {
+      if (
+        servicesWrapRef.current &&
+        !servicesWrapRef.current.contains(e.target as Node)
+      ) {
+        setServicesOpen(false)
+      }
+    }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setServicesOpen(false)
+    }
+    document.addEventListener('mousedown', onClick)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onClick)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [servicesOpen])
+
   const handleNavClick = (href: string) => {
     setIsOpen(false)
+    setServicesOpen(false)
+    setMobileServicesOpen(false)
     if (href.startsWith('/')) {
       window.location.href = href
       return
@@ -61,6 +101,10 @@ export default function Navbar() {
       }
     }
   }
+
+  const isServicesActive =
+    pathname?.startsWith('/cybersecurity/sme') ||
+    pathname?.startsWith('/cybersecurity/personal')
 
   return (
     <>
@@ -95,6 +139,70 @@ export default function Navbar() {
               const isActive =
                 (link.href === '/blog' && pathname?.startsWith('/blog')) ||
                 (link.href === '/hermes-agent-hosting' && pathname?.startsWith('/hermes-agent-hosting'))
+
+              // Services — dropdown trigger
+              if (link.children) {
+                return (
+                  <div
+                    key={link.key}
+                    ref={servicesWrapRef}
+                    className="relative"
+                    onMouseEnter={() => setServicesOpen(true)}
+                    onMouseLeave={() => setServicesOpen(false)}
+                  >
+                    <button
+                      type="button"
+                      aria-haspopup="menu"
+                      aria-expanded={servicesOpen}
+                      onClick={() => setServicesOpen((v) => !v)}
+                      className={`group text-[13px] font-medium tracking-wide transition-colors duration-200 relative flex items-center gap-1 ${
+                        isServicesActive ? 'text-stellar-cyan' : 'text-ink-200 hover:text-white'
+                      }`}
+                    >
+                      {t(link.key as any)}
+                      <ChevronDown
+                        size={13}
+                        className={`transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`}
+                      />
+                      <span className={`absolute -bottom-1 left-0 h-px bg-stellar-cyan transition-all duration-300 ${
+                        isServicesActive ? 'w-full' : 'w-0 group-hover:w-full'
+                      }`} />
+                    </button>
+                    <AnimatePresence>
+                      {servicesOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -6 }}
+                          transition={{ duration: 0.15, ease: 'easeOut' }}
+                          role="menu"
+                          className="absolute top-full left-0 mt-2 min-w-[220px] rounded-xl glass-nav border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.45)] py-2"
+                        >
+                          {link.children.map((child) => {
+                            const childActive = pathname?.startsWith(child.href)
+                            return (
+                              <a
+                                key={child.key}
+                                href={child.href}
+                                role="menuitem"
+                                onClick={(e) => { e.preventDefault(); handleNavClick(child.href) }}
+                                className={`block px-4 py-2.5 text-[13px] font-medium transition-colors ${
+                                  childActive
+                                    ? 'text-stellar-cyan bg-white/[0.04]'
+                                    : 'text-ink-200 hover:text-white hover:bg-white/[0.04]'
+                                }`}
+                              >
+                                {t(child.key as any)}
+                              </a>
+                            )
+                          })}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                )
+              }
+
               return (
                 <a
                   key={link.key}
@@ -161,16 +269,60 @@ export default function Navbar() {
             className="fixed top-[68px] left-0 right-0 z-40 glass-nav border-t border-white/[0.06]"
           >
             <div className="container-main py-5 flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.key}
-                  href={link.href}
-                  onClick={(e) => { e.preventDefault(); handleNavClick(link.href) }}
-                  className="py-3 px-3 rounded-lg text-ink-200 hover:text-stellar-cyan hover:bg-white/[0.04] transition-all font-medium text-sm"
-                >
-                  {t(link.key as any)}
-                </a>
-              ))}
+              {navLinks.map((link) => {
+                if (link.children) {
+                  return (
+                    <div key={link.key} className="rounded-lg overflow-hidden">
+                      <button
+                        type="button"
+                        aria-expanded={mobileServicesOpen}
+                        onClick={() => setMobileServicesOpen((v) => !v)}
+                        className="w-full flex items-center justify-between py-3 px-3 text-ink-200 hover:text-stellar-cyan hover:bg-white/[0.04] transition-all font-medium text-sm"
+                      >
+                        <span>{t(link.key as any)}</span>
+                        <ChevronDown
+                          size={14}
+                          className={`transition-transform duration-200 ${mobileServicesOpen ? 'rotate-180' : ''}`}
+                        />
+                      </button>
+                      <AnimatePresence initial={false}>
+                        {mobileServicesOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.18, ease: 'easeOut' }}
+                            className="overflow-hidden"
+                          >
+                            <div className="pl-4 flex flex-col gap-1 pb-1">
+                              {link.children.map((child) => (
+                                <a
+                                  key={child.key}
+                                  href={child.href}
+                                  onClick={(e) => { e.preventDefault(); handleNavClick(child.href) }}
+                                  className="py-2 px-3 rounded-lg text-ink-300 hover:text-stellar-cyan hover:bg-white/[0.04] transition-all font-medium text-sm"
+                                >
+                                  {t(child.key as any)}
+                                </a>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  )
+                }
+                return (
+                  <a
+                    key={link.key}
+                    href={link.href}
+                    onClick={(e) => { e.preventDefault(); handleNavClick(link.href) }}
+                    className="py-3 px-3 rounded-lg text-ink-200 hover:text-stellar-cyan hover:bg-white/[0.04] transition-all font-medium text-sm"
+                  >
+                    {t(link.key as any)}
+                  </a>
+                )
+              })}
               <div className="pt-3 border-t border-white/[0.06] mt-2">
                 <button
                   onClick={() => handleNavClick('#contact')}

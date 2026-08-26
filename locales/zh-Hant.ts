@@ -13,6 +13,8 @@ export const zhHant: Record<LocaleKey, string> = {
   nav_openMenu: '打開選單',
   nav_closeMenu: '關閉選單',
   nav_openclaw: 'Hermes Agent 托管服務',
+  nav_services_sme: '企業網絡安全',
+  nav_services_personal: '個人網絡安全',
 
   // Hero
   hero_headline: '網絡安全與人工智能的交匯點',
@@ -628,7 +630,7 @@ export const zhHant: Record<LocaleKey, string> = {
   cyber_sme_svc_6_d2: '針對性一對一培訓',
   cyber_sme_svc_6_d3: '保險級誤按率報告',
   cyber_sme_why_eyebrow: '// 02 — 為何選擇我們',
-  cyber_sme_why_title: '為何是我們，不是某個外國雲端？',
+  cyber_sme_why_title: '為何是我們？',
   cyber_sme_why_1_h: '先建模，後交付。',
   cyber_sme_why_1_b: '每個委約都從對手畫像開始——而不是從銷售簡報。我們先點名攻擊者、資產、攻擊路徑，再交付系統。',
   cyber_sme_why_2_h: '您的稽核人員讀得懂，不是只給我們看。',

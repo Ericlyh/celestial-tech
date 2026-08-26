@@ -11,6 +11,8 @@ export const en = {
   nav_openMenu: 'Open menu',
   nav_closeMenu: 'Close menu',
   nav_openclaw: 'Hermes Agent',
+  nav_services_sme: 'SME Cybersecurity',
+  nav_services_personal: 'Personal Cybersecurity',
 
   // Hero
   hero_headline: 'Where Cybersecurity Meets Artificial Intelligence',
@@ -625,7 +627,7 @@ export const en = {
   cyber_sme_svc_6_d2: 'Targeted 1:1 training',
   cyber_sme_svc_6_d3: 'Insurance-grade click-rate report',
   cyber_sme_why_eyebrow: '// 02 — Why us',
-  cyber_sme_why_title: 'Why us, not a global cloud?',
+  cyber_sme_why_title: 'Why us?',
   cyber_sme_why_1_h: 'Threat-modelled first, shipped second.',
   cyber_sme_why_1_b: 'Every engagement starts with an adversary profile, not a sales deck. We name the attacker, the asset, the path. Then we ship.',
   cyber_sme_why_2_h: 'Auditable to your auditor, not to us.',
