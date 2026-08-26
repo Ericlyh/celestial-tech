@@ -11,6 +11,7 @@
 
 import { FormEvent, useEffect, useRef, useState } from 'react'
 import { useTranslation } from '@/i18n'
+import { Menu, X } from 'lucide-react'
 
 // Locale-aware tag class. The English design uses monospace + uppercase + wide
 // tracking as part of the editorial-tech aesthetic. CJK characters don't have
@@ -53,21 +54,38 @@ function SectionTitle({ children, accent }: { children: React.ReactNode; accent?
 
 function A2Nav() {
   const { locale, toggleLocale, t } = useTranslation()
-  const links = [
-    { label: t('a2_nav_services' as any), href: '/cybersecurity/sme', children: [
-      { label: t('nav_services_sme' as any), href: '/cybersecurity/sme' },
-      { label: t('nav_services_personal' as any), href: '/cybersecurity/personal' },
-    ] },
-    { label: t('a2_nav_hosting' as any), href: '/hermes-agent-hosting' },
+  // Services groups: Cybersecurity + AI. AI empowerment comes before Hermes Agent per OOP-4066.
+  const servicesGroups: { label: string; items: { label: string; href: string }[] }[] = [
+    {
+      label: t('a2_nav_services_cyber' as any),
+      items: [
+        { label: t('nav_services_sme' as any), href: '/cybersecurity/sme' },
+        { label: t('nav_services_personal' as any), href: '/cybersecurity/personal' },
+      ],
+    },
+    {
+      label: t('a2_nav_services_ai' as any),
+      items: [
+        { label: t('nav_services_ai_empowerment' as any), href: '/ai-empowerment' },
+        { label: t('nav_services_ai_hermes' as any), href: '/hermes-agent-hosting' },
+      ],
+    },
+  ]
+  const otherLinks: { label: string; href: string }[] = [
     { label: t('a2_nav_whyUs' as any), href: '#why-us' },
     { label: t('a2_nav_blog' as any), href: '/blog' },
     { label: t('a2_nav_contact' as any), href: '#contact' },
   ]
+  const servicesLabel = t('a2_nav_services' as any)
   const linkCls = locale === 'zh-Hant' ? 'tracking-normal normal-case' : 'uppercase tracking-[0.08em]'
   const langCls = locale === 'zh-Hant' ? 'font-sans tracking-normal normal-case' : 'font-mono uppercase tracking-[0.1em]'
   const ctaCls = locale === 'zh-Hant' ? 'tracking-normal normal-case' : 'uppercase tracking-[0.1em]'
+  const groupHeadingCls = locale === 'zh-Hant' ? 'text-[10px] tracking-normal' : 'text-[10px] font-mono tracking-[0.18em] uppercase'
+  const mobileLinkCls = locale === 'zh-Hant' ? 'font-sans tracking-normal normal-case' : 'font-medium text-sm tracking-wide'
 
   const [servicesOpen, setServicesOpen] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
   const servicesWrapRef = useRef<HTMLLIElement>(null)
   useEffect(() => {
     if (!servicesOpen) return
@@ -80,7 +98,10 @@ function A2Nav() {
       }
     }
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setServicesOpen(false)
+      if (e.key === 'Escape') {
+        setServicesOpen(false)
+        setMobileOpen(false)
+      }
     }
     document.addEventListener('mousedown', onClick)
     document.addEventListener('keydown', onKey)
@@ -90,6 +111,12 @@ function A2Nav() {
     }
   }, [servicesOpen])
 
+  // Close the mobile panel on route-like anchor click so the next view isn't covered.
+  const closeMobile = () => {
+    setMobileOpen(false)
+    setMobileServicesOpen(false)
+  }
+
   const handleAnchorClick = (href: string) => (e: React.MouseEvent) => {
     if (!href.startsWith('#')) return
     e.preventDefault()
@@ -98,61 +125,64 @@ function A2Nav() {
   }
 
   return (
-    <nav className="sticky top-0 z-50 flex items-center justify-between px-5 sm:px-10 py-5 bg-deep-space/80 backdrop-blur-xl border-b border-stellar-cyan/10">
-      <a href="#home" className="font-display font-black text-lg sm:text-xl tracking-tight flex items-center gap-2.5">
-        <span className="w-2.5 h-2.5 rounded-full bg-stellar-cyan shadow-[0_0_18px_rgba(94,234,212,0.7)]" />
-        Celestial Tech
-      </a>
-      <ul className="hidden md:flex gap-7 list-none items-center">
-        {links.map((l) => {
-          if (l.children) {
-            return (
-              <li
-                key={l.label}
-                ref={servicesWrapRef}
-                className="relative"
-                onMouseEnter={() => setServicesOpen(true)}
-                onMouseLeave={() => setServicesOpen(false)}
+    <>
+      <nav className="sticky top-0 z-50 flex items-center justify-between px-5 sm:px-10 py-5 bg-deep-space/80 backdrop-blur-xl border-b border-stellar-cyan/10">
+        <a href="#home" className="font-display font-black text-lg sm:text-xl tracking-tight flex items-center gap-2.5">
+          <span className="w-2.5 h-2.5 rounded-full bg-stellar-cyan shadow-[0_0_18px_rgba(94,234,212,0.7)]" />
+          Celestial Tech
+        </a>
+        <ul className="hidden md:flex gap-7 list-none items-center">
+          <li
+            key={servicesLabel}
+            ref={servicesWrapRef}
+            className="relative"
+            onMouseEnter={() => setServicesOpen(true)}
+            onMouseLeave={() => setServicesOpen(false)}
+          >
+            <button
+              type="button"
+              aria-haspopup="menu"
+              aria-expanded={servicesOpen}
+              onClick={() => setServicesOpen((v) => !v)}
+              className={`text-ink-50 font-medium text-[13px] ${linkCls} hover:text-stellar-cyan transition-colors flex items-center gap-1`}
+            >
+              {servicesLabel}
+              <svg
+                width="10"
+                height="10"
+                viewBox="0 0 10 10"
+                aria-hidden="true"
+                className={`transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`}
               >
-                <button
-                  type="button"
-                  aria-haspopup="menu"
-                  aria-expanded={servicesOpen}
-                  onClick={() => setServicesOpen((v) => !v)}
-                  className={`text-ink-50 font-medium text-[13px] ${linkCls} hover:text-stellar-cyan transition-colors flex items-center gap-1`}
-                >
-                  {l.label}
-                  <svg
-                    width="10"
-                    height="10"
-                    viewBox="0 0 10 10"
-                    aria-hidden="true"
-                    className={`transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`}
-                  >
-                    <path d="M2 3.5l3 3 3-3" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </button>
-                {servicesOpen && (
-                  <div
-                    role="menu"
-                    className="absolute top-full left-0 mt-3 min-w-[220px] rounded-xl border border-white/[0.08] bg-deep-space/95 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.45)] py-2"
-                  >
-                    {l.children.map((child) => (
+                <path d="M2 3.5l3 3 3-3" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+            {servicesOpen && (
+              <div
+                role="menu"
+                className="absolute top-full left-0 mt-3 min-w-[260px] rounded-xl border border-white/[0.08] bg-deep-space/95 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.45)] py-2"
+              >
+                {servicesGroups.map((group, gi) => (
+                  <div key={group.label} className={gi > 0 ? 'mt-1 pt-1 border-t border-white/[0.06]' : ''}>
+                    <div className={`${groupHeadingCls} text-cosmic-violet px-4 pt-2 pb-1.5`}>
+                      {group.label}
+                    </div>
+                    {group.items.map((item) => (
                       <a
-                        key={child.label}
-                        href={child.href}
+                        key={item.label}
+                        href={item.href}
                         role="menuitem"
-                        className="block px-4 py-2.5 text-[13px] font-medium text-ink-50 hover:bg-white/[0.05] hover:text-stellar-cyan transition-colors"
+                        className="block px-4 py-2 text-[13px] font-medium text-ink-50 hover:bg-white/[0.05] hover:text-stellar-cyan transition-colors"
                       >
-                        {child.label}
+                        {item.label}
                       </a>
                     ))}
                   </div>
-                )}
-              </li>
-            )
-          }
-          return (
+                ))}
+              </div>
+            )}
+          </li>
+          {otherLinks.map((l) => (
             <li key={l.label}>
               <a
                 href={l.href}
@@ -162,25 +192,101 @@ function A2Nav() {
                 {l.label}
               </a>
             </li>
-          )
-        })}
-      </ul>
-      <div className="flex items-center gap-3">
-        <button
-          onClick={toggleLocale}
-          aria-label="Toggle language"
-          className={`px-2.5 py-1 text-[10px] ${langCls} rounded border border-white/[0.1] text-ink-300 hover:text-stellar-cyan hover:border-stellar-cyan/40 transition-colors`}
-        >
-          {locale === 'en' ? '繁中' : 'EN'}
-        </button>
-        <a
-          href="#contact"
-          className={`hidden md:inline-block px-4 py-2 border border-stellar-cyan rounded-full text-stellar-cyan text-[12px] ${ctaCls} hover:bg-stellar-cyan/10 transition-colors`}
-        >
-          {t('a2_nav_cta' as any)} →
-        </a>
-      </div>
-    </nav>
+          ))}
+        </ul>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={toggleLocale}
+            aria-label="Toggle language"
+            className={`px-2.5 py-1 text-[10px] ${langCls} rounded border border-white/[0.1] text-ink-300 hover:text-stellar-cyan hover:border-stellar-cyan/40 transition-colors`}
+          >
+            {locale === 'en' ? '繁中' : 'EN'}
+          </button>
+          <a
+            href="#contact"
+            className={`hidden md:inline-block px-4 py-2 border border-stellar-cyan rounded-full text-stellar-cyan text-[12px] ${ctaCls} hover:bg-stellar-cyan/10 transition-colors`}
+          >
+            {t('a2_nav_cta' as any)} →
+          </a>
+          <button
+            type="button"
+            className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/[0.05] transition-colors"
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label={mobileOpen ? t('nav_closeMenu') : t('nav_openMenu')}
+            aria-expanded={mobileOpen}
+          >
+            {mobileOpen ? <X size={20} className="text-ink-50" /> : <Menu size={20} className="text-ink-50" />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile panel */}
+      {mobileOpen && (
+        <div className="md:hidden sticky top-[72px] z-40 bg-deep-space/95 backdrop-blur-xl border-b border-stellar-cyan/15">
+          <div className="px-5 py-4 flex flex-col gap-1">
+            <div className="rounded-lg overflow-hidden">
+              <button
+                type="button"
+                aria-expanded={mobileServicesOpen}
+                onClick={() => setMobileServicesOpen((v) => !v)}
+                className="w-full flex items-center justify-between py-3 px-3 text-ink-50 hover:bg-white/[0.04] transition-colors"
+              >
+                <span className={mobileLinkCls}>{servicesLabel}</span>
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 10 10"
+                  aria-hidden="true"
+                  className={`text-ink-300 transition-transform duration-200 ${mobileServicesOpen ? 'rotate-180' : ''}`}
+                >
+                  <path d="M2 3.5l3 3 3-3" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              {mobileServicesOpen && (
+                <div className="pl-3 pb-1 flex flex-col gap-1">
+                  {servicesGroups.map((group) => (
+                    <div key={group.label} className="pt-1">
+                      <div className={`${groupHeadingCls} text-cosmic-violet px-3 pt-2 pb-1`}>
+                        {group.label}
+                      </div>
+                      {group.items.map((item) => (
+                        <a
+                          key={item.label}
+                          href={item.href}
+                          onClick={closeMobile}
+                          className="block py-2 px-3 rounded-lg text-ink-200 hover:bg-white/[0.04] hover:text-stellar-cyan transition-colors text-sm"
+                        >
+                          {item.label}
+                        </a>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            {otherLinks.map((l) => (
+              <a
+                key={l.label}
+                href={l.href}
+                onClick={(e) => { closeMobile(); handleAnchorClick(l.href)(e) }}
+                className="py-3 px-3 rounded-lg text-ink-50 hover:bg-white/[0.04] transition-colors"
+              >
+                <span className={mobileLinkCls}>{l.label}</span>
+              </a>
+            ))}
+            <div className="pt-3 border-t border-white/[0.06] mt-2">
+              <a
+                href="#contact"
+                onClick={closeMobile}
+                className={`block w-full text-center py-3 rounded-full bg-stellar-cyan text-deep-space font-bold text-sm ${ctaCls}`}
+              >
+                {t('a2_nav_cta' as any)} →
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   )
 }
 

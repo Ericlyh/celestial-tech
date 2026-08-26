@@ -10,6 +10,7 @@ type NavLink = {
   key: string
   href: string
   children?: { key: string; href: string }[]
+  groups?: { headingKey: string; children: { key: string; href: string }[] }[]
 }
 
 const navLinks: NavLink[] = [
@@ -17,9 +18,21 @@ const navLinks: NavLink[] = [
   {
     key: 'nav_services',
     href: '/cybersecurity/sme',
-    children: [
-      { key: 'nav_services_sme', href: '/cybersecurity/sme' },
-      { key: 'nav_services_personal', href: '/cybersecurity/personal' },
+    groups: [
+      {
+        headingKey: 'nav_services_cyber',
+        children: [
+          { key: 'nav_services_sme', href: '/cybersecurity/sme' },
+          { key: 'nav_services_personal', href: '/cybersecurity/personal' },
+        ],
+      },
+      {
+        headingKey: 'nav_services_ai',
+        children: [
+          { key: 'nav_services_ai_empowerment', href: '/ai-empowerment' },
+          { key: 'nav_services_ai_hermes', href: '/hermes-agent-hosting' },
+        ],
+      },
     ],
   },
   { key: 'nav_whyUs', href: '#about' },
@@ -104,7 +117,9 @@ export default function Navbar() {
 
   const isServicesActive =
     pathname?.startsWith('/cybersecurity/sme') ||
-    pathname?.startsWith('/cybersecurity/personal')
+    pathname?.startsWith('/cybersecurity/personal') ||
+    pathname?.startsWith('/ai-empowerment') ||
+    pathname?.startsWith('/hermes-agent-hosting')
 
   return (
     <>
@@ -141,7 +156,8 @@ export default function Navbar() {
                 (link.href === '/hermes-agent-hosting' && pathname?.startsWith('/hermes-agent-hosting'))
 
               // Services — dropdown trigger
-              if (link.children) {
+              if (link.children || link.groups) {
+                const groups = link.groups ?? [{ headingKey: '', children: link.children! }]
                 return (
                   <div
                     key={link.key}
@@ -176,26 +192,35 @@ export default function Navbar() {
                           exit={{ opacity: 0, y: -6 }}
                           transition={{ duration: 0.15, ease: 'easeOut' }}
                           role="menu"
-                          className="absolute top-full left-0 mt-2 min-w-[220px] rounded-xl glass-nav border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.45)] py-2"
+                          className="absolute top-full left-0 mt-2 min-w-[260px] rounded-xl glass-nav border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.45)] py-2"
                         >
-                          {link.children.map((child) => {
-                            const childActive = pathname?.startsWith(child.href)
-                            return (
-                              <a
-                                key={child.key}
-                                href={child.href}
-                                role="menuitem"
-                                onClick={(e) => { e.preventDefault(); handleNavClick(child.href) }}
-                                className={`block px-4 py-2.5 text-[13px] font-medium transition-colors ${
-                                  childActive
-                                    ? 'text-stellar-cyan bg-white/[0.04]'
-                                    : 'text-ink-200 hover:text-white hover:bg-white/[0.04]'
-                                }`}
-                              >
-                                {t(child.key as any)}
-                              </a>
-                            )
-                          })}
+                          {groups.map((group, gi) => (
+                            <div key={group.headingKey || `g-${gi}`} className={gi > 0 ? 'mt-1 pt-1 border-t border-white/[0.06]' : ''}>
+                              {group.headingKey && (
+                                <div className={`px-4 pt-2 pb-1.5 text-[10px] font-mono uppercase tracking-[0.18em] text-cosmic-violet`}>
+                                  {t(group.headingKey as any)}
+                                </div>
+                              )}
+                              {group.children.map((child) => {
+                                const childActive = pathname?.startsWith(child.href)
+                                return (
+                                  <a
+                                    key={child.key}
+                                    href={child.href}
+                                    role="menuitem"
+                                    onClick={(e) => { e.preventDefault(); handleNavClick(child.href) }}
+                                    className={`block px-4 py-2.5 text-[13px] font-medium transition-colors ${
+                                      childActive
+                                        ? 'text-stellar-cyan bg-white/[0.04]'
+                                        : 'text-ink-200 hover:text-white hover:bg-white/[0.04]'
+                                    }`}
+                                  >
+                                    {t(child.key as any)}
+                                  </a>
+                                )
+                              })}
+                            </div>
+                          ))}
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -270,7 +295,8 @@ export default function Navbar() {
           >
             <div className="container-main py-5 flex flex-col gap-1">
               {navLinks.map((link) => {
-                if (link.children) {
+                if (link.children || link.groups) {
+                  const groups = link.groups ?? [{ headingKey: '', children: link.children! }]
                   return (
                     <div key={link.key} className="rounded-lg overflow-hidden">
                       <button
@@ -294,16 +320,25 @@ export default function Navbar() {
                             transition={{ duration: 0.18, ease: 'easeOut' }}
                             className="overflow-hidden"
                           >
-                            <div className="pl-4 flex flex-col gap-1 pb-1">
-                              {link.children.map((child) => (
-                                <a
-                                  key={child.key}
-                                  href={child.href}
-                                  onClick={(e) => { e.preventDefault(); handleNavClick(child.href) }}
-                                  className="py-2 px-3 rounded-lg text-ink-300 hover:text-stellar-cyan hover:bg-white/[0.04] transition-all font-medium text-sm"
-                                >
-                                  {t(child.key as any)}
-                                </a>
+                            <div className="pl-3 flex flex-col gap-1 pb-1">
+                              {groups.map((group, gi) => (
+                                <div key={group.headingKey || `g-${gi}`} className="pt-1">
+                                  {group.headingKey && (
+                                    <div className={`px-3 pt-2 pb-1 text-[10px] font-mono uppercase tracking-[0.18em] text-cosmic-violet`}>
+                                      {t(group.headingKey as any)}
+                                    </div>
+                                  )}
+                                  {group.children.map((child) => (
+                                    <a
+                                      key={child.key}
+                                      href={child.href}
+                                      onClick={(e) => { e.preventDefault(); handleNavClick(child.href) }}
+                                      className="block py-2 px-3 rounded-lg text-ink-300 hover:text-stellar-cyan hover:bg-white/[0.04] transition-all font-medium text-sm"
+                                    >
+                                      {t(child.key as any)}
+                                    </a>
+                                  ))}
+                                </div>
                               ))}
                             </div>
                           </motion.div>
