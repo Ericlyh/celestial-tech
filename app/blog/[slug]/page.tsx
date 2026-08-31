@@ -4,23 +4,28 @@ import { prisma } from '@/lib/prisma'
 import Navbar from '@/components/Navbar'
 import BilingualBlogContent from '@/components/BilingualBlogContent'
 
-// Static params for SSG
+// Static params for SSG. Merge DB-derived slugs with STATIC_POSTS slugs so a
+// newly-added post is prerendered even before the production DB has been
+// re-seeded (otherwise the slug falls to dynamic serverless render).
 export async function generateStaticParams() {
+  const staticSlugs = Object.keys(STATIC_POSTS).map((slug) => ({ slug }))
   try {
     const posts = await prisma.post.findMany({
       where: { published: true },
       select: { slug: true },
     })
-    return posts.map((p) => ({ slug: p.slug }))
+    const dbSlugs = posts.map((p) => ({ slug: p.slug }))
+    const seen = new Set<string>()
+    const merged: { slug: string }[] = []
+    for (const s of [...dbSlugs, ...staticSlugs]) {
+      if (!seen.has(s.slug)) {
+        seen.add(s.slug)
+        merged.push(s)
+      }
+    }
+    return merged
   } catch {
-    return [
-      { slug: 'ai-powered-soc-future-threat-detection' },
-      { slug: 'reactive-to-predictive-traditional-cybersecurity-failing' },
-      { slug: 'convergence-ai-cybersecurity-enterprises-2026' },
-      { slug: 'openclaw-multi-agent-patterns-autonomous-execution-engine' },
-      { slug: 'hermes-agent-obsidian-llm-second-brain' },
-      { slug: 'hk-pdpo-compliance-sme-guide-2026' },
-    ]
+    return staticSlugs
   }
 }
 
