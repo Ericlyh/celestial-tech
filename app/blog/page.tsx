@@ -284,6 +284,21 @@ export default function BlogPage() {
           readTime: 9,
           publishedAt: '2026-05-15T00:00:00Z',
         },
+        {
+          id: '6',
+          title: 'HK PDPO Compliance for SMEs in 2026: What Changed and What Your Business Actually Needs',
+          titleZh: '2026 年香港《個人資料（私隱）條例》對中小企業的合規要求：實際變化與必要行動',
+          slug: 'hk-pdpo-compliance-sme-guide-2026',
+          excerpt:
+            'The Personal Data (Privacy) Ordinance is not optional, and the 2021 doxxing amendments materially expanded the compliance surface. For SMEs without a dedicated legal team, here is what the Privacy Commissioner actually looks at — and what you can fix this quarter.',
+          excerptZh: '《個人資料（私隱）條例》並非可選，而 2021 年針對「起底」行為的修訂已實質擴大了合規範圍。對沒有專屬法律團隊的中小企業而言，本文說明私隱專員實際會審視的項目，以及本季度內可採取的修正行動。',
+          category: 'Cybersecurity',
+          authorZh: 'Celestial Tech 團隊',
+          coverImage: 'https://images.unsplash.com/photo-1450101499163-c8848c66c85b?w=1600&q=80',
+          author: 'Celestial Tech Team',
+          readTime: 7,
+          publishedAt: '2026-08-31T00:00:00Z',
+        },
       ] as Post[]).sort(
         (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
       ),

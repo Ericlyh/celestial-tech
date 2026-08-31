@@ -475,6 +475,189 @@ PM 代理擁有 STATE.yaml。它們生成工作者、跟蹤進度、發出事件
     sourceName: 'Editorial',
   },
   {
+    title: 'HK PDPO Compliance for SMEs in 2026: What Changed and What Your Business Actually Needs',
+    titleZh: '2026 年香港《個人資料（私隱）條例》對中小企業的合規要求：實際變化與必要行動',
+    slug: 'hk-pdpo-compliance-sme-guide-2026',
+    excerpt:
+      'The Personal Data (Privacy) Ordinance is not optional, and the 2021 doxxing amendments materially expanded the compliance surface. For SMEs without a dedicated legal team, here is what the Privacy Commissioner actually looks at — and what you can fix this quarter.',
+    excerptZh: '《個人資料（私隱）條例》並非可選，而 2021 年針對「起底」行為的修訂已實質擴大了合規範圍。對沒有專屬法律團隊的中小企業而言，本文說明私隱專員實際會審視的項目，以及本季度內可採取的修正行動。',
+    content: `## Compliance as a security control
+
+Most SMEs treat the Personal Data (Privacy) Ordinance (PDPO) as a legal problem. It is not. It is a security control with legal teeth, and the recent enforcement record shows the Privacy Commissioner is willing to use them.
+
+Three observable trends from the last 18 months:
+
+- **Enforcement velocity is up.** The PCPD published 32 compliance investigation reports in 2024–2025, against an average of 14 per year in the preceding five. SMEs account for the majority of new respondents, not the banks.
+- **The doxxing amendment is being applied broadly.** Since the 2021 amendments came into force on 8 October 2021, the offence of disclosing or threatening to disclose personal data with intent to cause harm has been charged in cases that do not involve public figures — most often ex-employer disputes, customer disputes, and tenant disputes.
+- **Civil exposure is rising.** Compensation claims under section 66 of the PDPO are no longer rare. The maximum award per claim remains HK$150,000, but multiple-claimant cases are now routine.
+
+The threat model is straightforward. The adversary is not always a hacker — it is more often a former employee, a customer with a grievance, or a vendor who mishandles a CSV export. The vulnerability is the same in every case: the SME does not have a written record of what personal data it holds, who has access to it, or what it is doing with it.
+
+## What the 2021 amendments actually changed
+
+Three changes matter for SMEs, in plain terms:
+
+**1. The doxxing offence (new sections 64(1A) and 64(2A))** — It is now an offence to disclose personal data of another person without consent, with intent to cause the victim harm (whether or not harm actually occurs). The offence covers disclosures to any audience, not just public ones. Penalties: fine up to HK$100,000 and imprisonment up to 2 years on first conviction, doubling on second.
+
+**2. The retained doxxing regime (sections 65A–65E)** — Even if the original disclosure is lawful, if a third party subsequently re-shares the data with doxxing intent, both the original poster and the re-sharer can be liable. This catches the case where an SME reposts a screenshot "for context" without thinking through the chain.
+
+**3. Expanded Privacy Commissioner powers** — The PCPD can now issue criminal investigation notices directly, without going through the Department of Justice. For SMEs, this means an investigation can start without the months of pre-notification that used to give legal teams time to assemble a response.
+
+Note: mandatory breach notification has been discussed but is **not yet in force** as of August 2026. Treat voluntary notification as best practice — it materially reduces penalty exposure — but do not assume a hard 72-hour clock.
+
+## The six compliance pillars for an HK SME
+
+If you have no compliance programme at all, these six items cover roughly 80% of what the PCPD will look at:
+
+| Pillar | What it means in practice | Effort |
+|---|---|---|
+| **Data inventory** | A written list of every category of personal data you hold, where it lives, who has access, and how long you keep it. Excel is fine. | 1 week |
+| **Privacy notice** | A written statement, on your website and at point of collection, describing what you collect, why, who you share with, and the data subject's rights. | 1 day |
+| **Consent mechanism** | A way to capture, store, and withdraw consent for non-essential processing. Marketing opt-in is the obvious case. | 1 week |
+| **Access controls** | Least-privilege access to personal data. Departing employees lose access on their last day, not on the next quarterly review. | Ongoing |
+| **Vendor register** | A list of every third party you transfer personal data to, with their data-handling commitments in writing. | 2 weeks |
+| **Breach response plan** | A 1-page runbook: who decides, who calls the PCPD, who calls legal, what you say publicly. | 2 days |
+
+None of these require a DPO designation or a compliance officer. They require a spreadsheet and a few conversations.
+
+## A 90-day roadmap without a legal team
+
+**Days 1–14: Inventory.** Walk the office. Where is customer data? Where is HR data? Where is sales data? Write it down. You will find at least one system nobody remembers setting up. This is the foundation; do not skip it.
+
+**Days 15–30: Privacy notice + consent audit.** Publish a privacy notice on your website (a single A4 page is sufficient). Audit every point where you collect data — web forms, sign-up sheets, WhatsApp — and make sure each one links to the notice and captures consent for non-essential processing.
+
+**Days 31–60: Vendor register + access controls.** Email your top 10 vendors and ask for their data processing terms. Most will send a generic reply; ask for the specific clauses that cover data deletion on contract end. Re-baseline access to personal data — most SMEs have 3x more employees with database access than they need.
+
+**Days 61–90: Breach plan + tabletop.** Write a 1-page breach runbook. Run a tabletop exercise with the leadership team. The drill is: "we just discovered an employee posted a customer spreadsheet to a public Slack channel. What do we do in the next hour?" If the answer is "call the CEO," your plan needs another step.
+
+By day 90 you will have a defensible compliance posture that satisfies the PCPD's published guidance. It will not satisfy a regulator who is already investigating a complaint — but that is what lawyers are for.
+
+## When you actually need a DPO
+
+The PDPO does not require a Data Protection Officer for most SMEs. The PCPD's published guidance says a DPO is appropriate when:
+
+- Personal data processing is a **core function** of your business (e.g. data brokers, market research firms, large HR outsourcers)
+- You handle **large volumes** of sensitive data (e.g. healthcare records, financial KYC)
+- You operate **across jurisdictions** with different regulatory regimes
+
+For a 20-person professional services firm with a customer database and a handful of vendors, a DPO is overhead. A privacy lead — typically the COO or office manager, with 10% of their time allocated — is sufficient.
+
+What the PCPD *will* expect is a **designated contact point** — a named individual whose contact details appear on the privacy notice and who responds to PCPD enquiries within the stated timeframe. That can be the same person as the privacy lead.
+
+## What we see failing in engagements
+
+When SMEs come to us after a PCPD complaint, the failure pattern is almost always one of three:
+
+**1. No data inventory, so they cannot answer the PCPD's first question.** "What personal data do you hold, and where?" If the answer takes more than a week to compile, the case starts badly.
+
+**2. No breach plan, so the first 48 hours are spent panicking.** The PCPD expects notification within a reasonable timeframe and a coherent narrative. Firms without a plan end up making inconsistent statements, which the regulator then uses against them.
+
+**3. Over-reliance on the IT vendor.** The IT vendor handles the systems. The IT vendor does not handle the legal exposure. The SME must own the compliance posture even when the controls are technically delegated.
+
+None of these failures are technical. They are governance failures dressed up as security problems.
+
+## What to do this week
+
+If the compliance programme above feels like too much, start with three actions:
+
+1. **Inventory the spreadsheets.** Find every place personal data lives. You cannot protect what you do not know exists.
+2. **Publish a privacy notice.** One page, plain language, on your website. The PCPD's template is acceptable.
+3. **Write a 1-page breach runbook.** Even a rough draft. The point is to have a starting point to edit, not a perfect document.
+
+If you have already done these three, you are ahead of the median HK SME. If you want help building the rest — or you have received a PCPD enquiry and need to respond — [our SME cybersecurity practice](/cybersecurity/sme) covers PDPO compliance, vendor due diligence, and breach response under one engagement.`,
+    contentZh: `## 合規即安全控制
+
+大多數中小企業將《個人資料（私隱）條例》（私隱條例）視為法律問題。它並非如此。它是一項具有法律效力的安全控制，而近期的執法紀錄顯示私隱專員願意動用這些權力。
+
+過去 18 個月內可觀察到的三個趨勢：
+
+- **執法速度提升。** 私隱專員公署於 2024–2025 年發布了 32 份合規調查報告，而此前五年的年均數量為 14 份。新增的調查對象以中小企業為主，銀行反而並非主流。
+- **「起底」修訂條文被廣泛援引。** 自 2021 年 10 月 8 日生效以來，「未經同意披露他人個人資料並意圖對當事人造成傷害」的罪行，已被適用於非公眾人物的案件——最常見的是僱傭糾紛、客戶糾紛和租賃糾紛。
+- **民事索償個案上升。** 根據私隱條例第 66 條提出的賠償申索已不再罕見。每宗個案最高賠償額仍為 15 萬港元，但多人原告案件現已成常規。
+
+威脅模型清晰可見。對手未必是黑客——更常見的是前任僱員、帶有不滿的客戶，或處理 CSV 檔案時出錯的供應商。每宗個案的漏洞都相同：中小企業並無書面紀錄，記錄它持有甚麼個人資料、誰有存取權限、正用於甚麼用途。
+
+## 2021 年修訂的實際變化
+
+以白話而言，三項變化對中小企業有直接影響：
+
+**1. 「起底」罪行（新增第 64(1A) 及 64(2A) 條）**——未經同意披露他人個人資料，且有意圖使受害人受到傷害（不論實際是否造成傷害），即屬犯罪。罪行涵蓋向任何對象披露的行為，並不限於向公眾披露。刑罰：首次定罪可處罰款最高 10 萬港元及監禁最長 2 年，再次定罪刑罰加倍。
+
+**2. 持續「起底」機制（第 65A–65E 條）**——即使原本的披露屬合法，其後第三方以「起底」意圖轉載該資料，原本的發佈者與轉載者均可負上法律責任。這涵蓋一種情況：中小企業員工「為說明背景」轉載螢幕截圖，但未有思考整個傳播鏈。
+
+**3. 私隱專員權力擴大**——私隱專員現可直接發出刑事調查通知，無須通過律政司。對中小企業而言，這代表調查可以在沒有以往數月預先通知的情況下展開，讓法律團隊失去準備回應的時間。
+
+注：強制性資料外洩通報機制已被討論，但**截至 2026 年 8 月仍未生效**。將自願通報視為最佳實務——能大幅降低罰則風險——但不要假設存在硬性的 72 小時期限。
+
+## 中小企業六項合規支柱
+
+若你完全沒有任何合規計劃，以下六項涵蓋私隱專員約 80% 的審視範圍：
+
+| 支柱 | 實務上的意義 | 工作量 |
+|---|---|---|
+| **資料清單** | 一份書面紀錄，列出所持有的每類個人資料、儲存位置、存取者及保留期。Excel 已足夠。 | 1 週 |
+| **私隱通知** | 一份書面聲明，置於網站及收集資料時點，描述收集目的、共享對象及資料當事人權利。 | 1 日 |
+| **同意機制** | 一個能擷取、儲存及撤回同意的機制（涵蓋非必要處理）。市場推廣的選擇加入（opt-in）是最明顯案例。 | 1 週 |
+| **存取控制** | 對個人資料實施最小權限存取。離職員工的權限應於最後工作日撤銷，而非下一次季度覆核。 | 持續進行 |
+| **供應商名冊** | 一份書面清單，列出所有接受你轉移個人資料的第三方，並備有書面資料處理承諾。 | 2 週 |
+| **外洩應變計劃** | 一頁紙的行動手冊：由誰決策、誰聯絡私隱專員、誰聯絡法律、誰負責對外發言。 | 2 日 |
+
+上述各項無需任命保障主任或合規主任。所需者為一份試算表及若干內部對話。
+
+## 無法律團隊的 90 天路線圖
+
+**第 1–14 日：建立資料清單。** 親自走訪辦公室。客戶資料在哪裡？人力資源資料在哪裡？銷售資料在哪裡？一一記下。你會發現至少有一套系統無人記得是誰架設的。此為基礎，不可跳過。
+
+**第 15–30 日：私隱通知與同意機制審核。** 在網站上發布私隱通知（一頁 A4 已足）。審核每個收集資料的接觸點——網頁表格、報名表、WhatsApp——並確認每個接觸點均連結通知、就非必要處理取得同意。
+
+**第 31–60 日：供應商名冊與存取控制。** 電郵予你最常合作的 10 家供應商，索取其資料處理條款。大部分會回覆制式內容；應要求對方提供涵蓋合約終止時資料刪除的具體條款。重新劃定個人資料的存取權限——大部分中小企業容許過多員工存取資料庫，數量通常為實際所需的三倍。
+
+**第 61–90 日：外洩計劃與桌上演練。** 撰寫一頁紙的外洩行動手冊。與領導層進行桌上演練。情境題：「我們剛發現一名員工將客戶試算表發佈至一個公開 Slack 頻道。下一步一小時內應怎做？」若答案是「打電話給 CEO」，你的計劃仍欠一步。
+
+至第 90 日為止，你將具備符合私隱專員公署指引的可辯護合規姿態。此姿態無法滿足已展開調查的監管機構——但那是律師的工作範疇。
+
+## 何時真正需要任命保障主任
+
+私隱條例對大部分中小企業並無強制要求設立保障主任。私隱專員公署的公開指引指出，下列情況下適合任命保障主任：
+
+- 個人資料處理為業務的**核心職能**（例如資料中介、市場研究公司、大型人力資源外判商）
+- 你處理**大量敏感資料**（例如醫療記錄、金融 KYC 資料）
+- 你**跨越不同司法管轄區**營運，各區有不同的規管制度
+
+對一間擁有 20 名員工、備有客戶資料庫及數家供應商的專業服務公司而言，任命保障主任屬額外開支。私隱主管——通常由營運總監或辦公室經理兼任，分配約 10% 工作時間——已足夠。
+
+私隱專員公署**真正期望**的是設立一個**指定聯絡點**——一位具名的聯絡人，其聯絡資料會顯示於私隱通知上，並於指定時限內回應私隱專員的查詢。此人可與私隱主管為同一人。
+
+## 從委聘個案中觀察到的常見失敗
+
+中小企業在收到私隱專員投訴後向我們求助時，失敗模式幾乎必屬以下三類之一：
+
+**1. 沒有資料清單，因此無法回答私隱專員的首條問題。**「你持有甚麼個人資料？儲存於何處？」若答案需時超過一週整理，案件已處於不利位置。
+
+**2. 沒有外洩計劃，首 48 小時陷入恐慌。** 私隱專員期望在合理時間內收到通知，並期望獲得連貫敘述。沒有計劃的公司容易作出前後矛盾的陳述，監管機構會利用這些矛盾作為不利證據。
+
+**3. 過度依賴資訊科技供應商。** 資訊科技供應商負責系統運作，但並不承擔法律責任。即使技術控制已外判，中小企業仍須擁有合規姿態。
+
+上述失敗均非技術問題。它們皆為披著安全問題外衣的管治失敗。
+
+## 本週可採取的行動
+
+若上述合規計劃過於龐大，由三項行動起步：
+
+1. **盤點試算表。** 找出個人資料所在的每一處。無法保護你並不知道存在的東西。
+2. **發布私隱通知。** 一頁、淺白語言、置於網站。私隱專員公署的範本已可接受。
+3. **撰寫一頁外洩行動手冊。** 即使只是粗略草稿。重點是有一個起點可供編輯，並非追求完美文件。
+
+若你已完成上述三項，你已領先香港中小企業的中位水平。若你需要協助建立其餘部分——或你已收到私隱專員查詢並需要回應——[我們的中小企業網絡安全實務](/cybersecurity/sme) 在同一委聘框架下涵蓋私隱條例合規、供應商盡職審查及外洩應變。`,
+    category: 'Cybersecurity',
+    coverImage: 'https://images.unsplash.com/photo-1450101499163-c8848c66c85b?w=1600&q=80',
+    author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
+    readTime: 7,
+    published: true,
+    sourceName: 'Editorial',
+  },
+  {
     title: 'Hermes Agent + Obsidian: Building an LLM-Powered Second Brain for Business',
     titleZh: 'Hermes Agent + Obsidian：為企業打造由 LLM 驅動的第二大腦',
     slug: 'hermes-agent-obsidian-llm-second-brain',
