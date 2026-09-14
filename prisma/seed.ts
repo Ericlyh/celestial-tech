@@ -938,6 +938,193 @@ Hermes 使用一個小型本地 LLM（通常為 Qwen 2.5 7B Instruct 或 Llama 3
     published: true,
     sourceName: 'Editorial',
   },
+  {
+    title: 'AI Threat Modelling for HK SMEs in 2026: What Attackers Actually Do With Off-the-Shelf LLM Tools',
+    titleZh: '2026 年香港中小企業的 AI 威脅建模：攻擊者如何利用現成 LLM 工具發動攻擊',
+    slug: 'ai-threat-modelling-hk-sme-2026',
+    excerpt:
+      "Off-the-shelf AI tools have collapsed the cost of a credible attack. For HK SMEs without a dedicated red team, here are the four LLM-enabled patterns showing up in real incidents this quarter — and the four controls that blunt them.",
+    excerptZh: '現成 AI 工具已大幅降低一次可信攻擊的成本。對沒有專屬紅隊的香港中小企業而言，本文整理本季度真實事故中常見的四種 LLM 賦能攻擊模式，以及四項能有效遏止的控制措施。',
+    content: `## The cost of a credible attack just collapsed
+
+In 2024 a convincing spear-phishing email required a skilled operator, translation work, and a few hours of reconnaissance. In 2026 it requires a free ChatGPT account, a target's LinkedIn profile, and about four minutes. The asymmetry that already defined cybersecurity has been amplified by an order of magnitude.
+
+For Hong Kong SMEs this is the practical reality: you do not need to be attacked by a nation-state to be hit by AI-augmented tradecraft. The same commoditised tools your marketing team is using to draft proposals are being used to draft attacks against your finance team. The threat model has changed faster than most compliance programmes have caught up.
+
+This post walks through the four LLM-enabled attack patterns we are seeing in real HK SME incidents this quarter, then gives you a four-control defence that does not require a red team or a six-figure budget.
+
+## The four attack patterns showing up in HK SME incidents
+
+### 1. AI-generated spear-phishing in Cantonese and English
+
+The tradecraft gap that used to protect mid-size firms — most phishing emails were obviously translated, oddly formal, or grammatically broken — has closed. LLMs produce fluent, locally-toned output in seconds. The targeting data comes from public LinkedIn profiles, company annual reports, and the HK Companies Registry.
+
+**The attack in practice.** A finance clerk at a 30-person logistics firm receives an email "from" the CFO, written in fluent English with Cantonese code-switching, referencing a real project from a recent press release, asking for an urgent wire transfer to a new vendor. The email passes every internal smell test because it was *written* to pass them.
+
+The PCPD has noted a 3x increase in BEC (business email compromise) complaints from SMEs in 2024-2025, and a substantial share of the payloads now show LLM fingerprinting (perfect grammar, locally relevant idioms, plausible internal references).
+
+### 2. Deepfake voice on the phone
+
+Three seconds of audio is enough to clone a voice with current off-the-shelf tools. The HK Police have publicly warned about deepfake voice calls impersonating executives. The typical case: a managing partner receives a WhatsApp voice note "from" a senior associate asking for an urgent favour, or a finance controller receives a phone call "from" the CEO directing an immediate payment.
+
+The defence is not "train employees to spot deepfakes" — by design, they cannot. The defence is procedural: any payment above a threshold requires an out-of-band confirmation, regardless of how convincing the request sounds.
+
+### 3. Prompt-injection against your own AI tools
+
+If your firm uses a customer-service chatbot, a contract-review assistant, or any LLM tool that ingests external content, prompt injection is a real risk. An attacker emails your support inbox with an instruction hidden in a customer "complaint"; your assistant interprets it as a system instruction and forwards the customer database to the attacker's address. This is not theoretical — it is the most common LLM-related incident reported to the OWASP Top 10 for LLM Applications project.
+
+The mitigation is structural: the assistant should not have direct access to customer data exports, and every tool call should be mediated by a human-reviewable log.
+
+### 4. Reconnaissance automation against your public surface
+
+LLMs dramatically accelerate the reconnaissance phase of an attack. An attacker can ask a model to enumerate all your staff on LinkedIn, cross-reference that with the Companies Registry, then draft a tailored pretext for each person — all in under an hour. The actual breach still requires traditional tradecraft, but the targeting is now AI-native.
+
+This pattern is hard to defeat with controls because the reconnaissance happens against *public* information. The defence is to reduce your public attack surface: fewer staff on LinkedIn with "Finance" or "IT Admin" in their titles, fewer operational details in annual reports, fewer real names tied to vendor relationships.
+
+## The four controls that blunt all four patterns
+
+A small set of controls, applied consistently, will defeat the bulk of these attacks. None require new tooling; they require policy and discipline.
+
+| Control | Defeats | Effort |
+|---|---|---|
+| **Out-of-band payment verification** for any amount above HK$50,000 | Deepfake voice, AI spear-phishing, BEC | 1 day to write, ongoing discipline |
+| **Prompt-injection review** of every customer-facing AI tool before deploy | Prompt-injection against your own stack | 1 week per tool |
+| **Public attack-surface reduction** — staff titles, annual-report detail, vendor naming | Reconnaissance automation | Ongoing, mostly policy |
+| **Banned-channel policy for sensitive data** — never paste customer PII or credentials into public LLM tools | Data exfiltration via consumer AI tools | 1 day to write, ongoing discipline |
+
+The first control is the single highest-leverage change. A rule that "any payment over HK$50,000 requires a callback to a known number for confirmation" will defeat every deepfake voice attack and most AI spear-phishing, regardless of how sophisticated the prompt becomes. The attackers know this; they target firms that have not implemented it.
+
+## A 30-day AI threat-modelling exercise for an HK SME
+
+You do not need a red team to do this. A half-day workshop with the leadership team is enough.
+
+**Day 1: Inventory your AI exposure.** Where does your firm use LLMs? Marketing copy? Customer support? Internal document search? Contract review? For each, write down: what data goes in, what comes out, and who has access.
+
+**Day 7: Walk the four attack patterns.** For each, ask: "If a credible attacker ran this against us tomorrow, what would fail first?" Write down one concrete control per pattern.
+
+**Day 14: Implement the highest-leverage control.** In nearly every case it is the out-of-band payment verification rule. Implement it. Tell the team. Test it once.
+
+**Day 21: Tabletop exercise.** Run a 90-minute tabletop: "We just received a deepfake voice call from what sounds exactly like the CEO, asking for an HK$800,000 transfer to a new vendor. What do we do?" If the answer is "we'd transfer it," the control set is incomplete.
+
+**Day 30: Document and review.** Write down what changed. Schedule the next review in 90 days.
+
+This is not a comprehensive AI security programme. It is the floor — the four controls that close the most common failure modes. Once this is in place, you can layer on more sophisticated controls (LLM output filtering, AI-aware SIEM rules, red-team engagements) with a defensible baseline underneath.
+
+## What we see failing in practice
+
+When SMEs come to us after an AI-augmented incident, the failure pattern is almost always one of three:
+
+**1. No out-of-band verification on payments.** The deepfake voice call works because there is no procedural friction. The attacker can ask for an immediate transfer and the receiver feels urgency.
+
+**2. Customer PII pasted into consumer AI tools.** A staff member pastes a customer spreadsheet into ChatGPT to "summarise the churn patterns." The data is now in OpenAI's training pipeline, depending on the account settings. This is a PDPO issue as much as a security one.
+
+**3. AI tools deployed without security review.** The marketing team adopts a new chatbot. The IT team does not know it exists. The chatbot has read access to the CRM. The chatbot is prompt-injectable. No one finds out until the data leaks.
+
+None of these failures are sophisticated. They are governance failures: the AI tool was adopted faster than the controls were updated. The fix is not to ban the tools — that loses the productivity gains and does not stop the shadow usage — but to extend the existing controls to cover them.
+
+## What to do this week
+
+If the 30-day exercise above feels like too much, start with three actions:
+
+1. **Write the out-of-band payment rule today.** One page. A threshold above which no payment proceeds without a callback to a number you already had on file for that person.
+2. **Audit every consumer AI tool usage in your team.** Ask each employee: "Which AI tools have you pasted customer data into this month?" The answers will surprise you.
+3. **Schedule the 30-day AI threat-modelling workshop.** Put it in the calendar. Even if you do nothing else, the conversation is the control.
+
+If you have already done these three, you are ahead of the median HK SME. If you want help running the 30-day exercise or reviewing your AI tool inventory, [our SME cybersecurity practice](/cybersecurity/sme) covers AI threat modelling, prompt-injection review, and AI-aware incident response under one engagement.`,
+    contentZh: `## 可信攻擊的成本已經崩塌
+
+2024 年，一封令人信服的魚叉式釣魚電郵需要一位熟練操作員、翻譯工作及數小時的偵察。2026 年則只需要一個免費的 ChatGPT 帳戶、目標的 LinkedIn 個人檔案，以及大約四分鐘。一直以來定義網絡安全的不對稱已被放大一個數量級。
+
+對香港中小企業而言，這就是現實：你不需要遭受國家級攻擊，也會被 AI 增強的攻擊技藝所擊中。你的市場團隊用來撰寫建議書的同一套商品化工具，正被用來對你的財務團隊發動攻擊。威脅模型的變化速度，已超過大部分合規計劃的更新速度。
+
+本文整理本季度香港中小企業真實事故中常見的四種 LLM 賦能攻擊模式，並提供一套無需紅隊或六位數預算即可部署的四項控制措施。
+
+## 本季香港中小企業事故中常見的四種攻擊模式
+
+### 1. 以粵語及英語撰寫的 AI 魚叉式釣魚
+
+過去保護中型企業的技藝差距——大部分釣魚電郵顯然經過翻譯、語氣怪異、文法錯誤——已不復存在。LLM 可在數秒內產出流暢且符合本地語境的內容。針對性數據來自公開 LinkedIn 檔案、公司年報及香港公司註冊處。
+
+**實際攻擊情境。** 一間 30 人物流公司的財務文員收到一封「由」CFO 發出的電郵，以流利英語夾雜粵語句式撰寫，引用近期新聞稿中提及的真實項目，要求緊急轉帳至新供應商。由於電郵是*專為*通過內部嗅覺測試而撰寫，它通過了每一道關卡。
+
+私隱專員公署指出，2024-2025 年中小企業商業電郵詐騙（BEC）投訴上升三倍，其中相當部分攻擊載荷帶有 LLM 指紋（文法完美、語境在地化、引用看似內部）。
+
+### 2. 電話中的深偽語音
+
+以現成工具複製聲音，只需三秒鐘音訊。香港警方已公開警告冒充高管的深偽語音電話。常見情境：一名管理合夥人收到 WhatsApp 語音訊息，「由」一名高級律師發出，要求緊急幫忙；或一名財務主管收到「由」行政總裁打來的電話，要求即時付款。
+
+防禦並非「訓練員工識別深偽」——設計上他們做不到。防禦是程序性的：任何超過一定金額的付款，無論要求聽起來多麼可信，都必須經過帶外確認（out-of-band confirmation）。
+
+### 3. 針對你自家 AI 工具的提示注入
+
+若你的公司使用客戶服務聊天機械人、合約審閱助理，或任何會接收外部內容的 LLM 工具，提示注入是真實風險。攻擊者於客戶「投訴」中隱藏一條指令發送至你的支援郵箱；你的助理將其解讀為系統指令，並將客戶資料庫轉發至攻擊者地址。這並非假設情境——它是 OWASP LLM 應用程式十大風險專案中回報最常見的 LLM 相關事故。
+
+緩解措施屬結構性：助理不應直接擁有客戶資料匯出的權限，每次工具呼叫均應由可人工審閱的日誌所中介。
+
+### 4. 針對你公開表面的自動化偵察
+
+LLM 大幅加速攻擊的偵察階段。攻擊者可要求模型枚舉 LinkedIn 上你所有員工，再與公司註冊處交叉比對，然後為每人草擬針對性話術——全程在一小時內完成。實際入侵仍需要傳統技藝，但目標鎖定已是 AI 原生。
+
+此模式難以用控制措施擊敗，因為偵察針對的是*公開*資訊。防禦在於縮減你的公開攻擊面：LinkedIn 上標題為「財務」或「IT 行政」的員工減少、年報中的營運細節減少、與供應商關係掛鉤的真名減少。
+
+## 同時遏止四種模式的四項控制
+
+一套小型的控制措施，若貫徹執行，可擊敗大部分此類攻擊。全部無需新工具；所需者為政策與紀律。
+
+| 控制措施 | 遏止的攻擊 | 工作量 |
+|---|---|---|
+| **帶外付款核實**，金額超過 5 萬港元即適用 | 深偽語音、AI 魚叉式釣魚、BEC | 1 日撰寫，後續紀律執行 |
+| **提示注入審查**，每個面向客戶的 AI 工具部署前必做 | 針對你自家技術棧的提示注入 | 每個工具 1 週 |
+| **公開攻擊面縮減**——員工職銜、年報細節、供應商命名 | 偵察自動化 | 持續，以政策為主 |
+| **敏感資料禁渠道政策**——永不將客戶個人資料或憑證貼入公開 LLM 工具 | 透過消費級 AI 工具的資料外洩 | 1 日撰寫，後續紀律執行 |
+
+第一項控制是單一最高槓桿力的改變。一條規則——「任何超過 5 萬港元的付款，必須致電既有號碼確認」——將擊敗所有深偽語音攻擊及大部分 AI 魚叉式釣魚，無論提示詞多麼精密。攻擊者知道這一點；他們瞄準的，是尚未實施此規則的公司。
+
+## 為香港中小企業而設的 30 日 AI 威脅建模演練
+
+你無需紅隊也可執行。與領導層進行半日工作坊已足夠。
+
+**第 1 日：盤點你的 AI 曝險。** 你的公司在哪裡使用 LLM？市場文案？客戶支援？內部文件搜尋？合約審閱？就每項寫下：哪些資料輸入、哪些輸出、誰有存取權。
+
+**第 7 日：逐一檢視四種攻擊模式。** 就每項發問：「若一名可信攻擊者明天對我們執行此攻擊，哪個環節最先失守？」就每個模式寫下一項具體控制措施。
+
+**第 14 日：實施最高槓桿力控制。** 幾乎所有個案均為帶外付款核實規則。予以實施。通知團隊。測試一次。
+
+**第 21 日：桌上演練。** 進行 90 分鐘桌上演練：「我們剛收到一通深偽語音電話，聲音與行政總裁一模一樣，要求將 80 萬港元轉帳至新供應商。我們應如何處理？」若答案是「我們會轉帳」，控制集合尚未完備。
+
+**第 30 日：記錄與檢討。** 記下改動內容。排定 90 日後的下次檢討。
+
+這並非一套全面的 AI 安全計劃，而是地板——四項能堵住最常見失效模式的控制措施。此基礎建立後，你可在具備可辯護底線的前提下，疊加更精密的控制（LLM 輸出過濾、AI 感知 SIEM 規則、紅隊委聘）。
+
+## 我們從實務中觀察到的常見失敗
+
+中小企業在遭受 AI 增強攻擊後向我們求助時，失敗模式幾乎必屬以下三類之一：
+
+**1. 付款未設帶外核實。** 深偽語音電話之所以奏效，是因為程序上沒有摩擦。攻擊者可要求即時轉帳，收件人感到迫切。
+
+**2. 客戶個人資料被貼入消費級 AI 工具。** 一名員工將客戶試算表貼入 ChatGPT 以「歸納流失模式」。該資料現已進入 OpenAI 的訓練管線（視乎帳戶設定而定）。此為私隱條例問題，同時亦為保安問題。
+
+**3. AI 工具未經保安審查即部署。** 市場團隊採用新的聊天機械人。資訊科技團隊並不知情。聊天機械人對 CRM 擁有讀取權限。聊天機械人可被提示注入。直至資料外洩方被察覺。
+
+上述失敗均非精密攻擊，皆為管治失敗：AI 工具採納速度比控制措施的更新更快。解方並非禁用工具——那會失去生產力增益，且無法阻止影子使用——而是延伸既有控制措施以涵蓋它們。
+
+## 本週可採取的行動
+
+若上述 30 日演練過於龐大，由三項行動起步：
+
+1. **今天寫下帶外付款規則。** 一頁紙。一個金額門檻，超過此門檻的任何付款，必須致電你早前已存檔的號碼確認。
+2. **審核團隊內所有消費級 AI 工具的使用情況。** 詢問每位員工：「本月內你將客戶資料貼入過哪些 AI 工具？」答案會令你驚訝。
+3. **排定 30 日 AI 威脅建模工作坊。** 寫入日程。即使你別無行動，這場對話本身就是控制。
+
+若你已完成上述三項，你已領先香港中小企業的中位水平。若你需要協助執行 30 日演練或審核你的 AI 工具清單，[我們的中小企業網絡安全實務](/cybersecurity/sme) 在同一委聘框架下涵蓋 AI 威脅建模、提示注入審查及 AI 感知事故應變。`,
+    category: 'Cybersecurity',
+    coverImage: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80',
+    author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
+    readTime: 7,
+    published: true,
+    sourceName: 'Editorial',
+  },
 ]
 
 async function main() {
