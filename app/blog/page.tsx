@@ -299,6 +299,36 @@ export default function BlogPage() {
           readTime: 7,
           publishedAt: '2026-08-31T00:00:00Z',
         },
+        {
+          id: '7',
+          title: 'AI Threat Modelling for HK SMEs in 2026: What Attackers Actually Do With Off-the-Shelf LLM Tools',
+          titleZh: '2026 年香港中小企業的 AI 威脅建模：攻擊者如何利用現成 LLM 工具發動攻擊',
+          slug: 'ai-threat-modelling-hk-sme-2026',
+          excerpt:
+            "Off-the-shelf AI tools have collapsed the cost of a credible attack. For HK SMEs without a dedicated red team, here are the four LLM-enabled patterns showing up in real incidents this quarter — and the four controls that blunt them.",
+          excerptZh: '現成 AI 工具已大幅降低一次可信攻擊的成本。對沒有專屬紅隊的香港中小企業而言，本文整理本季度真實事故中常見的四種 LLM 賦能攻擊模式，以及四項能有效遏止的控制措施。',
+          category: 'Cybersecurity',
+          authorZh: 'Celestial Tech 團隊',
+          coverImage: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1600&q=80',
+          author: 'Celestial Tech Team',
+          readTime: 7,
+          publishedAt: '2026-09-14T00:00:00Z',
+        },
+        {
+          id: '8',
+          title: 'When the Worst Happens: A 48-Hour Incident Response Playbook for HK SMEs Without a CISO',
+          titleZh: '最壞情況發生時：沒有 CISO 的香港中小企業 48 小時事故應變手冊',
+          slug: 'incident-response-playbook-hk-sme-48hr-2026',
+          excerpt:
+            'A HK SME without an incident response plan will spend the first 48 hours improvising. Here is the playbook — what to do in the first hour, the first day, and the report window — calibrated for a 20-50 person firm with no dedicated security staff.',
+          excerptZh: '沒有事故應變計劃的香港中小企業，會把頭 48 小時浪費在臨場摸索。本文提供一份按 20–50 人、無專屬安全人員規模校準的手冊：頭一小時、頭一日、報告窗口內各自應做甚麼。',
+          category: 'Cybersecurity',
+          authorZh: 'Celestial Tech 團隊',
+          coverImage: 'https://images.unsplash.com/photo-1551808525-051a9eddb88b?w=1600&q=80',
+          author: 'Celestial Tech Team',
+          readTime: 6,
+          publishedAt: '2026-09-17T00:00:00Z',
+        },
       ] as Post[]).sort(
         (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
       ),

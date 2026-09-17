@@ -1223,6 +1223,185 @@ LLM 大幅加速攻擊的偵察階段。攻擊者可要求模型枚舉 LinkedIn 
 
 若你已完成上述三項，你已領先香港中小企業的中位水平。若你需要協助執行 30 日演練或審核你的 AI 工具清單，[我們的中小企業網絡安全實務](/cybersecurity/sme) 在同一委聘框架下涵蓋 AI 威脅建模、提示注入審查及 AI 感知事故應變。`,
   },
+  'incident-response-playbook-hk-sme-48hr-2026': {
+    id: '8',
+    title: 'When the Worst Happens: A 48-Hour Incident Response Playbook for HK SMEs Without a CISO',
+    titleZh: '最壞情況發生時：沒有 CISO 的香港中小企業 48 小時事故應變手冊',
+    slug: 'incident-response-playbook-hk-sme-48hr-2026',
+    excerpt:
+      'A HK SME without an incident response plan will spend the first 48 hours improvising. Here is the playbook — what to do in the first hour, the first day, and the report window — calibrated for a 20-50 person firm with no dedicated security staff.',
+    excerptZh: '沒有事故應變計劃的香港中小企業，會把頭 48 小時浪費在臨場摸索。本文提供一份按 20–50 人、無專屬安全人員規模校準的手冊：頭一小時、頭一日、報告窗口內各自應做甚麼。',
+    category: 'Cybersecurity',
+    coverImage: 'https://images.unsplash.com/photo-1551808525-051a9eddb88b?w=1600&q=80',
+    author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
+    readTime: 6,
+    publishedAt: '2026-09-17T00:00:00Z',
+    sourceUrl: null,
+    sourceName: 'Editorial',
+    content: `## Why the first 48 hours decide everything
+
+The HK Privacy Commissioner for Personal Data (PCPD), the HK Police Force's cybersecurity units, and your insurance carrier will all judge your organisation primarily by what happens in the first 48 hours after a confirmed breach. After that, the narrative you can defend is locked in by the actions you took — or failed to take — when it still felt chaotic.
+
+Most HK SMEs we work with have no incident response plan. The reason is consistent: "we don't have a CISO and we don't know who would do what." This post gives you a plan a managing partner can hold together without a security team.
+
+## The plan on one page
+
+You need three named roles and one phone number before a breach happens. Not 30 people, not a RACI matrix — three names.
+
+| Role | Who (typical HK SME) | What they own |
+|---|---|---|
+| **Decision-maker** | Managing partner / CEO | Authorises external spend, statements, regulator contact |
+| **Coordinator** | COO or office manager | Logs timeline, calls IT vendor, preserves evidence |
+| **External counsel** | Pre-arranged retainer | Legal exposure, regulator communication, indemnity |
+| **Out-of-band number** | A second phone line | Confirms payment/release requests — defeats BEC |
+
+Print this table. Put it next to the fire exit. Update the phone numbers every six months.
+
+## Hour 0–1: contain, don't investigate
+
+When the breach is confirmed (a phishing payment was sent, customer data appeared on a forum, ransomware hit a server), the impulse is to start investigating. Resist. The first hour is for containment only.
+
+**Five actions in the first hour:**
+1. **Stop the bleeding.** If the attack is active — a compromised mailbox still sending BEC, a vendor portal account still accessible — disable the relevant credentials. Rotate the affected passwords from a clean device.
+2. **Preserve evidence.** Take the affected machine offline *without* wiping it. Photograph the screen if it is still showing the attack. Do not power-cycle servers — volatile memory is evidence.
+3. **Call the coordinator.** The decision-maker should be reachable, but should not be in the loop for technical decisions. The coordinator owns the timeline log from this point forward.
+4. **Call external counsel.** This is the call you make *before* you call the regulator or the police. Counsel will tell you what is reportable, in what order, and what is privileged.
+5. **Do not pay anything yet.** Whether it is a ransom demand or a vendor asking for "urgent verification payment," the first hour is the wrong time to authorise spend. Decisions under time pressure are bad decisions.
+
+## Hour 1–24: investigate, document, scope
+
+With the immediate bleeding stopped, the next 24 hours are about building a defensible picture of what happened. The output of this phase is a one-page incident summary that counsel, the regulator, and the board can all read.
+
+**The minimum viable incident summary contains:**
+- Date and time the breach was first detected (and by whom)
+- Date and time the breach is believed to have started (best estimate from logs)
+- Categories of personal data affected (names? HKIDs? payment data? health data?)
+- Approximate number of data subjects affected
+- Containment actions taken in the first hour
+- Systems and accounts that have been rotated, disabled, or are still under review
+
+The coordinator maintains a single document — a timestamped log of every action taken and every statement made. This document is the single most important artefact for the rest of the process.
+
+## Hour 24–48: report and communicate
+
+HK does not yet have a mandatory breach notification window (the PCPD has flagged it but, as of August 2026, it is not in force). But the practical expectations are:
+
+- **PCPD complaint likely or data subjects affected:** Notify the PCPD within a reasonable timeframe. "Reasonable" in 2025–2026 PCPD enforcement practice has been measured in days, not weeks.
+- **Payment data affected:** Notify the issuing banks and the HKMA within 24 hours; their processors will need to monitor for fraud.
+- **HK Police (if criminal):** File a report with the Anti-Deception Coordination Centre or the Technology Crime Division. Get the report number — insurers require it.
+- **Data subjects:** A plain-language notification is now expected for any confirmed personal data exposure, even before the formal regime lands. Subject line, what happened, what data was affected, what they should do, who to contact.
+
+Statements to staff and to the press should be drafted by counsel. SMEs that go public early without legal sign-off end up creating discoverable admissions that make the regulatory conversation harder.
+
+## Day 3 onward: post-mortem and remediation
+
+Once the immediate fire is out, schedule the post-mortem within 10 working days. The point is not blame — the point is to identify the control that failed, the control that worked, and what needs to change so this exact incident does not recur.
+
+**Three deliverables from a good post-mortem:**
+1. A two-page incident report (factual, timeline, scope, response, regulators notified, outcome)
+2. Three to five specific remediation actions with owners and dates
+3. A "rebuild day" — the day the firm returns to normal operations, signed off by the decision-maker
+
+If the post-mortem identifies a systemic control failure, that is the moment to bring in outside help. The cost of external incident response after a third incident is materially higher than after the first.
+
+## A note on insurance
+
+If the firm carries cyber insurance, the policy will require you to notify them before you incur external response costs. Read the policy. Most HK cyber policies require notification within 24–72 hours of a "covered event" — and "covered event" usually includes a wider set of incidents than the firm expects (any unauthorised access, not just confirmed exfiltration).
+
+The biggest single mistake we see in HK SME breaches is paying an external IR firm without checking the insurance notification clause first. The cost is recoverable under most policies; without the notification, it is not.
+
+## What to do this week
+
+A 48-hour playbook is worthless if the names on the page are blank and the phone numbers are six months stale.
+
+1. **Fill in the three roles today.** Print the table above. Put it next to the fire exit. Tell the three people they have been named.
+2. **Pre-arrange external counsel.** One call. Five minutes. "If we have a cyber incident, can we call you?" The answer will be yes; the relationship will already exist when you need it.
+3. **Test the out-of-band number.** Pick a random Tuesday. Call the CEO's spouse from the office line to confirm a fake payment. The friction of doing it for real the first time during an incident is the failure mode.
+
+If you have already done these three, you are ahead of the median HK SME. If you want help building the rest — running the table-top exercise, drafting the post-mortem template, or sitting next to you when the bad day comes — [our SME cybersecurity practice](/cybersecurity/sme) covers incident response retainer, breach communications, and post-mortem facilitation under one engagement.`,
+    contentZh: `## 為何頭 48 小時決定一切
+
+香港個人資料私隱專員公署（PCPD）、香港警務處網絡安全組及你的保險公司，對一家機構的判斷，主要基於事故獲確認後頭 48 小時內的應對。此後，你能夠捍衛的事件敘述，已被當時你做過（或沒做過）的行動鎖死。
+
+我們接觸的大部分香港中小企業並無事故應變計劃。原因一致：「我們沒有 CISO，也不知道誰該做甚麼。」本文為你提供一份由管理合夥人主導、無需安全團隊即可運作的手冊。
+
+## 一頁紙計劃
+
+事故發生前，你需要三個具名角色及一個電話號碼。並非 30 人，也並非 RACI 矩陣——三個名字即可。
+
+| 角色 | 典型香港中小企業人選 | 負責事項 |
+|---|---|---|
+| **決策者** | 管理合夥人／行政總裁 | 授權外部開支、聲明、聯絡監管機構 |
+| **協調人** | 營運總監或辦公室經理 | 記錄時間線、聯絡資訊科技供應商、保留證據 |
+| **外聘法律顧問** | 預先安排的留用關係 | 法律風險、與監管機構溝通、彌償安排 |
+| **帶外聯絡號碼** | 第二條電話線 | 確認付款或釋出請求——阻截商業電郵詐騙 |
+
+將此表打印，張貼於防火門旁。每六個月更新電話號碼。
+
+## 第 0–1 小時：遏制，而非調查
+
+當事故獲確認（詐騙付款已發出、客戶資料已出現在論壇、伺服器遭勒索軟件攻擊），本能反應是立即展開調查。請克制。頭一小時只用於遏制。
+
+**頭一小時內的五項行動：**
+1. **止血。** 若攻擊仍在進行——被入侵的郵箱仍在發出商業電郵詐騙、供應商入口帳戶仍可登入——立即停用相關憑證。在乾淨裝置上更改受影響密碼。
+2. **保留證據。** 將受影響的機器離線，*切勿*抹除。若屏幕仍顯示攻擊畫面，予以拍攝。切勿重新啟動伺服器——揮發性記憶體是證據。
+3. **致電協調人。** 決策者應處於可聯絡狀態，但無需參與技術決策。從這一刻起，協調人擁有時間線日誌。
+4. **致電外聘法律顧問。** 此電話必須在聯絡監管機構或警方之前打出。法律顧問會告訴你哪些事項須申報、按甚麼次序申報、以及哪些內容受法律專業特權保護。
+5. **暫不支付任何款項。** 無論是勒索贖金或供應商所謂「緊急核實付款」，頭一小時並非批准開支的合適時機。時間壓力下的決定，往往是壞決定。
+
+## 第 1–24 小時：調查、記錄、評估範圍
+
+即時出血停止後，接下來 24 小時用於建立可辯護的事件圖像。此階段的成果，是一份一頁紙的事故摘要，法律顧問、監管機構及董事會均能閱讀。
+
+**最小可行事故摘要包含：**
+- 事故首次被發現的日期及時間（及發現者）
+- 事故估計開始的日期及時間（依據日誌的最佳估算）
+- 受影響的個人資料類別（姓名？香港身份證？支付資料？醫療資料？）
+- 受影響資料當事人概約數目
+- 頭一小時內採取的遏制行動
+- 已更改憑證、已停用、或仍在審查中的系統及帳戶
+
+協調人維護單一文件——按時間戳記錄的行動日誌及所有作出的陳述。此文件是整個餘下流程中最重要的單一產物。
+
+## 第 24–48 小時：申報及溝通
+
+香港至今仍未設強制性資料外洩通報時限（私隱專員公署已提出，但截至 2026 年 8 月仍未生效）。然而，實際期望為：
+
+- **可能涉及私隱專員投訴或受影響資料當事人：** 於合理時間內通知私隱專員公署。2025–2026 年私隱專員公署的執法實務中，「合理」以日數而非週數計算。
+- **涉及支付資料：** 於 24 小時內通知發卡銀行及香港金融管理局；其處理商需要監察欺詐情況。
+- **涉及刑事（香港警務處）：** 向反詐騙協調中心或科技罪案組報案。取得報案編號——保險公司會要求。
+- **資料當事人：** 即使在正式制度生效前，就任何已確認的個人資料外洩，現時已預期以淺白語言作出通知。標題、發生事項、哪些資料受影響、當事人應採取的行動、聯絡人。
+
+對員工及傳媒的聲明，應由法律顧問起草。中小企業若未經法律確認便率先公開，往往製造可被發現的陳述，令監管溝通更加困難。
+
+## 第 3 日起：事後檢討及補救
+
+即時火頭撲滅後，於 10 個工作天內召開事後檢討會議。重點並非問責——而是識別失效的控制、有效的控制，以及須作何改變以避免同類事故再次發生。
+
+**良好事後檢討的三項交付：**
+1. 兩頁紙事故報告（事實、時間線、範圍、應對、已通知監管機構、結果）
+2. 三至五項具體補救行動，連同負責人及完成日期
+3. 「重建日」——機構恢復正常運作的日期，由決策者簽署確認
+
+若事後檢討識別出系統性控制失效，便是引入外部協助的時機。於第三次事故後引入外部事故應變支援，所需成本遠高於首次事故後。
+
+## 保險事宜
+
+若機構持有網絡保單，保單將要求你在招致外部應變費用之前通知保險公司。請仔細閱讀保單。大部分香港網絡保單要求於「受保事件」發生後 24–72 小時內通知——而「受保事件」的涵蓋範圍通常比機構預期更廣（涵蓋任何未經授權的存取，而非僅限已確認的資料外洩）。
+
+我們在香港中小企業事故中見過的最大單一錯誤，是在未有核實保險通知條款前先行支付外部事故應變公司費用。在大部分保單下，有關費用屬可索償範圍；未有依通知條款行事者，則不可索償。
+
+## 本週可採取的行動
+
+若姓名欄空白、電話號碼已過期六個月，48 小時手冊便形同廢紙。
+
+1. **今天填妥三個角色。** 將上述表格打印，張貼於防火門旁。告訴三人已被委派。
+2. **預先安排外聘法律顧問。** 一通電話，五分鐘。「若我們發生網絡事故，可否致電給你？」答案會是肯定的；當你需要時，這段關係已建立。
+3. **測試帶外號碼。** 隨意挑選一個星期二，由辦公室線路致電行政總裁的配偶，確認一筆虛擬付款。於事故中首次真正執行時的摩擦，正是失敗模式。
+
+若你已完成上述三項，你已領先香港中小企業的中位水平。若你需要協助建立其餘部分——進行桌上演練、撰寫事後檢討範本，或在壞日子來臨時與你並肩作戰——[我們的中小企業網絡安全實務](/cybersecurity/sme) 在同一委聘框架下涵蓋事故應變留用、外洩通訊及事後檢討主持。`,
+  },
 }
 
 /**

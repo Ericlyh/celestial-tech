@@ -1125,6 +1125,22 @@ LLM 大幅加速攻擊的偵察階段。攻擊者可要求模型枚舉 LinkedIn 
     published: true,
     sourceName: 'Editorial',
   },
+  {
+    slug: 'incident-response-playbook-hk-sme-48hr-2026',
+    title: 'When the Worst Happens: A 48-Hour Incident Response Playbook for HK SMEs Without a CISO',
+    titleZh: '最壞情況發生時：沒有 CISO 的香港中小企業 48 小時事故應變手冊',
+    excerpt:
+      'A HK SME without an incident response plan will spend the first 48 hours improvising. Here is the playbook — what to do in the first hour, the first day, and the report window — calibrated for a 20-50 person firm with no dedicated security staff.',
+    excerptZh: '沒有事故應變計劃的香港中小企業，會把頭 48 小時浪費在臨場摸索。本文提供一份按 20–50 人、無專屬安全人員規模校準的手冊：頭一小時、頭一日、報告窗口內各自應做甚麼。',
+    content: 'Editorial — see /blog/incident-response-playbook-hk-sme-48hr-2026 for the published post. The MDX body is in app/blog/[slug]/page.tsx STATIC_POSTS for the live page; this row keeps the DB-side title/excerpt/category in sync so future cross-posting or index rebuilds (e.g. a future Supabase swap) do not lose the metadata.',
+    category: 'Cybersecurity',
+    coverImage: 'https://images.unsplash.com/photo-1551808525-051a9eddb88b?w=1600&q=80',
+    author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
+    readTime: 6,
+    published: true,
+    sourceName: 'Editorial',
+  },
 ]
 
 async function main() {
