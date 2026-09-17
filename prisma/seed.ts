@@ -1141,6 +1141,22 @@ LLM 大幅加速攻擊的偵察階段。攻擊者可要求模型枚舉 LinkedIn 
     published: true,
     sourceName: 'Editorial',
   },
+  {
+    slug: 'personal-cybersecurity-hk-individual-habits-2026',
+    title: 'Personal Cybersecurity for Hong Kong Professionals in 2026: The Six Habits That Actually Move the Needle',
+    titleZh: '2026 年香港在職人士個人網絡安全：真正能改變風險的六個習慣',
+    excerpt:
+      'Most personal-security advice is written for IT teams. The threats a HK professional faces on their own devices are different — and the goal is six specific habits, set up in an afternoon, that materially reduce the probability of a bad outcome. Here they are.',
+    excerptZh: '大部分個人安全建議都是為資訊科技團隊而寫。香港在職人士於自用裝置上面對的威脅截然不同——目標是六項特定習慣，於一個下午設定妥當，從而實質降低壞結果的概率。本文逐一說明。',
+    content: 'Editorial — see /blog/personal-cybersecurity-hk-individual-habits-2026 for the published post. The MDX body is in app/blog/[slug]/page.tsx STATIC_POSTS for the live page; this row keeps the DB-side title/excerpt/category in sync so future cross-posting or index rebuilds (e.g. a future Supabase swap) do not lose the metadata.',
+    category: 'Cybersecurity',
+    coverImage: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1600&q=80',
+    author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
+    readTime: 7,
+    published: true,
+    sourceName: 'Editorial',
+  },
 ]
 
 async function main() {

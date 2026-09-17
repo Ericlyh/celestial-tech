@@ -329,6 +329,21 @@ export default function BlogPage() {
           readTime: 6,
           publishedAt: '2026-09-17T00:00:00Z',
         },
+        {
+          id: '9',
+          title: 'Personal Cybersecurity for Hong Kong Professionals in 2026: The Six Habits That Actually Move the Needle',
+          titleZh: '2026 年香港在職人士個人網絡安全：真正能改變風險的六個習慣',
+          slug: 'personal-cybersecurity-hk-individual-habits-2026',
+          excerpt:
+            'Most personal-security advice is written for IT teams. The threats a HK professional faces on their own devices are different — and the goal is six specific habits, set up in an afternoon, that materially reduce the probability of a bad outcome. Here they are.',
+          excerptZh: '大部分個人安全建議都是為資訊科技團隊而寫。香港在職人士於自用裝置上面對的威脅截然不同——目標是六項特定習慣，於一個下午設定妥當，從而實質降低壞結果的概率。本文逐一說明。',
+          category: 'Cybersecurity',
+          authorZh: 'Celestial Tech 團隊',
+          coverImage: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1600&q=80',
+          author: 'Celestial Tech Team',
+          readTime: 7,
+          publishedAt: '2026-09-17T00:00:00Z',
+        },
       ] as Post[]).sort(
         (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
       ),

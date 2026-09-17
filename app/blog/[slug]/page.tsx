@@ -1402,6 +1402,169 @@ If you have already done these three, you are ahead of the median HK SME. If you
 
 若你已完成上述三項，你已領先香港中小企業的中位水平。若你需要協助建立其餘部分——進行桌上演練、撰寫事後檢討範本，或在壞日子來臨時與你並肩作戰——[我們的中小企業網絡安全實務](/cybersecurity/sme) 在同一委聘框架下涵蓋事故應變留用、外洩通訊及事後檢討主持。`,
   },
+  'personal-cybersecurity-hk-individual-habits-2026': {
+    id: '9',
+    title: 'Personal Cybersecurity for Hong Kong Professionals in 2026: The Six Habits That Actually Move the Needle',
+    titleZh: '2026 年香港在職人士個人網絡安全：真正能改變風險的六個習慣',
+    slug: 'personal-cybersecurity-hk-individual-habits-2026',
+    excerpt:
+      'Most personal-security advice is written for IT teams. The threats a HK professional faces on their own devices are different — and the goal is six specific habits, set up in an afternoon, that materially reduce the probability of a bad outcome. Here they are.',
+    excerptZh: '大部分個人安全建議都是為資訊科技團隊而寫。香港在職人士於自用裝置上面對的威脅截然不同——目標是六項特定習慣，於一個下午設定妥當，從而實質降低壞結果的概率。本文逐一說明。',
+    category: 'Cybersecurity',
+    coverImage: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1600&q=80',
+    author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
+    readTime: 7,
+    publishedAt: '2026-09-17T00:00:00Z',
+    sourceUrl: null,
+    sourceName: 'Editorial',
+    content: `## Why your personal threat model is different from your employer's
+
+Most security advice is written for IT teams. The threats a Hong Kong professional faces on their personal devices are different in scale and in kind: you are the helpdesk, the procurement office, the compliance team, and the on-call responder, all at the same time, and usually at 11pm. The goal is not to become a security engineer. The goal is to make six specific changes that materially reduce the probability of a bad outcome — and to do them once, in an afternoon, so you stop thinking about it.
+
+## Habit 1: a password manager, and *every* credential unique
+
+The single biggest source of personal account compromise is credential reuse. An attacker who steals a credential dump from one site runs those credentials against banking, email, social, and crypto — and gets a hit on whatever you typed the same password into. A password manager lets you generate and store a unique password for every site without remembering any of them.
+
+Practical setup for HK professionals:
+- **Pick one.** 1Password and Bitwarden are the two that work well in Hong Kong; both have desktop, mobile, and browser integrations.
+- **Migrate your email and banking first.** Those two are the keys to everything else. If an attacker owns your email, they can reset any other account.
+- **Generate, don't invent.** A 24-character random password is more secure than \`Summer2026!\` and you do not have to remember it.
+- **Set a strong master password.** Long, memorable phrase — your favourite line from a song you will never forget, with a personal twist.
+
+The migration takes an afternoon. After that, your daily interaction is "open the manager, copy the password, paste it." That is the entire workflow change.
+
+## Habit 2: a hardware key or passkey on the email and banking accounts that matter
+
+SMS-based two-factor authentication is still the most common 2FA in Hong Kong. It is also the most phishable: a SIM-swap, an SMS interception scam, or a real-time phishing kit can all defeat it. The replacement that holds up in 2026 is either a hardware security key (a YubiKey or a compatible token, around HKD 350) or a device-bound passkey (built into iCloud Keychain, Google Password Manager, and the major password managers above).
+
+The order to enable them on:
+1. Primary personal email (the one tied to banking, social, everything)
+2. Primary banking app (HSBC, Hang Seng, ZA Bank, etc.)
+3. Work email (your employer may already require this; if not, raise it)
+4. iCloud / Apple ID / Google account
+5. Password manager itself
+
+Skip authenticator apps for now if you can use a passkey instead. App-based 2FA is better than SMS but still phishable in real time; passkeys are not.
+
+## Habit 3: a separate phone number for banking and crypto OTPs
+
+In Hong Kong, the most damaging personal account compromise we see is SIM-swap. The attacker walks into a telecom store with a forged document, transfers your number to a SIM they control, and intercepts every OTP the bank sends. The defence is not a better password — the defence is to not have your primary phone number be the OTP channel for your most sensitive accounts.
+
+If your bank supports it (HSBC, ZA Bank, and most crypto exchanges now do), register a separate, less-known number for OTPs. The number should be on a SIM that is not your primary daily-driver phone — a cheap data-only SIM, an eSIM on a tablet, or a number held by a family member you trust with strict instructions. The point is to make a SIM-swap on your main phone not yield the keys to your bank.
+
+## Habit 4: out-of-band verification for any payment or wire request
+
+The attack pattern that catches even careful professionals: an email that looks like it comes from your boss, your client, or your supplier, asking you to "urgently change the payment details" or "wire this today, I'm in a meeting." The email is well-written. The signature is right. The wire goes to the attacker.
+
+The defence is mechanical and never fails: any payment instruction received by email or message — particularly any that is urgent, any that asks to change bank details, any that involves a new payee — must be confirmed by a phone call to a number you already had on file (not a number in the email). This is called out-of-band verification. It is the single highest-leverage habit on this list.
+
+A 30-second phone call defeats every business email compromise scam we have seen in 2025–2026. The friction is the feature, not a bug.
+
+## Habit 5: disk encryption and remote wipe on every device you use
+
+A lost phone or a stolen laptop is a personal data breach. The HK Privacy Commissioner has made clear in 2024–2025 enforcement that organisations whose employees' devices hold personal data — including their own — are expected to have remote-wipe capability. As an individual, this is yours to set up.
+
+Three settings to enable today:
+- **iPhone / iPad:** "Find My iPhone" with Send Last Location and Erase After 10 Failed Passcode Attempts (Settings → Face ID & Passcode → Erase Data).
+- **Mac:** FileVault on, Find My Mac enabled, Activation Lock on.
+- **Windows laptop:** BitLocker on, "Find my device" enabled in your Microsoft account.
+
+Each of these is a 2-minute toggle. The setting you do not turn on is the one that bites you on the MTR.
+
+## Habit 6: a 30-minute quarterly personal security review
+
+The habits above are one-time setup. The thing that keeps them current is a quarterly 30-minute review. Pick the first Saturday of March, June, September, December. Put it in your calendar. Spend the half hour on:
+- Updating the phone number on file at your bank if you changed SIMs
+- Reviewing the active sessions in your email and password manager (revoke anything you do not recognise)
+- Backing up your password manager export to an encrypted USB drive stored somewhere physically separate
+- Reviewing which apps have access to your location, microphone, and contacts (most people will find 5–10 they forgot about)
+
+You will find one or two things that have drifted every quarter. That is normal. The point of the review is to catch the drift before it becomes an incident.
+
+## What this does not cover
+
+If you are in any of these categories, the six habits above are the floor, not the ceiling:
+- Public figure or senior executive (targeted attacks, deepfake voice calls)
+- Journalist or activist (nation-state-grade threats)
+- Holding significant crypto in a self-custody wallet (operational security for seed phrases)
+- Going through a contentious separation or dispute (targeted doxxing)
+
+For these profiles, the threat model is materially different and the controls above are necessary but not sufficient. See [our individual cybersecurity practice](/cybersecurity/personal) for a personal-risk assessment that scopes the additional controls to your actual exposure.`,
+    contentZh: `## 為何你的個人威脅模型與僱主的不同
+
+大部分網絡安全建議都是為資訊科技團隊而寫的。香港在職人士於個人裝置上面對的威脅，在規模和性質上都截然不同：你同時是服務台、採購部、合規團隊，以及候命應變人員，而且通常在晚上十一點處理一切。目標並非要成為安全工程師，而是作出六項具體改動，從而實質降低壞結果發生的概率——並在某一個下午一次過完成，之後不再需要操心。
+
+## 習慣一：採用密碼管理器，所有憑證獨立唯一
+
+個人帳戶遭入侵的最大單一成因，是憑證重用。攻擊者從某一網站竊取一批帳號密碼後，便會用同一組憑證嘗試登入銀行、電郵、社交媒體、加密貨幣戶口——只要你在另一個網站也用了同一密碼，就會被命中。密碼管理器讓你為每個網站生成並儲存獨立密碼，無需記住任何一個。
+
+香港在職人士的實用設定：
+- **選擇一款。** 1Password 與 Bitwarden 均在香港運作良好；兩者均提供桌面版、手機版及瀏覽器整合。
+- **優先遷移電郵及銀行戶口。** 這兩項是其他一切的鎖匙。攻擊者若掌控了你的電郵，便能重設任何其他帳戶。
+- **以生成取代自設。** 一組 24 字元的隨機密碼，比 \`Summer2026!\` 安全得多，而你亦毋須記住。
+- **設定高強度的主密碼。** 一段長而難忘的詞組——你永不會忘記的一首歌的歌詞，配以個人化的變化。
+
+遷移過程需時一個下午。此後，你每日的操作只是「打開管理器，複製密碼，貼上」。這就是整個工作流的改變。
+
+## 習慣二：為重要電郵及銀行戶口配置硬件安全鎖匙或通行密鑰
+
+香港目前最常見的雙重認證仍是基於 SMS 的方案。它同時也是最容易遭受網絡釣魚攻擊的方案：SIM 卡調換、SMS 攔截詐騙、實時釣魚套件均可將其擊破。2026 年仍能抵禦攻擊的替代方案，是硬件安全鎖匙（YubiKey 或相容的代幣，約港幣 350 元），或裝置綁定的通行密鑰（內建於 iCloud 鑰匙圈、Google 密碼管理工具及上述主要密碼管理器）。
+
+啟用順序：
+1. 主要個人電郵（與銀行、社交媒體及一切綁定的電郵）
+2. 主要銀行應用程式（滙豐、恒生、ZA Bank 等）
+3. 公司電郵（你的僱主或已要求啟用；如未，請主動提出）
+4. iCloud / Apple ID / Google 帳戶
+5. 密碼管理器本身
+
+若可使用通行密鑰，可略過認證器應用程式。基於應用程式的雙重認證雖比 SMS 安全，但仍可被實時釣魚攻擊；通行密鑰則不然。
+
+## 習慣三：為銀行及加密貨幣 OTP 配置獨立電話號碼
+
+在香港，我們所見破壞力最大的個人帳戶入侵，多屬 SIM 卡調換攻擊。攻擊者持偽造文件進入電訊商門市，將你的號碼轉移至其控制的 SIM 卡，繼而截取銀行發出的每個 OTP。防禦並非更佳的密碼，而是讓主要個人電話號碼不再成為你最敏感帳戶的 OTP 渠道。
+
+若你的銀行支援（滙豐、ZA Bank 及大部分加密貨幣交易所現已支援），為 OTP 登記另一個知名度較低的號碼。該號碼所屬的 SIM 卡不應是你的主要日常手機：廉價的純數據 SIM、平板的 eSIM，或由你信任的家庭成員持有並附以嚴格指示。重點在於：即使你的主要手機號碼遭 SIM 卡調換，亦無法取得銀行的控制權。
+
+## 習慣四：對任何付款或匯款要求進行帶外核實
+
+連最謹慎的在職人士也會中招的攻擊模式：一封看似由你上司、客戶或供應商發出的電郵，要求你「緊急更改付款資料」或「我正在會議中，請今天立即匯款」。電郵措辭得體，署名正確，款項最終匯給攻擊者。
+
+防禦屬於程序性、永不失誤：任何透過電郵或訊息收到的付款指示——特別是任何緊急的、任何要求更改銀行戶口的、任何涉及新收款人的——必須透過你既有紀錄中的電話號碼（並非電郵中所列的號碼）致電核實。這稱為帶外核實。是此清單中槓桿效用最高的單一習慣。
+
+一通 30 秒的電話，便能擊敗我們於 2025–2026 年所見每一宗商業電郵入侵詐騙。所帶來的不便，正是其功能所在，並非缺陷。
+
+## 習慣五：於每部自用裝置啟用磁碟加密及遠端清除
+
+遺失手機或手提電腦被盜，等於個人資料外洩。香港私隱專員已於 2024–2025 年的執法中明確指出：僱員裝置內含個人資料的——包括其自身的個人資料——有關機構須具備遠端清除能力。作為個人，這由你自行設定。
+
+今天便應啟用的三項設定：
+- **iPhone / iPad：** 「尋找我的 iPhone」內啟用「發送最後位置」及「輸入 10 次錯誤密碼後清除所有資料」（設定 → Face ID 與密碼 → 清除資料）。
+- **Mac：** 啟用 FileVault、「尋找我的 Mac」啟用、「啟用鎖定」開啟。
+- **Windows 手提電腦：** 啟用 BitLocker、於 Microsoft 帳戶啟用「尋找我的裝置」。
+
+每項均為兩分鐘的設定。沒有啟用的那一項，就是港鐵上咬你一口的那一項。
+
+## 習慣六：每季進行 30 分鐘的個人安全檢視
+
+上述習慣均屬一次性設定。使其保持與時並進的，是每季 30 分鐘的例行檢視。請挑選三月、六月、九月、十二月的首個星期六，將其記入日程。將該半小時用於：
+- 若曾更換 SIM 卡，更新銀行檔案中的電話號碼
+- 檢視電郵及密碼管理器中的活躍登入階段（撤銷任何你不認得的階段）
+- 將密碼管理器的匯出檔案備份至加密 USB 隨身碟，存放於實體上分隔的位置
+- 檢視哪些應用程式仍存有你位置、麥克風及聯絡人的存取權限（大部分人會發現 5–10 個已遺忘的應用）
+
+每季你都會發現一兩項已有所偏離。這屬正常現象。檢視的目的，是在偏差演變成事故之前先予捕獲。
+
+## 此清單未涵蓋的範圍
+
+若你屬於以下類別，上述六項習慣為下限，而非上限：
+- 公眾人物或高級行政人員（具針對性的攻擊、深偽語音通話）
+- 記者或社運人士（國家級別的威脅）
+- 在自主託管的錢包中持有重大加密貨幣資產（助記詞的操作安全）
+- 正經歷具爭議的分居或糾紛（具針對性的「起底」）
+
+就此等身分，威脅模型截然不同，上述控制措施屬必要但並不充分。如需個人風險評估，按你實際的曝險程度配置額外控制，請參閱[我們的個人網絡安全實務](/cybersecurity/personal)。`,
+  },
 }
 
 /**
