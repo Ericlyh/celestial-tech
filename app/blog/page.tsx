@@ -344,6 +344,21 @@ export default function BlogPage() {
           readTime: 7,
           publishedAt: '2026-09-17T00:00:00Z',
         },
+        {
+          id: '10',
+          title: 'Cybersecurity Compliance for Hong Kong SMEs in 2026: The Practical Audit Checklist',
+          titleZh: '2026 年香港中小企網絡安全合規：實用審計清單',
+          slug: 'hk-sme-cybersecurity-audit-compliance-2026',
+          excerpt:
+            'PDPO obligations are not just for big business. Every Hong Kong SME that handles customer data, processes payments, or employs staff is subject to the same core requirements — and the gap between "we are compliant" and "we can prove it" is where most companies get caught.',
+          excerptZh: '《個人資料（私隱）條例》下的責任並非大企業專屬。每一間處理客戶資料、處理付款或聘用員工的香港中小企，均須遵守相同的核心要求——而「我們已合規」與「我們能夠證明」的距離，正是大部分企業出問題的地方。',
+          category: 'Cybersecurity',
+          authorZh: 'Celestial Tech 團隊',
+          coverImage: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&q=80',
+          author: 'Celestial Tech Team',
+          readTime: 8,
+          publishedAt: '2026-09-21T00:00:00Z',
+        },
       ] as Post[]).sort(
         (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
       ),

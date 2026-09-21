@@ -1157,6 +1157,22 @@ LLM 大幅加速攻擊的偵察階段。攻擊者可要求模型枚舉 LinkedIn 
     published: true,
     sourceName: 'Editorial',
   },
+  {
+    slug: 'hk-sme-cybersecurity-audit-compliance-2026',
+    title: 'Cybersecurity Compliance for Hong Kong SMEs in 2026: The Practical Audit Checklist',
+    titleZh: '2026 年香港中小企網絡安全合規：實用審計清單',
+    excerpt:
+      'PDPO obligations are not just for big business. Every Hong Kong SME that handles customer data, processes payments, or employs staff is subject to the same core requirements — and the gap between "we are compliant" and "we can prove it" is where most companies get caught.',
+    excerptZh: '《個人資料（私隱）條例》下的責任並非大企業專屬。每一間處理客戶資料、處理付款或聘用員工的香港中小企，均須遵守相同的核心要求——而「我們已合規」與「我們能夠證明」的距離，正是大部分企業出問題的地方。',
+    content: 'Editorial — see /blog/hk-sme-cybersecurity-audit-compliance-2026 for the published post. The MDX body is in app/blog/[slug]/page.tsx STATIC_POSTS for the live page; this row keeps the DB-side title/excerpt/category in sync so future cross-posting or index rebuilds (e.g. a future Supabase swap) do not lose the metadata.',
+    category: 'Cybersecurity',
+    coverImage: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&q=80',
+    author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
+    readTime: 8,
+    published: true,
+    sourceName: 'Editorial',
+  },
 ]
 
 async function main() {

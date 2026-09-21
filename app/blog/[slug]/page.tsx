@@ -1565,6 +1565,227 @@ For these profiles, the threat model is materially different and the controls ab
 
 就此等身分，威脅模型截然不同，上述控制措施屬必要但並不充分。如需個人風險評估，按你實際的曝險程度配置額外控制，請參閱[我們的個人網絡安全實務](/cybersecurity/personal)。`,
   },
+  'hk-sme-cybersecurity-audit-compliance-2026': {
+    id: '10',
+    title: 'Cybersecurity Compliance for Hong Kong SMEs in 2026: The Practical Audit Checklist',
+    titleZh: '2026 年香港中小企網絡安全合規：實用審計清單',
+    slug: 'hk-sme-cybersecurity-audit-compliance-2026',
+    excerpt:
+      'PDPO obligations are not just for big business. Every Hong Kong SME that handles customer data, processes payments, or employs staff is subject to the same core requirements — and the gap between "we are compliant" and "we can prove it" is where most companies get caught.',
+    excerptZh: '《個人資料（私隱）條例》下的責任並非大企業專屬。每一間處理客戶資料、處理付款或聘用員工的香港中小企，均須遵守相同的核心要求——而「我們已合規」與「我們能夠證明」的距離，正是大部分企業出問題的地方。',
+    category: 'Cybersecurity',
+    coverImage: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&q=80',
+    author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
+    readTime: 8,
+    publishedAt: '2026-09-21T00:00:00Z',
+    sourceUrl: null,
+    sourceName: 'Editorial',
+    content: `## The compliance gap most Hong Kong SMEs do not know they have
+
+In our work with small and medium enterprises across Hong Kong, the same pattern appears in almost every first audit: the company believes it is compliant because it has an IT vendor, a privacy policy on the website, and nobody has complained. The Privacy Commissioner for Personal Data's enforcement actions in 2024 and 2025 tell a different story — small businesses are not exempt, and the consequences of a data breach without documented controls are the same regardless of company size.
+
+This post is a practical audit checklist for Hong Kong SMEs. It is not legal advice. It is the operational baseline we use when we start a compliance engagement — the items that either exist or they do not, and where the gaps are most fixable with limited time and budget.
+
+## What compliance actually means for a small Hong Kong business
+
+The Personal Data (Privacy) Ordinance (PDPO) governs how personal data is collected, used, kept, and destroyed. "Personal data" is broad: customer names, email addresses, order histories, employee records, and IP addresses all count. If your business holds any of it, the PDPO applies — no minimum company size, no threshold test.
+
+The six Data Protection Principles (DPPs) are where most of the obligations live:
+
+- **DPP1**: Purpose and manner of collection must be notified at collection time
+- **DPP2**: Retention: keep data only as long as necessary
+- **DPP3**: Use: only for the purpose it was collected (or a directly related purpose)
+- **DPP4**: Data security: adequate protection against unauthorised or accidental access
+- **DPP5**: Openness: you must be able to describe what data you hold and how you use it
+- **DPP6**: Access and correction: individuals can request to see and correct their data
+
+For most SMEs, DPP4 (security) and DPP1 (collection notice) are where the gaps are widest.
+
+## The practical SME audit checklist
+
+Use this as a point-in-time snapshot. "No" on three or more items means you have a material gap. "Yes" on all eight gives you a defensible baseline.
+
+### 1. You can list every category of personal data your business collects
+
+Walk through your business processes and name the data: customer names and contact details, transaction records, employee HR data, supplier contact details. For each category, you should be able to name where it is stored (a file, a database, a third-party SaaS tool), who has access, and why.
+
+**Why this matters:** DPP5 requires openness. If a customer writes to ask what data you hold about them, you need to be able to answer within 40 days. Most SMEs cannot, because no one has ever done the inventory.
+
+**Common gaps:** Data held in informal spreadsheets or in personal email accounts of staff. Data collected by tools the business did not realise were capturing personal data (a Simple CRM, a free form builder, a WhatsApp Business account).
+
+### 2. Every data collection point has a written collection statement
+
+At the moment you ask someone for personal data — a website form, a signing-in sheet, a new employee hire form — you must tell them: what data you are collecting, why, how long you will keep it, who it may be transferred to, and how they can request access or correction.
+
+**Why this matters:** DPP1. A missing or incomplete collection statement is the most common finding in SME audits, and the most common trigger for enforcement complaints.
+
+**Common gaps:** Website forms that say "we will contact you shortly" with no detail. HR forms that collect Hong Kong ID numbers without explaining why.
+
+### 3. Data is deleted when it is no longer needed
+
+For each category of data you listed in step 1, there is a defined retention period. Customer records are deleted X years after last contact. Employee records are kept Y years after departure. Payment records are kept Z years per the Inland Revenue Ordinance requirement.
+
+**Why this matters:** DPP2. Keeping data "just in case" is not a valid reason under the PDPO. A data breach of data you did not need to keep is a preventable incident.
+
+**Common gaps:** Customer records kept indefinitely after a one-time purchase. Employee data kept on personal drives after HR departure. Backup files that are never purged.
+
+### 4. Every system that holds personal data has access controls
+
+No system containing personal data should be accessible to everyone in the organisation. Access is on a need-to-know basis: the sales team can see customer contact records; the accounts team can see billing data; only HR can see staff records.
+
+**Why this matters:** DPP4. If a laptop with unencrypted access to a customer database is stolen and there is no access control in place, that is a reportable data breach.
+
+**Common gaps:** Shared login credentials for cloud services. Former employees still having access to Google Workspace or Dropbox. No password policy for systems holding customer data.
+
+### 5. All devices that leave the office are encrypted
+
+Laptops, phones, and portable drives that may contain personal data must have full-disk encryption enabled. This means FileVault on Mac, BitLocker on Windows, and MDM or equivalent on mobile devices.
+
+**Why this matters:** A lost or stolen device with unencrypted data is a data breach. The Privacy Commissioner has specifically noted in enforcement guidance that encryption is the baseline expectation for devices that leave the office.
+
+**Common gaps:** Personal devices used for work that are not enrolled in any MDM. Work laptops without FileVault or BitLocker because "the IT vendor never set it up."
+
+### 6. You have a documented procedure for responding to a data access request
+
+An individual writes to your company asking to see the personal data you hold about them, or to correct it. You have 40 days to respond. Someone in the business knows who this request goes to and what the process is.
+
+**Why this matters:** DPP6. Failure to respond to a data access request within 40 days is a breach of the PDPO, and the Privacy Commissioner can investigate and impose a compliance notice.
+
+**Common gaps:** Requests going to a shared inbox where nobody owns the process. Staff who do not know the 40-day deadline exists.
+
+### 7. Your incident response plan covers a personal data breach
+
+If a laptop is stolen, a hacker accesses your customer database, or a staff member accidentally sends a file to the wrong recipient — do you know what to do within the first 24 hours? The steps are: contain the breach, assess the scope, notify the Privacy Commissioner (for material data breaches), and notify affected individuals where required.
+
+**Why this matters:** The PDPO requires notification of material data breaches to the Privacy Commissioner, and where there is a risk of harm, to the individuals affected. "We did not know we had to report it" is not a valid excuse.
+
+**Common gaps:** No written incident response plan. No defined owner for data breach decisions. Staff who would not recognise a reportable incident.
+
+### 8. Your vendors and third-party tools are reviewed for data security
+
+Every third-party service you use — a CRM, an email marketing tool, a cloud storage provider, a payment processor — holds or processes personal data on your behalf. You are responsible for ensuring they have adequate security.
+
+**Why this matters:** Under DPP4, data users (your company) are responsible for ensuring that data processors (your vendors) apply the same security standards. Using a free online form builder that stores data in an unsecured database is still your responsibility.
+
+**Common gaps:** No review of vendor security practices. Use of free tools for business purposes without understanding their data policies. No Data Processing Agreements in place with vendors who handle significant volumes of customer data.
+
+## How to close the gaps you find
+
+The eight items above are in order of how quickly they can be remediated and how much risk they represent. If you scored 0–3 on the checklist, start with items 4 and 5 — access controls and device encryption. These are the highest-probability sources of a reportable breach in a small business, and they can be implemented within a week.
+
+If you scored 4–6, the work is primarily documentation: write the retention schedule, draft the collection statements, document the incident response procedure. This takes a few days but does not require new tools or budget.
+
+If you scored 7–8, you are in better shape than most. The remaining gap is likely in vendor management — a Data Processing Agreement with your main vendors, and a review of any free or low-cost tools being used for business purposes.
+
+## The compliance that runs in the background
+
+The goal of this checklist is not to produce a binder that sits on a shelf. It is to make compliance the natural result of how the business operates: access is controlled because that is how the systems are set up, data is deleted on schedule because the retention policy is in the system, a data access request goes to the right person because that is documented and known.
+
+That is the standard to aim for. [Contact our team](/#contact) if you want a structured gap assessment against this checklist, or help implementing the fixes.`,
+    contentZh: `## 大部分香港中小企不知道自己存在的合規缺口
+
+在我們與香港中小企的合作中，幾乎每次首次審計都會出現同一模式：公司認為自己已合規，因為有 IT 供應商、網站上有私隱政策，而且沒有人投訴過。個人資料私隱專員於 2024 年及 2025 年的執法行動顯示另一個情況——小型企業並無豁免，而且不論公司規模，發生資料外洩而無文件化控制措施的後果相同。
+
+本文是香港中小企的實用審計清單，而非法律意見。這是我們開展合規項目時使用的操作基準——各項目有則有，無則無，而最具體、最容易在有限時間和預算下修正的缺口所在。
+
+## 合規對香港小型企業的實際意義
+
+《個人資料（私隱）條例》（PDPO）規管個人資料的收集、使用、保存及銷毀。「個人資料」的定義甚廣：客戶姓名、電郵地址、訂單記錄、員工記錄及 IP 地址均屬此列。只要你的業務涉及任何此類資料，便受 PDPO 約束——並無公司規模門檻或最低標準測試。
+
+六項保障資料原則（DPP）是大部分責任所在：
+
+- **DPP1**：收集目的及方式須於收集時通知當事人
+- **DPP2**：保存期限：只保留至需要為止
+- **DPP3**：使用：僅用於收集時所述目的（或直接相關目的）
+- **DPP4**：資料保安：需有足夠保障，防止未獲授權或意外查閱
+- **DPP5**：公開事項：你能夠說明你所持有的資料及使用方式
+- **DPP6**：查閱及更正：個人可要求查閱及更正其資料
+
+對大部分中小企而言，DPP4（保安）及 DPP1（收集通知）是缺口最大的兩項。
+
+## 實用中小企審計清單
+
+將此清單作為時間點快照使用。八個項目中有三個或以上回答「否」，即表示存在重大缺口。八個項目全部回答「是」，則代表有一個可辯護的基準。
+
+### 第一項：你能列舉業務收集的各類個人資料
+
+走一遍業務流程，列出資料類別：客戶姓名及聯絡方式、交易記錄、員工人事資料、供應商聯絡資料。對於每個類別，你能說出儲存位置（檔案、數據庫、第三方 SaaS 工具）、誰有權查閱，以及原因。
+
+**為何重要：** DPP5 要求公開事項。若有客戶發信查詢你所持有關於他們的資料，你須在 40 天內作出回覆。大部分中小企做不到，因為從未有人做過資料清點。
+
+**常見缺口：** 存放於非正式試算表或員工個人電郵帳戶的資料。業務使用的工具在后台默默記錄著個人資料（如某個 Simple CRM 、免費表格生成器或 WhatsApp Business 帳戶）。
+
+### 第二項：每個資料收集點均有書面收集聲明
+
+在你要求他人提供個人資料的時刻——網站表格、簽到表、入職表格——你必須告知他們：收集哪些資料、為何收集、保存多久、可能轉移至誰，以及如何要求查閱或更正。
+
+**為何重要：** DPP1。缺漏或不完備的收集聲明，是中小企審計中最常見的發現，也是引發執法投訴的最常見觸發點。
+
+**常見缺口：** 網站表格只寫「我們將盡快與你聯繫」而無任何細節。人力資源表格收集香港身份證號碼而未說明原因。
+
+### 第三項：資料在不再需要時被刪除
+
+對於第一項所列的每類資料，均有明確的保存期限。客戶記錄於最後聯絡後 X 年刪除。員工記錄於離職後 Y 年刪除。付款記錄按稅務條例要求保存 Z 年。
+
+**為何重要：** DPP2。「以防萬一」並非 PDPO 下的有效理由。不需要卻留存的資料一旦外洩，便是可預防的事故。
+
+**常見缺口：** 一次性購買後永久保留的客戶記錄。離職後仍存於個人雲端硬碟的員工資料。永不清除的備份檔案。
+
+### 第四項：每個儲存個人資料的系統均設有存取控制
+
+任何含個人資料的系統，不應向組織內所有人開放。存取按「需要知道」原則：營業團隊可查閱客戶聯絡記錄；財務團隊可查閱帳單資料；只有人力資源可查閱員工記錄。
+
+**為何重要：** DPP4。若一台存有未加密客戶資料庫的筆記本電腦被盜，而又無存取控制，則屬須通報的資料外洩。
+
+**常見缺口：** 雲端服務使用共享登入憑證。已離職員工仍可登入 Google Workspace 或 Dropbox。儲存客戶資料的系統無密碼政策。
+
+### 第五項：所有可能離開辦公室的裝置均已加密
+
+可能含個人資料的筆記本電腦、手機及流動硬碟，必須啟用全磁碟加密。即 Mac 上的 FileVault、Windows 上的 BitLocker，以及流動裝置上的 MDM 或同等方案。
+
+**為何重要：** 遺失或被竊而未加密的裝置上的資料外洩，即屬資料外洩事故。私隱專員在執法指引中明確指出，加密是對離開辦公室的裝置的基本要求。
+
+**常見缺口：** 用於工作的個人裝置未加入任何 MDM。工作用筆記本電腦未啟用 FileVault 或 BitLocker，因為「IT 供應商從未設定」。
+
+### 第六項：已有處理資料查閱請求的書面程序
+
+某人發信給公司，要求查閱你所持有關於他們的個人資料，或要求更正。你有 40 天時間回覆。公司內需有人知道該請求應轉交誰，以及程序為何。
+
+**為何重要：** DPP6。未能於 40 天內回覆資料查閱請求，即屬違反 PDPO。私隱專員可展開調查並發出合規通知。
+
+**常見缺口：** 請求進入共享收件箱，無人負責流程。員工不知道 40 天期限的存在。
+
+### 第七項：事故應變計劃已涵蓋個人資料外洩
+
+若筆記本電腦被竊、黑客入侵你的客戶資料庫，或員工意外將檔案發送至錯誤收件人——你能在首 24 小時內知道該怎麼做嗎？步驟包括：遏制外洩、評估範圍、通報私隱專員（重大資料外洩），以及在有傷害風險時通報受影響人士。
+
+**為何重要：** PDPO 要求通報重大資料外洩至私隱專員，以及在有傷害風險時通報受影響個人。「我們不知道需要通報」並非有效抗辯。
+
+**常見缺口：** 無書面事故應變計劃。資料外洩決策無明確負責人。員工無法識別須通報的事故。
+
+### 第八項：已對供應商及第三方工具的資料安全進行審查
+
+你所使用的每個第三方服務——CRM、電郵營銷工具、雲端儲存供應商、付款處理商——均代表你的公司持有或處理個人資料。你有責任確保他們具備足夠的安全保障。
+
+**為何重要：** 根據 DPP4，資料使用者（你的公司）有責任確保資料處理者（你的供應商）採用相同的安全標準。使用免費線上表格生成器而數據存放於不安全資料庫，仍是你的責任。
+
+**常見缺口：** 無審查供應商安全實務的機制。為業務目的使用免費工具而未了解其資料政策。與處理大量客戶資料的供應商之間無資料處理協議。
+
+## 如何填補所發現的缺口
+
+上述八個項目，按修補速度快慢及風險高低排序。若你在清單上只得 0–3 分，從第 4 及第 5 項開始——存取控制及裝置加密。這是小型企業中最有可能導致須通報外洩的風險源，可在一週內實施。
+
+若你得 4–6 分，工作主要是文件化：撰寫保存期限表、起草收集聲明、文件化事故應變程序。這需時數天，但無需新工具或預算。
+
+若你得 7–8 分，你比大多數企業做得更好。其餘缺口可能在供應商管理——與主要供應商簽訂資料處理協議，並審查任何用於業務目的的免費或低成本工具。
+
+## 運行於後台的合規措施
+
+此清單的目標不是產生一份放在書架上的文件夾。而是讓合規成為業務運作的自然結果：系統設定中天然就有存取控制、保存政策在系統中自動執行資料刪除、資料查閱請求按照文件化並已知悉的流程轉交正確人員。
+
+這是努力的標準。如需針對此清單進行結構化缺口評估，或協助實施修正方案，[請聯絡我們的團隊](/#contact)。`,
+  },
 }
 
 /**
