@@ -359,6 +359,23 @@ export default function BlogPage() {
           readTime: 8,
           publishedAt: '2026-09-21T00:00:00Z',
         },
+        {
+          id: '11',
+          title:
+            'The Deepfake CFO Is Already Calling: AI Voice Scams Cost a Hong Kong Firm HK$200M — And the Same Playbook Is Now Targeting Local SMEs',
+          titleZh: '深偽 CFO 已來電：AI 語音詐騙令香港公司損失 200 萬港元——同一劇本正瞄準本地中小企',
+          slug: 'ai-voice-deepfake-cfo-scams-hong-kong-2026',
+          excerpt:
+            'A cloned voice, a WhatsApp call, and a six-figure wire transfer — AI-generated audio now imitates a CFO convincingly enough to fool accounts teams at Hong Kong firms of every size. Here is what changed, what the playbook looks like, and the verification chain that stops it.',
+          excerptZh:
+            '一段克隆語音、一通 WhatsApp 來電、一筆六位數轉帳——AI 生成的音訊現已能模仿 CFO 到足以騙倒香港大小公司的會計團隊。本文說明改變了什麼、劇本長什麼樣，以及能阻止它的驗證鏈。',
+          category: 'Cybersecurity',
+          authorZh: 'Celestial Tech 團隊',
+          coverImage: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1600&q=80',
+          author: 'Celestial Tech Team',
+          readTime: 7,
+          publishedAt: '2026-09-24T00:00:00Z',
+        },
       ] as Post[]).sort(
         (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
       ),
