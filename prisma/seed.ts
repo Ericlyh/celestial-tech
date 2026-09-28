@@ -1190,6 +1190,22 @@ LLM 大幅加速攻擊的偵察階段。攻擊者可要求模型枚舉 LinkedIn 
     published: true,
     sourceName: 'Editorial',
   },
+  {
+    slug: 'hk-sme-threat-landscape-2026-board-view',
+    title: 'The 2026 Threat Landscape for Hong Kong SMEs: What Board Members Actually Need to Understand Before Year-End',
+    titleZh: '2026 年香港中小企威脅全景：董事會成員在年結前必須真正理解的威脅',
+    excerpt:
+      "Q4 is when attackers ramp up, regulators tighten, and budgets reset. For HK SME boards without a dedicated security function, here is the threat-landscape briefing a managing partner should be able to hold in their head — five shifts since Q1 2026, three questions to ask in the next board meeting, and the one metric that tells you whether you are exposed.",
+    excerptZh: '第四季正是攻擊者加碼、監管收緊、預算重訂的時節。對沒有專屬安全職能的香港中小企董事會而言，本文提供一份管理合夥人應能在腦中掌握的威脅全景簡報——2026 年第一季以來的五項轉變、下次董事會應提出的三個問題，以及一個能告訴你是否處於曝險狀態的指標。',
+    content: 'Editorial — see /blog/hk-sme-threat-landscape-2026-board-view for the published post. The MDX body is in app/blog/[slug]/page.tsx STATIC_POSTS for the live page; this row keeps the DB-side title/excerpt/category in sync so future cross-posting or index rebuilds (e.g. a future Supabase swap) do not lose the metadata.',
+    category: 'Cybersecurity',
+    coverImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
+    author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
+    readTime: 8,
+    published: true,
+    sourceName: 'Editorial',
+  },
 ]
 
 async function main() {

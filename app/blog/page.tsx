@@ -376,6 +376,22 @@ export default function BlogPage() {
           readTime: 7,
           publishedAt: '2026-09-24T00:00:00Z',
         },
+        {
+          id: '12',
+          title:
+            'The 2026 Threat Landscape for Hong Kong SMEs: What Board Members Actually Need to Understand Before Year-End',
+          titleZh: '2026 年香港中小企威脅全景：董事會成員在年結前必須真正理解的威脅',
+          slug: 'hk-sme-threat-landscape-2026-board-view',
+          excerpt:
+            "Q4 is when attackers ramp up, regulators tighten, and budgets reset. For HK SME boards without a dedicated security function, here is the threat-landscape briefing a managing partner should be able to hold in their head — five shifts since Q1 2026, three questions to ask in the next board meeting, and the one metric that tells you whether you are exposed.",
+          excerptZh: '第四季正是攻擊者加碼、監管收緊、預算重訂的時節。對沒有專屬安全職能的香港中小企董事會而言，本文提供一份管理合夥人應能在腦中掌握的威脅全景簡報——2026 年第一季以來的五項轉變、下次董事會應提出的三個問題，以及一個能告訴你是否處於曝險狀態的指標。',
+          category: 'Cybersecurity',
+          authorZh: 'Celestial Tech 團隊',
+          coverImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80',
+          author: 'Celestial Tech Team',
+          readTime: 8,
+          publishedAt: '2026-09-28T00:00:00Z',
+        },
       ] as Post[]).sort(
         (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
       ),
