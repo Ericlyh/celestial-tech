@@ -392,6 +392,22 @@ export default function BlogPage() {
           readTime: 8,
           publishedAt: '2026-09-28T00:00:00Z',
         },
+        {
+          id: '13',
+          title: 'The 14-Minute Wire Block: How Out-of-Band Verification Stopped a HK$2.4M Deepfake Attack at a Hong Kong Trading Firm',
+          titleZh: '14 分鐘的轉帳阻截：帶外驗證如何擋下香港一間貿易公司 240 萬港元的深偽攻擊',
+          slug: 'out-of-band-verification-hk-trading-firm-2026',
+          excerpt:
+            'In late September 2026 a Hong Kong trading firm came within 14 minutes of losing HK$2.4M to a voice-cloned CFO. The wire never left. Here is the post-mortem — what held, what broke, and the four lessons your SME can take to a tabletop this month.',
+          excerptZh:
+            '2026 年 9 月底，香港一間貿易公司在 14 分鐘內幾乎被一宗深偽語音冒充 CFO 的騙局騙走 240 萬港元。款項最終未匯出。本篇為事故剖析——何者守住、何者失守，以及你的中小企業本月即可帶到桌上演練的四項教訓。',
+          category: 'Cybersecurity',
+          authorZh: 'Celestial Tech 團隊',
+          coverImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80',
+          author: 'Celestial Tech Team',
+          readTime: 7,
+          publishedAt: '2026-10-05T00:00:00Z',
+        },
       ] as Post[]).sort(
         (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
       ),

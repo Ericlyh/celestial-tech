@@ -1206,6 +1206,23 @@ LLM 大幅加速攻擊的偵察階段。攻擊者可要求模型枚舉 LinkedIn 
     published: true,
     sourceName: 'Editorial',
   },
+  {
+    slug: 'out-of-band-verification-hk-trading-firm-2026',
+    title: 'The 14-Minute Wire Block: How Out-of-Band Verification Stopped a HK$2.4M Deepfake Attack at a Hong Kong Trading Firm',
+    titleZh: '14 分鐘的轉帳阻截：帶外驗證如何擋下香港一間貿易公司 240 萬港元的深偽攻擊',
+    excerpt:
+      'In late September 2026 a Hong Kong trading firm came within 14 minutes of losing HK$2.4M to a voice-cloned CFO. The wire never left. Here is the post-mortem — what held, what broke, and the four lessons your SME can take to a tabletop this month.',
+    excerptZh:
+      '2026 年 9 月底，香港一間貿易公司在 14 分鐘內幾乎被一宗深偽語音冒充 CFO 的騙局騙走 240 萬港元。款項最終未匯出。本篇為事故剖析——何者守住、何者失守，以及你的中小企業本月即可帶到桌上演練的四項教訓。',
+    content: 'Editorial — see /blog/out-of-band-verification-hk-trading-firm-2026 for the published post. The MDX body is in app/blog/[slug]/page.tsx STATIC_POSTS for the live page; this row keeps the DB-side title/excerpt/category in sync so future cross-posting or index rebuilds (e.g. a future Supabase swap) do not lose the metadata.',
+    category: 'Cybersecurity',
+    coverImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80',
+    author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
+    readTime: 7,
+    published: true,
+    sourceName: 'Editorial',
+  },
 ]
 
 async function main() {
