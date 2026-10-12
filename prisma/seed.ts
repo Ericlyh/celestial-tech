@@ -1223,6 +1223,22 @@ LLM 大幅加速攻擊的偵察階段。攻擊者可要求模型枚舉 LinkedIn 
     published: true,
     sourceName: 'Editorial',
   },
+  {
+    slug: 'ai-vendor-due-diligence-hk-sme-2026',
+    title: 'AI Vendor Due Diligence for Hong Kong SMEs: 12 Questions to Ask Before You Sign the Contract',
+    titleZh: '香港中小企業 AI 供應商盡職調查：簽約前必須提出的十二項問題',
+    excerpt:
+      'Every AI vendor your Hong Kong SME engages becomes a single point of failure for the workflow that depends on it, and a regulator-visible processor under the Personal Data (Privacy) Ordinance. Here are the 12 questions — grouped into data, security, and exit — that procurement should answer in writing before a contract is counter-signed.',
+    excerptZh: '你的香港中小企業所接觸的每一家 AI 供應商，皆會成為其所支援工作流程的單一故障點；若你受《個人資料（私隱）條例》規範，它亦會成為監管機構可見的資料處理者。本文整理採購團隊於合約會簽前必須以書面取得的十二項問題——分為資料、安全、退出三大類。',
+    content: 'Editorial — see /blog/ai-vendor-due-diligence-hk-sme-2026 for the published post. The MDX body is in app/blog/[slug]/page.tsx STATIC_POSTS for the live page; this row keeps the DB-side title/excerpt/category in sync so future cross-posting or index rebuilds (e.g. a future Supabase swap) do not lose the metadata.',
+    category: 'Cybersecurity',
+    coverImage: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1600&q=80',
+    author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
+    readTime: 8,
+    published: true,
+    sourceName: 'Editorial',
+  },
 ]
 
 async function main() {

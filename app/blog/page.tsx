@@ -408,6 +408,21 @@ export default function BlogPage() {
           readTime: 7,
           publishedAt: '2026-10-05T00:00:00Z',
         },
+        {
+          id: '14',
+          title: 'AI Vendor Due Diligence for Hong Kong SMEs: 12 Questions to Ask Before You Sign the Contract',
+          titleZh: '香港中小企業 AI 供應商盡職調查：簽約前必須提出的十二項問題',
+          slug: 'ai-vendor-due-diligence-hk-sme-2026',
+          excerpt:
+            'Every AI vendor your Hong Kong SME engages becomes a single point of failure for the workflow that depends on it, and a regulator-visible processor under the Personal Data (Privacy) Ordinance. Here are the 12 questions — grouped into data, security, and exit — that procurement should answer in writing before a contract is counter-signed.',
+          excerptZh: '你的香港中小企業所接觸的每一家 AI 供應商，皆會成為其所支援工作流程的單一故障點；若你受《個人資料（私隱）條例》規範，它亦會成為監管機構可見的資料處理者。本文整理採購團隊於合約會簽前必須以書面取得的十二項問題——分為資料、安全、退出三大類。',
+          category: 'Cybersecurity',
+          authorZh: 'Celestial Tech 團隊',
+          coverImage: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1600&q=80',
+          author: 'Celestial Tech Team',
+          readTime: 8,
+          publishedAt: '2026-10-12T00:00:00Z',
+        },
       ] as Post[]).sort(
         (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
       ),

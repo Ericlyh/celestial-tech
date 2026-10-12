@@ -2412,6 +2412,219 @@ If you want help standing up the rule, the vendor gate, or running the tabletop,
 
 若你需要協助建立該規則、開戶關卡或執行桌上演練，[我們的中小企業網絡安全實務](/cybersecurity/sme) 在同一委聘框架下涵蓋 BEC、深偽及 BEC 事故剖析。`,
   },
+  'ai-vendor-due-diligence-hk-sme-2026': {
+    id: '14',
+    title: 'AI Vendor Due Diligence for Hong Kong SMEs: 12 Questions to Ask Before You Sign the Contract',
+    titleZh: '香港中小企業 AI 供應商盡職調查：簽約前必須提出的十二項問題',
+    slug: 'ai-vendor-due-diligence-hk-sme-2026',
+    excerpt:
+      'Every AI vendor your Hong Kong SME engages becomes a single point of failure for the workflow that depends on it, and a regulator-visible processor under the Personal Data (Privacy) Ordinance. Here are the 12 questions — grouped into data, security, and exit — that procurement should answer in writing before a contract is counter-signed.',
+    excerptZh: '你的香港中小企業所接觸的每一家 AI 供應商，皆會成為其所支援工作流程的單一故障點；若你受《個人資料（私隱）條例》規範，它亦會成為監管機構可見的資料處理者。本文整理採購團隊於合約會簽前必須以書面取得的十二項問題——分為資料、安全、退出三大類。',
+    category: 'Cybersecurity',
+    coverImage: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80',
+    author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
+    readTime: 8,
+    publishedAt: '2026-10-12T00:00:00Z',
+    sourceUrl: null,
+    sourceName: 'Editorial',
+    content: `## Why an HK SME needs an AI-vendor checklist before signing
+
+In the last twelve months the procurement pattern at most Hong Kong SMEs we work with has shifted from "do we need AI?" to "which AI vendor do we sign first?" The decision is usually made in 14 days by a single department head, justified by a 30-minute sales call and a redacted SOC 2 report. The contract gets signed; the due-diligence question list does not exist.
+
+This is a category error. Every AI vendor your SME engages creates an attack surface that did not exist six months earlier. The AI vendor sees your data, your prompts, and — depending on the deployment model — the file system your agents run against. The AI vendor also becomes a single point of failure for the workflow that depends on it, and a regulator-visible processor under the Personal Data (Privacy) Ordinance if you are in scope.
+
+We have watched three failure modes play out at Hong Kong SMEs in 2026:
+
+1. **Training-data exfiltration via a consumer-grade AI vendor.** A 25-person accounting firm enabled a third-party AI "email assistant" that, by default, used inbound customer email bodies to fine-tune the assistant. Two months after the contract was signed, the firm's PDPO lead discovered the practice via a vendor settings page nobody had read. There was no breach; the data flowed lawfully under the vendor's terms. The reputational and contractual exposure was still material.
+
+2. **Prompt injection through a shared tenant.** A logistics firm integrated a multi-tenant LLM for shipment queries. An attacker crafted an inbound shipment note containing an indirect prompt injection that redirected the LLM to exfiltrate the firm's vendor pricing. Detection was accidental; the LLM's behaviour changed because a human noticed a typo in a response.
+
+3. **Vendor outage during a peak window.** A trading firm built its quarterly reconciliation on an external AI summariser. The vendor's largest customer — a hyperscaler — had a region-wide outage on a Sunday evening. Reconciliation was four days late. The trading firm had no fallback plan and no contractual SLA credit that covered the loss.
+
+None of these failure modes is exotic. All three are routine. All three were foreseeable at the time of signing.
+
+## The threat model in one paragraph
+
+**Adversary:** Not only external attackers. More often, the adversary is your own vendor's retention policy, your own employees using a non-approved consumer AI on a work document, or your single department head's enthusiasm for a tool the rest of the organisation has not reviewed.
+
+**Asset:** The set of customer personal data, contracts, pricing, and operational data that your AI vendor can see — which, depending on the integration, is everything your team types or uploads.
+
+**Vulnerability:** A procurement decision made without a written, repeatable due-diligence process. The fix is procedural, not technical.
+
+## The 12 questions
+
+The questions are grouped into three categories. Ask them in writing. A vendor that cannot answer in writing is not a vendor you can rely on during an incident.
+
+### Data & Governance (Q1–Q4)
+
+**1. Where does my data live, and who in your organisation can read it?**
+Ask for the data-flow diagram, the storage regions, and the access-control matrix. If the vendor cannot produce this in writing, your data is being shared across product, support, and engineering teams in ways you have not consented to. This is the single most-asked and least-answered question in our SME reviews.
+
+**2. Do you train your model on my data by default? How do I opt out?**
+Consumer-tier AI vendors — the kind your marketing lead is about to sign for — routinely use customer data as fine-tuning material. The "we may use your data to improve our service" clause in the terms is binding. The opt-out is in the dashboard, behind a setting nobody reads. Make opt-in the default and require it to be explicit, in writing.
+
+**3. What is your retention and deletion policy, and how do you prove deletion?**
+You need an answer in days, not months. You need the deletion certificate, signed by the vendor, on termination. This is required under PDPO data-retention principles and under most enterprise contracts. If the vendor's answer is "we delete within 30 days of request", ask for the 30-day clock to start on contract end.
+
+**4. Who are your sub-processors, and how am I notified when that list changes?**
+Every AI vendor runs on infrastructure owned by someone else. Ask for the current sub-processor list at signing, and a contractual commitment that you get 30 days' notice before any change. This is the question that catches HK SMEs most often — vendor X is on AWS, AWS uses a sub-processor in jurisdiction Y, and your PDPO risk profile just changed without your knowledge.
+
+### Security & Audit (Q5–Q8)
+
+**5. Can you share your latest SOC 2 Type II / ISO 27001 report?**
+SOC 2 Type II covers a period of time; ISO 27001 covers a managed control set. Either is acceptable. A SOC 2 Type I (point-in-time) is not. A self-attestation is not. If the vendor cannot produce one within ten business days of request, the vendor is too small or too unregulated to safely process your data.
+
+**6. Have you had a breach in the last 24 months? What happened, and what is the disclosure posture?**
+The answer "no, never" is a red flag. The answer "yes, in March, we disclosed to affected customers within 72 hours, here is the post-mortem" is a green flag. The shape of the disclosure matters more than the incident itself.
+
+**7. What is your AI-specific red-team methodology, and what is the published record?**
+"AI security" without a published red-team record is marketing. Look for a documented adversarial-testing methodology, a published vulnerability disclosure record, and verifiable third-party test reports. The same three indicators we use to evaluate LLM red-team programmes apply at vendor selection.
+
+**8. How do you handle prompt injection and jailbreaks in production?**
+A serious answer names a layered control set: input sanitisation, output filtering, retrieval-source trust boundaries, monitoring of model behaviour, and a documented incident-response playbook. A non-answer is "we follow best practices." Push for specifics.
+
+### Business Continuity & Exit (Q9–Q12)
+
+**9. What is your SLA uptime, and what are the credits for missing it?**
+"99.9% uptime" means "43 minutes of downtime per month is acceptable" and credits are usually a discount on next month's bill. For a workflow your team depends on every day, that is not a recovery posture. Ask for the credit schedule, and ask what your recovery procedure is when the AI vendor is down.
+
+**10. What happens to my data, my prompts, and any model trained on my data if I leave?**
+You need a written deletion confirmation within 30 days, a model-weight return or destruction schedule, and a clause that no derivative model trained on your data will continue to be served. The third clause is the most-forgotten. If the vendor trained a model on your data and that model continues to serve other customers, your contract termination does not actually return your data.
+
+**11. Can you produce an AI Bill of Materials (AI-BOM)?**
+An AI-BOM is the analogue of a software bill of materials for AI systems. It names the foundation model, the data sources, the fine-tuning procedure, the safety filters applied, and the audit trail for each. Vendors who cannot produce one are not auditing their own stack; they are not in a position to audit yours.
+
+**12. Will you provide audit logs of AI decisions made on my data?**
+Audit logs are non-negotiable for any workflow that touches personal data, contractual decisions, or financial transactions. Specify the retention period (90 days minimum), the format (machine-readable, signed), and the access latency (within 24 hours on request). PDPO audits, HKMA reviews, and any post-incident review depend on this log existing.
+
+## The 30/60/90 plan for an HK SME that has already signed
+
+If your firm has already signed with one or more AI vendors without these questions, you have not failed — you have just deferred the work. Here is how to compress the remediation into a quarter.
+
+**Days 1–30: Inventory and audit.**
+List every AI vendor with access to your data. For each, capture: contract value, data scope, last review date, status of the 12 questions above. Most HK SMEs we work with find they have 2–4x more AI vendors than their procurement team thinks — consumer-tier assistants installed by individual employees are the largest hidden category.
+
+**Days 31–60: Re-paper the high-risk ones.**
+For vendors with access to customer personal data, contracts, or financials, send the 12 questions. Re-paper the contract to add: explicit opt-out of training on your data, 30-day deletion on termination, 30-day notice on sub-processor changes, audit-log access clause. Most vendors will accept these in negotiation; the ones who will not are the ones to migrate off first.
+
+**Days 61–90: Migrate or remediate the long tail.**
+For vendors that will not accept the re-paper, migrate. Build the playbook for the next vendor selection using the 12-question checklist as the gate. Document the criteria. Own them. The single highest-leverage change you can make is to ensure that the next AI vendor signed by your firm goes through this checklist before the contract is counter-signed.
+
+## Three failure modes we see repeatedly
+
+**1. The "growth-team-signed-it" failure.** A marketing or sales lead signs for a vendor because the team needs it now. Legal is looped in after the fact, with a contract already paid. Remediation is always more expensive than prevention.
+
+**2. The "consumer-grade in production" failure.** A free or low-cost tier of a consumer AI service is used by a team handling customer data, because the budget for the enterprise tier was not approved. Vendor terms usually prohibit this — discoverable only when a regulator asks.
+
+**3. The "we trained the model on our customers" failure.** A vendor trained a derivative model on your customers' interactions. Termination returns the data but not the derivative value. This is the failure mode that, two years from now, will be the basis of the first wave of AI-specific PDPO enforcement actions.
+
+## What this is and what it isn't
+
+This is not a framework that will turn an HK SME into a procurement department. It is a 12-question checklist that, run at vendor selection and re-run every 12 months, will catch the failure modes above 90% of the time. The expected output is one signed page per vendor. The expected time-cost is half a working day per vendor.
+
+The procurement function in most HK SMEs we work with is one person, plus whoever the relevant business lead is. That is the correct scale for an SME. The mistake is treating AI procurement as "different" from any other procurement. It is the same risk surface, with a higher blast radius.
+
+If you are running this exercise for the first time and want a second set of eyes on the answers, [our SME cybersecurity practice](/cybersecurity/sme) covers vendor due diligence, contract remediation, and AI-specific risk review under one engagement. For a walk-through of the 12 questions against a real vendor proposal, plan on a half-day working session plus a follow-up review once the vendor responds.`,
+    contentZh: `## 為何香港中小企業在簽約前需要一份 AI 供應商查核清單
+
+過去十二個月，我們合作過的香港中小企業，其採購模式已從「我們是否需要 AI？」轉變為「我們先簽哪家 AI 供應商？」這個決定通常由單一部門主管在 14 日內作出，所依據的僅為一節 30 分鐘的銷售電話與一份遮罩過的 SOC 2 報告。合約簽了；查核問題清單卻不存在。
+
+這是一個分類謬誤。你的中小企業所接觸的每一家 AI 供應商，都會在六個月內創造一個原本不存在的攻擊面。AI 供應商看得到你的資料、你的提示詞（prompts），並視乎部署模式，亦能看到你的代理（agent）所運行的檔案系統。AI 供應商同時亦會成為依賴它的工作流程的單一故障點；若你受《個人資料（私隱）條例》規範，它亦會成為監管機構可見的資料處理者。
+
+2026 年，我們目睹三種失效模式在香港中小企業身上反覆出現：
+
+1. **經消費級 AI 供應商流出的訓練資料外洩。** 一間 25 人的會計師事務所啟用了一家第三方 AI「電郵助理」，預設情況下，該助理以收到的客戶電郵正文作為微調（fine-tuning）素材。合約簽訂後兩個月，該公司的 PDPO 負責人於無人細閱的供應商設定頁面中發現此做法。事故本身並未發生——資料依供應商條款合法地流動——但其聲譽及合約上的曝險仍屬實質。
+
+2. **經共享租戶的提示注入攻擊。** 一間物流公司將多用戶 LLM 整合至貨運查詢流程。攻擊者於一則來港貨運備註中植入間接提示注入（indirect prompt injection），令 LLM 將該公司的供應商定價外流。偵測屬意外——LLM 之所以被察覺有異，是因為一位同事注意到回應中出現了一處錯字。
+
+3. **高峰期內的供應商中斷。** 一間貿易公司將其季度對賬建構於一家外部 AI 摘要服務之上。該供應商最大客戶（一家超大規模雲端服務商）於一個週日傍晚發生了跨區中斷。對賬延遲四日。該貿易公司並無後備方案，亦無任何可涵蓋該損失的合約 SLA 抵償條款。
+
+上述三種失效模式，無一例外，皆屬常規，亦皆可於簽約時預見。
+
+## 一段話說清楚的威脅模型
+
+**對手：** 並非僅止於外部攻擊者。更常見的對手，是供應商自身的資料留存政策、你的員工於未經審批的消費級 AI 上傳工作文件，又或是單一部門主管在其他人尚未覆核前對某工具的熱忱。
+
+**資產：** 你的 AI 供應商所能看到的客戶個人資料、合約、定價及營運資料的集合——視乎整合深度，這集合等於你團隊所輸入或上傳的一切。
+
+**漏洞：** 一個在缺乏書面、可重複的盡職調查（due-diligence）程序下作出的採購決定。修正在於流程而非技術。
+
+## 十二項問題
+
+以下問題分為三個類別。請以書面形式提出。一家不能以書面回答的供應商，並非你於事故發生時可賴以為本的供應商。
+
+### 資料與治理（第 1–4 題）
+
+**1. 我的資料儲存於何處，貴公司內誰可讀取？**
+索取資料流程圖、儲存區域，以及存取控制矩陣。若供應商無法以書面提供此圖，你的資料將在產品、支援及工程團隊之間以你未同意的方式流動。此題是我們所見中小企業覆核中提問最多、獲答最少的一題。
+
+**2. 貴方會否預設以我的資料訓練模型？我如何選擇退出？**
+消費級 AI 供應商——你那市場推廣主管正要簽下的一家——通常會將客戶資料用作微調素材。條款中所寫「我們或會使用你的資料以改善我們的服務」具約束力。退出選項藏於後台設定之內，無人細看。請將「選擇加入」訂為預設，並以書面明確要求。
+
+**3. 貴方的留存與刪除政策為何？如何證明刪除已執行？**
+答案需以「日」計，而非以「月」計。你需要的是一份由供應商簽署、於合約終止時出具的刪除證明。此乃 PDPO 資料留存原則及大部分企業合約所要求。若供應商答「我們將於收到要求後 30 日內刪除」，請將該 30 日的計算起點改為合約終止之日。
+
+**4. 貴方的次處理者（sub-processors）為何？該清單變動時如何通知我？**
+每一家 AI 供應商皆運行於他人擁有的基礎設施之上。請於簽約時索取現時的次處理者清單，並以合約方式訂明任何變更須於 30 日前預先通知。此題最常令香港中小企業中伏——X 供應商運行於 AWS，AWS 由 Y 司法管轄區的次處理者託管，你的 PDPO 風險面貌就此在你不知情下改變。
+
+### 安全與審計（第 5–8 題）
+
+**5. 能否分享最近期的 SOC 2 Type II 或 ISO 27001 報告？**
+SOC 2 Type II 涵蓋一段時期；ISO 27001 涵蓋一套受管理的控制措施。兩者皆可接受。SOC 2 Type I（時點報告）並不足夠；自我聲明並不足夠。若供應商無法於提出要求後十個工作天內提供任一，則該供應商規模過小或受規管過淺，不足以安全地處理你的資料。
+
+**6. 過去 24 個月內是否曾發生事故？經過如何，披露立場為何？**
+「從未發生」屬紅旗。「2026 年 3 月曾發生，72 小時內通知受影響客戶，以下為事故剖析」屬綠旗。披露的形狀比事故本身更重要。
+
+**7. 貴方專為 AI 而設的紅隊演練方法為何？有何公開記錄？**
+缺乏公開紅隊記錄的「AI 安全」只是市場推廣。請查閱文件化的對抗性測試方法、公開漏洞披露記錄，以及可驗證的第三方測試報告。我們用以評估 LLM 紅隊計劃的三項指標同樣適用於供應商遴選。
+
+**8. 貴方於生產環境中如何處理提示注入（prompt injection）及越獄（jailbreak）？**
+認真的答案會列出多層控制：輸入消毒、輸出過濾、檢索來源信任邊界、模型行為監察，以及文件化的事故應變手冊。不認真的答案是「我們遵循最佳作業常規」。請追問細節。
+
+### 業務持續性與退出（第 9–12 題）
+
+**9. 貴方 SLA 的可用率為何？未達標時有何抵償？**
+「99.9% 可用率」意指「每月 43 分鐘中斷屬可接受」，而抵償通常僅為下月帳單的折扣。對你的團隊每日依賴的工作流程而言，這並非恢復立場。請索取抵償時間表，並詢問當 AI 供應商中斷時你的恢復程序為何。
+
+**10. 若我終止合作，我的資料、提示詞及任何以我的資料訓練的模型會如何處理？**
+你需要的是 30 日內書面刪除確認、模型權重歸還或銷毀時間表，以及一條條款確保任何以你的資料訓練的衍生模型不會繼續服務其他客戶。第三項條款最常被忽略。若供應商已基於你的資料訓練模型，而該模型仍服務其他客戶，則合約終止並未真正歸還你的資料。
+
+**11. 能否提供一份 AI 物料清單（AI-BOM）？**
+AI-BOM 是軟件物料清單（SBOM）於 AI 系統上的對應物。它列出基礎模型、資料來源、微調程序、所施加的安全過濾器，以及每項的審計軌跡。未能提供者，意味着供應商並未審核自身技術棧——自然亦無法審核你的。
+
+**12. 貴方會否提供就我的資料所作出 AI 決策的審計日誌？**
+對任何涉及個人資料、合約決定或財務交易的工作流程而言，審計日誌為不可妥協項目。請指明留存期（最少 90 日）、格式（機器可讀、已簽署），以及取用延遲（要求後 24 小時內）。PDPO 審核、HKMA 審查，以及任何事故後覆核，皆依賴此一日誌之存在。
+
+## 已簽約香港中小企業的 30/60/90 補救計劃
+
+若你的公司已於未經上述問題下簽訂一家或多家 AI 供應商，你並未失敗——你只是把工作延後了。以下為如何將補救工作壓縮至一個季度內。
+
+**第 1–30 日：盤點與審核。**
+列出所有可存取你資料的 AI 供應商。各供應商記下：合約金額、資料範圍、上次覆核日期、上述 12 題的填答狀態。我們合作過的香港中小企業，於盤點後多發現其 AI 供應商數量為其採購團隊所預期的 2 至 4 倍——單個員工私下安裝的消費級助理為最大的隱藏類別。
+
+**第 31–60 日：為高風險合約補紙。**
+對可存取客戶個人資料、合約或財務資料的供應商，發出 12 題。修訂合約以加入：明確的「不以其資料訓練」選擇退出、合約終止 30 日內刪除、次處理者變更 30 日前通知、審計日誌取用條款。多數供應商願意於議價時接受上述條款；不願接受者為首先遷移對象。
+
+**第 61–90 日：遷移或補救長尾。**
+對不願接受補紙的供應商，啟動遷移。為下一輪供應商遴選訂立劇本，以 12 題查核清單作為簽約前的門檻。將準則文件化、擁有化。你所能作的最高槓桿率改變，是確保貴公司日後簽訂的每一家 AI 供應商，皆於合約會簽前通過本查核清單。
+
+## 我們反覆目睹的三種失效模式
+
+**1. 「增長團隊先簽了」失效。** 一位市場推廣或銷售主管因其團隊即時所需而簽下供應商。法律團隊於事後方被知會——所面對的已是已付款的合約。補救永遠比預防昂貴。
+
+**2. 「消費級落於生產環境」失效。** 一家處理客戶資料的團隊，使用了一家消費級 AI 服務的免費或低階收費層級，因為企業層級的預算未獲批。供應商條款通常禁止此做法——僅於監管機構查問時方會被揭曉。
+
+**3. 「我們以客戶訓練了模型」失效。** 一家供應商基於你的客戶互動訓練了一個衍生模型。合約終止僅歸還資料本身，無法歸還衍生價值。此失效模式在兩年後，將構成第一波 AI 專屬 PDPO 執法行動的基礎。
+
+## 此框架是什麼、不是什麼
+
+此框架並非要將一間香港中小企業改造成一支採購部門。它是一份 12 題查核清單——於供應商遴選時執行，每 12 個月重做一次——可於九成時間內截獲上述失效模式。預期輸出為每位供應商一份已簽署的頁面。預期時間成本為每位供應商半個工作天。
+
+我們合作過的大部分香港中小企業，其採購職能由一人加上相關業務主管構成。這是中小企業的正確規模。謬誤在於將 AI 採購視為有別於其他採購的特殊項目。它是同一個風險面貌，只是爆破半徑更大。
+
+若你首次執行此項並希望就供應商回覆取得第二雙眼睛的覆核，[我們的中小企業網絡安全實務](/cybersecurity/sme) 在同一委聘框架下涵蓋供應商盡職調查、合約補紙及 AI 專屬風險審核。若需就一份真實供應商建議書演示 12 題的執行方式，請預留半日工作會時段，並於供應商回覆後再作一次覆核會。`,
+  },
 }
 
 /**
