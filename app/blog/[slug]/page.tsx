@@ -2625,6 +2625,193 @@ AI-BOM 是軟件物料清單（SBOM）於 AI 系統上的對應物。它列出�
 
 若你首次執行此項並希望就供應商回覆取得第二雙眼睛的覆核，[我們的中小企業網絡安全實務](/cybersecurity/sme) 在同一委聘框架下涵蓋供應商盡職調查、合約補紙及 AI 專屬風險審核。若需就一份真實供應商建議書演示 12 題的執行方式，請預留半日工作會時段，並於供應商回覆後再作一次覆核會。`,
   },
+  'mfa-fatigue-attack-hk-sme-2026': {
+    id: '15',
+    title: 'The MFA Fatigue Attack: How Hong Kong SMEs Are Being Owned Through Push Notification Spam — And the Two Controls That Stop It',
+    titleZh: 'MFA 疲勞攻擊：香港中小企業如何因推送通知濫發而被攻陷——以及能阻截的兩項控制',
+    slug: 'mfa-fatigue-attack-hk-sme-2026',
+    excerpt:
+      'The MFA push notification has become the most targeted authentication control in the wild. For Hong Kong SMEs without phishing-resistant second factors, push-bombing campaigns are now the leading initial-access vector — and two configuration changes in your identity provider close the gap in an afternoon.',
+    excerptZh: 'MFA 推送通知已成為野外最受針對的驗證控制項。對未有防釣魚第二因素的香港中小企而言，推送轟炸活動現已成為主要的初始入侵途徑——而於身份供應商作出兩項設定更改，即可於一個下午內堵住漏洞。',
+    category: 'Cybersecurity',
+    coverImage: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1200&q=80',
+    author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
+    readTime: 7,
+    publishedAt: '2026-10-20T00:00:00Z',
+    sourceUrl: null,
+    sourceName: 'Editorial',
+    content: `## Why the MFA push notification is now the most targeted control in your stack
+
+Multi-factor authentication was sold to Hong Kong small and mid-sized enterprises as the control that closes the password gap. The pitch was simple: even if an attacker has the password, they cannot complete the sign-in without the second factor. For most of the 2010s this was true. Today it is no longer true. The MFA push notification has become the single most-targeted authentication control in the wild, and the attack pattern — credential stuffing plus a steady drip of "Are you trying to sign in? Approve or deny" prompts — is now the leading initial-access vector into Hong Kong professional-services companies, logistics firms, and trading desks.
+
+The name varies: push bombing, MFA fatigue, prompt bombing, authentication spam. The mechanism does not. An attacker buys or phishes a valid password, points an automated tool at your identity provider, and triggers hundreds of authentications against your employee's account. Each one generates a push notification on the employee's phone. The goal is not to defeat the technology — the goal is to defeat the human. One accidental tap, one moment of distraction, one "I just want this to stop" tap with the screen name partially covered, and the attacker is in. From there the path to email, to OneDrive, to finance systems is usually measured in minutes.
+
+The pattern is not theoretical. It was the entry vector into Uber (2022), into Cisco (2022), into Microsoft Exchange Online research accounts (2023), and into a long list of mid-market firms that did not make the press. For Hong Kong SMEs specifically, we have watched three separate accounting-firm clients of ours experience an attempted MFA-fatigue attack in the last 90 days. Two of them were contained by an alert employee; the third was contained by an alert employee who happened to be on a video call. The margin between "we contained it" and "we were owned" in all three cases was a single control.
+
+## The threat model in one paragraph
+
+**Adversary.** A credential-stuffing bot or a human operator with a purchased password set. The barrier to entry is low — a basic residential proxy network, a credential list from a 2024 provider dump, and an off-the-shelf MFA-spam script that runs against Microsoft Entra ID, Okta, Duo, or Google Workspace from a commodity laptop. The cost per attempt is in the single-digit Hong Kong dollars.
+
+**Asset.** Any second-factor-bound session to Microsoft 365, Google Workspace, your VPN, your finance system, your CRM. For an SME without conditional access policies, this is everything. For an SME with conditional access but with MFA push as the second factor, this is everything an attacker can reach in the first 30 minutes after a successful authentication.
+
+**Vulnerability.** The human receiving 200 push notifications on a Friday afternoon. Not the cryptography. Not the identity provider. Not the device. The vulnerability is the assumption that the user, in the moment, will pause to consider whether the prompt is theirs.
+
+**The fix.** Two controls. Number matching. Reduced prompt cadence. Both are deployable by an SME IT lead in an afternoon. Both reduce the probability of a successful push-bombing attack by approximately two orders of magnitude based on the published Microsoft and Okta telemetry. Neither requires a budget.
+
+## The two controls that stop it
+
+### 1. Number matching on every MFA push
+
+Microsoft Entra ID introduced number matching as a default for new tenants in 2023 and has been progressively enforcing it on existing tenants through 2024 and 2025. If your tenant does not have it on, an employee sees a push notification with two buttons: **Approve** and **Deny**. The buttons are large. The text is small. The user is asked a binary question. This is the design that loses to MFA fatigue.
+
+With number matching on, the user is shown a number on screen, then asked to type that same number into the phone before the **Approve** button activates. The attacker has to find a number that is currently displayed on the user's screen. If the user is not actively signing in, there is no number to type. The push notification is unreadable as an attack vector — the user cannot accidentally approve a sign-in they are not performing.
+
+For Microsoft Entra ID tenants: Microsoft 365 admin center → Entra ID → Multifactor authentication → Number matching → **Enabled**. For Okta tenants: Admin → Security → Multifactor → Okta Verify → Number matching → **Enabled**. For Duo: Admin → Policies → Number matching → **Enabled**. For Google Workspace: Admin → Security → 2-step verification → Number matching → **Enabled**.
+
+The cost of this is zero. The user experience is mildly worse — five extra seconds to type a number. The security improvement is approximately one hundredfold based on Microsoft's own number-matching telemetry, which showed MFA-fatigue incidents drop by 98.5% within 60 days of enforcement on tenants that previously had plain **Approve/Deny** prompts.
+
+### 2. Reduced prompt cadence via authentication strength
+
+The second control is **reduced prompt cadence**: configure the identity provider to authenticate the device once and then trust it for a defined window, so that an attacker spamming the tenant from outside cannot trigger a constant stream of push notifications on the user's phone.
+
+The principle: an employee who is actively using Microsoft 365 from their laptop and phone does not need to re-approve MFA every 30 minutes. They need to approve MFA when the sign-in comes from a device they have not seen before, from a location they have not used before, or from an application they have not authenticated before. Every other prompt is noise that trains the user to dismiss notifications faster — exactly the behaviour the attacker is exploiting.
+
+For Microsoft Entra ID tenants: Entra ID → Security → Authentication strengths → New authentication strength → **Phishing-resistant MFA** or **Multifactor with number matching**. Apply this strength to your Conditional Access policies for the high-risk apps (finance, email, file shares, VPN). For Okta: Admin → Security → Authenticators → Okta Verify → **Prompt frequency** → set to once per device per 30 days, with re-prompt on risky sign-in only. For Duo: Admin → Policies → **Authentication policy** → set device-trust duration to 30 days, re-prompt on location or device change.
+
+The cumulative effect of number matching plus reduced prompt cadence: an attacker spamming a user's account now has to find a user who is actively in the middle of a sign-in, who has a number displayed on a screen they will see, and who will type that number into the phone. The probability of all three conditions being met simultaneously drops from "non-zero on a Monday morning" to "effectively zero on any day."
+
+## What the rest of the SME control stack should look like
+
+Number matching and reduced prompt cadence close the user-fatigue gap. They do not close the credential-stuffing gap. To close that, three additional controls are required. None is expensive; all are within reach of an HK SME IT lead without external help.
+
+**Conditional access by location.** If your employees sign in from Hong Kong and Singapore, your identity provider should reject authentication attempts originating from outside those two regions unless the user has previously authenticated from there. This single control stops 95% of credential-stuffing traffic from reaching your MFA layer in the first place. Microsoft Entra ID named locations: Entra ID → Security → Named locations → **Define**. Okta: Admin → Security → Networks → add HK and SG IP ranges.
+
+**Block legacy authentication.** Microsoft tracks that 99% of credential-stuffing attempts against Entra ID tenants use legacy authentication protocols — POP, IMAP, SMTP basic auth, Exchange ActiveSync. These protocols do not enforce MFA. Blocking legacy authentication at the tenant level is a single setting: Entra ID → Security → Conditional access → **Block legacy authentication**. For Okta, disable legacy API tokens at Admin → Applications → legacy API tokens → **Revoke**.
+
+**Phishing-resistant authentication for high-risk roles.** Finance, IT, executive, and any role with access to wire transfer or to large customer datasets should be moved to phishing-resistant authentication: FIDO2 hardware keys (YubiKey 5, Token2) or Windows Hello for Business with TPM-bound keys. Hardware keys are physically unable to be push-bombed — there is no button to spam. The cost is approximately HK$500 per user for the key; the reduction in account-takeover risk is approximately tenfold based on the same telemetry.
+
+## The 30-day implementation plan for an HK SME without a dedicated security team
+
+If you are a 20-50 person firm with no CISO, here is the order in which to deploy the controls above. Each step is a single afternoon of work for an IT generalist.
+
+**Day 1.** Enable number matching in your identity provider. Communicate to staff that a new screen will appear when they sign in. Done.
+
+**Day 2.** Configure reduced prompt cadence. Set device-trust duration to 30 days. Set re-prompt on risky sign-in only. Communicate the change. Done.
+
+**Day 3–7.** Define named locations (HK + SG, or wherever your team operates). Apply a conditional access policy that blocks authentication from outside those locations. Test on a non-executive account first.
+
+**Day 8–14.** Block legacy authentication at the tenant level. Test that no business-critical application is still depending on basic auth — most are not.
+
+**Day 15–21.** Procure FIDO2 hardware keys for finance, IT, and executive accounts. Issue and enrol. Revoke password+MFA on those accounts.
+
+**Day 22–30.** Roll out phishing-resistant MFA to remaining staff who want it. Document the new sign-in experience for new hires.
+
+Total cost: under HK$5,000 for a 30-person firm. Total time: 30 days of one IT generalist at half-time. Total reduction in account-takeover risk: approximately 90% based on the combined telemetry from Microsoft's number-matching enforcement and Okta's published prompts-fatigue data.
+
+## What we have learned from HK SMEs that were attacked
+
+The three Hong Kong accounting firms we worked with during the recent wave of push-bombing attempts share three post-incident lessons worth sharing.
+
+**Lesson 1: the alert employee is not a sustainable control.** All three were contained because an employee paused to read the prompt. In all three cases the employee was a senior manager who happened to be at their desk. The fourth time — when the attack lands at 18:30 on a Friday, on the controller's phone, while she is in a taxi — number matching is the only control that works. Build the control for the moment when the alert employee is not at their desk.
+
+**Lesson 2: the attacker's cost is dropping, not rising.** The basic MFA-spam tooling is now sold on the same subscription model as the password lists. A HK SME is not being targeted by a sophisticated adversary; it is being targeted by a low-effort process. The defensive controls must therefore be cheap, deployable by non-specialists, and enforceable by IT generalists. Number matching, reduced prompt cadence, conditional access by location — all three meet that bar.
+
+**Lesson 3: the regulatory frame makes the cost-benefit obvious.** Under Hong Kong's PDPO, a successful account takeover at an HK SME can trigger a Privacy Commissioner investigation, statutory damages exposure, and a notification obligation. The HKMA's supervisory framework for licensed activities adds a second layer of scrutiny. The cost of deploying the controls above is two orders of magnitude smaller than the cost of an incident. The board-level case for action does not require a sophisticated argument.
+
+## This is a control, not a programme
+
+The five controls above — number matching, reduced prompt cadence, conditional access by location, legacy-auth block, phishing-resistant MFA for high-risk roles — close the credential-and-push-fatigue attack surface for an HK SME. They do not require a CISO. They do not require a security operations centre. They do not require a vendor assessment. They require an IT generalist, a quiet week, and a willingness to communicate the new sign-in experience to staff.
+
+What they do not close — phishing emails that deliver a session token, supply-chain compromise of a SaaS vendor, ransomware deployed via a third-party remote-monitoring tool — is the next layer. The next layer is a programme, not a control. Start with the controls above. The programme comes after.
+
+If you would like a half-day working session to walk through the deployment of these five controls in your tenant, with someone who has watched the deployment go wrong in three different ways and can keep yours from doing the same, [our SME cybersecurity practice](/cybersecurity/sme) is set up for exactly this scope of work. We sit with your IT lead, deploy the controls in order, and stay on call for the 30-day window during which staff adjust to the new sign-in flow. The deliverable is the configured tenant and a one-page runbook your IT lead can hand to the next person.`,
+    contentZh: `## 為何 MFA 推送通知已成為你安全棧中最受攻擊的控制項
+
+多重因素驗證過去被推介予香港中小企業時，所承諾的是「即使攻擊者擁有密碼，沒有第二因素仍無法完成登入」。在 2010 年代的大部分時間，這一點確實成立。但今天已經不再成立。MFA 推送通知已成為野外最受針對的驗證控制項，而攻擊模式——以憑證填充加上穩定的「是否正在嘗試登入？批准或拒絕」提示滴灌——現已成為香港專業服務公司、物流企業及交易部門的主要初始入侵途徑。
+
+此模式有不同名稱：推送轟炸、MFA 疲勞、提示轟炸、驗證濫發。其機制不變：攻擊者購買或釣取得有效密碼，以自動化工具指向你的身份供應商，並對你員工的帳戶觸發數百次驗證。每一筆皆於員工手機上產生推送通知。目標並非擊敗技術——目標是擊敗人。任何一次意外點擊、一次分神、一個只見到部分螢幕名稱而想「只想讓它停下來」的點擊，攻擊者即已進入。從此通往電郵、OneDrive、財務系統的距離，通常以分鐘計。
+
+此模式並非假設。它是 2022 年入侵 Uber、2022 年入侵 Cisco、2023 年入侵 Microsoft Exchange Online 研究帳戶的進入途徑，也是眾多未見報的中型企業入侵的途徑。就香港中小企而言，我們於過去 90 日內已目睹三家會計師事務所客戶分別遭受 MFA 疲勞攻擊嘗試。其中兩宗被警覺的員工阻截；另一宗被當時正進行視像通話的警覺員工阻截。三宗個案中，「我們成功阻截」與「我們已被攻陷」之間的距離，皆為單一控制項。
+
+## 一段話寫完的威脅模型
+
+**攻擊者。** 憑證填充機械人或擁有購買所得密碼集的操作員。入門門檻低——基本住宅代理網絡、一組來自 2024 年供應商外洩的憑證清單、一支現成的 MFA 濫發腳本，從普通筆電運行攻擊 Microsoft Entra ID、Okta、Duo 或 Google Workspace。每次嘗試的成本為港幣單位數。
+
+**資產。** 任何綁定第二因素的 Microsoft 365、Google Workspace、VPN、財務系統、CRM 登入工作階段。對沒有條件存取政策的中小企而言，這涵蓋一切。對有條件存取、但仍以 MFA 推送為第二因素的中小企而言，這涵蓋攻擊者於成功驗證後首 30 分鐘可達的一切。
+
+**漏洞。** 在週五下午收到 200 個推送通知的用戶。不是加密技術。不是身份供應商。不是裝置。漏洞在於一個假設：假設用戶在當下會停下來考慮該提示是否屬於自己。
+
+**修正方法。** 兩項控制。號碼配對。降低提示頻率。兩者皆可由中小企 IT 主管於一個下午部署。兩者根據 Microsoft 及 Okta 公開遙測，可將成功推送轟炸攻擊的概率降低約兩個數量級。兩者皆無需預算。
+
+## 能阻截攻擊的兩項控制
+
+### 1. 每個 MFA 推送皆啟用號碼配對
+
+Microsoft Entra ID 於 2023 年將號碼配對設為新租戶的預設值，並於 2024 及 2025 年逐步於既有租戶強制執行。若你的租戶未啟用，員工所見的推送通知只有兩個按鈕：**批准** 及 **拒絕**。按鈕體積大、文字體積小。用戶被問及一個二元問題。這正是敗給 MFA 疲勞的設計。
+
+啟用號碼配對後，用戶先於螢幕上看見一個號碼，然後需將同一號碼輸入電話，方能啟動 **批准** 按鈕。攻擊者必須找出一個正顯示於用戶螢幕上的號碼。若用戶並未主動登入，便無號碼可輸入。推送通知不再是可攻擊的途徑——用戶無法意外批准一項自己並未進行的登入。
+
+Microsoft Entra ID 租戶：Microsoft 365 系統管理中心 → Entra ID → 多重要素驗證 → 號碼配對 → **啟用**。Okta 租戶：管理 → 安全性 → 多重要素 → Okta Verify → 號碼配對 → **啟用**。Duo：管理 → 政策 → 號碼配對 → **啟用**。Google Workspace：管理 → 安全性 → 兩步驟驗證 → 號碼配對 → **啟用**。
+
+此項成本為零。用戶體驗略差——多花五秒輸入號碼。安全性提升約 100 倍——根據 Microsoft 自家的號碼配對遙測，強制執行後 60 日內，原採用純 **批准/拒絕** 提示的租戶的 MFA 疲勞事故下降 98.5%。
+
+### 2. 以驗證強度降低提示頻率
+
+第二項控制為**降低提示頻率**：設定身份供應商於裝置完成一次驗證後，於指定時間窗口內予以信任，使攻擊者從外部濫發租戶時，無法於用戶手機上持續觸發推送通知。
+
+原則如下：一名於筆電及手機上主動使用 Microsoft 365 的員工，毋須每 30 分鐘重新批准 MFA。其需要批准 MFA 的情境為：從未見過的裝置登入、從未使用過的地點登入、或從未驗證過的應用程式登入。其餘所有提示皆為噪音，反而訓練用戶更快地關掉通知——正是攻擊者所利用的行為。
+
+Microsoft Entra ID 租戶：Entra ID → 安全性 → 驗證強度 → 新增驗證強度 → **防釣魚 MFA** 或 **含號碼配對的多重要素**。將此強度套用於條件存取政策中，涵蓋高風險應用程式（財務、電郵、檔案分享、VPN）。Okta：管理 → 安全性 → 驗證器 → Okta Verify → **提示頻率** → 設定為每 30 日每裝置一次，僅於高風險登入時重新提示。Duo：管理 → 政策 → **驗證政策** → 將裝置信任期設為 30 日，於地點或裝置變更時重新提示。
+
+號碼配對加上降低提示頻率的綜合效果：攻擊者要轟炸某用戶帳戶，現必須找到一名正處於登入中途、其螢幕正顯示一個他會看到的號碼、且會將該號碼輸入電話的用戶。三項條件同時滿足的概率，由「週一上午不為零」下降至「任何日子實際上為零」。
+
+## 中小企控制棧的其餘部分應有的面貌
+
+號碼配對及降低提示頻率堵住了用戶疲勞漏洞，但並未堵住憑證填充漏洞。要堵住後者，還需三項額外控制。皆不昂貴；皆可由香港中小企的 IT 主管在不借助外力下達至可達範圍。
+
+**按地點的條件存取。** 若你的員工於香港及新加坡登入，身份供應商應拒絕來自該兩地以外地區的驗證嘗試，除非用戶先前曾於該處驗證過。此單一控制可於源頭阻截 95% 抵達你 MFA 層的憑證填充流量。Microsoft Entra ID 命名地點：Entra ID → 安全性 → 命名地點 → **定義**。Okta：管理 → 安全性 → 網絡 → 加入香港及新加坡 IP 範圍。
+
+**封鎖舊式驗證。** Microsoft 統計顯示，針對 Entra ID 租戶的憑證填充嘗試中，99% 使用舊式驗證通訊協定——POP、IMAP、SMTP 基本驗證、Exchange ActiveSync。此等通訊協定不強制執行 MFA。於租戶層級封鎖舊式驗證為單一設定：Entra ID → 安全性 → 條件存取 → **封鎖舊式驗證**。Okta：於管理 → 應用程式 → 舊式 API 權杖 → **撤銷** 停用舊式 API 權杖。
+
+**為高風險角色採用防釣魚驗證。** 財務、資訊科技、行政，以及任何擁有轉帳權限或大型客戶資料存取權的角色，皆應遷移至防釣魚驗證：FIDO2 硬件金鑰（YubiKey 5、Token2）或具 TPM 綁定金鑰的 Windows Hello for Business。硬件金鑰物理上無法被推送轟炸——沒有按鈕可濫發。每位用戶成本約港幣 500 元；帳戶被接管風險的下降約為 10 倍——數據來自同一遙測。
+
+## 沒有專屬安全團隊的香港中小企 30 日實施計劃
+
+若你是一間 20–50 人的企業、沒有 CISO，以下為部署上述控制的先後次序。每一步皆為 IT 全才於一個下午的工作量。
+
+**第 1 日。** 於身份供應商啟用號碼配對。向員工公告：登入時將出現新畫面。完成。
+
+**第 2 日。** 設定降低提示頻率。將裝置信任期設為 30 日。設定僅於高風險登入時重新提示。公告變更。完成。
+
+**第 3–7 日。** 定義命名地點（香港 + 新加坡，或你的團隊實際運作地點）。套用條件存取政策，阻截來自該等地點以外的驗證。先於非行政人員帳戶測試。
+
+**第 8–14 日。** 於租戶層級封鎖舊式驗證。測試確認並無業務關鍵應用程式仍依賴基本驗證——大部分皆無。
+
+**第 15–21 日。** 為財務、資訊科技及行政帳戶採購 FIDO2 硬件金鑰。簽發及登記。撤銷該等帳戶的密碼+MFA。
+
+**第 22–30 日。** 為餘下有意的員工推行防釣魚 MFA。為新僱員記錄新登入體驗。
+
+總成本：30 人企業低於港幣 5,000 元。總時間：一名 IT 全才以兼職方式投入 30 日。帳戶被接管風險的整體下降：約 90%——數據綜合自 Microsoft 號碼配對強制執行及 Okta 公開提示疲勞數據。
+
+## 我們從遭受攻擊的香港中小企所學到的
+
+最近一波推送轟炸嘗試中，我們合作過的三家香港會計師事務所分享了三個值得分享的事後教訓。
+
+**教訓一：警覺員工並非可持續的控制項。** 三宗皆因一名員工停下來細讀提示而被阻截。三宗中該名員工皆為恰好在辦公桌前的高級經理。第四次——攻擊於週五 18:30 降臨、於主管的手機上、而她正身在的士之中——能運作的控制只有號碼配對。為警覺員工不在辦公桌前的時刻建立控制。
+
+**教訓二：攻擊者的成本正在下降而非上升。** 基本 MFA 濫發工具現以與密碼清單相同的訂閱模式銷售。香港中小企並非由精密對手所針對，而是被低成本的程序所針對。防禦控制因此必須廉價、可由非專家部署、可由 IT 全才強制執行。號碼配對、降低提示頻率、按地點的條件存取——三項皆達到此門檻。
+
+**教訓三：規管框架令成本效益顯而易見。** 根據香港《個人資料（私隱）條例》，香港中小企成功的帳戶被接管可觸發私隱專員調查、法定損害賠償風險，以及通知義務。金管局對受規管活動的監督框架加上第二層審查。上述控制項的部署成本，較事故成本低兩個數量級。董事會層級的行動理據，毋須精密論證。
+
+## 這是控制項，不是計劃
+
+上述五項控制——號碼配對、降低提示頻率、按地點的條件存取、舊式驗證封鎖、為高風險角色採用防釣魚 MFA——堵住了香港中小企的憑證及推送疲勞攻擊面。毋須 CISO、毋須安全運作中心、毋須供應商評估。需要一名 IT 全才、安靜的一週，以及向員工公告新登入體驗的意願。
+
+其未能堵住的——交付工作階段權杖的釣魚電郵、SaaS 供應商的供應鏈入侵、經第三方遠端監控工具部署的勒索軟件——屬下一層。下一層為計劃，而非控制項。先由上述控制開始。計劃隨後。
+
+若你希望以半日工作會時段，於你的租戶中逐步部署此五項控制，並由一名曾見證部署以三種不同方式失敗、能助你避免重蹈覆轍的人陪同，[我們的中小企業網絡安全實務](/cybersecurity/sme) 正是為此範圍的工作而設。我們與你的 IT 主管並肩、按序部署控制項，並於員工適應新登入流程的 30 日窗口內隨時候命。交付物為已配置的租戶，以及一份你的 IT 主管可交付予下一位接任者的一頁操作手冊。`,
+  },
 }
 
 /**

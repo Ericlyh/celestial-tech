@@ -1239,6 +1239,22 @@ LLM 大幅加速攻擊的偵察階段。攻擊者可要求模型枚舉 LinkedIn 
     published: true,
     sourceName: 'Editorial',
   },
+  {
+    slug: 'mfa-fatigue-attack-hk-sme-2026',
+    title: 'The MFA Fatigue Attack: How Hong Kong SMEs Are Being Owned Through Push Notification Spam — And the Two Controls That Stop It',
+    titleZh: 'MFA 疲勞攻擊：香港中小企業如何因推送通知濫發而被攻陷——以及能阻截的兩項控制',
+    excerpt:
+      'The MFA push notification has become the most targeted authentication control in the wild. For Hong Kong SMEs without phishing-resistant second factors, push-bombing campaigns are now the leading initial-access vector — and two configuration changes in your identity provider close the gap in an afternoon.',
+    excerptZh: 'MFA 推送通知已成為野外最受針對的驗證控制項。對未有防釣魚第二因素的香港中小企而言，推送轟炸活動現已成為主要的初始入侵途徑——而於身份供應商作出兩項設定更改，即可於一個下午內堵住漏洞。',
+    content: 'Editorial — see /blog/mfa-fatigue-attack-hk-sme-2026 for the published post. The MDX body is in app/blog/[slug]/page.tsx STATIC_POSTS for the live page; this row keeps the DB-side title/excerpt/category in sync so future cross-posting or index rebuilds (e.g. a future Supabase swap) do not lose the metadata.',
+    category: 'Cybersecurity',
+    coverImage: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1600&q=80',
+    author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
+    readTime: 7,
+    published: true,
+    sourceName: 'Editorial',
+  },
 ]
 
 async function main() {
