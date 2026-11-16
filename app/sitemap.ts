@@ -52,26 +52,35 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'yearly',
       priority: 0.6,
     },
+    // Blog entries mirror STATIC_POSTS in app/blog/[slug]/page.tsx, in post-set
+    // order. A slug that drifts from that list 404s; one missing from it goes
+    // unlisted. Keep the two in step when a post ships.
     {
-      url: `${baseUrl}/blog/openclaw-multi-agent-patterns`,
+      url: `${baseUrl}/blog/ai-powered-soc-future-threat-detection`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/blog/multi-agent-patterns`,
+      url: `${baseUrl}/blog/reactive-to-predictive-traditional-cybersecurity-failing`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/blog/openclaw-claude-desktop`,
+      url: `${baseUrl}/blog/convergence-ai-cybersecurity-enterprises-2026`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/blog/hermes-agent`,
+      url: `${baseUrl}/blog/openclaw-multi-agent-patterns-autonomous-execution-engine`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blog/hermes-agent-obsidian-llm-second-brain`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.7,
