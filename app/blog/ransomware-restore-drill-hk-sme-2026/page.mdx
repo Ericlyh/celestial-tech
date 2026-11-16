@@ -1,0 +1,199 @@
+# A Backup You Have Never Restored Is a Guess: The Four-Hour Restore Drill for Hong Kong SMEs
+
+**Category:** Cybersecurity
+**Author:** Celestial Tech Team
+**Published:** 2026-11-16
+**Read time:** 8 minutes
+**Slug:** ransomware-restore-drill-hk-sme-2026
+
+---
+
+> Bilingual excerpt (en): A backup that has never been restored is a guess. The ransomware cases documented in Hong Kong show backups corrupted alongside production data — and the four-hour restore drill that turns a hope into a measured recovery plan.
+
+> 雙語摘要（繁體中文）：從未復原過的備份只是一個猜測。香港已紀錄的勒索軟件個案顯示，備份與生產資料一同被攻破——而四小時復原演練，正是把期望變成可量度復原計劃的關鍵。
+
+---
+
+This page is the source-of-truth archive for the post published at `/blog/ransomware-restore-drill-hk-sme-2026`. The rendered HTML is generated from the STATIC_POSTS entry in `app/blog/[slug]/page.tsx` (which also carries the zh-Hant `contentZh`). This MDX file exists so the post has a discoverable source artefact under `app/blog/<slug>/page.mdx` per the OOP-6123 pipeline contract.
+
+The figures cited are taken from HKCERT's published sources: the "Hong Kong Cybersecurity Outlook 2026" media briefing (28 January 2026), the "Hong Kong Cybersecurity Incident Overview for Q3 2026", and HKCERT's published ransomware case record for Hong Kong. Each figure is attributed in the body text.
+
+## A backup you have never restored is a guess
+
+In September 2023 the Council of the Hong Kong Laureate Forum Limited had servers and seven endpoint devices encrypted with the "Elbie" ransomware. The attackers had entered through the firewall's VPN area using brute-forced administrator credentials, moved laterally across the network, and then went for the backups. HKCERT's published case record states it plainly: because the data backup solution was inadequate, the hackers also corrupted the backup data. Eight thousand one hundred and twenty-two individuals ended up with their sensitive information exposed.
+
+That detail is the argument of this post. A backup that shares an administrative account with the file server, that sits on the same network, and that nobody has ever restored is not a recovery plan. It is a hope with a retention policy. The recovery plan is the artefact you produce when you prove, on a scheduled afternoon, that a system comes back from backup in a number of minutes you have written down.
+
+This is a four-hour exercise. It costs one afternoon per quarter and one page of documentation. For a Hong Kong SME with 20 to 50 staff, it is the single highest-leverage afternoon in the security budget.
+
+## Why Hong Kong SMEs are the standing target
+
+The threat volume is public. HKCERT recorded 15,877 security incidents in Hong Kong in 2025, a record high and a 27% increase on the year before. The pattern held into 2026: 4,404 incidents in the third quarter, 565 more than the 3,839 recorded in the same quarter of 2025. Phishing accounted for 2,672 of those, roughly 61%. Botnet incidents came to 729 and vulnerable-system incidents to 469.
+
+Two figures from that set matter most for a small firm. Vulnerable-system incidents in 2025 came to 2,328, more than three and a half times the previous year. And in HKCERT's Hong Kong Enterprise Cybersecurity Landscape study, which covered 622 enterprises including 544 SMEs, only 26% of SMEs had dedicated cybersecurity personnel, against 59% of large enterprises. 48% of SMEs had deployed email security against 79% of large enterprises. 29% had privileged access management against 60%. Remote access security sat at 31% against 67%. Over the previous year, 13% of SMEs had increased their cybersecurity budget, against 36% of large enterprises.
+
+Read those two sets of figures together. The attack side of the ledger is automated, subscription-priced and indifferent to your size. The defence side of the ledger is 26% staffed and 13% growing. Ransomware is the business model built for exactly that gap. It needs no sophistication, only one valid administrator credential and the patience to let encryption run.
+
+The exposure is not abstract either. Under the Personal Data (Privacy) Ordinance, a data breach affecting 500 or more individuals, or one involving specified harm such as identity theft or financial loss, carries a mandatory notification duty to the Privacy Commissioner, who then has 60 days to complete the investigation. Separately, an individual whose personal data is affected by a breach may claim statutory damages of up to HK$50,000 under section 66, rising to HK$100,000 where the breach was intentional or reckless. In the Council of the Hong Kong Laureate Forum case that was 8,122 people. In the Hong Kong Ballet case it was approximately 37,840 people, including employees, job seekers, ticket bookers, guest artists, event attendees, donors, sponsors and suppliers.
+
+## The threat model in one paragraph
+
+**Adversary.** A ransomware affiliate working for a ransomware-as-a-service platform. Entry is one of the vectors HKCERT lists from the Hong Kong cases: phishing email, exposed RDP, an unpatched exploit, a drive-by download, malvertising, supply chain, brute force, a misconfigured service, or social engineering. The cost per attempt is low and falling.
+
+**Asset.** The file server, the accounting package, the CRM, and the mailboxes. For an SME these are not separable. The file server holds the client contracts, the accounting package holds the ledger, and the mailbox holds the wire instructions.
+
+**Vulnerability.** The recovery path, not the perimeter. In the Hong Kong cases HKCERT has documented, the same administrator account used to enter was usually the account that could reach the backup.
+
+**Fix.** Break the reachability, then prove the restore. Six controls and one afternoon per quarter.
+
+## What breaks first: the four ways a backup fails
+
+**1. The backup shares the administrator credentials.** The Laureate Forum intrusion began with a brute-forced system administrator account, which the attacker then used to reach the servers through the firewall's VPN area. At Cyberport, administrators were obtained by brute force over RDP and three further administrator accounts were compromised with credential dumping; the attackers then disabled firewall protections and stopped anti-malware programs. In both cases the attacker who owned the domain also owned the path to the backup.
+
+**2. The backup is reachable from the production network.** At Cyberport the same intrusion compromised multiple servers and network storage devices together. A backup on a NAS mounted inside the office network, served by the same admin account, is inside the blast radius.
+
+**3. The backup has never been restored.** Nothing on a dashboard reports this. The backup job reports success because the job did succeed. The file has never been read back, the service dependencies have never been reattached, the restore time is unknown, and nobody has ever discovered that the encryption key was rotated two years ago.
+
+**4. The backup and the production system share a fate.** Ransomware payloads routinely delete volume shadow copies before encrypting, and immutable local snapshots are still just local snapshots. If every copy lives in one cloud account under one set of credentials, the single point of failure has moved rather than disappeared. HKCERT named over-reliance on cloud infrastructure, with no redundancy or contingency planning, as one of the top five cybersecurity risks for 2026 for exactly this reason.
+
+## The four-hour restore drill
+
+**Step 0, thirty minutes. Write down three numbers.** For your three most business-critical systems, the file server, accounting and mail, write the recovery time objective (how many hours of downtime the business can absorb) and the recovery point objective (how much data loss the business can absorb). Then write down where the backup for each one physically lives and who holds the credentials. If a line reads "unknown", that line is the most valuable thing you will write this quarter.
+
+**Step 1, thirty minutes. Pick a system you did not choose.** A drill on the system that obviously works proves nothing. Pick the one nobody has touched in six months, because that is the one you will need during an incident.
+
+**Step 2, ninety minutes. Restore it into an isolated VLAN.** Not a test server, not production. A separate VLAN with no route to the office network, no shared credentials, no mail flow. Start the clock when you press restore, and write down the elapsed minutes at each of four milestones: the image restore completes, the services start, the data volume mounts and verifies, and the dependencies reattach. Most SMEs have never watched these four numbers, and the third one is usually the surprise.
+
+**Step 3, sixty minutes. Verify the data, not the daemon.** A running service is not a restore. Open five real files: last week's client contract, last month's ledger export, the shared contact list, the document template everyone actually uses, and one file a user once complained about losing. Check the dates and the file sizes. Then write down every dependency you had to reattach by hand, because those are the ones that will break at 02:00 during a real incident: the print server, the scan folder, the API keys, the service account, the DNS record, the licence key.
+
+**Step 4, thirty minutes. Write the one-page document.** Restore order, who does what, the minutes you actually measured, the three things that broke, and the date of the next drill. Print it and put it in the drawer that holds the accountant's key. A recovery plan that exists only in a shared drive is one encrypted copy away from not existing.
+
+Total: four hours. Repeat it quarterly with a different system each time. The point is not that the drill passes. The point is that the first drill tells you what your real recovery time is, and every drill after that moves it down.
+
+## The control set that makes the drill pass
+
+**Separate backup credentials with MFA.** The backup console must have its own administrator identity, with MFA, that is not the production domain administrator. If the backup console accepts the same credentials as the file server, the attacker who owns the domain owns the backup. This is the single highest-leverage hour of configuration work in this post.
+
+**Keep one immutable or offline copy.** One copy that the production network cannot address. HKCERT's guidance to Hong Kong enterprises is to keep offline copies of important data regularly and to establish tested backup and restoration procedures. In practice that means at least one copy on storage the production network cannot reach, retained longer than an attacker's patience.
+
+**Put MFA on every remote access path.** The Consumer Council encrypted 93 systems and infiltrated 11 servers and endpoints after an account with administrative privileges was used to enter over VPN, in an environment where employees could connect remotely without multi-factor authentication. More than 450 individuals' personal data were accessed.
+
+**Segment and monitor the endpoints.** The Hong Kong Ballet intrusion began with a vulnerability in outdated operating software on the organisation's servers; the attack analysis on the Hong Kong Vocational and Continuing School case identified one employee URL and eighteen user URLs that were vulnerable to penetration. Patch the network storage and the servers, and put endpoint detection on the machines that hold the file server and the accounting package.
+
+**Alert on mass file modification.** A rule that fires when a large number of files change extension or volume shadow copies are deleted costs nothing, and it buys you the difference between an hour and a week. This is the cheapest control on the list.
+
+**Answer the cloud question honestly.** If all your copies live in one cloud account under one set of credentials, you have relocated the single point of failure rather than removed it. HKCERT's 2026 risk assessment names this specifically, and it is worth an afternoon of your own time to work out what happens to your files if that account is locked out or that provider has an outage in your region.
+
+## The 30-day plan
+
+**Days 1 to 7.** Write the three numbers. Locate every backup, including the ones nobody remembers and the one that is really just file sync.
+
+**Days 8 to 14.** Separate the backup credentials. Put MFA on the backup console and on every remote access path, including the one your IT contractor uses.
+
+**Days 15 to 21.** Add one immutable or offline copy. Verify it is genuinely unreachable from production by trying to reach it from a workstation on the office LAN, and record the result.
+
+**Days 22 to 30.** Run the four-hour drill on one system. Write the one-page document. Put the next three quarterly drills in the calendar before you close the laptop, because a drill scheduled for a quarter that has no date in it will not happen.
+
+## What it costs
+
+For a 20 to 50 person firm, the drill is one afternoon of an IT generalist's time per quarter. At typical Hong Kong IT day rates that is roughly HK$4,000 to HK$8,000 a year of labour. An offline or immutable second copy is a one-time hardware cost of roughly HK$4,000 to HK$9,000 for a small NAS plus the time to configure it, or a low monthly cloud storage cost for the volume involved. The alternative is a data breach notification, an investigation, statutory damages exposure per affected individual, and an operational shutdown measured in weeks. The arithmetic is not close.
+
+## This is a control, not a programme
+
+The drill plus the six controls above close the ransomware recovery gap for an HK SME. They do not require a CISO, a security operations centre, or a vendor assessment. They require an IT generalist, a quiet week, and one afternoon per quarter.
+
+What they do not close is phishing that delivers a session token, an unpatched internet-facing appliance, a supply-chain compromise of a SaaS vendor you have no contract with, or an insider who exports the customer database. Those are the next layer. The next layer is a programme, not a control. Start with the drill. The programme comes after.
+
+If you would like to run one real restore drill this quarter, with the isolation, the timings and the rebuild order written down and handed to your IT lead, [our SME cybersecurity practice](/cybersecurity/sme) is set up for exactly this scope of work. We run the drill with your IT lead, write the one-page document, and stay while the findings get fixed. The deliverable is a measured recovery time for your three critical systems and a drill you can repeat without us.
+
+---
+
+# 繁體中文版本
+
+## 從未復原過的備份只是一個猜測
+
+2023 年 9 月，香港桂冠論壇委員會的伺服器及七個端點裝置被「Elbie」勒索軟件加密。攻擊者以暴力破解取得的系統管理員憑證，經防火牆的虛擬私人網路區進入網絡並橫向移動，隨後轉向備份。HKCERT 已公開的個案紀錄說得很直接：由於數據備份方案不足，駭客亦損毀了備份資料。八千一百二十二人的敏感資料因而外洩。
+
+這個細節就是本文的論點。與檔案伺服器共用管理員帳戶、置於同一網絡之內、以及從未有人嘗試復原的備份，不是復原計劃。它只是一個附帶保留期限的期望。復原計劃，是你在一個預定的下午證明系統可於一個已寫下的分鐘數內從備份回來之後，所產出的那份文件。
+
+這是一項四小時的練習。每季成本為一個下午加上一頁文件的時間。對一間 20 至 50 人的香港中小企而言，它是整個保安預算中槓桿最高的半日。
+
+## 為何香港中小企是恆常的目標
+
+威脅量是公開的。HKCERT 在 2025 年於香港錄得 15,877 宗網絡安全事故，創下新高，按年上升 27%。此模式延續至 2026 年：第三季錄得 4,404 宗，比 2025 年同期的 3,839 宗多 565 宗。釣魚佔其中 2,672 宗，約 61%。殭屍網絡事故 729 宗，系統漏洞事故 469 宗。
+
+當中兩個數字對小型公司最為關鍵。2025 年的系統漏洞事故達 2,328 宗，較上一年增加逾三倍半。而在 HKCERT 的《香港企業網絡安全形勢》研究（涵蓋 622 間企業，其中 544 間為中小企），只有 26% 的中小企配備專職網絡安全人員，大型企業則為 59%。48% 的中小企已部署電郵保安，大型企業為 79%。29% 已採用特權存取管理，大型企業為 60%。遠端存取保安為 31%，對比 67%。過去一年，13% 的中小企增加網絡安全預算，大型企業則為 36%。
+
+把這兩組數字放在一起讀。攻擊一方的帳目是自動化、按訂閱計價、且不問你的規模。防守一方的帳目是 26% 有人專責、13% 在增長。勒索軟件正是為這個落差而生的商業模式。它不需要任何技術門檻，只需要一個有效的管理員憑證，以及讓加密程序慢慢跑完的耐性。
+
+風險敞口同樣不是抽象概念。根據《個人資料（私隱）條例》，一宗影響 500 名或以上人士的資料洩漏事故，或涉及身份盜竊、經濟損失等「指定損害」的事故，須向私隱專員作強制通知，而專員其後有 60 日完成調查。此外，受資料洩漏影響的個人可根據第 66 條就損失或損害索償，法定上限為每名 50,000 港元；若該次違規屬故意或罔顧後果，上限為 100,000 港元。在香港桂冠論壇委員會一案中是 8,122 人。在香港芭蕾舞團一案則約為 37,840 人，當中包括僱員、求職者、購票觀眾、客席藝人、活動出席者、捐助者、贊助商及供應商。
+
+## 一段話寫完的威脅模型
+
+**攻擊者。** 勒索軟件即服務（RaaS）平台下的加盟攻擊者。入侵途徑為 HKCERT 從香港個案歸納的其中之一：釣魚電郵、暴露的 RDP、未修補的漏洞、偷渡式下載、惡意廣告、供應鏈、暴力攻擊、配置錯誤的服務，或社會工程。每次嘗試的成本低而且正在下降。
+
+**資產。** 檔案伺服器、會計軟件、CRM，以及電子郵箱。對中小企而言，這些並非彼此可分。檔案伺服器存放客戶合約，會計軟件存放帳目總帳，而郵箱存放電匯指示。
+
+**漏洞。** 復原路徑，而非周邊防線。在 HKCERT 已紀錄的香港個案中，攻擊者用來進入系統的管理員帳戶，通常正是能接觸備份的那一個。
+
+**修正方法。** 切斷可達性，然後證明復原。六項控制，加上每季一個下午。
+
+## 最先崩壞的四種備份失效方式
+
+**一、備份與管理員憑證共用。** 桂冠論壇一役以暴力破解取得的系統管理員帳戶，正是攻擊者用來經防火牆虛擬私人網路區接觸伺服器的帳戶。數碼港一役，管理員憑證同樣經 RDP 以暴力破解取得，其後三個管理員帳戶被憑證傾印所攻破，攻擊者關閉了防火牆保護並停止了防惡意軟件程式。兩個個案中，掌控網域的攻擊者，同時掌控通往備份的路徑。
+
+**二、備份可從生產網絡接觸。** 數碼港同一場入侵中，多台伺服器與網絡儲存裝置一同被攻破。置於辦公室網絡內、以同一管理員帳戶掛載的 NAS 備份，本身就在攻擊半徑之內。
+
+**三、備份從未復原過。** 沒有任何儀表板會報告這一點。備份工作顯示成功，因為工作確實成功。那個檔案從未被讀回，服務依賴從未被重新接上，復原時間無從得知，也從沒有人發現加密金鑰已在兩年前輪換。
+
+**四、備份與生產系統同生共死。** 勒索軟件載荷在加密前例行刪除磁碟區副本（volume shadow copy），而不可改寫的本機快照仍然只屬本機。若所有副本都放在同一個雲端帳戶、同一套憑證之下，單一故障點只是搬了家，並沒有消失。HKCERT 把「過度依賴雲端基礎設施、欠缺冗餘及應變規劃」列為 2026 年五大網絡安全風險之一，正是出於此因。
+
+## 四小時復原演練
+
+**第 0 步，三十分鐘。寫下三組數字。** 為你三個最關鍵的系統——檔案伺服器、會計、郵箱——寫下復原時間目標（業務可以承受多少小時停機）與復原點目標（業務可以承受多少資料遺失）。然後寫下每個系統的備份實際存放於何處，以及憑證由誰持有。若某一行寫的是「未知」，那一行就是本季度最有價值的產出。
+
+**第 1 步，三十分鐘。選一個不是你選的系統。** 對明顯運作正常的系統做演練，不能證明任何事。選那個六個月沒人碰過的系統，因為那正是事發時你要用的一個。
+
+**第 2 步，九十分鐘。把它還原到一個隔離的 VLAN。** 不是測試伺服器，也不是生產環境。是一個沒有通往辦公室網絡路由、沒有共用憑證、沒有郵件流向的獨立 VLAN。按下還原的一刻開始計時，並在四個里程碑各自記下經過分鐘數：映像還原完成、服務啟動、資料磁碟掛載並通過驗證、依賴項重新接上。多數中小企從未注視過這四個數字，而第三個通常就是驚喜所在。
+
+**第 3 步，六十分鐘。驗證資料，而不是服務程序。** 服務跑起來不等於還原成功。打開五個真實檔案：上週的客戶合約、上月的帳目匯出、共用的聯絡人名單、所有人真正在用的文件範本，以及一個曾有用戶投訴遺失的檔案。核對日期與檔案大小。然後寫下每一項你要手動重新接上的依賴，因為真正事發時在凌晨兩點壞掉的，就是這些：列印伺服器、掃描資料夾、API 金鑰、服務帳戶、DNS 記錄、授權金鑰。
+
+**第 4 步，三十分鐘。寫下那一頁文件。** 復原次序、誰負責甚麼、你實測的分鐘數、壞掉的三件事，以及下次演練日期。列印出來，放進存放會計師鎖匙的那個抽屜。一份只存在於共用雲端硬碟的復原計劃，距離「並不存在」只差一個被加密的副本。
+
+合計四小時。每季換一個系統重做一次。重點不是演練要通過。重點是第一次演練會告訴你真實的復原時間，而之後每一次演練都把它壓低。
+
+## 令演練通過的控制組合
+
+**分離備份憑證並啟用 MFA。** 備份主控台必須有獨立於生產網域管理員的管理員身分，並啟用多因素驗證。若備份主控台接受與檔案伺服器相同的憑證，掌控網域的攻擊者便掌控備份。這是本文中槓桿最高的一小時設定工作。
+
+**保留一份不可改寫或離線的副本。** 一份生產網絡無法接觸的副本。HKCERT 對香港企業的指引是：定期保存重要資料的離線備份，並建立經測試的備份及復原程序。實務上，這意味著至少一份存放於生產網絡無法觸及的儲存裝置，保留期長於攻擊者的耐性。
+
+**為每一條遠端存取路徑啟用 MFA。** 消委會一役，一個具管理員權限的帳戶經 VPN 進入，其後加密 93 個系統並入侵 11 台伺服器及端點裝置；該環境容許員工在沒有多重認證下遠端連線。超過 450 名個人的資料被未經授權取用。
+
+**分割網絡並監察端點。** 香港芭蕾舞團一役始於伺服器上已過時的作業系統漏洞；香港專業進修學校個案的攻擊分析則指出，一個員工 URL 及十八個用戶 URL 容易被攻破。為網絡儲存與伺服器安裝修補，並在存放檔案伺服器與會計軟件的機器上部署端點偵測。
+
+**為大規模檔案改動設置告警。** 一條在大批檔案更改副檔名或磁碟區副本被刪除時觸發的規則，成本為零，卻買得起「一小時」與「一星期」之間的差距。這是名單上最便宜的控制項。
+
+**誠實回答雲端那一題。** 若所有副本都在同一個雲端帳戶、同一套憑證之下，你只是搬走了單一故障點，並未移除它。HKCERT 的 2026 年風險評估明確點名此事，值得你花一個下午想清楚：若該帳戶被鎖，或該服務供應商在你所屬地區發生服務中斷，你的檔案會怎樣。
+
+## 30 日計劃
+
+**第 1 至 7 日。** 寫下三組數字。找出每一份備份，包括沒人記得的那幾份，以及那份其實只是檔案同步的「備份」。
+
+**第 8 至 14 日。** 分離備份憑證。為備份主控台及每一條遠端存取路徑啟用 MFA，包括你的 IT 外判所用的那一條。
+
+**第 15 至 21 日。** 加入一份不可改寫或離線的副本。從辦公室區域網絡內的一台工作站嘗試連接它，驗證它確實無法從生產環境接觸，並記錄結果。
+
+**第 22 至 30 日。** 為一個系統執行四小時演練。寫下那一頁文件。在闔上筆記型電腦之前，把接下來三季的演練日期放入日程——寫在沒有日期的季度裏的演練，不會發生。
+
+## 成本
+
+對一間 20 至 50 人的公司，演練每季佔一名 IT 全才的一個下午。以香港一般 IT 日費計算，一年約為 4,000 至 8,000 港元。離線或不可改寫的第二份副本，以硬件計是一次性約 4,000 至 9,000 港元的細型 NAS 成本加上設定時間；若以雲端儲存計，則按涉及的容量每月成本為數百港元以下。另一邊是資料洩漏通知、調查、每名受影響個人的法定損害賠償風險，以及以週計的營運停擺。兩者之間的算術，並不接近。
+
+## 這是控制項，不是計劃
+
+演練連同上述六項控制，堵住中小企的勒索軟件復原缺口。它們不需要 CISO、不需要安全運營中心、亦不需要供應商評估。它們需要的是一名 IT 全才、一個安靜的一星期，以及每季一個下午。
+
+它們堵不住的是遞送工作階段權杖的釣魚郵件、未修補的對外暴露裝置、你沒有合約的 SaaS 供應商遭供應鏈入侵，或把客戶資料庫匯出的內部人員。那是下一層。下一層是計劃，不是控制項。先做演練。計劃隨後。
+
+若你希望於本季度執行一次真正的復原演練——連同隔離方式、時間紀錄與重建次序，全部寫成文件並交予你的 IT 主管——[我們的中小企業網絡安全實務](/cybersecurity/sme)正是為此範圍的工作而設。我們與你的 IT 主管一起執行演練、撰寫那一頁文件，並在所發現的問題修復期間留守。交付物是你三個關鍵系統經實測的復原時間，以及一場你們不需我們也能重複的演練。

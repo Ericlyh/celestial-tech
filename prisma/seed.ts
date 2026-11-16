@@ -1255,6 +1255,22 @@ LLM 大幅加速攻擊的偵察階段。攻擊者可要求模型枚舉 LinkedIn 
     published: true,
     sourceName: 'Editorial',
   },
+  {
+    slug: 'ransomware-restore-drill-hk-sme-2026',
+    title: 'A Backup You Have Never Restored Is a Guess: The Four-Hour Restore Drill for Hong Kong SMEs',
+    titleZh: '從未復原過的備份只是一個猜測：香港中小企的四小時復原演練',
+    excerpt:
+      'A backup that has never been restored is a guess. The ransomware cases documented in Hong Kong show backups corrupted alongside production data — and the four-hour restore drill that turns a hope into a measured recovery plan.',
+    excerptZh: '從未復原過的備份只是一個猜測。香港已紀錄的勒索軟件個案顯示，備份與生產資料一同被攻破——而四小時復原演練，正是把期望變成可量度復原計劃的關鍵。',
+    content: 'Editorial — see /blog/ransomware-restore-drill-hk-sme-2026 for the published post. The MDX body is in app/blog/[slug]/page.tsx STATIC_POSTS for the live page; this row keeps the DB-side title/excerpt/category in sync so future cross-posting or index rebuilds (e.g. a future Supabase swap) do not lose the metadata.',
+    category: 'Cybersecurity',
+    coverImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&q=80',
+    author: 'Celestial Tech Team',
+    authorZh: 'Celestial Tech 團隊',
+    readTime: 8,
+    published: true,
+    sourceName: 'Editorial',
+  },
 ]
 
 async function main() {

@@ -438,6 +438,21 @@ export default function BlogPage() {
           readTime: 7,
           publishedAt: '2026-10-20T00:00:00Z',
         },
+        {
+          id: '16',
+          title: 'A Backup You Have Never Restored Is a Guess: The Four-Hour Restore Drill for Hong Kong SMEs',
+          titleZh: '從未復原過的備份只是一個猜測：香港中小企的四小時復原演練',
+          slug: 'ransomware-restore-drill-hk-sme-2026',
+          excerpt:
+            'A backup that has never been restored is a guess. The ransomware cases documented in Hong Kong show backups corrupted alongside production data — and the four-hour restore drill that turns a hope into a measured recovery plan.',
+          excerptZh: '從未復原過的備份只是一個猜測。香港已紀錄的勒索軟件個案顯示，備份與生產資料一同被攻破——而四小時復原演練，正是把期望變成可量度復原計劃的關鍵。',
+          category: 'Cybersecurity',
+          authorZh: 'Celestial Tech 團隊',
+          coverImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&q=80',
+          author: 'Celestial Tech Team',
+          readTime: 8,
+          publishedAt: '2026-11-16T00:00:00Z',
+        },
       ] as Post[]).sort(
         (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
       ),
