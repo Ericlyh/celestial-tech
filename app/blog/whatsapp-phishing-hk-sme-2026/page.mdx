@@ -1,0 +1,179 @@
+# The Phish Is Not in Your Inbox Anymore: WhatsApp Hijacking and a 60-Minute Fix for Hong Kong SMEs
+
+**Category:** Cybersecurity
+**Author:** Celestial Tech Team
+**Published:** 2026-11-17
+**Read time:** 7 minutes
+**Slug:** whatsapp-phishing-hk-sme-2026
+
+---
+
+> Bilingual excerpt (en): HKCERT recorded 1,435 phishing cases impersonating WhatsApp in the first half of 2026, and 46% of all phishing now targets messaging apps. Here is the 60-minute control set that closes the gap.
+
+> 雙語摘要（繁體中文）：HKCERT 紀錄 2026 年上半年有 1,435 宗假冒 WhatsApp 的釣魚個案，而 46% 的釣魚已轉向即時通訊平台。以下是可以補上這個缺口的 60 分鐘控制清單。
+
+---
+
+This page is the source-of-truth archive for the post published at `/blog/whatsapp-phishing-hk-sme-2026`. The rendered HTML is generated from the STATIC_POSTS entry in `app/blog/[slug]/page.tsx` (which also carries the zh-Hant `contentZh`). This MDX file exists so the post has a discoverable source artefact under `app/blog/<slug>/page.mdx` per the OOP-6123 pipeline contract.
+
+The figures cited are taken from HKCERT's "Mid-Year Review: HKCERT Security Incident Statistics and Cybersecurity Trends in the First Half of 2026" (released 31 August 2026) and its security bulletin "Phishing Alert - Beware of Fraudulent 'WhatsApp Security Centre' Pages Hijacking Accounts" (12 June 2026). Both were re-read against the source on 2026-11-17. Each figure is attributed in the body text.
+
+## The phish moved to your phone
+
+Between January and June 2026, HKCERT received 8,358 security incident reports in Hong Kong, broadly in line with the 8,142 recorded over the same period of 2025. Phishing was 5,305 of them, 63% of everything reported, and the second-largest category was botnet at 1,377 cases, or 16%.
+
+The figure that should change how a Hong Kong SME spends its next security hour is not the 63%. It is who the phish was aimed at. Of all phishing incidents in the first half of 2026, social media and instant messaging applications were the single most-targeted category at 46% of cases. Banking, finance and electronic payment services came next at 17%, cryptocurrency platforms at 15%, e-commerce platforms at 11% and technology companies at 6%.
+
+Half of Hong Kong's phishing is aimed at a phone now. And the financial motive has not softened: banking and cryptocurrency-related scams together accounted for 32% of all cases.
+
+Inside the messaging category, the platform counts are stark. HKCERT's table of the four social media and instant messaging platforms most commonly impersonated in phishing attacks records WhatsApp at 1,435 cases, Telegram at 557, TikTok at 315 and Meta at 115, for 2,422 cases in total. WhatsApp alone was roughly three times Telegram.
+
+## Why your email controls never saw it
+
+Every control a small firm owns sits on the corporate side of a line the attacker no longer respects. The spam filter, the mail gateway, the attachment sandbox, DMARC, the phishing awareness email in January, the annual simulated phishing exercise: none of them see a message that arrives inside a chat app on a personal handset, sent from a number that is not a company email address at all.
+
+There is a Hong Kong-specific reason this lands harder here than the 46% figure suggests. Attackers impersonate the institutions Hong Kongers already expect to hear from. HKCERT has recorded phishing sites impersonating the Inland Revenue Department during tax filing season, and impersonating iAM Smart and Hongkong Post between 2024 and 2026. In 2026 the number of cases impersonating the Water Supplies Department through fake bills more than doubled from February to April, with subject lines such as "Water Account Information Update Notice", shortened URLs dressed up as service links, and phishing domains deliberately spelled to resemble the official ones: wsdbg, wsdio, wsdde, wsdazx.
+
+Your finance team will receive a plausible fake water bill or tax notice this quarter. The context is unusually convincing because it is true, and that is exactly why the channel matters. The phish does not have to defeat your mail filter, because it never reaches your mail filter.
+
+## The forty seconds that hand over the account
+
+HKCERT's June 2026 phishing alert describes the WhatsApp mechanics in full, and they are worth reading twice, because this attack does not ask for a password. It asks for a scan.
+
+The attacker sends a message claiming that the recipient's WhatsApp account has been locked because of a security risk, with a link that supposedly unlocks it. The link opens a fake "WhatsApp Security Centre" website that asks for the victim's phone number. The victim is then instructed to open WhatsApp, go to Settings and then Linked devices, and either scan the QR code displayed on the website or select Link with phone number and enter the code the site provides. That links the victim's account to the attacker's device, and the attacker now holds unauthorised access.
+
+Nothing in that flow raises an alarm at a corporate level, because nothing in that flow is corporate. The device is personal, the app is not on any managed list, the message never touched the company server, and the credential surrendered was not a company credential. HKCERT's public advice is short enough to memorise: do not trust messages claiming that your WhatsApp account has been locked or requires verification through a link; do not scan unknown QR codes or enter codes from websites into Linked devices; do not follow unsolicited instructions to use Link with phone number; verify account alerts only through official WhatsApp channels; review linked devices regularly and remove any you do not recognise; and enable two-step verification.
+
+For a business, a hijacked staff account is not a personal problem. It is a warm, trusted channel to your customers and your suppliers, already verified, now answering questions in your company's voice. An attacker inside a hijacked finance account does not need to phish anyone to request a payment change. They ask for it in a thread where the customer has been talking to your real staff for two years, and the reply looks exactly like every other reply.
+
+## The threat model in one paragraph
+
+**Adversary.** A phishing operator running a low-cost kit against a handset rather than a network. The economics are subscription-priced: a domain that resembles WhatsApp, a message template, a QR code. Volume, not sophistication.
+
+**Asset.** Your staff's messaging identities and the business conversations they carry. For an SME, the customer thread and the supplier thread often sit on the same personal handset that carries the founder's own banking.
+
+**Vulnerability.** The gap between where the message arrives and where your controls live. Nothing in a small firm's stack watches a chat app, so the path from click to linked device is unmonitored, and the first sign of it is often a customer who noticed before you did.
+
+**Fix.** One policy line, one setting, one audit, one channel change. Sixty minutes, this week.
+
+## The 60-minute fix
+
+**Ten minutes: write the linked-device rule.** One line, in the staff handbook, in the group chat description and in the onboarding email: no QR code from a link, and no code from a website entered into Linked devices, for any account, ever. HKCERT's guidance is public advice, and a Hong Kong SME can turn it into policy in a single paragraph. The rule is easy to teach because it is easy to remember, and it stops precisely the flow HKCERT documented.
+
+**Ten minutes: turn on two-step verification for every business account.** The PIN protects the account even when the linked-device trick succeeds, and HKCERT lists it explicitly. Store the PIN somewhere that is not that phone: a password manager, or a sealed envelope in the finance folder. An account protected by a PIN the attacker can read off the device is not protected.
+
+**Ten minutes: audit the linked devices you already have.** Open WhatsApp, go to Settings and then Linked devices on every company number and on any account used for business, and remove every device you do not recognise. Then put five minutes in the same slot each month. HKCERT's advice is to review linked devices regularly and remove anything unfamiliar, and a monthly five-minute check is what turns that advice into a control.
+
+**Fifteen minutes: move payment-change requests off the chat app.** Write down that a change of bank account, a change of payee or a request for a refund is confirmed by calling back a number already on file, never a number supplied in the message, and never by replying with the detail being confirmed. If your business already runs an out-of-band verification rule for wires, extend it to the channels your staff actually use. If you do not have one yet, [we have written up how to build it](/blog/out-of-band-verification-hk-trading-firm-2026).
+
+**Ten minutes: move business messaging onto a managed device.** For a firm of 20 to 50 people, the cheapest version of this is a company-owned handset with a company number, enrolled in mobile device management, used for company conversations. It costs the price of a mid-range phone. It buys you remote wipe, and it buys you an inventory of which conversations are company conversations.
+
+**Five minutes: publish a report path.** One name, one number, one instruction: if a message asks you to scan a code, click a link to unlock an account, or enter a code, stop and forward the message to this address. Say in writing that nobody will be disciplined for reporting a click. The people who click are the ones who never tell you, and every hour of delay is an attacker inside the account.
+
+## What is landing right now
+
+The seasonal pattern matters for a Hong Kong firm planning its week. HKCERT notes that threat actors exploit recurring seasonal themes, such as the New Year, tax filing season and water bill payment cycles, because that is when people expect a notification and act quickly without checking the sender. The Water Supplies Department impersonation cases more than doubled from February to April 2026. New Year, tax season and year-end are the same argument repeated in different months.
+
+There is a second technique worth knowing, because it targets the finance team rather than the phone. HKCERT reports that the ClickFix technique, which convinces a victim to copy and paste a malicious command into a Run dialog or a terminal, has become increasingly prevalent in recent years, using fake CAPTCHA checks, verification prompts for video conference invitations and fraudulent operating system update messages as lures. If a message asks a member of staff to paste something into their computer, that is the whole attack. The control is one sentence: nobody pastes commands into a machine because a message, a document or a verification told them to.
+
+## The 30-day plan
+
+**Days 1 to 7.** Write the linked-device rule and the report path. Publish both in the group description and the staff handbook. Turn on two-step verification for every business account and store the PINs off the phone.
+
+**Days 8 to 21.** Audit linked devices on every business number. Extend the out-of-band verification rule to messaging channels. Enrol one company handset in mobile device management and move the finance conversation onto it.
+
+**Days 22 to 30.** Run a twenty-minute session with staff: three real phish screenshots, the fake WhatsApp Security Centre, a fake water bill and a fake tax notice, what each one wanted, and the one rule that stops it. Then re-read the linked-device list on every number, because that is where a successful attempt shows up.
+
+## The cost
+
+Ten minutes of writing, one setting per account, one audit per month and one handset per finance user. At typical Hong Kong SME IT day rates the policy work is an hour of someone's time and the handset is a one-off. The other side of that ledger is a hijacked account that reads and sends in your company's voice to your customers, which is the kind of incident that ends in a fraudulent payment, a compromised customer list and an expensive discovery of who knew what and when. The arithmetic is not close.
+
+## This is a control set, not a programme
+
+Six controls close the messaging-channel gap. They do not need a CISO, a security operations centre or a supplier assessment. They need an hour and a policy.
+
+What they do not close: phishing that delivers a session token, an unpatched internet-facing appliance, a supply-chain compromise of a SaaS vendor you have no contract with, or an insider who exports the customer database. That is the next layer, and the next layer is a programme rather than a control. Start with the linked-device rule.
+
+If you want the sixty minutes done properly, with the policy line, the linked-device audit across every business number, and the callback rule written down and handed to your finance lead, [our SME cybersecurity practice](/cybersecurity/sme) is set up for exactly this scope of work. We run the audit with your team, write the one-page policy, and stay while the findings get fixed. The deliverable is a rule your staff can repeat from memory and a monthly five-minute check that keeps it true.
+
+---
+
+# 繁體中文版本
+
+## 釣魚已經移到你的手機上
+
+2026 年 1 月至 6 月，HKCERT 在香港收到 8,358 宗保安事故報告，與 2025 年同期錄得的 8,142 宗大致相若。其中釣魚佔 5,305 宗，即全部呈報事故的 63%；第二大類別是殭屍網絡，1,377 宗，佔 16%。
+
+真正應該改變香港中小企下一個保安小時如何花費的，並不是 63% 這個數字，而是釣魚瞄準了誰。在 2026 年上半年的所有釣魚事故中，社交媒體與即時通訊應用是最受攻擊的單一類別，佔全部個案的 46%。其後是銀行、財務與電子支付服務，佔 17%；加密貨幣平台 15%；電子商務平台 11%；科技公司 6%。
+
+香港有一半的釣魚，瞄準的已經是手機。而金錢誘因並沒有減弱：銀行與加密貨幣相關的詐騙，合計佔全部個案的 32%。
+
+在通訊平台這一類別裏面，各平台的數字相當醒目。HKCERT 列出最常被假冒的四大社交媒體與即時通訊平台：WhatsApp 1,435 宗，Telegram 557 宗，TikTok 315 宗，Meta 115 宗，合共 2,422 宗。單是 WhatsApp 就約為 Telegram 的三倍。
+
+## 你的電郵控制從來沒有看見它
+
+一間中小企擁有的每一項控制，都站在攻擊者已不再理會的那條界線的企業那一邊。垃圾郵件過濾器、郵件閘、附件沙盒、DMARC、一月寄出的釣魚意識電郵、每年一次的模擬釣魚演練——它們沒有一項看得見一則訊息：它出現在個人手機的一個通訊應用裡，寄件者是一個根本不是公司電郵地址的號碼。
+
+香港還有一層特別的原因，令這個 46% 在本地格外痛。攻擊者假冒的，正正是香港人本來就預期會收到通知的機構。HKCERT 紀錄過在報稅季假冒稅務局的釣魚網站，以及在 2024 至 2026 年間假冒 iAM Smart 與香港郵政的網站。2026 年，假冒水務署、以假帳單發作的個案由 2 月至 4 月增加超過一倍，那些郵件的主題行是「水費帳戶資料更新通知」，以縮短網址扮成服務入口，並刻意把釣魚網域拼成與官方相近的樣子：wsdbg、wsdio、wsdde、wsdazx。
+
+今個季度，你的財務團隊會收到一封像真的一樣的假水費單或假稅務通知。情境之所以格外令人信服，正因為它是真的——而這正是渠道本身變得重要的原因。釣魚郵件不必擊敗你的電郵過濾器，因為它從來沒有送到你的電郵過濾器。
+
+## 四十秒交出整個帳戶
+
+HKCERT 2026 年 6 月的釣魚警報完整描述了針對 WhatsApp 的手法，值得讀兩遍，因為這種攻擊根本不要密碼——它要你掃一個 QR code。
+
+攻擊者發出一則訊息，聲稱收件人的 WhatsApp 帳戶因為安全風險已被鎖上，並附上一個「解鎖」連結。連結開啟一個假的「WhatsApp Security Centre」網站，網站要求輸入受害者的電話號碼。接著，受害者被指示開啟 WhatsApp、進入 Settings 再進入 Linked devices，然後掃描網站上顯示的 QR code，或者選擇 Link with phone number 並輸入網站提供的數碼。受害者的帳戶就這樣連接到攻擊者的裝置，而攻擊者現在持有未經授權的存取權。
+
+整個過程在公司層面不會引起任何警號，因為它沒有一個環節屬於公司。那部裝置是私人的，那個應用不在任何管理清單上，那則訊息沒有碰過公司伺服器，而被交出去的憑證也不是公司憑證。HKCERT 給公眾的建議短到背得出來：不要相信聲稱你的 WhatsApp 帳戶已被鎖上、或需要透過連結驗證的訊息；不要掃描不明 QR code，也不要把網站上的數碼輸入 Linked devices；不要跟隨任何指示你使用 Link with phone number 的未經請求；只透過 WhatsApp 官方渠道核實帳戶警報；定期檢視已連結裝置並移除任何你不認出的；以及開啟兩步驗證。
+
+對一間公司而言，被劫持的員工帳戶不是私人問題。它是你與客戶、與供應商之間一條溫熱而可信的渠道——已經通過驗證、已經累積信任，現在用你公司的語氣回答問題。攻擊者待在一個被劫持的財務帳戶裡，根本不需要再釣任何人來要求更改收款帳戶。他們只是在客戶已經與你的真人同事談了兩年的對話串裡提出要求，而那則回覆看起來與其他每一則回覆一模一樣。
+
+## 一段話寫完的威脅模型
+
+**攻擊者。** 一個針對手機而非針對網絡的釣魚營運者。經濟模型是訂閱制：一個仿似 WhatsApp 的網域、一個訊息範本、一個 QR code。要的是量，不是精巧。
+
+**資產。** 員工的通訊身分，以及他們承載的商業對話。對中小企而言，客戶對話與供應商對話，往往同樣在老闆自己銀行 App 所在的那部私人手機上。
+
+**漏洞。** 訊息到達的位置與你的控制所在的位置之間的落差。中小企的技術棧沒有任何一項會監察通訊應用，所以由點擊到帳戶被連結這條路徑完全無人監察，而第一個發現異狀的，往往是比你更早注意到的客戶。
+
+**修正方法。** 一行政策、一個設定、一次審視、一個渠道改變。六十分鐘，本週之內。
+
+## 60 分鐘補救
+
+**十分鐘：寫下「已連結裝置」規則。** 一行字，放入員工手冊、群組簡介與入職電郵：任何帳號，任何情況，永遠不要掃描來自連結的 QR code，也不要把網站上的數碼輸入 Linked devices。HKCERT 的指引是公開建議，香港中小企可以用一個段落把它變成政策。這條規則容易教，因為容易記，而且擋住的正是 HKCERT 所記錄的那個流程。
+
+**十分鐘：為每一個商業帳戶開啟兩步驗證。** 當連結裝置的手法得逞，PIN 仍然保護帳戶，而 HKCERT 亦明確列出這一項。把 PIN 存放在不是那部手機的地方：密碼管理器，或者財務文件夾裡的一個封蠟信封。一個由攻擊者可以直接從裝置讀到 PIN 的帳戶，並沒有受到保護。
+
+**十分鐘：審視你已經有的已連結裝置。** 在每一個公司號碼，以及每一個用作業務的帳戶上，開啟 WhatsApp、進入 Settings 再進入 Linked devices，移除每一部你不認得的裝置。然後在每月的同一時段預留五分鐘。HKCERT 的建議是定期檢視已連結裝置並移除任何陌生項目，而每月五分鐘的檢查，就是把建議變成控制項的動作。
+
+**十五分鐘：把更改收款資料的要求移出通訊應用。** 寫下來：更改銀行帳戶、更更改收款人或要求退款，一律以致電回檔案內既有的號碼確認，絕不採用訊息內提供的號碼，也絕不以回覆該訊息並附上待確認內容的方式確認。若你們的業務已在電匯上執行核實線外確認的規則，就把它延伸到員工真正使用的渠道。若你們還未有，[我們已寫過如何建立這套規則](/blog/out-of-band-verification-hk-trading-firm-2026)。
+
+**十分鐘：把業務通訊搬到受管理的裝置。** 對一間 20 至 50 人的公司，最便宜的做法是一部公司擁有的手機、一個公司號碼、加入流動裝置管理，並只用於公司對話。成本是一部中端手機的價錢。它買到的是遠端抹除，以及一份「哪些對話是公司對話」的清單。
+
+**五分鐘：公布一條舉報路徑。** 一個名字、一個號碼、一句指示：如果有訊息要求你掃描一個碼、點擊一個「解鎖帳戶」的連結，或者輸入一段數碼，停下來，把訊息轉發到這個地址。以文字寫明，沒有人會因為舉報點擊而受處分。點擊了的人，往往正是永遠不會告訴你的那些，而每延遲一小時，就是攻擊者多留在帳戶裡一小時。
+
+## 現正發生的攻擊
+
+季節性模式對一間正在安排本週工作的香港公司很重要。HKCERT 指出，攻擊者會利用經常出現的季節主題——新年、報稅季、水費繳費週期——因為那些正是人們預期會收到通知、於是快速點擊而不查核來源的時候。假冒水務署的個案由 2026 年 2 月至 4 月增加超過一倍。新年、報稅季與年結，只是同一套說法在不同的月份重複。
+
+還有第二種技術值得知道，因為它瞄準的是財務團隊而非手機。HKCERT 報告，ClickFix 手法近年日益普及——說服受害者把惡意指令複製貼上到 Windows 的執行視窗或終端機——常見的誘餌包括假的 CAPTCHA 檢查、視像會議邀請的驗證提示，以及假冒作業系統更新的訊息。如果一則訊息要求員工在電腦上貼上任何東西，整個攻擊就已經完成。控制方法只有一句話：沒有人會因為訊息、文件或所謂的驗證指示，就把指令貼進電腦。
+
+## 30 日計劃
+
+**第 1 至 7 日。** 寫下「已連結裝置」規則與舉報路徑，兩者都放進群組簡介與員工手冊。為每一個商業帳戶開啟兩步驗證，並把 PIN 存放於手機以外。
+
+**第 8 至 21 日。** 審視每一個商業號碼的已連結裝置。把核實線外確認的規則延伸到通訊渠道。將一部公司手機加入流動裝置管理，並把財務對話搬過去。
+
+**第 22 至 30 日。** 為員工進行一次二十分鐘的培訓：三張真實的釣魚截圖——假的 WhatsApp Security Centre、假水費單、假稅務通知——每一則想要什麼，以及那一條擋得住它的規則。然後重新檢視每一個號碼的已連結裝置清單，因為成功的嘗試會留痕於此。
+
+## 成本
+
+十分鐘的書寫、每個帳戶一個設定、每月一次審視，以及每位財務同事一部手機。以香港中小企一般 IT 日費計算，政策部分是一小時的時間成本，手機是一次性開支。而帳簿另一邊是一個被劫持的帳戶，以你公司的語氣讀取並發送訊息給你的客戶——這種事故的結局，通常是一次欺詐付款、一份外洩的客戶名單，以及一場關於誰在什麼時候知道什麼的昂貴追查。兩者之間的算術，並不接近。
+
+## 這是控制項，不是計劃
+
+六項控制可以補上通訊渠道這個缺口。它們不需要 CISO、不需要安全運營中心、亦不需要供應商評估。它們需要的是一小時與一份政策。
+
+它們堵不住的是遞送工作階段權杖的釣魚訊息、未修補的對外暴露裝置、你沒有合約的 SaaS 供應商遭供應鏈入侵，或把客戶資料庫匯出的內部人員。那是下一層。下一層是計劃，不是控制項。先做「已連結裝置」那一條。
+
+若你想把這六十分鐘做對——政策那一行、遍及每個商業號碼的已連結裝置審視，以及寫成文件交予財務主管的回電確認規則——[我們的中小企業網絡安全實務](/cybersecurity/sme)正是為此範圍的工作而設。我們與你的團隊一起執行審視、撰寫那一頁政策，並在所發現的問題修復期間留守。交付物是一條你的員工背得出來的規則，以及每月五分鐘、令它持續成立的檢查。

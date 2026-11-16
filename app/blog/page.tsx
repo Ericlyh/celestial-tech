@@ -453,6 +453,21 @@ export default function BlogPage() {
           readTime: 8,
           publishedAt: '2026-11-16T00:00:00Z',
         },
+        {
+          id: '17',
+          title: 'The Phish Is Not in Your Inbox Anymore: WhatsApp Hijacking and a 60-Minute Fix for Hong Kong SMEs',
+          titleZh: '釣魚已經唔喺電郵入面：WhatsApp 帳號劫持與香港中小企 60 分鐘自保清單',
+          slug: 'whatsapp-phishing-hk-sme-2026',
+          excerpt:
+            'HKCERT recorded 1,435 phishing cases impersonating WhatsApp in the first half of 2026, and 46% of all phishing now targets messaging apps. Here is the 60-minute control set that closes the gap.',
+          excerptZh: 'HKCERT 紀錄 2026 年上半年有 1,435 宗假冒 WhatsApp 的釣魚個案，而 46% 的釣魚已轉向即時通訊平台。以下是可以補上這個缺口的 60 分鐘控制清單。',
+          category: 'Cybersecurity',
+          authorZh: 'Celestial Tech 團隊',
+          coverImage: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1600&q=80',
+          author: 'Celestial Tech Team',
+          readTime: 7,
+          publishedAt: '2026-11-17T00:00:00Z',
+        },
       ] as Post[]).sort(
         (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
       ),
